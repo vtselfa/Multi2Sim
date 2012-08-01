@@ -1,0 +1,34 @@
+#!/bin/bash
+mv ctxconfig.GemsFDTD.448 ctxconfig.GemsFDTD
+mv ctxconfig.astar.448 ctxconfig.astar
+mv ctxconfig.bwaves.448 ctxconfig.bwaves
+mv ctxconfig.bzip2.448 ctxconfig.bzip2
+mv ctxconfig.cactusADM.448 ctxconfig.cactusADM
+mv ctxconfig.calculix-gamess.448.448 ctxconfig.calculix-gamess
+mv ctxconfig.calculix.448 ctxconfig.calculix
+mv ctxconfig.dealII.448 ctxconfig.dealII
+mv ctxconfig.gamess.448 ctxconfig.gamess
+mv ctxconfig.gcc.448 ctxconfig.gcc
+mv ctxconfig.gobmk.448 ctxconfig.gobmk
+mv ctxconfig.gromacs.448 ctxconfig.gromacs
+mv ctxconfig.h264ref.448 ctxconfig.h264ref
+mv ctxconfig.hmmer.448 ctxconfig.hmmer
+mv ctxconfig.lbm.448 ctxconfig.lbm
+mv ctxconfig.leslie3d.448 ctxconfig.leslie3d
+mv ctxconfig.libquantum.448 ctxconfig.libquantum
+mv ctxconfig.mcf.448 ctxconfig.mcf
+mv ctxconfig.milc.448 ctxconfig.milc
+mv ctxconfig.namd.448 ctxconfig.namd
+mv ctxconfig.omnetpp.448 ctxconfig.omnetpp
+mv ctxconfig.perlbench.448 ctxconfig.perlbench
+mv ctxconfig.povray.448 ctxconfig.povray
+mv ctxconfig.sjeng.448 ctxconfig.sjeng
+mv ctxconfig.soplex.448 ctxconfig.soplex
+mv ctxconfig.specrand.448 ctxconfig.specrand
+mv ctxconfig.sphinx3.448 ctxconfig.sphinx3
+mv ctxconfig.str.448 ctxconfig.str
+mv ctxconfig.tonto.448 ctxconfig.tonto
+mv ctxconfig.wrf.448 ctxconfig.wrf
+mv ctxconfig.xalancbmk.448 ctxconfig.xalancbmk
+mv ctxconfig.zeusmp.448 ctxconfig.zeusmp
+

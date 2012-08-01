@@ -1,0 +1,6 @@
+[ Context 0 ]
+exe = bwaves_base.i386
+cwd = benchmarks/spec2006/410.bwaves
+StdOut = bwaves.out
+IPCReport = bwaves.ipc
+IPCReportInterval = 100000

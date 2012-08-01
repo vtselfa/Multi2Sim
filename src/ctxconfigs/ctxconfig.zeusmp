@@ -1,0 +1,6 @@
+[ Context 0 ]
+exe = zeusmp_base.i386
+cwd = benchmarks/spec2006/434.zeusmp
+StdOut = zeusmp.out
+IPCReport = zeusmp.ipc
+IPCReportInterval = 100000

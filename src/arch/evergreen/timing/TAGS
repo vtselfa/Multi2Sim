@@ -1,0 +1,294 @@
+
+alu-engine.c,991
+int evg_gpu_alu_engine_inst_mem_latency = 2;  /* Latency of instruction memory */evg_gpu_alu_engine_inst_mem_latency25,855
+int evg_gpu_alu_engine_fetch_queue_size = 64;  /* Number of bytes */evg_gpu_alu_engine_fetch_queue_size26,937
+int evg_gpu_alu_engine_pe_latency = 4;  /* Processing element latency */evg_gpu_alu_engine_pe_latency27,1006
+static void evg_alu_engine_fetch(struct evg_compute_unit_t *compute_unit)evg_alu_engine_fetch30,1081
+static void evg_alu_engine_decode(struct evg_compute_unit_t *compute_unit)evg_alu_engine_decode171,6180
+static void evg_alu_engine_read(struct evg_compute_unit_t *compute_unit)evg_alu_engine_read207,7211
+static void evg_alu_engine_execute(struct evg_compute_unit_t *compute_unit)evg_alu_engine_execute255,8649
+static void evg_alu_engine_write(struct evg_compute_unit_t *compute_unit)evg_alu_engine_write291,9944
+void evg_compute_unit_run_alu_engine(struct evg_compute_unit_t *compute_unit)evg_compute_unit_run_alu_engine403,13284
+
+cf-engine.c,655
+int evg_gpu_cf_engine_inst_mem_latency = 2;  /* Instruction memory latency */evg_gpu_cf_engine_inst_mem_latency25,868
+static void evg_cf_engine_fetch(struct evg_compute_unit_t *compute_unit)evg_cf_engine_fetch28,948
+static void evg_cf_engine_decode(struct evg_compute_unit_t *compute_unit)evg_cf_engine_decode119,4245
+static void evg_cf_engine_execute(struct evg_compute_unit_t *compute_unit)evg_cf_engine_execute155,5376
+static void evg_cf_engine_complete(struct evg_compute_unit_t *compute_unit)evg_cf_engine_complete238,7878
+void evg_compute_unit_run_cf_engine(struct evg_compute_unit_t *compute_unit)evg_compute_unit_run_cf_engine298,9696
+
+uop.c,1107
+int evg_stack_debug_category;evg_stack_debug_category29,884
+static long long gpu_uop_id_counter = 0;gpu_uop_id_counter37,936
+static struct repos_t *gpu_uop_repos;gpu_uop_repos39,978
+static void evg_uop_add_src_idep(struct evg_uop_t *uop, struct evg_inst_t *inst, int src_idx)evg_uop_add_src_idep42,1018
+void evg_uop_init()evg_uop_init73,1735
+void evg_uop_done()evg_uop_done84,2102
+struct evg_uop_t *evg_uop_create()evg_uop_create90,2156
+struct evg_uop_t *evg_uop_create_from_alu_group(struct evg_alu_group_t *alu_group)evg_uop_create_from_alu_group100,2311
+void evg_uop_free(struct evg_uop_t *gpu_uop)evg_uop_free154,3773
+void evg_uop_list_free(struct linked_list_t *gpu_uop_list)evg_uop_list_free162,3893
+void evg_uop_dump_dep_list(char *buf, int size, int *dep_list, int dep_count)evg_uop_dump_dep_list175,4159
+void evg_uop_save_active_mask(struct evg_uop_t *uop)evg_uop_save_active_mask204,4915
+void gpu_uop_dump_active_mask(struct evg_uop_t *uop, FILE *f)gpu_uop_dump_active_mask225,5553
+void evg_uop_debug_active_mask(struct evg_uop_t *uop)evg_uop_debug_active_mask244,6112
+
+periodic-report.c,2102
+int evg_periodic_report_active;evg_periodic_report_active27,864
+static char *evg_periodic_report_file_name;evg_periodic_report_file_name35,928
+static int evg_periodic_report_interval = 1000;evg_periodic_report_interval36,972
+static enum evg_periodic_report_scope_tevg_periodic_report_scope_t38,1021
+	evg_periodic_report_scope_invalid = 0,evg_periodic_report_scope_invalid40,1063
+	evg_periodic_report_scope_first_wavefront_first_workgroup,evg_periodic_report_scope_first_wavefront_first_workgroup42,1104
+	evg_periodic_report_scope_first_wavefront_all_workgroups,evg_periodic_report_scope_first_wavefront_all_workgroups43,1164
+	evg_periodic_report_scope_all_wavefronts_first_workgroup,evg_periodic_report_scope_all_wavefronts_first_workgroup44,1223
+	evg_periodic_report_scope_all_wavefronts_all_workgroups,evg_periodic_report_scope_all_wavefronts_all_workgroups45,1282
+	evg_periodic_report_scope_countevg_periodic_report_scope_count47,1341
+} evg_periodic_report_scope;evg_periodic_report_scope48,1374
+static struct string_map_t evg_periodic_report_scope_map =evg_periodic_report_scope_map50,1404
+static char *evg_periodic_report_scope_str = "FirstWavefrontFirstWorkgroup";evg_periodic_report_scope_str61,1892
+static char *evg_periodic_report_intro =evg_periodic_report_intro63,1970
+void evg_periodic_report_init(void)evg_periodic_report_init99,3264
+void evg_periodic_report_done(void)evg_periodic_report_done104,3306
+static char *evg_periodic_report_section_name = "PeriodicReport";evg_periodic_report_section_name110,3390
+void evg_periodic_report_config_read(struct config_t *config)evg_periodic_report_config_read112,3457
+void evg_periodic_report_wavefront_init(struct evg_wavefront_t *wavefront)evg_periodic_report_wavefront_init152,4821
+void evg_periodic_report_wavefront_done(struct evg_wavefront_t *wavefront)evg_periodic_report_wavefront_done207,6363
+void evg_periodic_report_dump_entry(struct evg_wavefront_t *wavefront)evg_periodic_report_dump_entry220,6693
+void evg_periodic_report_new_inst(struct evg_uop_t *uop)evg_periodic_report_new_inst263,8208
+
+faults.c,1275
+char *evg_faults_file_name = "";evg_faults_file_name26,876
+enum evg_fault_type_enumevg_fault_type_enum28,910
+	evg_fault_ams,evg_fault_ams30,937
+	evg_fault_reg,evg_fault_reg31,953
+	evg_fault_memevg_fault_mem32,969
+struct evg_fault_tevg_fault_t35,988
+	enum evg_fault_type_enum type;type37,1009
+	long long cycle;cycle38,1041
+	int compute_unit_id;  /* 0, evg_gpu_num_compute_units - 1 ] */compute_unit_id39,1059
+	int stack_id;  /* [ 0, evg_gpu_max_wavefronts_per_compute_unit - 1 ] */stack_id40,1123
+	int active_mask_id;  /* [ 0, EVG_MAX_STACK_SIZE - 1 ] */active_mask_id41,1196
+	int bit;bit42,1254
+	int reg_id;reg_id43,1264
+	int byte;byte44,1277
+static int evg_fault_errors;evg_fault_errors48,1329
+static struct linked_list_t *evg_fault_list;evg_fault_list51,1411
+int evg_faults_debug_category;evg_faults_debug_category53,1457
+char *evg_faults_debug_file_name = "";evg_faults_debug_file_name54,1488
+static int evg_stack_faults_is_odep(struct evg_uop_t *uop,evg_stack_faults_is_odep61,1558
+static int evg_stack_faults_is_idep(struct evg_uop_t *uop,evg_stack_faults_is_idep75,1837
+void evg_faults_init(void)evg_faults_init95,2146
+void evg_faults_done(void)evg_faults_done263,6505
+void evg_faults_insert(void)evg_faults_insert275,6737
+
+sched.c,533
+struct string_map_t evg_gpu_sched_policy_map =evg_gpu_sched_policy_map23,836
+enum evg_gpu_sched_policy_t evg_gpu_sched_policy;evg_gpu_sched_policy30,986
+static struct evg_wavefront_t *evg_schedule_round_robin(struct evg_compute_unit_t *compute_unit)evg_schedule_round_robin39,1069
+static struct evg_wavefront_t *evg_schedule_greedy(struct evg_compute_unit_t *compute_unit)evg_schedule_greedy75,2312
+struct evg_wavefront_t *evg_compute_unit_schedule(struct evg_compute_unit_t *compute_unit)evg_compute_unit_schedule123,3854
+
+tex-engine.c,910
+int evg_gpu_tex_engine_inst_mem_latency = 2;  /* Instruction memory latency */evg_gpu_tex_engine_inst_mem_latency25,868
+int evg_gpu_tex_engine_fetch_queue_size = 32;  /* Number of bytes */evg_gpu_tex_engine_fetch_queue_size26,947
+int evg_gpu_tex_engine_load_queue_size = 8;  /* Maximum number of in-flight global memory reads */evg_gpu_tex_engine_load_queue_size27,1016
+static void evg_tex_engine_fetch(struct evg_compute_unit_t *compute_unit)evg_tex_engine_fetch30,1117
+static void evg_tex_engine_decode(struct evg_compute_unit_t *compute_unit)evg_tex_engine_decode123,4280
+static void evg_tex_engine_read(struct evg_compute_unit_t *compute_unit)evg_tex_engine_read159,5311
+static void evg_tex_engine_write(struct evg_compute_unit_t *compute_unit)evg_tex_engine_write202,6642
+void evg_compute_unit_run_tex_engine(struct evg_compute_unit_t *compute_unit)evg_compute_unit_run_tex_engine249,7853
+
+compute-unit.c,595
+struct evg_compute_unit_t *evg_compute_unit_create()evg_compute_unit_create30,880
+void evg_compute_unit_free(struct evg_compute_unit_t *compute_unit)evg_compute_unit_free79,2750
+void evg_compute_unit_map_work_group(struct evg_compute_unit_t *compute_unit, struct evg_work_group_t *work_group)evg_compute_unit_map_work_group143,5232
+void evg_compute_unit_unmap_work_group(struct evg_compute_unit_t *compute_unit, struct evg_work_group_t *work_group)evg_compute_unit_unmap_work_group211,7928
+void evg_compute_unit_run(struct evg_compute_unit_t *compute_unit)evg_compute_unit_run249,9304
+
+calc.c,609
+char *evg_gpu_calc_file_name = "";evg_gpu_calc_file_name23,836
+static char *err_gnuplot_msg =err_gnuplot_msg25,872
+int evg_calc_get_work_groups_per_compute_unit(int work_items_per_work_group,evg_calc_get_work_groups_per_compute_unit32,1200
+static void evg_calc_plot_work_items_per_work_group(void)evg_calc_plot_work_items_per_work_group83,3701
+static void evg_calc_plot_registers_per_work_item(void)evg_calc_plot_registers_per_work_item159,6804
+static void evg_calc_plot_local_mem_per_work_group(void)evg_calc_plot_local_mem_per_work_group235,9798
+void evg_calc_plot(void)evg_calc_plot314,12927
+
+evergreen-timing.h,9322
+#define EVERGREEN_TIMING_HEVERGREEN_TIMING_H21,831
+#define evg_faults_debug(evg_faults_debug32,932
+#define evg_stack_debug(evg_stack_debug52,1251
+struct evg_work_item_uop_tevg_work_item_uop_t57,1442
+	uint32_t global_mem_access_addr;global_mem_access_addr60,1505
+	uint32_t global_mem_access_size;global_mem_access_size61,1539
+	unsigned int active : 1;  /* Active after instruction emulation */active64,1587
+	int local_mem_access_count;local_mem_access_count67,1683
+	enum mod_access_kind_t local_mem_access_kind[EVG_MAX_LOCAL_MEM_ACCESSES_PER_INST];local_mem_access_kind68,1712
+	uint32_t local_mem_access_addr[EVG_MAX_LOCAL_MEM_ACCESSES_PER_INST];local_mem_access_addr69,1796
+	uint32_t local_mem_access_size[EVG_MAX_LOCAL_MEM_ACCESSES_PER_INST];local_mem_access_size70,1866
+#define EVG_UOP_MAX_IDEP EVG_UOP_MAX_IDEP73,1940
+#define EVG_UOP_MAX_ODEP EVG_UOP_MAX_ODEP74,1978
+#define EVG_UOP_DEP_NONE EVG_UOP_DEP_NONE76,2017
+#define EVG_UOP_DEP_REG_FIRST EVG_UOP_DEP_REG_FIRST77,2052
+#define EVG_UOP_DEP_REG(EVG_UOP_DEP_REG78,2087
+#define EVG_UOP_DEP_REG_LAST EVG_UOP_DEP_REG_LAST79,2130
+#define EVG_UOP_DEP_PV EVG_UOP_DEP_PV80,2167
+#define EVG_UOP_DEP_PS EVG_UOP_DEP_PS81,2204
+#define EVG_UOP_DEP_LDS EVG_UOP_DEP_LDS82,2241
+#define EVG_UOP_DEP_COUNT EVG_UOP_DEP_COUNT83,2278
+struct evg_uop_tevg_uop_t87,2480
+	long long id;id90,2513
+	long long id_in_compute_unit;id_in_compute_unit91,2528
+	struct evg_wavefront_t *wavefront;  /* Wavefront it belongs to */wavefront92,2559
+	struct evg_work_group_t *work_group;  /* Work-group it belongs to */work_group93,2626
+	struct evg_compute_unit_t *compute_unit;  /* Compute unit it belongs to */compute_unit94,2696
+	struct evg_uop_t *cf_uop;  /* For ALU/TEX uops, CF uop that triggered clause */cf_uop95,2772
+	int length;  /* Number of bytes occupied by ALU group */length96,2853
+	int vliw_slots;  /* Number of slots for ALU group, or 1 for CF/TEX instructions */vliw_slots97,2911
+	unsigned int alu_clause_trigger : 1;  /* Instruction triggers ALU clause */alu_clause_trigger100,3024
+	unsigned int tex_clause_trigger : 1;  /* Instruction triggers TEX clause */tex_clause_trigger101,3101
+	unsigned int no_clause_trigger : 1;  /* Instruction does not trigger secondary clause */no_clause_trigger102,3178
+	unsigned int ready : 1;ready105,3292
+	unsigned int last : 1;  /* Last instruction in the clause */last108,3331
+	unsigned int wavefront_last : 1;  /* Last instruction in the wavefront */wavefront_last109,3393
+	unsigned int global_mem_read : 1;global_mem_read110,3468
+	unsigned int global_mem_write : 1;global_mem_write111,3503
+	unsigned int local_mem_read : 1;local_mem_read112,3539
+	unsigned int local_mem_write : 1;local_mem_write113,3573
+	unsigned int active_mask_update : 1;active_mask_update114,3608
+	int active_mask_push;  /* Number of entries the stack was pushed */active_mask_push115,3646
+	int active_mask_pop;  /* Number of entries the stack was popped */active_mask_pop116,3715
+	int active_mask_stack_top;  /* Top of stack */active_mask_stack_top117,3783
+	long long inst_mem_ready;  /* Cycle when instruction memory access completes */inst_mem_ready120,3863
+	int global_mem_witness;global_mem_witness121,3944
+	int local_mem_witness;local_mem_witness122,3969
+	int subwavefront_count;subwavefront_count125,4028
+	int exec_subwavefront_count;exec_subwavefront_count126,4053
+	int write_subwavefront_count;write_subwavefront_count127,4083
+	int idep[EVG_UOP_MAX_IDEP];idep130,4167
+	int odep[EVG_UOP_MAX_ODEP];odep131,4196
+	int idep_count;idep_count132,4225
+	int odep_count;odep_count133,4242
+	struct evg_uop_t *dep_list_next;dep_list_next136,4309
+	struct evg_uop_t *dep_list_prev;dep_list_prev137,4343
+	struct evg_uop_t *dep_list_head;dep_list_head138,4377
+	struct evg_uop_t *dep_list_tail;dep_list_tail139,4411
+	int dep_list_count;dep_list_count140,4445
+	int dep_list_max;dep_list_max141,4466
+	struct evg_work_item_uop_t work_item_uop[0];work_item_uop145,4620
+struct evg_compute_unit_tevg_compute_unit_t191,5885
+	int id;id194,5924
+	long long gpu_uop_id_counter;  /* Counter to assign 'id_in_compute_unit' to uops */gpu_uop_id_counter195,5933
+	struct evg_compute_unit_t *ready_list_prev;ready_list_prev198,6062
+	struct evg_compute_unit_t *ready_list_next;ready_list_next199,6107
+	struct evg_compute_unit_t *busy_list_prev;busy_list_prev200,6152
+	struct evg_compute_unit_t *busy_list_next;busy_list_next201,6196
+	struct mod_t *global_memory;global_memory204,6281
+	struct mod_t *local_memory;local_memory205,6311
+	int work_group_count;work_group_count208,6385
+	struct evg_work_group_t **work_groups;work_groups209,6408
+	long long mapped_work_groups;mapped_work_groups212,6467
+	long long cycle;cycle213,6498
+	long long inst_count;inst_count214,6516
+	struct linked_list_t *wavefront_pool;wavefront_pool219,6699
+		struct evg_uop_t **fetch_buffer;  /* Array of uops (MaxWavefrontsPerComputeUnit elements) */fetch_buffer225,6794
+		struct evg_uop_t **inst_buffer;  /* Array of uops (MaxWavefrontsPerComputeUnit elements) */inst_buffer226,6889
+		int decode_index;  /* Next uop in 'fetch_buffer' to decode */decode_index229,7012
+		int execute_index;  /* Next uop in 'inst_buffer' to execute */execute_index230,7076
+		struct linked_list_t *complete_queue;  /* Queue of completed instructions */complete_queue233,7165
+		long long inst_count;inst_count236,7264
+		long long alu_clause_trigger_count;alu_clause_trigger_count237,7288
+		long long tex_clause_trigger_count;tex_clause_trigger_count238,7326
+		long long global_mem_write_count;global_mem_write_count239,7364
+	} cf_engine;cf_engine241,7401
+		struct linked_list_t *pending_queue;pending_queue251,7745
+		struct linked_list_t *finished_queue;finished_queue252,7784
+		struct linked_list_t *fetch_queue;  /* Uops from fetch to decode stage */fetch_queue255,7840
+		int fetch_queue_length;  /* Number of bytes occupied in fetch queue */fetch_queue_length256,7916
+		struct evg_uop_t *inst_buffer;  /* Uop from decode to read stage */inst_buffer257,7989
+		struct evg_uop_t *exec_buffer;  /* Uop from read to execute stage */exec_buffer258,8059
+		struct heap_t *event_queue;  /* Events for instruction execution */event_queue259,8130
+		struct evg_uop_t *producers[EVG_UOP_DEP_COUNT];producers263,8335
+		long long wavefront_count;wavefront_count266,8405
+		long long cycle;cycle267,8434
+		long long inst_count;inst_count268,8453
+		long long inst_slot_count;inst_slot_count269,8477
+		long long local_mem_slot_count;local_mem_slot_count270,8506
+		long long vliw_slots[5];vliw_slots271,8540
+	} alu_engine;alu_engine273,8568
+		struct linked_list_t *pending_queue;pending_queue279,8675
+		struct linked_list_t *finished_queue;finished_queue280,8714
+		struct linked_list_t *fetch_queue;  /* Uops from fetch to decode stage */fetch_queue283,8770
+		int fetch_queue_length;  /* Number of bytes occupied in fetch queue */fetch_queue_length284,8846
+		struct evg_uop_t *inst_buffer;  /* Uop from decode to read stage */inst_buffer285,8919
+		struct linked_list_t *load_queue;  /* Uops from read to write stage */load_queue286,8989
+		long long wavefront_count;wavefront_count289,9082
+		long long cycle;cycle290,9111
+		long long inst_count;inst_count291,9130
+	} tex_engine;tex_engine293,9155
+#define evg_tracing(evg_tracing346,10593
+#define evg_trace(evg_trace347,10648
+#define evg_trace_header(evg_trace_header348,10710
+extern enum evg_gpu_register_alloc_granularity_tevg_gpu_register_alloc_granularity_t361,11148
+	evg_gpu_register_alloc_invalid = 0,  /* For invalid user input */evg_gpu_register_alloc_invalid363,11199
+	evg_gpu_register_alloc_wavefront,evg_gpu_register_alloc_wavefront364,11266
+	evg_gpu_register_alloc_work_groupevg_gpu_register_alloc_work_group365,11301
+extern enum evg_gpu_sched_policy_tevg_gpu_sched_policy_t372,11534
+	evg_gpu_sched_invalid = 0,  /* For invalid user input */evg_gpu_sched_invalid374,11571
+	evg_gpu_sched_round_robin,evg_gpu_sched_round_robin375,11629
+	evg_gpu_sched_greedyevg_gpu_sched_greedy376,11657
+struct evg_gpu_tevg_gpu_t398,12270
+	long long cycle;cycle401,12310
+	struct evg_ndrange_t *ndrange;ndrange404,12359
+	int work_groups_per_compute_unit;work_groups_per_compute_unit405,12391
+	int wavefronts_per_compute_unit;wavefronts_per_compute_unit406,12426
+	int work_items_per_compute_unit;work_items_per_compute_unit407,12460
+	struct evg_compute_unit_t **compute_units;compute_units410,12516
+	struct evg_compute_unit_t *ready_list_head;ready_list_head413,12618
+	struct evg_compute_unit_t *ready_list_tail;ready_list_tail414,12663
+	int ready_list_count;ready_list_count415,12708
+	int ready_list_max;ready_list_max416,12731
+	struct evg_compute_unit_t *busy_list_head;busy_list_head419,12787
+	struct evg_compute_unit_t *busy_list_tail;busy_list_tail420,12831
+	int busy_list_count;busy_list_count421,12875
+	int busy_list_max;busy_list_max422,12897
+	struct linked_list_t *trash_uop_list;trash_uop_list425,12954
+	long long last_complete_cycle;last_complete_cycle429,13142
+#define EVG_GPU_FOREACH_COMPUTE_UNIT(EVG_GPU_FOREACH_COMPUTE_UNIT434,13213
+#define EVG_GPU_FOREACH_WORK_ITEM_IN_SUBWAVEFRONT(EVG_GPU_FOREACH_WORK_ITEM_IN_SUBWAVEFRONT437,13367
+
+gpu.c,2278
+char *evg_gpu_config_help =evg_gpu_config_help35,981
+char *evg_gpu_config_file_name = "";evg_gpu_config_file_name118,5530
+char *evg_gpu_report_file_name = "";evg_gpu_report_file_name119,5567
+int evg_trace_category;evg_trace_category121,5605
+int evg_gpu_num_compute_units = 20;evg_gpu_num_compute_units124,5687
+int evg_gpu_num_stream_cores = 16;evg_gpu_num_stream_cores125,5723
+int evg_gpu_num_registers = 16384;evg_gpu_num_registers126,5758
+int evg_gpu_register_alloc_size = 32;evg_gpu_register_alloc_size127,5793
+struct string_map_t evg_gpu_register_alloc_granularity_map =evg_gpu_register_alloc_granularity_map129,5832
+enum evg_gpu_register_alloc_granularity_t evg_gpu_register_alloc_granularity;evg_gpu_register_alloc_granularity136,6013
+int evg_gpu_max_work_groups_per_compute_unit = 8;evg_gpu_max_work_groups_per_compute_unit138,6092
+int evg_gpu_max_wavefronts_per_compute_unit = 32;evg_gpu_max_wavefronts_per_compute_unit139,6142
+int evg_gpu_local_mem_size = 32768;  /* 32 KB */evg_gpu_local_mem_size142,6223
+int evg_gpu_local_mem_alloc_size = 1024;  /* 1 KB */evg_gpu_local_mem_alloc_size143,6272
+int evg_gpu_local_mem_latency = 2;evg_gpu_local_mem_latency144,6325
+int evg_gpu_local_mem_block_size = 256;evg_gpu_local_mem_block_size145,6360
+int evg_gpu_local_mem_num_ports = 2;evg_gpu_local_mem_num_ports146,6400
+struct evg_gpu_t *evg_gpu;evg_gpu148,6438
+static char *evg_err_stall =evg_err_stall157,6498
+#define EVG_TRACE_VERSION_MAJOR	EVG_TRACE_VERSION_MAJOR166,6909
+#define EVG_TRACE_VERSION_MINOR	EVG_TRACE_VERSION_MINOR167,6944
+static void evg_gpu_device_init()evg_gpu_device_init170,6983
+static void evg_config_read(void)evg_config_read204,7948
+static void evg_config_dump(FILE *f)evg_config_dump338,15734
+static void evg_gpu_map_ndrange(struct evg_ndrange_t *ndrange)evg_gpu_map_ndrange386,17810
+static void evg_gpu_unmap_ndrange(void)evg_gpu_unmap_ndrange421,19386
+void evg_gpu_init(void)evg_gpu_init437,19578
+void evg_gpu_done()evg_gpu_done457,20006
+void evg_gpu_dump_report(void)evg_gpu_dump_report489,20652
+void evg_gpu_uop_trash_empty(void)evg_gpu_uop_trash_empty591,25070
+void evg_gpu_uop_trash_add(struct evg_uop_t *uop)evg_gpu_uop_trash_add609,25443
+int evg_gpu_run(void)evg_gpu_run617,25687

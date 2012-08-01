@@ -1,0 +1,242 @@
+
+wavefront_pool.c,314
+struct si_wavefront_pool_t *si_wavefront_pool_create()si_wavefront_pool_create23,843
+void si_wavefront_pool_free(struct si_wavefront_pool_t *wavefront_pool)si_wavefront_pool_free40,1242
+void si_wavefront_pool_map_wavefronts(struct si_wavefront_pool_t *wavefront_pool, si_wavefront_pool_map_wavefronts46,1377
+
+uop.c,467
+int si_stack_debug_category;si_stack_debug_category29,891
+static long long gpu_uop_id_counter = 0;gpu_uop_id_counter37,942
+static struct repos_t *gpu_uop_repos;gpu_uop_repos39,984
+void si_uop_init()si_uop_init75,1745
+void si_uop_done()si_uop_done86,2106
+struct si_uop_t *si_uop_create()si_uop_create92,2159
+void si_uop_free(struct si_uop_t *gpu_uop)si_uop_free102,2311
+void si_uop_list_free(struct linked_list_t *gpu_uop_list)si_uop_list_free110,2429
+
+simd.c,113
+int si_gpu_simd_issue_rate = 1;si_gpu_simd_issue_rate1,0
+int si_gpu_simd_latency = 4;si_gpu_simd_latency2,32
+
+southern-islands-timing.h,10377
+#define SOUTHERN_ISLANDS_TIMING_HSOUTHERN_ISLANDS_TIMING_H21,838
+#define si_stack_debug(si_stack_debug32,968
+struct si_work_item_uop_tsi_work_item_uop_t37,1156
+	uint32_t global_mem_access_addr;global_mem_access_addr40,1218
+	uint32_t global_mem_access_size;global_mem_access_size41,1252
+	unsigned int active : 1;  /* Active after instruction emulation */active44,1300
+	int local_mem_access_count;local_mem_access_count47,1396
+	enum mod_access_kind_t local_mem_access_kind[SI_MAX_LOCAL_MEM_ACCESSES_PER_INST];local_mem_access_kind48,1425
+	uint32_t local_mem_access_addr[SI_MAX_LOCAL_MEM_ACCESSES_PER_INST];local_mem_access_addr49,1508
+	uint32_t local_mem_access_size[SI_MAX_LOCAL_MEM_ACCESSES_PER_INST];local_mem_access_size50,1577
+#define SI_UOP_MAX_IDEP SI_UOP_MAX_IDEP53,1650
+#define SI_UOP_MAX_ODEP SI_UOP_MAX_ODEP54,1687
+#define SI_UOP_DEP_NONE SI_UOP_DEP_NONE56,1725
+#define SI_UOP_DEP_REG_FIRST SI_UOP_DEP_REG_FIRST57,1759
+#define SI_UOP_DEP_REG(SI_UOP_DEP_REG58,1793
+#define SI_UOP_DEP_REG_LAST SI_UOP_DEP_REG_LAST59,1835
+#define SI_UOP_DEP_PV SI_UOP_DEP_PV60,1871
+#define SI_UOP_DEP_PS SI_UOP_DEP_PS61,1907
+#define SI_UOP_DEP_LDS SI_UOP_DEP_LDS62,1943
+#define SI_UOP_DEP_COUNT SI_UOP_DEP_COUNT63,1979
+struct si_uop_tsi_uop_t67,2180
+	long long id;id70,2212
+	long long id_in_compute_unit;id_in_compute_unit71,2227
+	struct si_wavefront_t *wavefront;  /* Wavefront it belongs to */wavefront72,2258
+	struct si_work_group_t *work_group;  /* Work-group it belongs to */work_group73,2324
+	struct si_compute_unit_t *compute_unit;  /* Compute unit it belongs to */compute_unit74,2393
+	int length;  /* Number of bytes occupied by ALU group */length76,2481
+	unsigned int ready : 1;ready80,2576
+	unsigned int last : 1;  /* Last instruction in the clause */last81,2601
+	unsigned int wavefront_last : 1;  /* Last instruction in the wavefront */wavefront_last82,2663
+	unsigned int global_mem_read : 1;global_mem_read83,2738
+	unsigned int global_mem_write : 1;global_mem_write84,2773
+	unsigned int local_mem_read : 1;local_mem_read85,2809
+	unsigned int local_mem_write : 1;local_mem_write86,2843
+	unsigned int exec_mask_update : 1;exec_mask_update87,2878
+	long long inst_mem_ready;  /* Cycle when instruction memory access completes */inst_mem_ready90,2946
+	int global_mem_witness;global_mem_witness91,3027
+	int local_mem_witness;local_mem_witness92,3052
+	int subwavefront_count;subwavefront_count95,3111
+	int exec_subwavefront_count;exec_subwavefront_count96,3136
+	int write_subwavefront_count;write_subwavefront_count97,3166
+	int idep[SI_UOP_MAX_IDEP];idep100,3250
+	int odep[SI_UOP_MAX_ODEP];odep101,3278
+	int idep_count;idep_count102,3306
+	int odep_count;odep_count103,3323
+	struct si_uop_t *dep_list_next;dep_list_next106,3390
+	struct si_uop_t *dep_list_prev;dep_list_prev107,3423
+	struct si_uop_t *dep_list_head;dep_list_head108,3456
+	struct si_uop_t *dep_list_tail;dep_list_tail109,3489
+	int dep_list_count;dep_list_count110,3522
+	int dep_list_max;dep_list_max111,3543
+	struct si_work_item_uop_t work_item_uop[0];work_item_uop115,3697
+struct si_wavefront_pool_tsi_wavefront_pool_t152,4812
+	int id;id154,4841
+	int wavefront_count;wavefront_count157,4894
+	struct linked_list_t *wavefronts;wavefronts158,4916
+	struct si_wavefront_pool_t *wavefront_pool_ready_list_prev;wavefront_pool_ready_list_prev161,4997
+	struct si_wavefront_pool_t *wavefront_pool_ready_list_next;wavefront_pool_ready_list_next162,5058
+	struct si_wavefront_pool_t *wavefront_pool_busy_list_prev;wavefront_pool_busy_list_prev163,5119
+	struct si_wavefront_pool_t *wavefront_pool_busy_list_next;wavefront_pool_busy_list_next164,5179
+	struct si_compute_unit_t *compute_unit;compute_unit167,5260
+struct si_branch_unit_tsi_branch_unit_t170,5305
+	struct si_uop_t *inst_buffer;  /* Uop from decode to read stage */inst_buffer173,5345
+	struct si_uop_t *exec_buffer;  /* Uop from read to execute stage */exec_buffer174,5413
+	struct si_uop_t *producers[SI_UOP_DEP_COUNT];producers178,5615
+	long long wavefront_count;wavefront_count181,5681
+	long long cycle;cycle182,5709
+	long long inst_count;inst_count183,5727
+	long long inst_slot_count;inst_slot_count184,5750
+	long long local_mem_slot_count;local_mem_slot_count185,5778
+struct si_scalar_unit_tsi_scalar_unit_t188,5815
+	struct si_uop_t *inst_buffer;  /* Uop from decode to read stage */inst_buffer191,5855
+	struct si_uop_t *exec_buffer;  /* Uop from read to execute stage */exec_buffer192,5923
+	struct si_uop_t *producers[SI_UOP_DEP_COUNT];producers196,6125
+	long long wavefront_count;wavefront_count199,6191
+	long long cycle;cycle200,6219
+	long long inst_count;inst_count201,6237
+	long long inst_slot_count;inst_slot_count202,6260
+	long long local_mem_slot_count;local_mem_slot_count203,6288
+struct si_simd_tsi_simd_t206,6325
+	struct si_uop_t *inst_buffer;  /* Uop from decode to read stage */inst_buffer209,6358
+	struct si_uop_t *exec_buffer;  /* Uop from read to execute stage */exec_buffer210,6426
+	struct si_uop_t *producers[SI_UOP_DEP_COUNT];producers214,6628
+	long long wavefront_count;wavefront_count217,6694
+	long long cycle;cycle218,6722
+	long long inst_count;inst_count219,6740
+	long long inst_slot_count;inst_slot_count220,6763
+	long long local_mem_slot_count;local_mem_slot_count221,6791
+struct si_compute_unit_tsi_compute_unit_t229,6857
+	int id;id232,6895
+	long long gpu_uop_id_counter;  /* Counter to assign 'id_in_compute_unit' to uops */gpu_uop_id_counter233,6904
+	struct si_compute_unit_t *compute_unit_ready_list_prev;compute_unit_ready_list_prev236,7033
+	struct si_compute_unit_t *compute_unit_ready_list_next;compute_unit_ready_list_next237,7090
+	struct si_compute_unit_t *compute_unit_busy_list_prev;compute_unit_busy_list_prev238,7147
+	struct si_compute_unit_t *compute_unit_busy_list_next;compute_unit_busy_list_next239,7203
+	struct si_wavefront_pool_t *wavefront_pool_ready_list_head;wavefront_pool_ready_list_head242,7319
+	struct si_wavefront_pool_t *wavefront_pool_ready_list_tail;wavefront_pool_ready_list_tail243,7380
+	int wavefront_pool_ready_list_count;wavefront_pool_ready_list_count244,7441
+	int wavefront_pool_ready_list_max;wavefront_pool_ready_list_max245,7479
+	struct si_wavefront_pool_t *wavefront_pool_busy_list_head;wavefront_pool_busy_list_head248,7552
+	struct si_wavefront_pool_t *wavefront_pool_busy_list_tail;wavefront_pool_busy_list_tail249,7612
+	int wavefront_pool_busy_list_count;wavefront_pool_busy_list_count250,7672
+	int wavefront_pool_busy_list_max;wavefront_pool_busy_list_max251,7709
+	struct mod_t *global_memory;global_memory254,7785
+	struct mod_t *local_memory;local_memory255,7815
+	unsigned int num_wavefront_pools;num_wavefront_pools258,7872
+	struct si_wavefront_pool_t **wavefront_pools;wavefront_pools259,7907
+	struct si_simd_t **simds;simds260,7954
+	struct si_scalar_unit_t scalar_unit;scalar_unit262,8045
+	struct si_branch_unit_t branch_unit;branch_unit263,8083
+	struct si_uop_t **fetch_buffers;fetch_buffers265,8122
+	long long cycle;cycle268,8175
+	long long mapped_work_groups;mapped_work_groups269,8193
+	long long wavefront_count;wavefront_count270,8224
+	long long inst_count;inst_count271,8252
+	long long scalar_alu_inst_count;scalar_alu_inst_count272,8275
+	long long scalar_mem_inst_count;scalar_mem_inst_count273,8309
+	long long vector_alu_inst_count;vector_alu_inst_count274,8343
+	long long vector_mem_inst_count;vector_mem_inst_count275,8377
+	long long inst_slot_count;inst_slot_count277,8412
+	long long local_mem_slot_count;local_mem_slot_count278,8440
+	long long global_mem_write_count;global_mem_write_count279,8473
+	int work_group_count;work_group_count282,8553
+	struct si_work_group_t **work_groups;work_groups283,8576
+	int decode_index;  /* Next uop in 'fetch_buffer' to decode */decode_index286,8643
+	int execute_index;  /* Next uop in 'inst_buffer' to execute */execute_index287,8706
+	struct si_uop_t *producers[SI_UOP_DEP_COUNT];producers291,8903
+#define si_tracing(si_tracing325,9959
+#define si_trace(si_trace326,10012
+#define si_trace_header(si_trace_header327,10072
+extern enum si_gpu_register_alloc_granularity_tsi_gpu_register_alloc_granularity_t341,10538
+	si_gpu_register_alloc_invalid = 0,  /* For invalid user input */si_gpu_register_alloc_invalid343,10588
+	si_gpu_register_alloc_wavefront,si_gpu_register_alloc_wavefront344,10654
+	si_gpu_register_alloc_work_groupsi_gpu_register_alloc_work_group345,10688
+extern enum si_gpu_sched_policy_tsi_gpu_sched_policy_t352,10920
+	si_gpu_sched_invalid = 0,  /* For invalid user input */si_gpu_sched_invalid354,10956
+	si_gpu_sched_round_robin,si_gpu_sched_round_robin355,11013
+	si_gpu_sched_greedysi_gpu_sched_greedy356,11040
+struct si_gpu_tsi_gpu_t376,11545
+	long long cycle;cycle379,11584
+	struct si_ndrange_t *ndrange;ndrange382,11633
+	int work_groups_per_wavefront_pool;work_groups_per_wavefront_pool383,11664
+	int wavefronts_per_wavefront_pool;wavefronts_per_wavefront_pool384,11701
+	int work_items_per_wavefront_pool;work_items_per_wavefront_pool385,11737
+	int work_groups_per_compute_unit;work_groups_per_compute_unit386,11773
+	int wavefronts_per_compute_unit;wavefronts_per_compute_unit387,11808
+	int work_items_per_compute_unit;work_items_per_compute_unit388,11842
+	struct si_compute_unit_t **compute_units;compute_units391,11898
+	struct si_compute_unit_t *compute_unit_ready_list_head;compute_unit_ready_list_head394,11999
+	struct si_compute_unit_t *compute_unit_ready_list_tail;compute_unit_ready_list_tail395,12056
+	int compute_unit_ready_list_count;compute_unit_ready_list_count396,12113
+	int compute_unit_ready_list_max;compute_unit_ready_list_max397,12149
+	struct si_compute_unit_t *compute_unit_busy_list_head;compute_unit_busy_list_head400,12218
+	struct si_compute_unit_t *compute_unit_busy_list_tail;compute_unit_busy_list_tail401,12274
+	int compute_unit_busy_list_count;compute_unit_busy_list_count402,12330
+	int compute_unit_busy_list_max;compute_unit_busy_list_max403,12365
+	struct linked_list_t *trash_uop_list;trash_uop_list406,12435
+#define SI_GPU_FOREACH_COMPUTE_UNIT(SI_GPU_FOREACH_COMPUTE_UNIT411,12511
+#define SI_GPU_FOREACH_WORK_ITEM_IN_SUBWAVEFRONT(SI_GPU_FOREACH_WORK_ITEM_IN_SUBWAVEFRONT414,12663
+
+sched.c,152
+struct string_map_t si_gpu_sched_policy_map =si_gpu_sched_policy_map23,843
+enum si_gpu_sched_policy_t si_gpu_sched_policy;si_gpu_sched_policy30,990
+
+scalar_unit.c,141
+int si_gpu_scalar_unit_issue_rate = 1;si_gpu_scalar_unit_issue_rate1,0
+int si_gpu_scalar_unit_latency = 1;si_gpu_scalar_unit_latency2,39
+
+branch_unit.c,141
+int si_gpu_branch_unit_issue_rate = 1;si_gpu_branch_unit_issue_rate1,0
+int si_gpu_branch_unit_latency = 1;si_gpu_branch_unit_latency2,39
+
+compute-unit.c,543
+struct si_compute_unit_t *si_compute_unit_create()si_compute_unit_create30,887
+void si_compute_unit_free(struct si_compute_unit_t *compute_unit)si_compute_unit_free80,2736
+void si_compute_unit_map_work_group(struct si_compute_unit_t *compute_unit, si_compute_unit_map_work_group115,3905
+void si_compute_unit_unmap_work_group(struct si_compute_unit_t *compute_unit, struct si_work_group_t *work_group)si_compute_unit_unmap_work_group172,6416
+void si_compute_unit_run(struct si_compute_unit_t *compute_unit)si_compute_unit_run199,7488
+
+calc.c,601
+char *si_gpu_calc_file_name = "";si_gpu_calc_file_name23,843
+static char *err_gnuplot_msg =err_gnuplot_msg25,878
+int si_calc_get_work_groups_per_wavefront_pool(int work_items_per_work_group,si_calc_get_work_groups_per_wavefront_pool32,1206
+static void si_calc_plot_work_items_per_work_group(void)si_calc_plot_work_items_per_work_group83,3688
+static void si_calc_plot_registers_per_work_item(void)si_calc_plot_registers_per_work_item167,6830
+static void si_calc_plot_local_mem_per_work_group(void)si_calc_plot_local_mem_per_work_group248,9854
+void si_calc_plot(void)si_calc_plot333,13014
+
+gpu.c,2282
+char *si_gpu_config_help =si_gpu_config_help35,988
+char *si_gpu_config_file_name = "";si_gpu_config_file_name118,5543
+char *si_gpu_report_file_name = "";si_gpu_report_file_name119,5579
+int si_trace_category;si_trace_category121,5616
+int si_gpu_num_compute_units = 32;si_gpu_num_compute_units124,5697
+int si_gpu_num_wavefront_pools = 4; /* Per CU */si_gpu_num_wavefront_pools125,5732
+int si_gpu_num_stream_cores = 16; /* Per SIMD */si_gpu_num_stream_cores126,5781
+int si_gpu_num_registers = 65536; /* Per SIMD */si_gpu_num_registers127,5830
+int si_gpu_register_alloc_size = 32; si_gpu_register_alloc_size128,5879
+struct string_map_t si_gpu_register_alloc_granularity_map =si_gpu_register_alloc_granularity_map130,5918
+enum si_gpu_register_alloc_granularity_t si_gpu_register_alloc_granularity;si_gpu_register_alloc_granularity137,6096
+int si_gpu_max_work_groups_per_wavefront_pool = 1;si_gpu_max_work_groups_per_wavefront_pool139,6173
+int si_gpu_max_wavefronts_per_wavefront_pool = 1;si_gpu_max_wavefronts_per_wavefront_pool140,6224
+int si_gpu_local_mem_size = 65536;  /* 64 KB */si_gpu_local_mem_size143,6305
+int si_gpu_local_mem_alloc_size = 1024;  /* 1 KB */si_gpu_local_mem_alloc_size144,6353
+int si_gpu_local_mem_latency = 2;si_gpu_local_mem_latency145,6405
+int si_gpu_local_mem_block_size = 64;si_gpu_local_mem_block_size146,6439
+int si_gpu_local_mem_num_ports = 2;si_gpu_local_mem_num_ports147,6477
+struct si_gpu_t *si_gpu;si_gpu149,6514
+#define SI_TRACE_VERSION_MAJOR	SI_TRACE_VERSION_MAJOR161,6703
+#define SI_TRACE_VERSION_MINOR	SI_TRACE_VERSION_MINOR162,6737
+static void si_gpu_device_init()si_gpu_device_init165,6773
+static void si_config_read(void)si_config_read199,7732
+static void si_config_dump(FILE *f)si_config_dump330,14010
+static void si_gpu_map_ndrange(struct si_ndrange_t *ndrange)si_gpu_map_ndrange369,15759
+static void si_gpu_unmap_ndrange(void)si_gpu_unmap_ndrange416,17762
+void si_gpu_init(void)si_gpu_init432,17949
+void si_gpu_done()si_gpu_done448,18281
+void si_gpu_dump_report(void)si_gpu_dump_report476,18827
+void si_gpu_uop_trash_empty(void)si_gpu_uop_trash_empty547,21634
+void si_gpu_uop_trash_add(struct si_uop_t *uop)si_gpu_uop_trash_add565,21998
+int si_gpu_run(void)si_gpu_run572,22175

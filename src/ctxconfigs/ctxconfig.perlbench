@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = perlbench_base.i386
+args = checkspam.pl 2500 5 25 11 150 1 1 1 1
+cwd = benchmarks/spec2006/400.perlbench
+StdOut = perlbench.out
+IPCReport = perlbench.ipc
+IPCReportInterval = 100000

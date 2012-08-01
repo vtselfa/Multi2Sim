@@ -1,0 +1,108 @@
+
+misc.h,2020
+#define MISC_HMISC_H21,819
+#define MAX_LONG_STRING_SIZE MAX_LONG_STRING_SIZE32,961
+#define MAX_STRING_SIZE MAX_STRING_SIZE33,1001
+#define MAX_PATH_SIZE MAX_PATH_SIZE34,1030
+#define MIN(MIN38,1085
+#define MAX(MAX41,1146
+#define BOOL(BOOL45,1224
+#define IN_RANGE(IN_RANGE46,1258
+#define ROUND_UP(ROUND_UP49,1322
+#define ROUND_DOWN(ROUND_DOWN50,1385
+#define DWORD_ALIGN(DWORD_ALIGN53,1451
+#define WORD_ALIGN(WORD_ALIGN54,1492
+#define HALF_ALIGN(HALF_ALIGN55,1533
+#define MOD(MOD58,1614
+#define SWAPH(SWAPH61,1675
+#define SWAPW(SWAPW63,1759
+#define SWAPDW(SWAPDW67,1944
+#define SEXT32(SEXT3278,2413
+#define SEXT64(SEXT6479,2498
+#define BITS32(BITS3282,2628
+#define BITS64(BITS6483,2704
+#define GETBIT32(GETBIT3286,2815
+#define GETBIT64(GETBIT6487,2865
+#define SETBIT32(SETBIT3288,2917
+#define SETBIT64(SETBIT6489,2967
+#define CLEARBIT32(CLEARBIT3290,3019
+#define CLEARBIT64(CLEARBIT6491,3073
+#define SETBITVALUE32(SETBITVALUE3292,3129
+#define SETBITVALUE64(SETBITVALUE6493,3208
+#define BITMAP_TYPE(BITMAP_TYPE97,3316
+#define BITMAP_INIT(BITMAP_INIT99,3389
+#define BITMAP_SET(BITMAP_SET102,3498
+#define BITMAP_CLEAR(BITMAP_CLEAR104,3570
+#define BITMAP_SET_VAL(BITMAP_SET_VAL106,3647
+#define BITMAP_GET(BITMAP_GET108,3755
+#define BITMAP_SET_RANGE(BITMAP_SET_RANGE110,3834
+#define BITMAP_CLEAR_RANGE(BITMAP_CLEAR_RANGE113,3949
+#define DOUBLE_LINKED_LIST_INSERT_HEAD(DOUBLE_LINKED_LIST_INSERT_HEAD130,4481
+#define DOUBLE_LINKED_LIST_INSERT_TAIL(DOUBLE_LINKED_LIST_INSERT_TAIL142,4987
+#define DOUBLE_LINKED_LIST_MEMBER(DOUBLE_LINKED_LIST_MEMBER154,5491
+#define DOUBLE_LINKED_LIST_REMOVE(DOUBLE_LINKED_LIST_REMOVE157,5640
+#define DOUBLE_LINKED_LIST_FOR_EACH(DOUBLE_LINKED_LIST_FOR_EACH172,6344
+#define PTR_ASSIGN(PTR_ASSIGN177,6569
+struct string_map_tstring_map_t206,7318
+	int count;count208,7340
+		char *string;string210,7362
+		int value;value211,7378
+	} map[];map212,7391
+#define M2S_HOST_GUEST_MATCH(M2S_HOST_GUEST_MATCH310,9987
+
+misc.c,3972
+int log_base2(int x)log_base236,1016
+FILE *open_read(char *fname)open_read60,1275
+int can_open_read(char *fname)can_open_read73,1477
+FILE *open_write(char *fname)open_write88,1692
+int can_open_write(char *fname)can_open_write101,1895
+int read_line(FILE *f, char *line, int size)read_line118,2219
+void close_file(FILE *f)close_file132,2500
+FILE *create_temp_file(char *ret_path, int ret_path_size)create_temp_file139,2582
+int map_string(struct string_map_t *map, char *string)map_string164,2983
+int map_string_case(struct string_map_t *map, char *s)map_string_case175,3200
+static char *unknown = "<unknown>";unknown185,3385
+char *map_value(struct string_map_t *map, int value)map_value186,3421
+void map_value_string(struct string_map_t *map, int value, char *buf, int size)map_value_string196,3603
+void map_flags(struct string_map_t *map, int flags, char *out, int size)map_flags209,3872
+static int memoryleft;memoryleft233,4239
+void strccat(char *dest, char *src)strccat235,4263
+void strccpy(char *dest, char *src, int size)strccpy248,4522
+void strdump(char *dest, char *src, int size)strdump261,4762
+void str_single_spaces(char *dest, char *src, int size)str_single_spaces272,4930
+int str_suffix(char *str, char *suffix)str_suffix304,5463
+int str_prefix(char *str, char *prefix)str_prefix320,5754
+void str_substr(char *dest, int dest_size, char *src, int src_pos, int src_count)str_substr336,6032
+void str_token(char *dest, int dest_size, char *src, int index, char *delim)str_token352,6363
+int str_to_int(char *str)str_to_int366,6679
+void str_printf(char **pbuf, int *psize, char *fmt, ...)str_printf378,6848
+void str_read_from_file(FILE *f, char *buf, int buf_size)str_read_from_file394,7096
+void str_write_to_file(FILE *f, char *buf)str_write_to_file424,7599
+char *str_set(char *old_str, char *new_str)str_set445,7933
+char *str_free(char *str)str_free467,8299
+struct list_t *str_token_list_create(char *str, char *delim)str_token_list_create484,8470
+void str_token_list_free(struct list_t *token_list)str_token_list_free522,9126
+void str_token_list_shift(struct list_t *token_list)str_token_list_shift540,9365
+char *str_token_list_first(struct list_t *token_list)str_token_list_first554,9609
+void str_token_list_dump(struct list_t *token_list, FILE *f)str_token_list_dump565,9819
+int write_buffer(char *file_name, void *buf, int size)write_buffer585,10048
+void *read_buffer(char *file_name, int *psize)read_buffer596,10216
+void free_buffer(void *buf)free_buffer620,10614
+struct bit_map_tbit_map_t632,10691
+	unsigned int size;size634,10710
+	unsigned int word_count;  /* Size in words */word_count635,10730
+	unsigned int data[0];data636,10777
+struct bit_map_t *bit_map_create(unsigned int size)bit_map_create640,10805
+void bit_map_free(struct bit_map_t *bit_map)bit_map_free655,11096
+void bit_map_set(struct bit_map_t *bit_map, unsigned int where, unsigned int size,bit_map_set663,11268
+unsigned int bit_map_get(struct bit_map_t *bit_map, unsigned int where, unsigned int size)bit_map_get713,12580
+int bit_map_count_ones(struct bit_map_t *bit_map, unsigned int where, unsigned int size)bit_map_count_ones752,13612
+void bit_map_copy(struct bit_map_t *dst, unsigned int dst_where,bit_map_copy763,13831
+void bit_map_dump(struct bit_map_t *bit_map, unsigned int where, unsigned int size, FILE *f)bit_map_dump780,14254
+void hex_str_to_byte_array(char *dest, char *str, int num)hex_str_to_byte_array794,14473
+void dump_ptr(void *ptr, int size, FILE *stream)dump_ptr814,14950
+void dump_bin(int x, int digits, FILE *f)dump_bin832,15318
+#define PACKAGE_DATA_DIR PACKAGE_DATA_DIR856,15945
+void m2s_dist_file(char *file_name, char *dist_path, char *non_dist_path,m2s_dist_file859,15981
+static char *err_m2s_host_guest_match =err_m2s_host_guest_match921,17660
+void m2s_host_guest_match_error(char *expr, int host_value, int guest_value)m2s_host_guest_match_error928,18087

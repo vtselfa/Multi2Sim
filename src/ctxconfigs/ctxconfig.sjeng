@@ -1,0 +1,6 @@
+[ Context 0 ]
+exe = sjeng_base.i386
+args = train.txt
+cwd = benchmarks/spec2006/458.sjeng
+IPCReport = sjeng.ipc
+IPCReportInterval = 100000

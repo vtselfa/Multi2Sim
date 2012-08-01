@@ -1,0 +1,309 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+DEFINST	asm.c	66;"	d	file:
+DEFINST	asm.c	75;"	d	file:
+DEFINST	southern-islands-asm.h	368;"	d
+DEFINST	southern-islands-asm.h	371;"	d
+MAX_INST_STR_SIZE	asm.c	39;"	d	file:
+MAX_SDST_STR_SIZE	asm.c	40;"	d	file:
+SI_BIN_FILE_NOT_SUPPORTED	bin-file.c	24;"	d	file:
+SI_BIN_FILE_NOT_SUPPORTED_NEQ	bin-file.c	26;"	d	file:
+SI_FMT_COUNT	southern-islands-asm.h	/^	SI_FMT_COUNT$/;"	e	enum:si_fmt_enum
+SI_FMT_DS	southern-islands-asm.h	/^	SI_FMT_DS,$/;"	e	enum:si_fmt_enum
+SI_FMT_MIMG	southern-islands-asm.h	/^	SI_FMT_MIMG,$/;"	e	enum:si_fmt_enum
+SI_FMT_MTBUF	southern-islands-asm.h	/^	SI_FMT_MTBUF,$/;"	e	enum:si_fmt_enum
+SI_FMT_MUBUF	southern-islands-asm.h	/^	SI_FMT_MUBUF,$/;"	e	enum:si_fmt_enum
+SI_FMT_NONE	southern-islands-asm.h	/^	SI_FMT_NONE = 0,$/;"	e	enum:si_fmt_enum
+SI_FMT_SMRD	southern-islands-asm.h	/^	SI_FMT_SMRD,$/;"	e	enum:si_fmt_enum
+SI_FMT_SOP1	southern-islands-asm.h	/^	SI_FMT_SOP1,$/;"	e	enum:si_fmt_enum
+SI_FMT_SOP2	southern-islands-asm.h	/^	SI_FMT_SOP2,$/;"	e	enum:si_fmt_enum
+SI_FMT_SOPC	southern-islands-asm.h	/^	SI_FMT_SOPC,$/;"	e	enum:si_fmt_enum
+SI_FMT_SOPK	southern-islands-asm.h	/^	SI_FMT_SOPK,$/;"	e	enum:si_fmt_enum
+SI_FMT_SOPP	southern-islands-asm.h	/^	SI_FMT_SOPP,$/;"	e	enum:si_fmt_enum
+SI_FMT_VINTRP	southern-islands-asm.h	/^	SI_FMT_VINTRP,$/;"	e	enum:si_fmt_enum
+SI_FMT_VOP1	southern-islands-asm.h	/^	SI_FMT_VOP1,$/;"	e	enum:si_fmt_enum
+SI_FMT_VOP2	southern-islands-asm.h	/^	SI_FMT_VOP2,$/;"	e	enum:si_fmt_enum
+SI_FMT_VOP3a	southern-islands-asm.h	/^	SI_FMT_VOP3a,$/;"	e	enum:si_fmt_enum
+SI_FMT_VOP3b	southern-islands-asm.h	/^	SI_FMT_VOP3b,$/;"	e	enum:si_fmt_enum
+SI_FMT_VOPC	southern-islands-asm.h	/^	SI_FMT_VOPC,$/;"	e	enum:si_fmt_enum
+SI_INST_CAT_COUNT	southern-islands-asm.h	/^	SI_INST_CAT_COUNT$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_DS	southern-islands-asm.h	/^	SI_INST_CAT_DS,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_MIMG	southern-islands-asm.h	/^	SI_INST_CAT_MIMG,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_MTBUF	southern-islands-asm.h	/^	SI_INST_CAT_MTBUF,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_MUBUF	southern-islands-asm.h	/^	SI_INST_CAT_MUBUF,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_NONE	southern-islands-asm.h	/^	SI_INST_CAT_NONE = 0,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_SMRD	southern-islands-asm.h	/^	SI_INST_CAT_SMRD,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_SOP1	southern-islands-asm.h	/^	SI_INST_CAT_SOP1,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_SOP2	southern-islands-asm.h	/^	SI_INST_CAT_SOP2,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_SOPC	southern-islands-asm.h	/^	SI_INST_CAT_SOPC,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_SOPK	southern-islands-asm.h	/^	SI_INST_CAT_SOPK,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_SOPP	southern-islands-asm.h	/^	SI_INST_CAT_SOPP,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_VINTRP	southern-islands-asm.h	/^	SI_INST_CAT_VINTRP,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_VOP1	southern-islands-asm.h	/^	SI_INST_CAT_VOP1,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_VOP2	southern-islands-asm.h	/^	SI_INST_CAT_VOP2,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_VOP3a	southern-islands-asm.h	/^	SI_INST_CAT_VOP3a,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_VOP3b	southern-islands-asm.h	/^	SI_INST_CAT_VOP3b,$/;"	e	enum:si_inst_category_enum
+SI_INST_CAT_VOPC	southern-islands-asm.h	/^	SI_INST_CAT_VOPC,$/;"	e	enum:si_inst_category_enum
+SI_INST_COUNT	southern-islands-asm.h	/^	SI_INST_COUNT$/;"	e	enum:si_inst_enum
+SI_INST_INFO_SMRD_OPCODE_SIZE	asm.c	35;"	d	file:
+SI_INST_INFO_SOPP_OPCODE_SIZE	asm.c	36;"	d	file:
+SI_INST_MAX_WORDS	southern-islands-asm.h	402;"	d
+SI_INST_NONE	southern-islands-asm.h	/^	SI_INST_NONE = 0,$/;"	e	enum:si_inst_enum
+SOUTHERN_ISLANDS_ASM_H	southern-islands-asm.h	21;"	d
+abs	southern-islands-asm.h	/^        unsigned int abs      : 3;   \/*  [10:8] *\/$/;"	m	struct:si_fmt_vop3a_t
+addr	southern-islands-asm.h	/^        unsigned int addr     : 8;   \/* [39:32] *\/$/;"	m	struct:si_fmt_ds_t
+addr64	southern-islands-asm.h	/^        unsigned int addr64    : 1;   \/*     15  *\/$/;"	m	struct:si_fmt_mtbuf_t
+addr64	southern-islands-asm.h	/^        unsigned int addr64   : 1;   \/*     15  *\/$/;"	m	struct:si_fmt_mubuf_t
+address	bin-file.c	/^	Elf32_Word address;  \/* Device address *\/$/;"	m	struct:pt_note_prog_info_entry_t	file:
+as_float	southern-islands-asm.h	/^	float as_float;$/;"	m	union:si_reg_t
+as_int	southern-islands-asm.h	/^	signed int as_int;$/;"	m	union:si_reg_t
+as_short	southern-islands-asm.h	/^	signed short int as_short[2];$/;"	m	union:si_reg_t
+as_uint	southern-islands-asm.h	/^	unsigned int as_uint;$/;"	m	union:si_reg_t
+as_ushort	southern-islands-asm.h	/^	unsigned short int as_ushort[2];$/;"	m	union:si_reg_t
+attr	southern-islands-asm.h	/^        unsigned int attr     : 6;   \/* [15:10] *\/$/;"	m	struct:si_fmt_vintrp_t
+attrchan	southern-islands-asm.h	/^        unsigned int attrchan : 2;   \/*   [9:8] *\/$/;"	m	struct:si_fmt_vintrp_t
+bool_consts	southern-islands-asm.h	/^	unsigned int bool_consts[32];$/;"	m	struct:si_bin_enc_dict_entry_consts_t
+bytes	southern-islands-asm.h	/^	char bytes[8];$/;"	m	union:si_inst_microcode_t
+category	southern-islands-asm.h	/^	enum si_inst_category_enum category;$/;"	m	struct:si_inst_info_t	typeref:enum:si_inst_info_t::si_inst_category_enum
+clamp	southern-islands-asm.h	/^        unsigned int clamp    : 1;   \/*     11  *\/$/;"	m	struct:si_fmt_vop3a_t
+compr	southern-islands-asm.h	/^        unsigned int compr    : 1;   \/*     10  *\/$/;"	m	struct:si_fmt_exp_t
+consts	southern-islands-asm.h	/^	struct si_bin_enc_dict_entry_consts_t *consts;$/;"	m	struct:si_bin_enc_dict_entry_t	typeref:struct:si_bin_enc_dict_entry_t::si_bin_enc_dict_entry_consts_t
+d_flags	southern-islands-asm.h	/^	Elf32_Word d_flags;$/;"	m	struct:si_bin_enc_dict_entry_header_t
+d_machine	southern-islands-asm.h	/^	Elf32_Word d_machine;$/;"	m	struct:si_bin_enc_dict_entry_header_t
+d_offset	southern-islands-asm.h	/^	Elf32_Off d_offset;  \/* Offset for encoding data (PT_NOTE + PT_LOAD segments) *\/$/;"	m	struct:si_bin_enc_dict_entry_header_t
+d_size	southern-islands-asm.h	/^	Elf32_Word d_size;  \/* Size of encoding data (PT_NOTE + PT_LOAD segments) *\/$/;"	m	struct:si_bin_enc_dict_entry_header_t
+d_type	southern-islands-asm.h	/^	Elf32_Word d_type;$/;"	m	struct:si_bin_enc_dict_entry_header_t
+da	southern-islands-asm.h	/^        unsigned int da        : 1;   \/*     14  *\/$/;"	m	struct:si_fmt_mimg_t
+data0	southern-islands-asm.h	/^        unsigned int data0    : 8;   \/* [47:40] *\/$/;"	m	struct:si_fmt_ds_t
+data1	southern-islands-asm.h	/^        unsigned int data1    : 8;   \/* [55:48] *\/$/;"	m	struct:si_fmt_ds_t
+descsz	bin-file.c	/^	Elf32_Word descsz;  \/* Size of the data payload *\/$/;"	m	struct:pt_note_header_t	file:
+dfmt	southern-islands-asm.h	/^        unsigned int dfmt     : 4;   \/* [22:19] *\/$/;"	m	struct:si_fmt_mubuf_t
+dmask	southern-islands-asm.h	/^        unsigned int dmask     : 4;   \/*  [11:8] *\/$/;"	m	struct:si_fmt_mimg_t
+done	southern-islands-asm.h	/^        unsigned int done     : 1;   \/*     11  *\/$/;"	m	struct:si_fmt_exp_t
+ds	southern-islands-asm.h	/^	struct si_fmt_ds_t ds;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_ds_t
+elf_file	southern-islands-asm.h	/^	struct elf_file_t *elf_file;$/;"	m	struct:si_bin_file_t	typeref:struct:si_bin_file_t::elf_file_t
+en	southern-islands-asm.h	/^        unsigned int en       : 4;   \/*   [3:0] *\/$/;"	m	struct:si_fmt_exp_t
+enc	southern-islands-asm.h	/^        unsigned int enc       : 6;   \/* [31:26] *\/$/;"	m	struct:si_fmt_mimg_t
+enc	southern-islands-asm.h	/^        unsigned int enc       : 6;   \/* [31:26] *\/$/;"	m	struct:si_fmt_mtbuf_t
+enc	southern-islands-asm.h	/^        unsigned int enc      : 6;   \/* [31:26] *\/$/;"	m	struct:si_fmt_ds_t
+enc	southern-islands-asm.h	/^        unsigned int enc      : 6;   \/* [31:26] *\/$/;"	m	struct:si_fmt_exp_t
+enc	southern-islands-asm.h	/^        unsigned int enc      : 6;   \/* [31:26] *\/$/;"	m	struct:si_fmt_mubuf_t
+enc	southern-islands-asm.h	/^        unsigned int enc      : 6;   \/* [31:26] *\/$/;"	m	struct:si_fmt_vintrp_t
+enc	southern-islands-asm.h	/^        unsigned int enc      : 6;   \/* [31:26] *\/$/;"	m	struct:si_fmt_vop3a_t
+enc	southern-islands-asm.h	/^        unsigned int enc      : 6;   \/* [31:26] *\/$/;"	m	struct:si_fmt_vop3b_t
+enc	southern-islands-asm.h	/^        unsigned int enc    : 4;   \/* [31:28] *\/$/;"	m	struct:si_fmt_sopk_t
+enc	southern-islands-asm.h	/^        unsigned int enc    : 5;   \/* [31:27] *\/$/;"	m	struct:si_fmt_smrd_t
+enc	southern-islands-asm.h	/^        unsigned int enc    : 9;   \/* [31:23] *\/$/;"	m	struct:si_fmt_sopp_t
+enc	southern-islands-asm.h	/^        unsigned int enc   : 1;   \/*     31  *\/$/;"	m	struct:si_fmt_vop2_t
+enc	southern-islands-asm.h	/^        unsigned int enc   : 2;  \/* [31:30] *\/$/;"	m	struct:si_fmt_sop2_t
+enc	southern-islands-asm.h	/^        unsigned int enc   : 7;   \/* [31:25] *\/$/;"	m	struct:si_fmt_vopc_t
+enc	southern-islands-asm.h	/^        unsigned int enc   : 9;  \/* [31:23] *\/$/;"	m	struct:si_fmt_sop1_t
+enc	southern-islands-asm.h	/^        unsigned int enc   : 9;  \/* [31:32] *\/$/;"	m	struct:si_fmt_sopc_t
+enc	southern-islands-asm.h	/^        unsigned int enc  : 7;   \/* [31:25] *\/$/;"	m	struct:si_fmt_vop1_t
+enc_dict	southern-islands-asm.h	/^	struct list_t *enc_dict;$/;"	m	struct:si_bin_file_t	typeref:struct:si_bin_file_t::list_t
+enc_dict_entry_southern_islands	southern-islands-asm.h	/^	struct si_bin_enc_dict_entry_t *enc_dict_entry_southern_islands;$/;"	m	struct:si_bin_file_t	typeref:struct:si_bin_file_t::si_bin_enc_dict_entry_t
+enc_dict_machine_map	bin-file.c	/^static struct string_map_t enc_dict_machine_map =$/;"	v	typeref:struct:string_map_t	file:
+exp	southern-islands-asm.h	/^	struct si_fmt_exp_t exp;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_exp_t
+float_consts	southern-islands-asm.h	/^	float float_consts[256][4];$/;"	m	struct:si_bin_enc_dict_entry_consts_t
+fmt	southern-islands-asm.h	/^	enum si_fmt_enum fmt;  \/* Word formats *\/$/;"	m	struct:si_inst_info_t	typeref:enum:si_inst_info_t::si_fmt_enum
+fmt_str	southern-islands-asm.h	/^	char *fmt_str;$/;"	m	struct:si_inst_info_t
+gds	southern-islands-asm.h	/^        unsigned int gds      : 1;   \/*     17  *\/$/;"	m	struct:si_fmt_ds_t
+glc	southern-islands-asm.h	/^        unsigned int glc       : 1;   \/*     13  *\/$/;"	m	struct:si_fmt_mimg_t
+glc	southern-islands-asm.h	/^        unsigned int glc       : 1;   \/*     14  *\/$/;"	m	struct:si_fmt_mtbuf_t
+glc	southern-islands-asm.h	/^        unsigned int glc      : 1;   \/*     14  *\/$/;"	m	struct:si_fmt_mubuf_t
+header	southern-islands-asm.h	/^	struct si_bin_enc_dict_entry_header_t *header;$/;"	m	struct:si_bin_enc_dict_entry_t	typeref:struct:si_bin_enc_dict_entry_t::si_bin_enc_dict_entry_header_t
+imm	southern-islands-asm.h	/^        unsigned int imm    : 1;   \/*      8  *\/$/;"	m	struct:si_fmt_smrd_t
+index	bin-file.c	/^	Elf32_Word index;  \/* Constant buffer identifier *\/$/;"	m	struct:pt_note_constant_buffer_mask_t	file:
+index	southern-islands-asm.h	/^        unsigned int index     : 1;   \/*     13  *\/$/;"	m	struct:si_fmt_mtbuf_t
+index	southern-islands-asm.h	/^        unsigned int index    : 1;   \/*     13  *\/$/;"	m	struct:si_fmt_mubuf_t
+info	southern-islands-asm.h	/^	struct si_inst_info_t *info;  \/* Pointer to 'amd_inst_info' table *\/$/;"	m	struct:si_inst_t	typeref:struct:si_inst_t::si_inst_info_t
+inst	southern-islands-asm.h	/^	enum si_inst_enum inst;$/;"	m	struct:si_inst_info_t	typeref:enum:si_inst_info_t::si_inst_enum
+int_consts	southern-islands-asm.h	/^	unsigned int int_consts[32][4];$/;"	m	struct:si_bin_enc_dict_entry_consts_t
+lds	southern-islands-asm.h	/^        unsigned int lds       : 1;   \/*     16  *\/$/;"	m	struct:si_fmt_mtbuf_t
+lds_size_used	southern-islands-asm.h	/^	int lds_size_used;$/;"	m	struct:si_bin_enc_dict_entry_t
+lwe	southern-islands-asm.h	/^        unsigned int lwe       : 1;   \/*     17  *\/$/;"	m	struct:si_fmt_mimg_t
+micro_inst	southern-islands-asm.h	/^	union si_inst_microcode_t micro_inst;$/;"	m	struct:si_inst_t	typeref:union:si_inst_t::si_inst_microcode_t
+mimg	southern-islands-asm.h	/^	struct si_fmt_mimg_t mimg;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_mimg_t
+mtbuf	southern-islands-asm.h	/^	struct si_fmt_mtbuf_t mtbuf;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_mtbuf_t
+mubuf	southern-islands-asm.h	/^	struct si_fmt_mubuf_t mubuf;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_mubuf_t
+name	bin-file.c	/^	char name[8];  \/* Note header string. Must be "ATI CAL" *\/$/;"	m	struct:pt_note_header_t	file:
+name	southern-islands-asm.h	/^	char *name;$/;"	m	struct:si_inst_info_t
+namesz	bin-file.c	/^	Elf32_Word namesz;  \/* Size of the name field. Must be 8 *\/$/;"	m	struct:pt_note_header_t	file:
+neg	southern-islands-asm.h	/^        unsigned int neg      : 3;   \/* [63:60] *\/$/;"	m	struct:si_fmt_vop3a_t
+neg	southern-islands-asm.h	/^        unsigned int neg      : 3;   \/* [63:60] *\/$/;"	m	struct:si_fmt_vop3b_t
+nfmt	southern-islands-asm.h	/^        unsigned int nfmt     : 3;   \/* [25:23] *\/$/;"	m	struct:si_fmt_mubuf_t
+num_gpr_used	southern-islands-asm.h	/^	int num_gpr_used;$/;"	m	struct:si_bin_enc_dict_entry_t
+offen	southern-islands-asm.h	/^        unsigned int offen     : 1;   \/*     12  *\/$/;"	m	struct:si_fmt_mtbuf_t
+offen	southern-islands-asm.h	/^        unsigned int offen    : 1;   \/*     12  *\/$/;"	m	struct:si_fmt_mubuf_t
+offset	bin-file.c	/^	Elf32_Word offset;  \/* Offsets in bytes to start of data *\/$/;"	m	struct:pt_note_data_segment_desc_t	file:
+offset	southern-islands-asm.h	/^        unsigned int offset    : 12;  \/*  [11:0] *\/$/;"	m	struct:si_fmt_mtbuf_t
+offset	southern-islands-asm.h	/^        unsigned int offset   : 12;  \/*  [11:0] *\/$/;"	m	struct:si_fmt_mubuf_t
+offset	southern-islands-asm.h	/^        unsigned int offset : 8;   \/*   [7:0] *\/$/;"	m	struct:si_fmt_smrd_t
+offset0	southern-islands-asm.h	/^        unsigned int offset0  : 8;   \/*   [7:0] *\/$/;"	m	struct:si_fmt_ds_t
+offset1	southern-islands-asm.h	/^        unsigned int offset1  : 8;   \/*  [15:8] *\/$/;"	m	struct:si_fmt_ds_t
+omod	southern-islands-asm.h	/^        unsigned int omod     : 2;   \/* [59:58] *\/$/;"	m	struct:si_fmt_vop3a_t
+omod	southern-islands-asm.h	/^        unsigned int omod     : 2;   \/* [59:58] *\/$/;"	m	struct:si_fmt_vop3b_t
+op	southern-islands-asm.h	/^        unsigned int op        : 7;   \/* [24:18] *\/$/;"	m	struct:si_fmt_mimg_t
+op	southern-islands-asm.h	/^        unsigned int op        : 7;   \/* [24:18] *\/$/;"	m	struct:si_fmt_mtbuf_t
+op	southern-islands-asm.h	/^        unsigned int op       : 2;   \/* [17:16] *\/$/;"	m	struct:si_fmt_vintrp_t
+op	southern-islands-asm.h	/^        unsigned int op       : 3;   \/* [18:16] *\/$/;"	m	struct:si_fmt_mubuf_t
+op	southern-islands-asm.h	/^        unsigned int op       : 8;   \/* [25:18] *\/$/;"	m	struct:si_fmt_ds_t
+op	southern-islands-asm.h	/^        unsigned int op       : 9;   \/* [25:17] *\/$/;"	m	struct:si_fmt_vop3a_t
+op	southern-islands-asm.h	/^        unsigned int op       : 9;   \/* [25:17] *\/$/;"	m	struct:si_fmt_vop3b_t
+op	southern-islands-asm.h	/^        unsigned int op     : 5;   \/* [26:22] *\/$/;"	m	struct:si_fmt_smrd_t
+op	southern-islands-asm.h	/^        unsigned int op     : 5;   \/* [27:23] *\/$/;"	m	struct:si_fmt_sopk_t
+op	southern-islands-asm.h	/^        unsigned int op     : 7;   \/* [22:16] *\/$/;"	m	struct:si_fmt_sopp_t
+op	southern-islands-asm.h	/^        unsigned int op    : 6;   \/* [30:25] *\/$/;"	m	struct:si_fmt_vop2_t
+op	southern-islands-asm.h	/^        unsigned int op    : 7;  \/* [22:16] *\/$/;"	m	struct:si_fmt_sopc_t
+op	southern-islands-asm.h	/^        unsigned int op    : 7;  \/* [29:23] *\/$/;"	m	struct:si_fmt_sop2_t
+op	southern-islands-asm.h	/^        unsigned int op    : 8;   \/* [24:17] *\/$/;"	m	struct:si_fmt_vopc_t
+op	southern-islands-asm.h	/^        unsigned int op    : 8;  \/*  [15:8] *\/$/;"	m	struct:si_fmt_sop1_t
+op	southern-islands-asm.h	/^        unsigned int op   : 8;   \/*  [16:9] *\/$/;"	m	struct:si_fmt_vop1_t
+opcode	southern-islands-asm.h	/^	int opcode;  \/* Operation code *\/$/;"	m	struct:si_inst_info_t
+prog_info_entry_map	bin-file.c	/^static struct string_map_t prog_info_entry_map = {$/;"	v	typeref:struct:string_map_t	file:
+pt_load_buffer	southern-islands-asm.h	/^	struct elf_buffer_t pt_load_buffer;$/;"	m	struct:si_bin_enc_dict_entry_t	typeref:struct:si_bin_enc_dict_entry_t::elf_buffer_t
+pt_note_buffer	southern-islands-asm.h	/^	struct elf_buffer_t pt_note_buffer;$/;"	m	struct:si_bin_enc_dict_entry_t	typeref:struct:si_bin_enc_dict_entry_t::elf_buffer_t
+pt_note_constant_buffer_mask_t	bin-file.c	/^struct pt_note_constant_buffer_mask_t$/;"	s	file:
+pt_note_data_segment_desc_t	bin-file.c	/^struct pt_note_data_segment_desc_t$/;"	s	file:
+pt_note_header_t	bin-file.c	/^struct pt_note_header_t$/;"	s	file:
+pt_note_prog_info_entry_t	bin-file.c	/^struct pt_note_prog_info_entry_t$/;"	s	file:
+pt_note_type_map	bin-file.c	/^static struct string_map_t pt_note_type_map = {$/;"	v	typeref:struct:string_map_t	file:
+r128	southern-islands-asm.h	/^        unsigned int r128      : 1;   \/*     15  *\/$/;"	m	struct:si_fmt_mimg_t
+reserved	southern-islands-asm.h	/^        unsigned int reserved : 13;  \/* [25:13] *\/$/;"	m	struct:si_fmt_exp_t
+reserved	southern-islands-asm.h	/^        unsigned int reserved : 1;   \/*     16  *\/$/;"	m	struct:si_fmt_ds_t
+reserved	southern-islands-asm.h	/^        unsigned int reserved : 1;   \/*     53  *\/$/;"	m	struct:si_fmt_mubuf_t
+reserved	southern-islands-asm.h	/^        unsigned int reserved : 2;   \/* [16:15] *\/$/;"	m	struct:si_fmt_vop3b_t
+reserved	southern-islands-asm.h	/^        unsigned int reserved : 5;   \/* [16:12] *\/$/;"	m	struct:si_fmt_vop3a_t
+reserved0	southern-islands-asm.h	/^        unsigned int reserved0 : 1;   \/*     17  *\/$/;"	m	struct:si_fmt_mtbuf_t
+reserved0	southern-islands-asm.h	/^        unsigned int reserved0 : 8;   \/*   [7:0] *\/$/;"	m	struct:si_fmt_mimg_t
+reserved1	southern-islands-asm.h	/^        unsigned int reserved1  : 6;   \/* [63:58] *\/$/;"	m	struct:si_fmt_mimg_t
+reserved1	southern-islands-asm.h	/^        unsigned int reserved1 : 1;   \/*     25  *\/$/;"	m	struct:si_fmt_mtbuf_t
+reserved2	southern-islands-asm.h	/^        unsigned int reserved2 : 1;   \/*     53  *\/$/;"	m	struct:si_fmt_mtbuf_t
+sbase	southern-islands-asm.h	/^        unsigned int sbase  : 6;   \/*  [14:9] *\/$/;"	m	struct:si_fmt_smrd_t
+sdst	southern-islands-asm.h	/^        unsigned int sdst     : 7;   \/*  [14:8] *\/$/;"	m	struct:si_fmt_vop3b_t
+sdst	southern-islands-asm.h	/^        unsigned int sdst   : 7;   \/* [21:15] *\/$/;"	m	struct:si_fmt_smrd_t
+sdst	southern-islands-asm.h	/^        unsigned int sdst   : 7;   \/* [22:16] *\/$/;"	m	struct:si_fmt_sopk_t
+sdst	southern-islands-asm.h	/^        unsigned int sdst  : 7;  \/* [22:16] *\/$/;"	m	struct:si_fmt_sop1_t
+sdst	southern-islands-asm.h	/^        unsigned int sdst  : 7;  \/* [22:16] *\/$/;"	m	struct:si_fmt_sop2_t
+sec_data_buffer	southern-islands-asm.h	/^	struct elf_buffer_t sec_data_buffer;$/;"	m	struct:si_bin_enc_dict_entry_t	typeref:struct:si_bin_enc_dict_entry_t::elf_buffer_t
+sec_strtab_buffer	southern-islands-asm.h	/^	struct elf_buffer_t sec_strtab_buffer;$/;"	m	struct:si_bin_enc_dict_entry_t	typeref:struct:si_bin_enc_dict_entry_t::elf_buffer_t
+sec_symtab_buffer	southern-islands-asm.h	/^	struct elf_buffer_t sec_symtab_buffer;$/;"	m	struct:si_bin_enc_dict_entry_t	typeref:struct:si_bin_enc_dict_entry_t::elf_buffer_t
+sec_text_buffer	southern-islands-asm.h	/^	struct elf_buffer_t sec_text_buffer;$/;"	m	struct:si_bin_enc_dict_entry_t	typeref:struct:si_bin_enc_dict_entry_t::elf_buffer_t
+si_bin_enc_dict_entry_consts_t	southern-islands-asm.h	/^struct si_bin_enc_dict_entry_consts_t$/;"	s
+si_bin_enc_dict_entry_header_t	southern-islands-asm.h	/^struct si_bin_enc_dict_entry_header_t$/;"	s
+si_bin_enc_dict_entry_t	southern-islands-asm.h	/^struct si_bin_enc_dict_entry_t$/;"	s
+si_bin_file_create	bin-file.c	/^struct si_bin_file_t *si_bin_file_create(void *ptr, int size, char *name)$/;"	f
+si_bin_file_free	bin-file.c	/^void si_bin_file_free(struct si_bin_file_t *bin_file)$/;"	f
+si_bin_file_read_enc_dict	bin-file.c	/^static void si_bin_file_read_enc_dict(struct si_bin_file_t *bin_file)$/;"	f	file:
+si_bin_file_read_note_header	bin-file.c	/^static void si_bin_file_read_note_header(struct si_bin_file_t *bin_file, struct si_bin_enc_dict_entry_t *enc_dict_entry)$/;"	f	file:
+si_bin_file_read_notes	bin-file.c	/^static void si_bin_file_read_notes(struct si_bin_file_t *bin_file, struct si_bin_enc_dict_entry_t *enc_dict_entry)$/;"	f	file:
+si_bin_file_read_sections	bin-file.c	/^static void si_bin_file_read_sections(struct si_bin_file_t *bin_file)$/;"	f	file:
+si_bin_file_read_segments	bin-file.c	/^static void si_bin_file_read_segments(struct si_bin_file_t *bin_file)$/;"	f	file:
+si_bin_file_t	southern-islands-asm.h	/^struct si_bin_file_t$/;"	s
+si_disasm	asm.c	/^void si_disasm(char *path)$/;"	f
+si_disasm_buffer	asm.c	/^void si_disasm_buffer(struct elf_buffer_t *buffer, FILE *f)$/;"	f
+si_disasm_done	asm.c	/^void si_disasm_done()$/;"	f
+si_disasm_init	asm.c	/^void si_disasm_init()$/;"	f
+si_fmt_ds_t	southern-islands-asm.h	/^struct si_fmt_ds_t$/;"	s
+si_fmt_dump_func_t	southern-islands-asm.h	/^typedef void (*si_fmt_dump_func_t)(void *buf, FILE *);$/;"	t
+si_fmt_enum	southern-islands-asm.h	/^enum si_fmt_enum$/;"	g
+si_fmt_exp_t	southern-islands-asm.h	/^struct si_fmt_exp_t$/;"	s
+si_fmt_mimg_t	southern-islands-asm.h	/^struct si_fmt_mimg_t$/;"	s
+si_fmt_mtbuf_t	southern-islands-asm.h	/^struct si_fmt_mtbuf_t$/;"	s
+si_fmt_mubuf_t	southern-islands-asm.h	/^struct si_fmt_mubuf_t$/;"	s
+si_fmt_smrd_t	southern-islands-asm.h	/^struct si_fmt_smrd_t $/;"	s
+si_fmt_sop1_t	southern-islands-asm.h	/^struct si_fmt_sop1_t$/;"	s
+si_fmt_sop2_t	southern-islands-asm.h	/^struct si_fmt_sop2_t$/;"	s
+si_fmt_sopc_t	southern-islands-asm.h	/^struct si_fmt_sopc_t$/;"	s
+si_fmt_sopk_t	southern-islands-asm.h	/^struct si_fmt_sopk_t$/;"	s
+si_fmt_sopp_t	southern-islands-asm.h	/^struct si_fmt_sopp_t$/;"	s
+si_fmt_vintrp_t	southern-islands-asm.h	/^struct si_fmt_vintrp_t$/;"	s
+si_fmt_vop1_t	southern-islands-asm.h	/^struct si_fmt_vop1_t$/;"	s
+si_fmt_vop2_t	southern-islands-asm.h	/^struct si_fmt_vop2_t$/;"	s
+si_fmt_vop3a_t	southern-islands-asm.h	/^struct si_fmt_vop3a_t$/;"	s
+si_fmt_vop3b_t	southern-islands-asm.h	/^struct si_fmt_vop3b_t$/;"	s
+si_fmt_vopc_t	southern-islands-asm.h	/^struct si_fmt_vopc_t$/;"	s
+si_inst_category_enum	southern-islands-asm.h	/^enum si_inst_category_enum$/;"	g
+si_inst_decode	asm.c	/^int si_inst_decode(void *buf, struct si_inst_t *inst) $/;"	f
+si_inst_dump_smrd	asm.c	/^void si_inst_dump_smrd(struct si_inst_t* inst, unsigned int rel_addr, void* buf, FILE *f)$/;"	f
+si_inst_dump_sopp	asm.c	/^void si_inst_dump_sopp(struct si_inst_t* inst, unsigned int rel_addr, void* buf, FILE *f)$/;"	f
+si_inst_enum	southern-islands-asm.h	/^enum si_inst_enum$/;"	g
+si_inst_info	asm.c	/^static struct si_inst_info_t si_inst_info[SI_INST_COUNT];$/;"	v	typeref:struct:si_inst_info_t	file:
+si_inst_info_smrd	asm.c	/^static struct si_inst_info_t *si_inst_info_smrd[SI_INST_INFO_SMRD_OPCODE_SIZE];$/;"	v	typeref:struct:si_inst_info_t	file:
+si_inst_info_sopp	asm.c	/^static struct si_inst_info_t *si_inst_info_sopp[SI_INST_INFO_SOPP_OPCODE_SIZE];$/;"	v	typeref:struct:si_inst_info_t	file:
+si_inst_info_t	southern-islands-asm.h	/^struct si_inst_info_t$/;"	s
+si_inst_microcode_t	southern-islands-asm.h	/^union si_inst_microcode_t$/;"	u
+si_inst_t	southern-islands-asm.h	/^struct si_inst_t$/;"	s
+si_reg_t	southern-islands-asm.h	/^union si_reg_t$/;"	u
+simm16	southern-islands-asm.h	/^        unsigned int simm16 : 16;  \/*  [15:0] *\/$/;"	m	struct:si_fmt_sopk_t
+simm16	southern-islands-asm.h	/^        unsigned int simm16 : 16;  \/*  [15:0] *\/$/;"	m	struct:si_fmt_sopp_t
+size	bin-file.c	/^	Elf32_Word size;  \/* Size in bytes of data *\/$/;"	m	struct:pt_note_data_segment_desc_t	file:
+size	bin-file.c	/^	Elf32_Word size;  \/* Size in vec4f constants of the buffer *\/$/;"	m	struct:pt_note_constant_buffer_mask_t	file:
+size	southern-islands-asm.h	/^	int size;  \/* Size of microcode inst (bytes) *\/$/;"	m	struct:si_inst_info_t
+slc	southern-islands-asm.h	/^        unsigned int slc       : 1;   \/*     25  *\/$/;"	m	struct:si_fmt_mimg_t
+slc	southern-islands-asm.h	/^        unsigned int slc       : 1;   \/*     54  *\/$/;"	m	struct:si_fmt_mtbuf_t
+slc	southern-islands-asm.h	/^        unsigned int slc      : 1;   \/*     54  *\/$/;"	m	struct:si_fmt_mubuf_t
+smrd	southern-islands-asm.h	/^	struct si_fmt_smrd_t smrd;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_smrd_t
+soffset	southern-islands-asm.h	/^        unsigned int soffset   : 8;   \/* [63:56] *\/$/;"	m	struct:si_fmt_mtbuf_t
+soffset	southern-islands-asm.h	/^        unsigned int soffset  : 8;   \/* [63:56] *\/$/;"	m	struct:si_fmt_mubuf_t
+sop1	southern-islands-asm.h	/^	struct si_fmt_sop1_t sop1;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_sop1_t
+sop2	southern-islands-asm.h	/^	struct si_fmt_sop2_t sop2;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_sop2_t
+sopc	southern-islands-asm.h	/^	struct si_fmt_sopc_t sopc;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_sopc_t
+sopk	southern-islands-asm.h	/^	struct si_fmt_sopk_t sopk;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_sopk_t
+sopp	southern-islands-asm.h	/^	struct si_fmt_sopp_t sopp;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_sopp_t
+src0	southern-islands-asm.h	/^        unsigned int src0     : 9;   \/* [40:32] *\/$/;"	m	struct:si_fmt_vop3a_t
+src0	southern-islands-asm.h	/^        unsigned int src0     : 9;   \/* [40:32] *\/$/;"	m	struct:si_fmt_vop3b_t
+src0	southern-islands-asm.h	/^        unsigned int src0  : 9;   \/*   [8:0] *\/$/;"	m	struct:si_fmt_vop2_t
+src0	southern-islands-asm.h	/^        unsigned int src0  : 9;   \/*   [8:0] *\/$/;"	m	struct:si_fmt_vopc_t
+src0	southern-islands-asm.h	/^        unsigned int src0 : 9;   \/*   [8:0] *\/$/;"	m	struct:si_fmt_vop1_t
+src1	southern-islands-asm.h	/^        unsigned int src1     : 9;   \/* [49:41] *\/$/;"	m	struct:si_fmt_vop3a_t
+src1	southern-islands-asm.h	/^        unsigned int src1     : 9;   \/* [49:41] *\/$/;"	m	struct:si_fmt_vop3b_t
+src2	southern-islands-asm.h	/^        unsigned int src2     : 9;   \/* [57:49] *\/$/;"	m	struct:si_fmt_vop3a_t
+src2	southern-islands-asm.h	/^        unsigned int src2     : 9;   \/* [57:49] *\/$/;"	m	struct:si_fmt_vop3b_t
+srsrc	southern-islands-asm.h	/^        unsigned int srsrc     : 5;   \/* [52:48] *\/$/;"	m	struct:si_fmt_mimg_t
+srsrc	southern-islands-asm.h	/^        unsigned int srsrc     : 5;   \/* [52:48] *\/$/;"	m	struct:si_fmt_mtbuf_t
+srsrc	southern-islands-asm.h	/^        unsigned int srsrc    : 5;   \/* [52:48] *\/$/;"	m	struct:si_fmt_mubuf_t
+ssamp	southern-islands-asm.h	/^        unsigned int ssamp     : 5;   \/* [57:53] *\/$/;"	m	struct:si_fmt_mimg_t
+ssrc0	southern-islands-asm.h	/^        unsigned int ssrc0 : 8;  \/*   [7:0] *\/$/;"	m	struct:si_fmt_sop1_t
+ssrc0	southern-islands-asm.h	/^        unsigned int ssrc0 : 8;  \/*   [7:0] *\/$/;"	m	struct:si_fmt_sop2_t
+ssrc0	southern-islands-asm.h	/^        unsigned int ssrc0 : 8;  \/*   [7:0] *\/$/;"	m	struct:si_fmt_sopc_t
+ssrc1	southern-islands-asm.h	/^        unsigned int ssrc1 : 8;  \/*  [15:8] *\/$/;"	m	struct:si_fmt_sop2_t
+ssrc1	southern-islands-asm.h	/^        unsigned int ssrc1 : 8;  \/*  [15:8] *\/$/;"	m	struct:si_fmt_sopc_t
+stack_size_used	southern-islands-asm.h	/^	int stack_size_used;$/;"	m	struct:si_bin_enc_dict_entry_t
+tfe	southern-islands-asm.h	/^        unsigned int tfe       : 1;   \/*     16  *\/$/;"	m	struct:si_fmt_mimg_t
+tfe	southern-islands-asm.h	/^        unsigned int tfe       : 1;   \/*     55  *\/$/;"	m	struct:si_fmt_mtbuf_t
+tfe	southern-islands-asm.h	/^        unsigned int tfe      : 1;   \/*     55  *\/$/;"	m	struct:si_fmt_mubuf_t
+tgt	southern-islands-asm.h	/^        unsigned int tgt      : 6;   \/*   [9:4] *\/$/;"	m	struct:si_fmt_exp_t
+type	bin-file.c	/^	Elf32_Word type;  \/* Type of the payload *\/$/;"	m	struct:pt_note_header_t	file:
+unorm	southern-islands-asm.h	/^        unsigned int unorm     : 1;   \/*     12  *\/$/;"	m	struct:si_fmt_mimg_t
+vaddr	southern-islands-asm.h	/^        unsigned int vaddr     : 8;   \/* [39:32] *\/$/;"	m	struct:si_fmt_mimg_t
+vaddr	southern-islands-asm.h	/^        unsigned int vaddr     : 8;   \/* [39:32] *\/$/;"	m	struct:si_fmt_mtbuf_t
+vaddr	southern-islands-asm.h	/^        unsigned int vaddr    : 8;   \/* [39:32] *\/$/;"	m	struct:si_fmt_mubuf_t
+value	bin-file.c	/^	Elf32_Word value;  \/* Value *\/$/;"	m	struct:pt_note_prog_info_entry_t	file:
+vdata	southern-islands-asm.h	/^        unsigned int vdata     : 8;   \/* [47:40] *\/$/;"	m	struct:si_fmt_mimg_t
+vdata	southern-islands-asm.h	/^        unsigned int vdata     : 8;   \/* [47:40] *\/$/;"	m	struct:si_fmt_mtbuf_t
+vdata	southern-islands-asm.h	/^        unsigned int vdata    : 8;   \/* [47:40] *\/$/;"	m	struct:si_fmt_mubuf_t
+vdst	southern-islands-asm.h	/^        unsigned int vdst     : 8;   \/*   [7:0] *\/$/;"	m	struct:si_fmt_vop3a_t
+vdst	southern-islands-asm.h	/^        unsigned int vdst     : 8;   \/*   [7:0] *\/$/;"	m	struct:si_fmt_vop3b_t
+vdst	southern-islands-asm.h	/^        unsigned int vdst     : 8;   \/* [25:18] *\/$/;"	m	struct:si_fmt_vintrp_t
+vdst	southern-islands-asm.h	/^        unsigned int vdst     : 8;   \/* [63:56] *\/$/;"	m	struct:si_fmt_ds_t
+vdst	southern-islands-asm.h	/^        unsigned int vdst  : 8;   \/* [24:17] *\/$/;"	m	struct:si_fmt_vop2_t
+vdst	southern-islands-asm.h	/^        unsigned int vdst : 8;   \/* [24:17] *\/$/;"	m	struct:si_fmt_vop1_t
+vintrp	southern-islands-asm.h	/^	struct si_fmt_vintrp_t vintrp;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_vintrp_t
+vm	southern-islands-asm.h	/^        unsigned int vm       : 1;   \/*     12  *\/$/;"	m	struct:si_fmt_exp_t
+vop1	southern-islands-asm.h	/^	struct si_fmt_vop1_t vop1;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_vop1_t
+vop2	southern-islands-asm.h	/^	struct si_fmt_vop2_t vop2;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_vop2_t
+vop3a	southern-islands-asm.h	/^	struct si_fmt_vop3a_t vop3a;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_vop3a_t
+vop3b	southern-islands-asm.h	/^	struct si_fmt_vop3b_t vop3b;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_vop3b_t
+vopc	southern-islands-asm.h	/^	struct si_fmt_vopc_t vopc;$/;"	m	union:si_inst_microcode_t	typeref:struct:si_inst_microcode_t::si_fmt_vopc_t
+vsrc	southern-islands-asm.h	/^        unsigned int vsrc     : 8;   \/*   [7:0] *\/$/;"	m	struct:si_fmt_vintrp_t
+vsrc0	southern-islands-asm.h	/^        unsigned int vsrc0    : 8;   \/* [39:32] *\/$/;"	m	struct:si_fmt_exp_t
+vsrc1	southern-islands-asm.h	/^        unsigned int vsrc1    : 8;   \/* [47:40] *\/$/;"	m	struct:si_fmt_exp_t
+vsrc1	southern-islands-asm.h	/^        unsigned int vsrc1 : 8;   \/*  [16:9] *\/$/;"	m	struct:si_fmt_vop2_t
+vsrc1	southern-islands-asm.h	/^        unsigned int vsrc1 : 8;   \/*  [16:9] *\/$/;"	m	struct:si_fmt_vopc_t
+vsrc2	southern-islands-asm.h	/^        unsigned int vsrc2    : 8;   \/* [55:48] *\/$/;"	m	struct:si_fmt_exp_t
+vsrc3	southern-islands-asm.h	/^        unsigned int vsrc3    : 8;   \/* [63:56] *\/$/;"	m	struct:si_fmt_exp_t

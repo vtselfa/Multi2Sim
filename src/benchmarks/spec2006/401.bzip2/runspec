@@ -1,0 +1,2 @@
+exe = bzip2_base.i386
+args = input.source 280

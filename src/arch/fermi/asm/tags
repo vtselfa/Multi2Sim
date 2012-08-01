@@ -1,0 +1,1057 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+DEFINST	asm.c	50;"	d	file:
+DEFINST	asm.c	60;"	d	file:
+DEFINST	fermi-asm.h	1207;"	d
+DEFINST	fermi-asm.h	1210;"	d
+DEFINST	fermi-asm.h	32;"	d
+DEFINST	fermi-asm.h	35;"	d
+FERMI_ASM_H	fermi-asm.h	21;"	d
+FRM_FMT_COUNT	fermi-asm.h	/^	FRM_FMT_COUNT$/;"	e	enum:frm_fmt_enum
+FRM_FMT_NONE	fermi-asm.h	/^	FRM_FMT_NONE = 0, $/;"	e	enum:frm_fmt_enum
+FRM_INST_CAT_CONV	fermi-asm.h	/^	FRM_INST_CAT_CONV,  \/* Conversion instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_COUNT	fermi-asm.h	/^	FRM_INST_CAT_COUNT$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_CTRL	fermi-asm.h	/^	FRM_INST_CAT_CTRL, \/* Control instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_FP	fermi-asm.h	/^	FRM_INST_CAT_FP,  \/* Floating point instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_INT	fermi-asm.h	/^	FRM_INST_CAT_INT,  \/* Integer instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_LDST	fermi-asm.h	/^	FRM_INST_CAT_LDST, \/* Compute load\/store instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_MISC	fermi-asm.h	/^	FRM_INST_CAT_MISC, \/* Miscellaneous instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_MOV	fermi-asm.h	/^	FRM_INST_CAT_MOV,  \/* Movement instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_NONE	fermi-asm.h	/^	FRM_INST_CAT_NONE = 0,$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_PRED	fermi-asm.h	/^	FRM_INST_CAT_PRED,  \/* Predicate\/CC instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_SURF	fermi-asm.h	/^	FRM_INST_CAT_SURF, \/* Surface memory instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_CAT_TEX	fermi-asm.h	/^	FRM_INST_CAT_TEX,  \/* Texture instructions *\/$/;"	e	enum:frm_inst_category_enum
+FRM_INST_COUNT	fermi-asm.h	/^	FRM_INST_COUNT$/;"	e	enum:frm_inst_enum
+FRM_INST_NONE	fermi-asm.h	/^	FRM_INST_NONE = 0, $/;"	e	enum:frm_inst_enum
+FRM_ISNT_INFO_LONG_SIZE	asm.c	36;"	d	file:
+FRM_SR_AFFINITY	fermi-asm.h	/^	FRM_SR_AFFINITY, $/;"	e	enum:frm_sr_enum
+FRM_SR_COUNT	fermi-asm.h	/^	FRM_SR_COUNT$/;"	e	enum:frm_sr_enum
+FRM_SR_CTAParam	fermi-asm.h	/^	FRM_SR_CTAParam, $/;"	e	enum:frm_sr_enum
+FRM_SR_CTAid_X	fermi-asm.h	/^	FRM_SR_CTAid_X, $/;"	e	enum:frm_sr_enum
+FRM_SR_CTAid_Y	fermi-asm.h	/^	FRM_SR_CTAid_Y, $/;"	e	enum:frm_sr_enum
+FRM_SR_CTAid_Z	fermi-asm.h	/^	FRM_SR_CTAid_Z, $/;"	e	enum:frm_sr_enum
+FRM_SR_ClockHi	fermi-asm.h	/^	FRM_SR_ClockHi, $/;"	e	enum:frm_sr_enum
+FRM_SR_ClockLo	fermi-asm.h	/^	FRM_SR_ClockLo = 80, $/;"	e	enum:frm_sr_enum
+FRM_SR_EqMask	fermi-asm.h	/^	FRM_SR_EqMask, $/;"	e	enum:frm_sr_enum
+FRM_SR_GeMask	fermi-asm.h	/^	FRM_SR_GeMask, $/;"	e	enum:frm_sr_enum
+FRM_SR_GridParam	fermi-asm.h	/^	FRM_SR_GridParam, $/;"	e	enum:frm_sr_enum
+FRM_SR_GtMask	fermi-asm.h	/^	FRM_SR_GtMask, $/;"	e	enum:frm_sr_enum
+FRM_SR_INVOCATION_ID	fermi-asm.h	/^	FRM_SR_INVOCATION_ID, $/;"	e	enum:frm_sr_enum
+FRM_SR_LMemHiOff	fermi-asm.h	/^	FRM_SR_LMemHiOff, $/;"	e	enum:frm_sr_enum
+FRM_SR_LMemLoSz	fermi-asm.h	/^	FRM_SR_LMemLoSz, $/;"	e	enum:frm_sr_enum
+FRM_SR_LWINSZ	fermi-asm.h	/^	FRM_SR_LWINSZ, $/;"	e	enum:frm_sr_enum
+FRM_SR_LWinLo	fermi-asm.h	/^	FRM_SR_LWinLo, $/;"	e	enum:frm_sr_enum
+FRM_SR_Laneld	fermi-asm.h	/^	FRM_SR_Laneld = 0, $/;"	e	enum:frm_sr_enum
+FRM_SR_LeMask	fermi-asm.h	/^	FRM_SR_LeMask, $/;"	e	enum:frm_sr_enum
+FRM_SR_LtMask	fermi-asm.h	/^	FRM_SR_LtMask, $/;"	e	enum:frm_sr_enum
+FRM_SR_MACHINE_ID_0	fermi-asm.h	/^	FRM_SR_MACHINE_ID_0 = 24, $/;"	e	enum:frm_sr_enum
+FRM_SR_MACHINE_ID_1	fermi-asm.h	/^	FRM_SR_MACHINE_ID_1, $/;"	e	enum:frm_sr_enum
+FRM_SR_MACHINE_ID_2	fermi-asm.h	/^	FRM_SR_MACHINE_ID_2, $/;"	e	enum:frm_sr_enum
+FRM_SR_MACHINE_ID_3	fermi-asm.h	/^	FRM_SR_MACHINE_ID_3, $/;"	e	enum:frm_sr_enum
+FRM_SR_NCTAid_X	fermi-asm.h	/^	FRM_SR_NCTAid_X, $/;"	e	enum:frm_sr_enum
+FRM_SR_NCTAid_Y	fermi-asm.h	/^	FRM_SR_NCTAid_Y, $/;"	e	enum:frm_sr_enum
+FRM_SR_NCTAid_Z	fermi-asm.h	/^	FRM_SR_NCTAid_Z, $/;"	e	enum:frm_sr_enum
+FRM_SR_NTid	fermi-asm.h	/^	FRM_SR_NTid, $/;"	e	enum:frm_sr_enum
+FRM_SR_NTid_X	fermi-asm.h	/^	FRM_SR_NTid_X, $/;"	e	enum:frm_sr_enum
+FRM_SR_NTid_Y	fermi-asm.h	/^	FRM_SR_NTid_Y, $/;"	e	enum:frm_sr_enum
+FRM_SR_NTid_Z	fermi-asm.h	/^	FRM_SR_NTid_Z, $/;"	e	enum:frm_sr_enum
+FRM_SR_PM0	fermi-asm.h	/^	FRM_SR_PM0, $/;"	e	enum:frm_sr_enum
+FRM_SR_PM1	fermi-asm.h	/^	FRM_SR_PM1, $/;"	e	enum:frm_sr_enum
+FRM_SR_PM2	fermi-asm.h	/^	FRM_SR_PM2, $/;"	e	enum:frm_sr_enum
+FRM_SR_PM3	fermi-asm.h	/^	FRM_SR_PM3, $/;"	e	enum:frm_sr_enum
+FRM_SR_PM4	fermi-asm.h	/^	FRM_SR_PM4, $/;"	e	enum:frm_sr_enum
+FRM_SR_PM5	fermi-asm.h	/^	FRM_SR_PM5, $/;"	e	enum:frm_sr_enum
+FRM_SR_PM6	fermi-asm.h	/^	FRM_SR_PM6, $/;"	e	enum:frm_sr_enum
+FRM_SR_PM7	fermi-asm.h	/^	FRM_SR_PM7, $/;"	e	enum:frm_sr_enum
+FRM_SR_PRIM_TYPE	fermi-asm.h	/^	FRM_SR_PRIM_TYPE = 16, $/;"	e	enum:frm_sr_enum
+FRM_SR_SMemBanks	fermi-asm.h	/^	FRM_SR_SMemBanks, $/;"	e	enum:frm_sr_enum
+FRM_SR_SMemSz	fermi-asm.h	/^	FRM_SR_SMemSz, $/;"	e	enum:frm_sr_enum
+FRM_SR_SWINSZ	fermi-asm.h	/^	FRM_SR_SWINSZ, $/;"	e	enum:frm_sr_enum
+FRM_SR_SWinLo	fermi-asm.h	/^	FRM_SR_SWinLo, $/;"	e	enum:frm_sr_enum
+FRM_SR_Tid	fermi-asm.h	/^	FRM_SR_Tid = 32,  $/;"	e	enum:frm_sr_enum
+FRM_SR_Tid_X	fermi-asm.h	/^	FRM_SR_Tid_X, $/;"	e	enum:frm_sr_enum
+FRM_SR_Tid_Y	fermi-asm.h	/^	FRM_SR_Tid_Y, $/;"	e	enum:frm_sr_enum
+FRM_SR_Tid_Z	fermi-asm.h	/^	FRM_SR_Tid_Z, $/;"	e	enum:frm_sr_enum
+FRM_SR_VirtCfg	fermi-asm.h	/^	FRM_SR_VirtCfg = 2, $/;"	e	enum:frm_sr_enum
+FRM_SR_VirtId	fermi-asm.h	/^	FRM_SR_VirtId, $/;"	e	enum:frm_sr_enum
+FRM_SR_Y_DIRECTION	fermi-asm.h	/^	FRM_SR_Y_DIRECTION, $/;"	e	enum:frm_sr_enum
+P	fermi-asm.h	/^	unsigned long long int P : 3; \/* [19:17] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+P	fermi-asm.h	/^	unsigned long long int P : 3; \/* [19:17] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+P	fermi-asm.h	/^	unsigned long long int P : 3; \/* [19:17] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+P	fermi-asm.h	/^	unsigned long long int P : 3; \/* [55:53] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+P	fermi-asm.h	/^	unsigned long long int P : 3; \/* [56:54] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+Q	fermi-asm.h	/^	unsigned long long int Q : 3; \/* [16:14] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+Q	fermi-asm.h	/^	unsigned long long int Q : 3; \/* [16:14] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+Q	fermi-asm.h	/^	unsigned long long int Q : 3; \/* [16:14] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+Q	fermi-asm.h	/^	unsigned long long int Q : 4; \/* [23:20] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+Q	fermi-asm.h	/^	unsigned long long int Q : 4; \/* [52:49] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+R	fermi-asm.h	/^	unsigned long long int R : 3; \/* [52:50] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+R	fermi-asm.h	/^	unsigned long long int R : 4; \/* [52:49] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+R	fermi-asm.h	/^	unsigned long long int R : 4; \/* [52:49] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+R	fermi-asm.h	/^	unsigned long long int R : 4; \/* [52:49] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+R	fermi-asm.h	/^	unsigned long long int R : 4; \/* [52:49] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+R_1_0	fermi-asm.h	/^	unsigned long long int R_1_0 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+R_2	fermi-asm.h	/^	unsigned long long int R_2 : 1; \/* [58] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 12; \/* [25:14] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_imad_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_imul_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_shl_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_int_shr_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 2; \/* [4:5] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 2; \/* [5:4] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 2; \/* [5:4] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 2; \/* [5:4] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 2; \/* [5:4] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 2; \/* [5:4] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 2; \/* [5:4] *\/$/;"	m	struct:frm_fmt_int_lop_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 3; \/* [9:7] *\/$/;"	m	struct:frm_fmt_ldst_membar_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 4; \/* [7:4] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 4; \/* [7:4] *\/$/;"	m	struct:frm_fmt_misc_b2r_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 5; \/* [8:4] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 5; \/* [9:5] *\/$/;"	m	struct:frm_fmt_mov_mov32i_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 5; \/* [9:5] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_brk_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_cont_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_exit_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_longjmp_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_pbk_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_pcnt_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_plongjmp_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_ret_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_ctrl_ssy_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_misc_lepc_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_misc_s2r_t
+__reserved0	fermi-asm.h	/^	unsigned long long int __reserved0 : 6; \/* [9:4] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 10; \/* [25:16] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 11; \/* [25:15] *\/$/;"	m	struct:frm_fmt_ctrl_pbk_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 11; \/* [25:15] *\/$/;"	m	struct:frm_fmt_ctrl_pcnt_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 11; \/* [25:15] *\/$/;"	m	struct:frm_fmt_ctrl_plongjmp_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 11; \/* [25:15] *\/$/;"	m	struct:frm_fmt_ctrl_ssy_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [15] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [15] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [55] *\/$/;"	m	struct:frm_fmt_int_imad_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [7:6] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 32; \/* [57:26] *\/$/;"	m	struct:frm_fmt_misc_b2r_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 38; \/* [57:20] *\/$/;"	m	struct:frm_fmt_misc_lepc_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 3; \/* [8:6] *\/$/;"	m	struct:frm_fmt_int_shl_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 3; \/* [8:6] *\/$/;"	m	struct:frm_fmt_int_shr_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 3; \/* [9:7] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 44; \/* [57:14] *\/$/;"	m	struct:frm_fmt_ctrl_brk_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 44; \/* [57:14] *\/$/;"	m	struct:frm_fmt_ctrl_cont_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 44; \/* [57:14] *\/$/;"	m	struct:frm_fmt_ctrl_exit_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 44; \/* [57:14] *\/$/;"	m	struct:frm_fmt_ctrl_longjmp_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 44; \/* [57:14] *\/$/;"	m	struct:frm_fmt_ctrl_ret_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 44; \/* [57:14] *\/$/;"	m	struct:frm_fmt_ldst_membar_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 4; \/* [9:6] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 4; \/* [9:6] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 4; \/* [9:6] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_misc_s2r_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_mov_mov32i_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 7; \/* [54:48] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 7; \/* [54:48] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 7; \/* [54:48] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 8; \/* [49:42] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 9; \/* [25:17] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 9; \/* [25:17] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 9; \/* [57:49] *\/$/;"	m	struct:frm_fmt_int_imul_t
+__reserved1	fermi-asm.h	/^	unsigned long long int __reserved1 : 9; \/* [57:49] *\/$/;"	m	struct:frm_fmt_int_lop_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 10; \/* [57:48] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_pbk_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_pcnt_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_plongjmp_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_ssy_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 14; \/* [57:44] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 16; \/* [57:42] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [22] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [22] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [22] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [22] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_int_imad_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 24; \/* [57:34] *\/$/;"	m	struct:frm_fmt_misc_s2r_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 2; \/* [56:55] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 30; \/* [53:24] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 3; \/* [57:55] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 3; \/* [57:55] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 5; \/* [54:50] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 5; \/* [57:53] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 8; \/* [45:38] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 8; \/* [49:42] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 9; \/* [25:17] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 9; \/* [25:17] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 9; \/* [57:49] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 9; \/* [57:49] *\/$/;"	m	struct:frm_fmt_int_shl_t
+__reserved2	fermi-asm.h	/^	unsigned long long int __reserved2 : 9; \/* [57:49] *\/$/;"	m	struct:frm_fmt_int_shr_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 12; \/* [57:46] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 1; \/* [25] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 1; \/* [25] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 1; \/* [25] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 1; \/* [25] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 29; \/* [57:29] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 5; \/* [57:53] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+__reserved3	fermi-asm.h	/^	unsigned long long int __reserved3 : 9; \/* [57:49] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+__reserved4	fermi-asm.h	/^	unsigned long long int __reserved4 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+__reserved4	fermi-asm.h	/^	unsigned long long int __reserved4 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+__reserved4	fermi-asm.h	/^	unsigned long long int __reserved4 : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+__reserved4	fermi-asm.h	/^	unsigned long long int __reserved4 : 2; \/* [57:56] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+__reserved5	fermi-asm.h	/^	unsigned long long int __reserved5 : 4; \/* [54:51] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+__reserved5	fermi-asm.h	/^	unsigned long long int __reserved5 : 4; \/* [54:51] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+__reserved5	fermi-asm.h	/^	unsigned long long int __reserved5 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+__reserved5	fermi-asm.h	/^	unsigned long long int __reserved5 : 7; \/* [57:51] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+__reserved6	fermi-asm.h	/^	unsigned long long int __reserved6 : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+__reserved6	fermi-asm.h	/^	unsigned long long int __reserved6 : 2; \/* [57:56] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+__reserved6	fermi-asm.h	/^	unsigned long long int __reserved6 : 2; \/* [57:56] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+abs_src1	fermi-asm.h	/^	unsigned long long int abs_src1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+abs_src1	fermi-asm.h	/^	unsigned long long int abs_src1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+abs_src1	fermi-asm.h	/^	unsigned long long int abs_src1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+abs_src1	fermi-asm.h	/^	unsigned long long int abs_src1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+abs_src1	fermi-asm.h	/^	unsigned long long int abs_src1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+abs_src1	fermi-asm.h	/^	unsigned long long int abs_src1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+abs_src2	fermi-asm.h	/^	unsigned long long int abs_src2 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+abs_src2	fermi-asm.h	/^	unsigned long long int abs_src2 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+abs_src2	fermi-asm.h	/^	unsigned long long int abs_src2 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+abs_src2	fermi-asm.h	/^	unsigned long long int abs_src2 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+abs_src2	fermi-asm.h	/^	unsigned long long int abs_src2 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+abs_src2	fermi-asm.h	/^	unsigned long long int abs_src2 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+abs_src2	fermi-asm.h	/^	unsigned long long int abs_src2 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+abs_src2	fermi-asm.h	/^	unsigned long long int abs_src2 : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+addr	fermi-asm.h	/^	unsigned int addr;$/;"	m	struct:frm_inst_t
+b_src2	fermi-asm.h	/^	unsigned long long int b_src2 : 2; \/* [56:55] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+bar	fermi-asm.h	/^	unsigned long long int bar : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+bar_mod	fermi-asm.h	/^	unsigned long long int bar_mod : 1; \/* [47] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+brev	fermi-asm.h	/^	unsigned long long int brev : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+bytes	fermi-asm.h	/^	unsigned char bytes[8];$/;"	m	union:frm_inst_dword_t
+category	fermi-asm.h	/^	enum frm_inst_category_enum category;$/;"	m	struct:frm_inst_info_t	typeref:enum:frm_inst_info_t::frm_inst_category_enum
+ccop	fermi-asm.h	/^	unsigned long long int ccop : 5; \/* [9:5] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+cmp	fermi-asm.h	/^	unsigned long long int cmp : 3; \/* [57:55] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+cmp	fermi-asm.h	/^	unsigned long long int cmp : 4; \/* [58:55] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+cmp	fermi-asm.h	/^	unsigned long long int cmp : 4; \/* [58:55] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+cmp	fermi-asm.h	/^	unsigned long long int cmp : 4; \/* [58:55] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+cmp	fermi-asm.h	/^	unsigned long long int cmp : 4; \/* [58:55] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+conv_f2f	fermi-asm.h	/^	struct frm_fmt_conv_f2f_t conv_f2f;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_conv_f2f_t
+conv_f2i	fermi-asm.h	/^	struct frm_fmt_conv_f2i_t conv_f2i;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_conv_f2i_t
+conv_i2f	fermi-asm.h	/^	struct frm_fmt_conv_i2f_t conv_i2f;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_conv_i2f_t
+conv_i2i	fermi-asm.h	/^	struct frm_fmt_conv_i2i_t conv_i2i;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_conv_i2i_t
+cop	fermi-asm.h	/^	unsigned long long int cop : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+cop	fermi-asm.h	/^	unsigned long long int cop : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+cop	fermi-asm.h	/^	unsigned long long int cop : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+cop	fermi-asm.h	/^	unsigned long long int cop : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+ctrl_bra	fermi-asm.h	/^	struct frm_fmt_ctrl_bra_t ctrl_bra;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_bra_t
+ctrl_brk	fermi-asm.h	/^	struct frm_fmt_ctrl_brk_t ctrl_brk;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_brk_t
+ctrl_cal	fermi-asm.h	/^	struct frm_fmt_ctrl_cal_t ctrl_cal;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_cal_t
+ctrl_cont	fermi-asm.h	/^	struct frm_fmt_ctrl_cont_t ctrl_cont;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_cont_t
+ctrl_exit	fermi-asm.h	/^	struct frm_fmt_ctrl_exit_t ctrl_exit;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_exit_t
+ctrl_jcal	fermi-asm.h	/^	struct frm_fmt_ctrl_jcal_t ctrl_jcal;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_jcal_t
+ctrl_jmp	fermi-asm.h	/^	struct frm_fmt_ctrl_jmp_t ctrl_jmp;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_jmp_t
+ctrl_longjmp	fermi-asm.h	/^	struct frm_fmt_ctrl_longjmp_t ctrl_longjmp;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_longjmp_t
+ctrl_pbk	fermi-asm.h	/^	struct frm_fmt_ctrl_pbk_t ctrl_pbk;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_pbk_t
+ctrl_pcnt	fermi-asm.h	/^	struct frm_fmt_ctrl_pcnt_t ctrl_pcnt;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_pcnt_t
+ctrl_plongjmp	fermi-asm.h	/^	struct frm_fmt_ctrl_plongjmp_t ctrl_plongjmp;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_plongjmp_t
+ctrl_pret	fermi-asm.h	/^	struct frm_fmt_ctrl_pret_t ctrl_pret;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_pret_t
+ctrl_ret	fermi-asm.h	/^	struct frm_fmt_ctrl_ret_t ctrl_ret;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_ret_t
+ctrl_ssy	fermi-asm.h	/^	struct frm_fmt_ctrl_ssy_t ctrl_ssy;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ctrl_ssy_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_imad_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_imul_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_lop_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_shl_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_int_shr_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_misc_b2r_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_misc_lepc_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_misc_s2r_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_mov_mov32i_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+dst	fermi-asm.h	/^	unsigned long long int dst : 6; \/* [19:14] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_imad_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_imul_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_lop_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_shl_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [48] *\/$/;"	m	struct:frm_fmt_int_shr_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+dst_cc	fermi-asm.h	/^	unsigned long long int dst_cc : 1; \/* [58] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+dtype	fermi-asm.h	/^	unsigned long long int dtype : 2; \/* [21:20] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+dtype	fermi-asm.h	/^	unsigned long long int dtype : 2; \/* [21:20] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+dtype_n	fermi-asm.h	/^	unsigned long long int dtype_n : 2; \/* [21:20] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+dtype_n	fermi-asm.h	/^	unsigned long long int dtype_n : 2; \/* [21:20] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+dtype_s	fermi-asm.h	/^	unsigned long long int dtype_s : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+dtype_s	fermi-asm.h	/^	unsigned long long int dtype_s : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+dword	fermi-asm.h	/^	union frm_inst_dword_t dword;$/;"	m	struct:frm_inst_t	typeref:union:frm_inst_t::frm_inst_dword_t
+e	fermi-asm.h	/^	unsigned long long int e : 1; \/* [58] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+e	fermi-asm.h	/^	unsigned long long int e : 1; \/* [58] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+e	fermi-asm.h	/^	unsigned long long int e : 1; \/* [58] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+e	fermi-asm.h	/^	unsigned long long int e : 1; \/* [58] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+e	fermi-asm.h	/^	unsigned long long int e : 1; \/* [58] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+e	fermi-asm.h	/^	unsigned long long int e : 1; \/* [58] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+fma	fermi-asm.h	/^	unsigned long long int fma : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+fma_mode	fermi-asm.h	/^	unsigned long long int fma_mode : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+fma_mode	fermi-asm.h	/^	unsigned long long int fma_mode : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+fmt	fermi-asm.h	/^	enum frm_fmt_enum fmt;$/;"	m	struct:frm_inst_info_t	typeref:enum:frm_inst_info_t::frm_fmt_enum
+fmt_str	fermi-asm.h	/^	char *fmt_str;$/;"	m	struct:frm_inst_info_t
+fp_dadd	fermi-asm.h	/^	struct frm_fmt_fp_dadd_t fp_dadd;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_dadd_t
+fp_dfma	fermi-asm.h	/^	struct frm_fmt_fp_dfma_t fp_dfma;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_dfma_t
+fp_dmul	fermi-asm.h	/^	struct frm_fmt_fp_dmul_t fp_dmul;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_dmul_t
+fp_dsetp	fermi-asm.h	/^	struct frm_fmt_fp_dsetp_t fp_dsetp;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_dsetp_t
+fp_fadd	fermi-asm.h	/^	struct frm_fmt_fp_fadd_t fp_fadd;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_fadd_t
+fp_fadd32i	fermi-asm.h	/^	struct frm_fmt_fp_fadd32i_t fp_fadd32i;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_fadd32i_t
+fp_fcmp	fermi-asm.h	/^	struct frm_fmt_fp_fcmp_t fp_fcmp;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_fcmp_t
+fp_ffma	fermi-asm.h	/^	struct frm_fmt_fp_ffma_t fp_ffma;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_ffma_t
+fp_fmul	fermi-asm.h	/^	struct frm_fmt_fp_fmul_t fp_fmul;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_fmul_t
+fp_fmul32i	fermi-asm.h	/^	struct frm_fmt_fp_fmul32i_t fp_fmul32i;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_fmul32i_t
+fp_fsetp	fermi-asm.h	/^	struct frm_fmt_fp_fsetp_t fp_fsetp;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_fsetp_t
+fp_mufu	fermi-asm.h	/^	struct frm_fmt_fp_mufu_t fp_mufu;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_fp_mufu_t
+frm_disasm_init	asm.c	/^void frm_disasm_init()$/;"	f
+frm_fmt_conv_f2f_t	fermi-asm.h	/^struct frm_fmt_conv_f2f_t$/;"	s
+frm_fmt_conv_f2i_t	fermi-asm.h	/^struct frm_fmt_conv_f2i_t$/;"	s
+frm_fmt_conv_i2f_t	fermi-asm.h	/^struct frm_fmt_conv_i2f_t$/;"	s
+frm_fmt_conv_i2i_t	fermi-asm.h	/^struct frm_fmt_conv_i2i_t$/;"	s
+frm_fmt_ctrl_bra_t	fermi-asm.h	/^struct frm_fmt_ctrl_bra_t$/;"	s
+frm_fmt_ctrl_brk_t	fermi-asm.h	/^struct frm_fmt_ctrl_brk_t$/;"	s
+frm_fmt_ctrl_cal_t	fermi-asm.h	/^struct frm_fmt_ctrl_cal_t$/;"	s
+frm_fmt_ctrl_cont_t	fermi-asm.h	/^struct frm_fmt_ctrl_cont_t$/;"	s
+frm_fmt_ctrl_exit_t	fermi-asm.h	/^struct frm_fmt_ctrl_exit_t$/;"	s
+frm_fmt_ctrl_jcal_t	fermi-asm.h	/^struct frm_fmt_ctrl_jcal_t$/;"	s
+frm_fmt_ctrl_jmp_t	fermi-asm.h	/^struct frm_fmt_ctrl_jmp_t$/;"	s
+frm_fmt_ctrl_longjmp_t	fermi-asm.h	/^struct frm_fmt_ctrl_longjmp_t$/;"	s
+frm_fmt_ctrl_pbk_t	fermi-asm.h	/^struct frm_fmt_ctrl_pbk_t$/;"	s
+frm_fmt_ctrl_pcnt_t	fermi-asm.h	/^struct frm_fmt_ctrl_pcnt_t$/;"	s
+frm_fmt_ctrl_plongjmp_t	fermi-asm.h	/^struct frm_fmt_ctrl_plongjmp_t$/;"	s
+frm_fmt_ctrl_pret_t	fermi-asm.h	/^struct frm_fmt_ctrl_pret_t$/;"	s
+frm_fmt_ctrl_ret_t	fermi-asm.h	/^struct frm_fmt_ctrl_ret_t$/;"	s
+frm_fmt_ctrl_ssy_t	fermi-asm.h	/^struct frm_fmt_ctrl_ssy_t$/;"	s
+frm_fmt_enum	fermi-asm.h	/^enum frm_fmt_enum$/;"	g
+frm_fmt_fp_dadd_t	fermi-asm.h	/^struct frm_fmt_fp_dadd_t$/;"	s
+frm_fmt_fp_dfma_t	fermi-asm.h	/^struct frm_fmt_fp_dfma_t$/;"	s
+frm_fmt_fp_dmul_t	fermi-asm.h	/^struct frm_fmt_fp_dmul_t$/;"	s
+frm_fmt_fp_dsetp_t	fermi-asm.h	/^struct frm_fmt_fp_dsetp_t$/;"	s
+frm_fmt_fp_fadd32i_t	fermi-asm.h	/^struct frm_fmt_fp_fadd32i_t$/;"	s
+frm_fmt_fp_fadd_t	fermi-asm.h	/^struct frm_fmt_fp_fadd_t$/;"	s
+frm_fmt_fp_fcmp_t	fermi-asm.h	/^struct frm_fmt_fp_fcmp_t$/;"	s
+frm_fmt_fp_ffma_t	fermi-asm.h	/^struct frm_fmt_fp_ffma_t$/;"	s
+frm_fmt_fp_fmul32i_t	fermi-asm.h	/^struct frm_fmt_fp_fmul32i_t$/;"	s
+frm_fmt_fp_fmul_t	fermi-asm.h	/^struct frm_fmt_fp_fmul_t$/;"	s
+frm_fmt_fp_fsetp_t	fermi-asm.h	/^struct frm_fmt_fp_fsetp_t$/;"	s
+frm_fmt_fp_mufu_t	fermi-asm.h	/^struct frm_fmt_fp_mufu_t$/;"	s
+frm_fmt_int_bfe_t	fermi-asm.h	/^struct frm_fmt_int_bfe_t$/;"	s
+frm_fmt_int_bfi_t	fermi-asm.h	/^struct frm_fmt_int_bfi_t$/;"	s
+frm_fmt_int_iadd32i_t	fermi-asm.h	/^struct frm_fmt_int_iadd32i_t$/;"	s
+frm_fmt_int_iadd_t	fermi-asm.h	/^struct frm_fmt_int_iadd_t$/;"	s
+frm_fmt_int_icmp_t	fermi-asm.h	/^struct frm_fmt_int_icmp_t$/;"	s
+frm_fmt_int_imad_t	fermi-asm.h	/^struct frm_fmt_int_imad_t$/;"	s
+frm_fmt_int_imul_t	fermi-asm.h	/^struct frm_fmt_int_imul_t$/;"	s
+frm_fmt_int_iscadd_t	fermi-asm.h	/^struct frm_fmt_int_iscadd_t$/;"	s
+frm_fmt_int_isetp_t	fermi-asm.h	/^struct frm_fmt_int_isetp_t$/;"	s
+frm_fmt_int_lop32i_t	fermi-asm.h	/^struct frm_fmt_int_lop32i_t$/;"	s
+frm_fmt_int_lop_t	fermi-asm.h	/^struct frm_fmt_int_lop_t$/;"	s
+frm_fmt_int_shl_t	fermi-asm.h	/^struct frm_fmt_int_shl_t$/;"	s
+frm_fmt_int_shr_t	fermi-asm.h	/^struct frm_fmt_int_shr_t$/;"	s
+frm_fmt_ldst_atom_t	fermi-asm.h	/^struct frm_fmt_ldst_atom_t$/;"	s
+frm_fmt_ldst_cctl_t	fermi-asm.h	/^struct frm_fmt_ldst_cctl_t$/;"	s
+frm_fmt_ldst_cctll_t	fermi-asm.h	/^struct frm_fmt_ldst_cctll_t$/;"	s
+frm_fmt_ldst_ld_t	fermi-asm.h	/^struct frm_fmt_ldst_ld_t$/;"	s
+frm_fmt_ldst_ldc_t	fermi-asm.h	/^struct frm_fmt_ldst_ldc_t$/;"	s
+frm_fmt_ldst_ldl_t	fermi-asm.h	/^struct frm_fmt_ldst_ldl_t$/;"	s
+frm_fmt_ldst_ldlk_t	fermi-asm.h	/^struct frm_fmt_ldst_ldlk_t$/;"	s
+frm_fmt_ldst_lds_t	fermi-asm.h	/^struct frm_fmt_ldst_lds_t$/;"	s
+frm_fmt_ldst_ldslk_t	fermi-asm.h	/^struct frm_fmt_ldst_ldslk_t$/;"	s
+frm_fmt_ldst_ldu_t	fermi-asm.h	/^struct frm_fmt_ldst_ldu_t$/;"	s
+frm_fmt_ldst_membar_t	fermi-asm.h	/^struct frm_fmt_ldst_membar_t$/;"	s
+frm_fmt_ldst_red_t	fermi-asm.h	/^struct frm_fmt_ldst_red_t$/;"	s
+frm_fmt_ldst_st_t	fermi-asm.h	/^struct frm_fmt_ldst_st_t$/;"	s
+frm_fmt_ldst_stl_t	fermi-asm.h	/^struct frm_fmt_ldst_stl_t$/;"	s
+frm_fmt_ldst_sts_t	fermi-asm.h	/^struct frm_fmt_ldst_sts_t$/;"	s
+frm_fmt_ldst_stsul_t	fermi-asm.h	/^struct frm_fmt_ldst_stsul_t$/;"	s
+frm_fmt_ldst_stul_t	fermi-asm.h	/^struct frm_fmt_ldst_stul_t$/;"	s
+frm_fmt_misc_b2r_t	fermi-asm.h	/^struct frm_fmt_misc_b2r_t$/;"	s
+frm_fmt_misc_bar_t	fermi-asm.h	/^struct frm_fmt_misc_bar_t$/;"	s
+frm_fmt_misc_lepc_t	fermi-asm.h	/^struct frm_fmt_misc_lepc_t$/;"	s
+frm_fmt_misc_nop_t	fermi-asm.h	/^struct frm_fmt_misc_nop_t$/;"	s
+frm_fmt_misc_s2r_t	fermi-asm.h	/^struct frm_fmt_misc_s2r_t$/;"	s
+frm_fmt_misc_vote_t	fermi-asm.h	/^struct frm_fmt_misc_vote_t$/;"	s
+frm_fmt_mov_mov32i_t	fermi-asm.h	/^struct frm_fmt_mov_mov32i_t$/;"	s
+frm_fmt_mov_mov_t	fermi-asm.h	/^struct frm_fmt_mov_mov_t$/;"	s
+frm_fmt_mov_sel_t	fermi-asm.h	/^struct frm_fmt_mov_sel_t$/;"	s
+frm_inst_category_enum	fermi-asm.h	/^enum frm_inst_category_enum$/;"	g
+frm_inst_decode	asm.c	/^void frm_inst_decode(struct frm_inst_t *inst)$/;"	f
+frm_inst_dump	asm.c	/^void frm_inst_dump(FILE *f, char *str, int inst_str_size, unsigned char *buf, int inst_index)$/;"	f
+frm_inst_dump_P	asm.c	/^void frm_inst_dump_P(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_Q	asm.c	/^void frm_inst_dump_Q(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_R	asm.c	/^void frm_inst_dump_R(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_dst	asm.c	/^void frm_inst_dump_dst(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_ext	asm.c	/^void frm_inst_dump_ext(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_imm	asm.c	/^void frm_inst_dump_imm(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_offset	asm.c	/^void frm_inst_dump_offset(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_pred	asm.c	/^void frm_inst_dump_pred(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_shamt	asm.c	/^void frm_inst_dump_shamt(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_src1	asm.c	/^void frm_inst_dump_src1(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_src2	asm.c	/^void frm_inst_dump_src2(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_src3	asm.c	/^void frm_inst_dump_src3(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dump_target	asm.c	/^void frm_inst_dump_target(char **inst_str_ptr, int *inst_str_size, struct frm_inst_t *inst, enum frm_fmt_enum fmt)$/;"	f
+frm_inst_dword_t	fermi-asm.h	/^union frm_inst_dword_t$/;"	u
+frm_inst_enum	fermi-asm.h	/^enum frm_inst_enum$/;"	g
+frm_inst_hex_dump	asm.c	/^void frm_inst_hex_dump(FILE *f, unsigned char *buf, int inst_index)$/;"	f
+frm_inst_info	asm.c	/^static struct frm_inst_info_t frm_inst_info[FRM_INST_COUNT];$/;"	v	typeref:struct:frm_inst_info_t	file:
+frm_inst_info_long	asm.c	/^static struct frm_inst_info_t *frm_inst_info_long[FRM_ISNT_INFO_LONG_SIZE]; \/* 8-byte instructions *\/$/;"	v	typeref:struct:frm_inst_info_t	file:
+frm_inst_info_t	fermi-asm.h	/^struct frm_inst_info_t$/;"	s
+frm_inst_t	fermi-asm.h	/^struct frm_inst_t$/;"	s
+frm_sr	asm.c	/^static char *frm_sr[FRM_SR_COUNT];$/;"	v	file:
+frm_sr_enum	fermi-asm.h	/^enum frm_sr_enum$/;"	g
+ftz	fermi-asm.h	/^	unsigned long long int ftz : 1; \/* [55] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+ftz	fermi-asm.h	/^	unsigned long long int ftz : 1; \/* [55] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+ftz	fermi-asm.h	/^	unsigned long long int ftz : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+ftz	fermi-asm.h	/^	unsigned long long int ftz : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+ftz	fermi-asm.h	/^	unsigned long long int ftz : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+ftzfmz	fermi-asm.h	/^	unsigned long long int ftzfmz : 2; \/* [7:6] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+ftzfmz	fermi-asm.h	/^	unsigned long long int ftzfmz : 2; \/* [7:6] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+ftzfmz	fermi-asm.h	/^	unsigned long long int ftzfmz : 2; \/* [7:6] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+hi	fermi-asm.h	/^	unsigned long long int hi : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_int_imad_t
+hi	fermi-asm.h	/^	unsigned long long int hi : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_int_imul_t
+imm16	fermi-asm.h	/^	unsigned long long int imm16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+imm32	fermi-asm.h	/^	unsigned long long int imm32 : 32; \/* [57:26] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+imm32	fermi-asm.h	/^	unsigned long long int imm32 : 32; \/* [57:26] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+imm32	fermi-asm.h	/^	unsigned long long int imm32 : 32; \/* [57:26] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+imm32	fermi-asm.h	/^	unsigned long long int imm32 : 32; \/* [57:26] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+imm32	fermi-asm.h	/^	unsigned long long int imm32 : 32; \/* [57:26] *\/$/;"	m	struct:frm_fmt_mov_mov32i_t
+imm6	fermi-asm.h	/^	unsigned long long int imm6 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_misc_b2r_t
+info	fermi-asm.h	/^	struct frm_inst_info_t *info;$/;"	m	struct:frm_inst_t	typeref:struct:frm_inst_t::frm_inst_info_t
+inst	fermi-asm.h	/^	enum frm_inst_enum inst;$/;"	m	struct:frm_inst_info_t	typeref:enum:frm_inst_info_t::frm_inst_enum
+int_bfe	fermi-asm.h	/^	struct frm_fmt_int_bfe_t int_bfe;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_bfe_t
+int_bfi	fermi-asm.h	/^	struct frm_fmt_int_bfi_t int_bfi;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_bfi_t
+int_iadd	fermi-asm.h	/^	struct frm_fmt_int_iadd_t int_iadd;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_iadd_t
+int_iadd32i	fermi-asm.h	/^	struct frm_fmt_int_iadd32i_t int_iadd32i;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_iadd32i_t
+int_icmp	fermi-asm.h	/^	struct frm_fmt_int_icmp_t int_icmp;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_icmp_t
+int_imad	fermi-asm.h	/^	struct frm_fmt_int_imad_t int_imad;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_imad_t
+int_imul	fermi-asm.h	/^	struct frm_fmt_int_imul_t int_imul;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_imul_t
+int_iscadd	fermi-asm.h	/^	struct frm_fmt_int_iscadd_t int_iscadd;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_iscadd_t
+int_isetp	fermi-asm.h	/^	struct frm_fmt_int_isetp_t int_isetp;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_isetp_t
+int_lop	fermi-asm.h	/^	struct frm_fmt_int_lop_t int_lop;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_lop_t
+int_lop32i	fermi-asm.h	/^	struct frm_fmt_int_lop32i_t int_lop32i;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_lop32i_t
+int_shl	fermi-asm.h	/^	struct frm_fmt_int_shl_t int_shl;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_shl_t
+int_shr	fermi-asm.h	/^	struct frm_fmt_int_shr_t int_shr;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_int_shr_t
+ldst_atom	fermi-asm.h	/^	struct frm_fmt_ldst_atom_t ldst_atom;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_atom_t
+ldst_cctl	fermi-asm.h	/^	struct frm_fmt_ldst_cctl_t ldst_cctl;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_cctl_t
+ldst_cctll	fermi-asm.h	/^	struct frm_fmt_ldst_cctll_t ldst_cctll;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_cctll_t
+ldst_ld	fermi-asm.h	/^	struct frm_fmt_ldst_ld_t ldst_ld;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_ld_t
+ldst_ldc	fermi-asm.h	/^	struct frm_fmt_ldst_ldc_t ldst_ldc;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_ldc_t
+ldst_ldl	fermi-asm.h	/^	struct frm_fmt_ldst_ldl_t ldst_ldl;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_ldl_t
+ldst_ldlk	fermi-asm.h	/^	struct frm_fmt_ldst_ldlk_t ldst_ldlk;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_ldlk_t
+ldst_lds	fermi-asm.h	/^	struct frm_fmt_ldst_lds_t ldst_lds;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_lds_t
+ldst_ldslk	fermi-asm.h	/^	struct frm_fmt_ldst_ldslk_t ldst_ldslk;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_ldslk_t
+ldst_ldu	fermi-asm.h	/^	struct frm_fmt_ldst_ldu_t ldst_ldu;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_ldu_t
+ldst_membar	fermi-asm.h	/^	struct frm_fmt_ldst_membar_t ldst_membar;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_membar_t
+ldst_red	fermi-asm.h	/^	struct frm_fmt_ldst_red_t ldst_red;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_red_t
+ldst_st	fermi-asm.h	/^	struct frm_fmt_ldst_st_t ldst_st;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_st_t
+ldst_stl	fermi-asm.h	/^	struct frm_fmt_ldst_stl_t ldst_stl;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_stl_t
+ldst_sts	fermi-asm.h	/^	struct frm_fmt_ldst_sts_t ldst_sts;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_sts_t
+ldst_stsul	fermi-asm.h	/^	struct frm_fmt_ldst_stsul_t ldst_stsul;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_stsul_t
+ldst_stul	fermi-asm.h	/^	struct frm_fmt_ldst_stul_t ldst_stul;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_ldst_stul_t
+lmt	fermi-asm.h	/^	unsigned long long int lmt : 1; \/* [16] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+lmt	fermi-asm.h	/^	unsigned long long int lmt : 1; \/* [16] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+logic	fermi-asm.h	/^	unsigned long long int logic : 2; \/* [54:53] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+logic	fermi-asm.h	/^	unsigned long long int logic : 2; \/* [54:53] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+logic	fermi-asm.h	/^	unsigned long long int logic : 2; \/* [54:53] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+lvl	fermi-asm.h	/^	unsigned long long int lvl : 2; \/* [6:5] *\/$/;"	m	struct:frm_fmt_ldst_membar_t
+misc_b2r	fermi-asm.h	/^	struct frm_fmt_misc_b2r_t misc_b2r;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_misc_b2r_t
+misc_bar	fermi-asm.h	/^	struct frm_fmt_misc_bar_t misc_bar;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_misc_bar_t
+misc_lepc	fermi-asm.h	/^	struct frm_fmt_misc_lepc_t misc_lepc;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_misc_lepc_t
+misc_nop	fermi-asm.h	/^	struct frm_fmt_misc_nop_t misc_nop;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_misc_nop_t
+misc_s2r	fermi-asm.h	/^	struct frm_fmt_misc_s2r_t misc_s2r;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_misc_s2r_t
+misc_vote	fermi-asm.h	/^	struct frm_fmt_misc_vote_t misc_vote;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_misc_vote_t
+mod	fermi-asm.h	/^	unsigned long long int mod : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+mod	fermi-asm.h	/^	unsigned long long int mod : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+mod1	fermi-asm.h	/^	unsigned long long int mod1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_int_imad_t
+mod1	fermi-asm.h	/^	unsigned long long int mod1 : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_int_imul_t
+mod2	fermi-asm.h	/^	unsigned long long int mod2 : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_imad_t
+mod2	fermi-asm.h	/^	unsigned long long int mod2 : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_imul_t
+mov_mov	fermi-asm.h	/^	struct frm_fmt_mov_mov_t mov_mov;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_mov_mov_t
+mov_mov32i	fermi-asm.h	/^	struct frm_fmt_mov_mov32i_t mov_mov32i;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_mov_mov32i_t
+mov_sel	fermi-asm.h	/^	struct frm_fmt_mov_sel_t mov_sel;$/;"	m	union:frm_inst_dword_t	typeref:struct:frm_inst_dword_t::frm_fmt_mov_sel_t
+name	fermi-asm.h	/^	char *name;$/;"	m	struct:frm_inst_info_t
+neg_src1	fermi-asm.h	/^	unsigned long long int neg_src1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+neg_src1	fermi-asm.h	/^	unsigned long long int neg_src1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+neg_src1	fermi-asm.h	/^	unsigned long long int neg_src1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+neg_src1	fermi-asm.h	/^	unsigned long long int neg_src1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+neg_src1	fermi-asm.h	/^	unsigned long long int neg_src1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+neg_src1	fermi-asm.h	/^	unsigned long long int neg_src1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [57] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+neg_src2	fermi-asm.h	/^	unsigned long long int neg_src2 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+neg_src3	fermi-asm.h	/^	unsigned long long int neg_src3 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+neg_src3	fermi-asm.h	/^	unsigned long long int neg_src3 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+noinc	fermi-asm.h	/^	unsigned long long int noinc : 1; \/* [15] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+noinc	fermi-asm.h	/^	unsigned long long int noinc : 1; \/* [16] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+noinc	fermi-asm.h	/^	unsigned long long int noinc : 1; \/* [16] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+not_src1	fermi-asm.h	/^	unsigned long long int not_src1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+not_src1	fermi-asm.h	/^	unsigned long long int not_src1 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_int_lop_t
+not_src2	fermi-asm.h	/^	unsigned long long int not_src2 : 1; \/* [8] *\/$/;"	m	struct:frm_fmt_int_lop_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [41:26] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+offset16	fermi-asm.h	/^	unsigned long long int offset16 : 16; \/* [43:28] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+offset20_16_0	fermi-asm.h	/^	unsigned long long int offset20_16_0 : 17; \/* [42:26] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+offset20_16_0	fermi-asm.h	/^	unsigned long long int offset20_16_0 : 17; \/* [42:26] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+offset20_19_17	fermi-asm.h	/^	unsigned long long int offset20_19_17 : 3; \/* [57:55] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+offset20_19_17	fermi-asm.h	/^	unsigned long long int offset20_19_17 : 3; \/* [57:55] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+op	fermi-asm.h	/^	unsigned long long int op : 2; \/* [6:5] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+op	fermi-asm.h	/^	unsigned long long int op : 2; \/* [7:6] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+op	fermi-asm.h	/^	unsigned long long int op : 2; \/* [7:6] *\/$/;"	m	struct:frm_fmt_int_lop_t
+op	fermi-asm.h	/^	unsigned long long int op : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_misc_b2r_t
+op	fermi-asm.h	/^	unsigned long long int op : 3; \/* [28:26] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+op	fermi-asm.h	/^	unsigned long long int op : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+op	fermi-asm.h	/^	unsigned long long int op : 4; \/* [54:51] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_brk_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_cont_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_exit_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_longjmp_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_pbk_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_pcnt_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_plongjmp_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_ret_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ctrl_ssy_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_imad_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_imul_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_lop_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_shl_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_int_shr_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_membar_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_misc_b2r_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_misc_lepc_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_misc_s2r_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_mov_mov32i_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+op0	fermi-asm.h	/^	unsigned long long int op0 : 4; \/* [3:0] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 2; \/* [63:62] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 2; \/* [63:62] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 5; \/* [63:59] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_brk_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_cont_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_exit_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_longjmp_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_pbk_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_pcnt_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_plongjmp_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_ret_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ctrl_ssy_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_imad_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_imul_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_lop_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_shl_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_int_shr_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_membar_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_misc_b2r_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_misc_lepc_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_misc_s2r_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_mov_mov32i_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+op1	fermi-asm.h	/^	unsigned long long int op1 : 6; \/* [63:58] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+op_0	fermi-asm.h	/^	unsigned long long int op_0 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+op_0	fermi-asm.h	/^	unsigned long long int op_0 : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+op_3_1	fermi-asm.h	/^	unsigned long long int op_3_1 : 3; \/* [61:59] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+op_3_1	fermi-asm.h	/^	unsigned long long int op_3_1 : 3; \/* [61:59] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+opa	fermi-asm.h	/^	unsigned long long int opa : 2; \/* [27:26] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+opb	fermi-asm.h	/^	unsigned long long int opb : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+opcode	fermi-asm.h	/^	unsigned int opcode;$/;"	m	struct:frm_inst_info_t
+pass_round	fermi-asm.h	/^	unsigned long long int pass_round : 1; \/* [7] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_brk_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_cont_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_exit_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_longjmp_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_pbk_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_pcnt_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_plongjmp_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_ret_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ctrl_ssy_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_imad_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_imul_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_lop_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_shl_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_int_shr_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_membar_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_misc_b2r_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_misc_lepc_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_misc_s2r_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_misc_vote_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_mov_mov32i_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+pred	fermi-asm.h	/^	unsigned long long int pred : 4; \/* [13:10] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+rnd	fermi-asm.h	/^	unsigned long long int rnd : 2; \/* [50:49] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+rnd	fermi-asm.h	/^	unsigned long long int rnd : 2; \/* [50:49] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+rnd	fermi-asm.h	/^	unsigned long long int rnd : 2; \/* [50:49] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+rnd	fermi-asm.h	/^	unsigned long long int rnd : 2; \/* [56:55] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+rnd	fermi-asm.h	/^	unsigned long long int rnd : 2; \/* [56:55] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+rnd	fermi-asm.h	/^	unsigned long long int rnd : 2; \/* [56:55] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+rnd	fermi-asm.h	/^	unsigned long long int rnd : 2; \/* [56:55] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+rnd	fermi-asm.h	/^	unsigned long long int rnd : 2; \/* [56:55] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+s	fermi-asm.h	/^	unsigned long long int s : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+s	fermi-asm.h	/^	unsigned long long int s : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_ldst_membar_t
+s	fermi-asm.h	/^	unsigned long long int s : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+s	fermi-asm.h	/^	unsigned long long int s : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_mov_mov32i_t
+s	fermi-asm.h	/^	unsigned long long int s : 1; \/* [4] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [49] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [56] *\/$/;"	m	struct:frm_fmt_int_imad_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+sat	fermi-asm.h	/^	unsigned long long int sat : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+shamt	fermi-asm.h	/^	unsigned long long int shamt : 5; \/* [9:5] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+size	fermi-asm.h	/^	int size;$/;"	m	struct:frm_inst_info_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_fadd32i_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_fmul32i_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_fp_mufu_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_imad_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_imul_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_lop32i_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_lop_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_shl_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_int_shr_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_cctl_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_cctll_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+src1	fermi-asm.h	/^	unsigned long long int src1 : 6; \/* [25:20] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_imad_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_imul_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_lop_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_shl_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_int_shr_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+src2	fermi-asm.h	/^	unsigned long long int src2 : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_dadd_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_dmul_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_dsetp_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_fadd_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_fmul_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_fp_fsetp_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_imad_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_imul_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_lop_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_shl_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_int_shr_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_mov_mov_t
+src2_mod	fermi-asm.h	/^	unsigned long long int src2_mod : 2; \/* [47:46] *\/$/;"	m	struct:frm_fmt_mov_sel_t
+src3	fermi-asm.h	/^	unsigned long long int src3 : 6; \/* [48:43] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+src3	fermi-asm.h	/^	unsigned long long int src3 : 6; \/* [48:43] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+src3	fermi-asm.h	/^	unsigned long long int src3 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_fp_dfma_t
+src3	fermi-asm.h	/^	unsigned long long int src3 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_fp_fcmp_t
+src3	fermi-asm.h	/^	unsigned long long int src3 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_fp_ffma_t
+src3	fermi-asm.h	/^	unsigned long long int src3 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_int_bfi_t
+src3	fermi-asm.h	/^	unsigned long long int src3 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+src3	fermi-asm.h	/^	unsigned long long int src3 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_int_imad_t
+src4	fermi-asm.h	/^	unsigned long long int src4 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+src4	fermi-asm.h	/^	unsigned long long int src4 : 6; \/* [54:49] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+src_mod	fermi-asm.h	/^	unsigned long long int src_mod : 2; \/* [56:55] *\/$/;"	m	struct:frm_fmt_int_iscadd_t
+src_mod	fermi-asm.h	/^	unsigned long long int src_mod : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_int_iadd_t
+src_mod	fermi-asm.h	/^	unsigned long long int src_mod : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_int_imad_t
+src_mod	fermi-asm.h	/^	unsigned long long int src_mod : 2; \/* [9:8] *\/$/;"	m	struct:frm_fmt_int_imul_t
+sreg	fermi-asm.h	/^	unsigned long long int sreg : 8; \/* [33:26] *\/$/;"	m	struct:frm_fmt_misc_s2r_t
+stype	fermi-asm.h	/^	unsigned long long int stype : 2; \/* [24:23] *\/$/;"	m	struct:frm_fmt_conv_f2f_t
+stype	fermi-asm.h	/^	unsigned long long int stype : 2; \/* [24:23] *\/$/;"	m	struct:frm_fmt_conv_f2i_t
+stype_n	fermi-asm.h	/^	unsigned long long int stype_n : 2; \/* [24:23] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+stype_n	fermi-asm.h	/^	unsigned long long int stype_n : 2; \/* [24:23] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+stype_s	fermi-asm.h	/^	unsigned long long int stype_s : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_conv_i2f_t
+stype_s	fermi-asm.h	/^	unsigned long long int stype_s : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_conv_i2i_t
+tcount	fermi-asm.h	/^	unsigned long long int tcount : 12; \/* [37:26] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+tcount_mod	fermi-asm.h	/^	unsigned long long int tcount_mod : 1; \/* [46] *\/$/;"	m	struct:frm_fmt_misc_bar_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_pbk_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_pcnt_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_plongjmp_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+tgt	fermi-asm.h	/^	unsigned long long int tgt : 20; \/* [45:26] *\/$/;"	m	struct:frm_fmt_ctrl_ssy_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_cal_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_jcal_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_pbk_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_pcnt_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_plongjmp_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_pret_t
+tgt_mod	fermi-asm.h	/^	unsigned long long int tgt_mod : 1; \/* [14] *\/$/;"	m	struct:frm_fmt_ctrl_ssy_t
+trig	fermi-asm.h	/^	unsigned long long int trig : 1; \/* [50] *\/$/;"	m	struct:frm_fmt_misc_nop_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_ld_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_ldc_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_ldl_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_ldlk_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_lds_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_ldslk_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_ldu_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_st_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_stl_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_sts_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_stsul_t
+type	fermi-asm.h	/^	unsigned long long int type : 3; \/* [7:5] *\/$/;"	m	struct:frm_fmt_ldst_stul_t
+type	fermi-asm.h	/^	unsigned long long int type : 4; \/* [8:5] *\/$/;"	m	struct:frm_fmt_ldst_atom_t
+type	fermi-asm.h	/^	unsigned long long int type : 4; \/* [8:5] *\/$/;"	m	struct:frm_fmt_ldst_red_t
+u	fermi-asm.h	/^	unsigned long long int u : 1; \/* [15] *\/$/;"	m	struct:frm_fmt_ctrl_bra_t
+u	fermi-asm.h	/^	unsigned long long int u : 1; \/* [15] *\/$/;"	m	struct:frm_fmt_ctrl_jmp_t
+u32	fermi-asm.h	/^	unsigned long long int u32 : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_bfe_t
+u32	fermi-asm.h	/^	unsigned long long int u32 : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_icmp_t
+u32	fermi-asm.h	/^	unsigned long long int u32 : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_isetp_t
+u32	fermi-asm.h	/^	unsigned long long int u32 : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_shl_t
+u32	fermi-asm.h	/^	unsigned long long int u32 : 1; \/* [5] *\/$/;"	m	struct:frm_fmt_int_shr_t
+w	fermi-asm.h	/^	unsigned long long int w : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_int_shl_t
+w	fermi-asm.h	/^	unsigned long long int w : 1; \/* [9] *\/$/;"	m	struct:frm_fmt_int_shr_t
+x	fermi-asm.h	/^	unsigned long long int x : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_int_iadd32i_t
+x	fermi-asm.h	/^	unsigned long long int x : 1; \/* [6] *\/$/;"	m	struct:frm_fmt_int_iadd_t

@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = bzip2_base.i386
+args = input.source 280
+cwd = benchmarks/spec2006/401.bzip2
+StdOut = bzip2.out
+IPCReport = bzip2.ipc
+IPCReportInterval = 100000

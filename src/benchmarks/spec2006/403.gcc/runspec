@@ -1,0 +1,2 @@
+exe = gcc_base.i386
+args = 166.i -o 166.s

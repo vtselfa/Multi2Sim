@@ -1,0 +1,69 @@
+[ Context 0 ]
+exe = gcc_base.i386
+args = 166.i -o 166.s
+cwd = .benchmarks/spec2006/403.gcc
+StdOut = gcc.out
+IPCReport = gcc.ipc
+IPCReportInterval = 100000
+numberOfAccessedPages = 11486
+
+[ Context 1 ]
+exe = bzip2_base.i386
+args = input.source 280
+cwd = .benchmarks/spec2006/401.bzip2
+StdOut = bzip2.out
+IPCReport = bzip2.ipc
+IPCReportInterval = 100000
+numberOfAccessedPages = 216647
+
+[ Context 2 ]
+exe = povray_base.i386
+args = SPEC-benchmark-ref.ini
+cwd = .benchmarks/spec2006/453.povray
+StdOut = povray.out
+IPCReport = povray.ipc
+IPCReportInterval = 100000
+numberOfAccessedPages = 857
+
+[ Context 3 ]
+exe = mcf_base.i386
+args = inp.in
+cwd = .benchmarks/spec2006/429.mcf
+StdOut = mcf.out
+IPCReport = mcf.ipc
+IPCReportInterval = 100000
+numberOfAccessedPages = 2391
+
+[ Context 4 ]
+exe = xalancbmk_base.i386
+args = -v t5.xml xalanc.xsl
+cwd = .benchmarks/spec2006/483.xalancbmk
+StdOut = xalancbmk.out
+IPCReport = xalancbmk.ipc
+IPCReportInterval = 100000
+numberOfAccessedPages = 1392
+
+[ Context 5 ]
+exe = tonto_base.i386
+cwd = .benchmarks/spec2006/465.tonto
+StdOut = tonto.out
+IPCReport = tonto.ipc
+IPCReportInterval = 100000
+numberOfAccessedPages = 213
+
+[ Context 6 ]
+exe = dealII_base.i386
+args = 23
+cwd = .benchmarks/spec2006/447.dealII
+StdOut = dealII.out
+IPCReport = dealII.ipc
+IPCReportInterval = 100000
+numberOfAccessedPages = 1008
+
+[ Context 7 ]
+exe = GemsFDTD_base.i386
+cwd = .benchmarks/spec2006/459.GemsFDTD
+StdOut = GemsFDTD.out
+IPCReport = GemsFDTD.ipc
+IPCReportInterval = 100000
+numberOfAccessedPages = 176

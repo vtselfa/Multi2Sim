@@ -1,0 +1,3 @@
+cpu.o: cpu.c arm-timing.h
+
+arm-timing.h:

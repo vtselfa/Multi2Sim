@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = omnetpp_base.i386
+args = omnetpp.ini
+cwd = benchmarks/spec2006/471.omnetpp
+StdOut = omnetpp.out
+IPCReport = omnetpp.ipc
+IPCReportInterval = 100000

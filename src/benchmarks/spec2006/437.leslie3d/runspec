@@ -1,0 +1,2 @@
+exe = leslie3d_base.i386
+stdin = leslie3d.in

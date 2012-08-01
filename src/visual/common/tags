@@ -1,0 +1,184 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+VISUAL_COMMON_H	visual-common.h	22;"	d
+VI_LIST_FOR_EACH	visual-common.h	150;"	d
+VI_STATE_CHECKPOINT_INTERVAL	state.c	28;"	d	file:
+VI_STATE_FOR_EACH_HEADER	visual-common.h	92;"	d
+VI_STATE_PROGRESS_INTERVAL	state.c	29;"	d	file:
+body_trace_line	state.c	/^	struct vi_trace_line_t *body_trace_line;$/;"	m	struct:vi_state_t	typeref:struct:vi_state_t::vi_trace_line_t	file:
+body_trace_line_offset	state.c	/^	long int body_trace_line_offset;$/;"	m	struct:vi_state_t	file:
+category_list	state.c	/^	struct list_t *category_list;$/;"	m	struct:vi_state_t	typeref:struct:vi_state_t::list_t	file:
+checkpoint_file	state.c	/^	FILE *checkpoint_file;$/;"	m	struct:vi_state_t	file:
+checkpoint_file_name	state.c	/^	char *checkpoint_file_name;$/;"	m	struct:vi_state_t	file:
+checkpoint_file_offset	state.c	/^	long int checkpoint_file_offset;$/;"	m	struct:vi_state_checkpoint_t	file:
+checkpoint_list	state.c	/^	struct list_t *checkpoint_list;$/;"	m	struct:vi_state_t	typeref:struct:vi_state_t::list_t	file:
+color	led.c	/^	GdkColor color;$/;"	m	struct:vi_led_t	file:
+command	trace.c	/^	char *command;$/;"	m	struct:vi_trace_line_t	file:
+command_table	state.c	/^	struct hash_table_t *command_table;$/;"	m	struct:vi_state_t	typeref:struct:vi_state_t::hash_table_t	file:
+cycle	state.c	/^	long long cycle;$/;"	m	struct:vi_state_checkpoint_t	file:
+cycle	state.c	/^	long long cycle;$/;"	m	struct:vi_state_t	file:
+cycle_bar_back_double_path	cycle-bar.c	/^static char cycle_bar_back_double_path[MAX_PATH_SIZE];$/;"	v	file:
+cycle_bar_back_single_path	cycle-bar.c	/^static char cycle_bar_back_single_path[MAX_PATH_SIZE];$/;"	v	file:
+cycle_bar_back_triple_path	cycle-bar.c	/^static char cycle_bar_back_triple_path[MAX_PATH_SIZE];$/;"	v	file:
+cycle_bar_forward_double_path	cycle-bar.c	/^static char cycle_bar_forward_double_path[MAX_PATH_SIZE];$/;"	v	file:
+cycle_bar_forward_single_path	cycle-bar.c	/^static char cycle_bar_forward_single_path[MAX_PATH_SIZE];$/;"	v	file:
+cycle_bar_forward_triple_path	cycle-bar.c	/^static char cycle_bar_forward_triple_path[MAX_PATH_SIZE];$/;"	v	file:
+cycle_bar_go_path	cycle-bar.c	/^static char cycle_bar_go_path[MAX_PATH_SIZE];$/;"	v	file:
+cycle_bar_go_to_key_press_event	cycle-bar.c	/^static gboolean cycle_bar_go_to_key_press_event(GtkWidget *entry, GdkEventKey *event, gpointer data)$/;"	f	file:
+elem	list.c	/^	void *elem;$/;"	m	struct:vi_list_item_t	file:
+elem_list	list.c	/^	struct list_t *elem_list;$/;"	m	struct:vi_list_t	typeref:struct:vi_list_t::list_t	file:
+event_box	list.c	/^	GtkWidget *event_box;$/;"	m	struct:vi_list_item_t	file:
+f	trace.c	/^	gzFile *f;$/;"	m	struct:vi_trace_t	file:
+get_elem_desc	list.c	/^	void (*get_elem_desc)(void *elem, char *buf, int size);$/;"	m	struct:vi_list_t	file:
+get_elem_name	list.c	/^	void (*get_elem_name)(void *elem, char *buf, int size);$/;"	m	struct:vi_list_t	file:
+go_to_entry	cycle-bar.c	/^	GtkWidget *go_to_entry;$/;"	m	struct:vi_cycle_bar_t	file:
+header_trace_line	state.c	/^	struct vi_trace_line_t *header_trace_line;$/;"	m	struct:vi_state_t	typeref:struct:vi_state_t::vi_trace_line_t	file:
+header_trace_line_offset	state.c	/^	long int header_trace_line_offset;$/;"	m	struct:vi_state_t	file:
+height	list.c	/^	int height;$/;"	m	struct:vi_list_t	file:
+image_close	list.c	/^	GtkWidget *image_close;$/;"	m	struct:vi_list_popup_t	file:
+isidchar	trace.c	56;"	d	file:
+item_list	list.c	/^	struct list_t *item_list;$/;"	m	struct:vi_list_popup_t	typeref:struct:vi_list_popup_t::list_t	file:
+item_list	list.c	/^	struct list_t *item_list;$/;"	m	struct:vi_list_t	typeref:struct:vi_list_t::list_t	file:
+label	list.c	/^	GtkWidget *label;$/;"	m	struct:vi_list_item_t	file:
+label_color	list.c	/^	GdkColor label_color;$/;"	m	struct:vi_list_item_t	file:
+line_num	trace.c	/^	int line_num;$/;"	m	struct:vi_trace_line_t	file:
+line_num	trace.c	/^	int line_num;$/;"	m	struct:vi_trace_t	file:
+list	list.c	/^	struct vi_list_t *list;$/;"	m	struct:vi_list_item_t	typeref:struct:vi_list_item_t::vi_list_t	file:
+list	list.c	/^	struct vi_list_t *list;$/;"	m	struct:vi_list_popup_t	typeref:struct:vi_list_popup_t::vi_list_t	file:
+name	state.c	/^	char *name;$/;"	m	struct:vi_state_category_t	file:
+name	trace.c	/^	char *name;$/;"	m	struct:vi_trace_t	file:
+num_cycles	state.c	/^	long long num_cycles;$/;"	m	struct:vi_state_t	file:
+offset	trace.c	/^	long int offset;$/;"	m	struct:vi_trace_line_t	file:
+process_trace_line_func	state.c	/^	vi_state_process_trace_line_func_t process_trace_line_func;$/;"	m	struct:vi_state_command_t	file:
+read_checkpoint_func	state.c	/^	vi_state_read_checkpoint_func_t read_checkpoint_func;$/;"	m	struct:vi_state_category_t	file:
+refresh_func	cycle-bar.c	/^	vi_cycle_bar_refresh_func_t refresh_func;$/;"	m	struct:vi_cycle_bar_t	file:
+refresh_func_arg	cycle-bar.c	/^	void *refresh_func_arg;$/;"	m	struct:vi_cycle_bar_t	file:
+scale	cycle-bar.c	/^	GtkWidget *scale;$/;"	m	struct:vi_cycle_bar_t	file:
+symbol_table	trace.c	/^	struct hash_table_t *symbol_table;$/;"	m	struct:vi_trace_line_t	typeref:struct:vi_trace_line_t::hash_table_t	file:
+text_size	list.c	/^	int text_size;$/;"	m	struct:vi_list_t	file:
+title	list.c	/^	char *title;$/;"	m	struct:vi_list_t	file:
+unzipped_trace_file	state.c	/^	FILE *unzipped_trace_file;$/;"	m	struct:vi_state_t	file:
+unzipped_trace_file_name	state.c	/^	char *unzipped_trace_file_name;$/;"	m	struct:vi_state_t	file:
+unzipped_trace_file_offset	state.c	/^	long int unzipped_trace_file_offset;$/;"	m	struct:vi_state_checkpoint_t	file:
+user_data	state.c	/^	void *user_data;$/;"	m	struct:vi_state_category_t	file:
+user_data	state.c	/^	void *user_data;$/;"	m	struct:vi_state_command_t	file:
+vi_cycle_bar	cycle-bar.c	/^static struct vi_cycle_bar_t *vi_cycle_bar;$/;"	v	typeref:struct:vi_cycle_bar_t	file:
+vi_cycle_bar	visual.c	/^struct vi_cycle_bar_t *vi_cycle_bar;$/;"	v	typeref:struct:vi_cycle_bar_t
+vi_cycle_bar_back_double_clicked_event	cycle-bar.c	/^static gboolean vi_cycle_bar_back_double_clicked_event(GtkWidget *button, gpointer data)$/;"	f	file:
+vi_cycle_bar_back_single_clicked_event	cycle-bar.c	/^static gboolean vi_cycle_bar_back_single_clicked_event(GtkWidget *button, gpointer data)$/;"	f	file:
+vi_cycle_bar_back_triple_clicked_event	cycle-bar.c	/^static gboolean vi_cycle_bar_back_triple_clicked_event(GtkWidget *button, gpointer data)$/;"	f	file:
+vi_cycle_bar_change_value_event	cycle-bar.c	/^static gboolean vi_cycle_bar_change_value_event(GtkWidget *widget, GtkScrollType scroll,$/;"	f	file:
+vi_cycle_bar_done	cycle-bar.c	/^void vi_cycle_bar_done(void)$/;"	f
+vi_cycle_bar_forward_double_clicked_event	cycle-bar.c	/^static gboolean vi_cycle_bar_forward_double_clicked_event(GtkWidget *button, gpointer data)$/;"	f	file:
+vi_cycle_bar_forward_single_clicked_event	cycle-bar.c	/^static gboolean vi_cycle_bar_forward_single_clicked_event(GtkWidget *button, gpointer data)$/;"	f	file:
+vi_cycle_bar_forward_triple_clicked_event	cycle-bar.c	/^static gboolean vi_cycle_bar_forward_triple_clicked_event(GtkWidget *button, gpointer data)$/;"	f	file:
+vi_cycle_bar_get_cycle	cycle-bar.c	/^long long vi_cycle_bar_get_cycle(void)$/;"	f
+vi_cycle_bar_get_widget	cycle-bar.c	/^GtkWidget *vi_cycle_bar_get_widget(void)$/;"	f
+vi_cycle_bar_go_to_clicked_event	cycle-bar.c	/^static gboolean vi_cycle_bar_go_to_clicked_event(GtkWidget *button, gpointer data)$/;"	f	file:
+vi_cycle_bar_go_to_cycle	cycle-bar.c	/^static void vi_cycle_bar_go_to_cycle(long long cycle)$/;"	f	file:
+vi_cycle_bar_init	cycle-bar.c	/^void vi_cycle_bar_init(vi_cycle_bar_refresh_func_t refresh_func, void *user_data)$/;"	f
+vi_cycle_bar_refresh_func_t	visual-common.h	/^typedef void (*vi_cycle_bar_refresh_func_t)(void *user_data, long long cycle);$/;"	t
+vi_cycle_bar_t	cycle-bar.c	/^struct vi_cycle_bar_t$/;"	s	file:
+vi_evg_panel	visual.c	/^struct vi_evg_panel_t *vi_evg_panel;$/;"	v	typeref:struct:vi_evg_panel_t
+vi_led_create	led.c	/^struct vi_led_t *vi_led_create(int radius)$/;"	f
+vi_led_destroy	led.c	/^static void vi_led_destroy(GtkWidget *widget, struct vi_led_t *led)$/;"	f	file:
+vi_led_draw	led.c	/^static gboolean vi_led_draw(GtkWidget *widget, GdkEventConfigure *event, struct vi_led_t *led)$/;"	f	file:
+vi_led_free	led.c	/^void vi_led_free(struct vi_led_t *led)$/;"	f
+vi_led_get_widget	led.c	/^GtkWidget *vi_led_get_widget(struct vi_led_t *led)$/;"	f
+vi_led_set_color	led.c	/^void vi_led_set_color(struct vi_led_t *led, GdkColor *color)$/;"	f
+vi_led_t	led.c	/^struct vi_led_t$/;"	s	file:
+vi_list_add	list.c	/^void vi_list_add(struct vi_list_t *list, void *elem)$/;"	f
+vi_list_count	list.c	/^int vi_list_count(struct vi_list_t *list)$/;"	f
+vi_list_create	list.c	/^struct vi_list_t *vi_list_create(char *title, int width, int height,$/;"	f
+vi_list_free	list.c	/^void vi_list_free(struct vi_list_t *list)$/;"	f
+vi_list_get	list.c	/^void *vi_list_get(struct vi_list_t *list, int index)$/;"	f
+vi_list_get_elem_desc_func_t	visual-common.h	/^typedef void (*vi_list_get_elem_desc_func_t)(void *elem, char *buf, int size);$/;"	t
+vi_list_get_elem_name_func_t	visual-common.h	/^typedef void (*vi_list_get_elem_name_func_t)(void *elem, char *buf, int size);$/;"	t
+vi_list_get_widget	list.c	/^GtkWidget *vi_list_get_widget(struct vi_list_t *list)$/;"	f
+vi_list_image_close_path	list.c	/^char vi_list_image_close_path[MAX_PATH_SIZE];$/;"	v
+vi_list_image_close_sel_path	list.c	/^char vi_list_image_close_sel_path[MAX_PATH_SIZE];$/;"	v
+vi_list_item_button_press_event	list.c	/^static gboolean vi_list_item_button_press_event(GtkWidget *widget,$/;"	f	file:
+vi_list_item_create	list.c	/^static struct vi_list_item_t *vi_list_item_create(void)$/;"	f	file:
+vi_list_item_enter_notify_event	list.c	/^static gboolean vi_list_item_enter_notify_event(GtkWidget *widget,$/;"	f	file:
+vi_list_item_free	list.c	/^static void vi_list_item_free(struct vi_list_item_t *item)$/;"	f	file:
+vi_list_item_leave_notify_event	list.c	/^static gboolean vi_list_item_leave_notify_event(GtkWidget *widget,$/;"	f	file:
+vi_list_item_more_press_event	list.c	/^static gboolean vi_list_item_more_press_event(GtkWidget *widget,$/;"	f	file:
+vi_list_item_t	list.c	/^struct vi_list_item_t$/;"	s	file:
+vi_list_popup_create	list.c	/^struct vi_list_popup_t *vi_list_popup_create(struct vi_list_t *list)$/;"	f
+vi_list_popup_destroy_event	list.c	/^static void vi_list_popup_destroy_event(GtkWidget *widget, struct vi_list_popup_t *popup)$/;"	f	file:
+vi_list_popup_free	list.c	/^void vi_list_popup_free(struct vi_list_popup_t *popup)$/;"	f
+vi_list_popup_image_close_clicked_event	list.c	/^static void vi_list_popup_image_close_clicked_event(GtkWidget *widget,$/;"	f	file:
+vi_list_popup_image_close_enter_notify_event	list.c	/^static gboolean vi_list_popup_image_close_enter_notify_event(GtkWidget *widget,$/;"	f	file:
+vi_list_popup_image_close_leave_notify_event	list.c	/^static gboolean vi_list_popup_image_close_leave_notify_event(GtkWidget *widget,$/;"	f	file:
+vi_list_popup_show	list.c	/^void vi_list_popup_show(struct vi_list_t *list)$/;"	f
+vi_list_popup_t	list.c	/^struct vi_list_popup_t$/;"	s	file:
+vi_list_refresh	list.c	/^void vi_list_refresh(struct vi_list_t *list)$/;"	f
+vi_list_remove_at	list.c	/^void *vi_list_remove_at(struct vi_list_t *list, int index)$/;"	f
+vi_list_size_allocate_event	list.c	/^static void vi_list_size_allocate_event(GtkWidget *widget, GdkRectangle *allocation, struct vi_list_t *list)$/;"	f	file:
+vi_list_t	list.c	/^struct vi_list_t$/;"	s	file:
+vi_mem_panel	visual.c	/^struct vi_mem_panel_t *vi_mem_panel;$/;"	v	typeref:struct:vi_mem_panel_t
+vi_popup_button_press_event	popup.c	/^static gboolean vi_popup_button_press_event(GtkWidget *widget, GdkEventButton *event, gpointer data)$/;"	f	file:
+vi_popup_create	popup.c	/^struct vi_popup_t *vi_popup_create(char *text)$/;"	f
+vi_popup_destroy_event	popup.c	/^static void vi_popup_destroy_event(GtkWidget *widget, struct vi_popup_t *popup)$/;"	f	file:
+vi_popup_free	popup.c	/^void vi_popup_free(struct vi_popup_t *popup)$/;"	f
+vi_popup_motion_event	popup.c	/^static gboolean vi_popup_motion_event(GtkWidget *widget, GdkEventMotion *event, gpointer data)$/;"	f	file:
+vi_popup_show	popup.c	/^void vi_popup_show(char *text)$/;"	f
+vi_popup_t	popup.c	/^struct vi_popup_t$/;"	s	file:
+vi_state	state.c	/^static struct vi_state_t *vi_state;$/;"	v	typeref:struct:vi_state_t	file:
+vi_state_category_create	state.c	/^struct vi_state_category_t *vi_state_category_create(char *name,$/;"	f
+vi_state_category_free	state.c	/^void vi_state_category_free(struct vi_state_category_t *category)$/;"	f
+vi_state_category_t	state.c	/^struct vi_state_category_t$/;"	s	file:
+vi_state_checkpoint_create	state.c	/^struct vi_state_checkpoint_t *vi_state_checkpoint_create(long long cycle,$/;"	f
+vi_state_checkpoint_free	state.c	/^void vi_state_checkpoint_free(struct vi_state_checkpoint_t *checkpoint)$/;"	f
+vi_state_checkpoint_t	state.c	/^struct vi_state_checkpoint_t$/;"	s	file:
+vi_state_command_create	state.c	/^struct vi_state_command_t *vi_state_command_create($/;"	f
+vi_state_command_free	state.c	/^void vi_state_command_free(struct vi_state_command_t *command)$/;"	f
+vi_state_command_t	state.c	/^struct vi_state_command_t$/;"	s	file:
+vi_state_create_checkpoints	state.c	/^void vi_state_create_checkpoints(void)$/;"	f
+vi_state_done	state.c	/^void vi_state_done(void)$/;"	f
+vi_state_get_current_cycle	state.c	/^long long vi_state_get_current_cycle(void)$/;"	f
+vi_state_get_num_cycles	state.c	/^long long vi_state_get_num_cycles(void)$/;"	f
+vi_state_go_to_cycle	state.c	/^void vi_state_go_to_cycle(long long cycle)$/;"	f
+vi_state_header_first	state.c	/^struct vi_trace_line_t *vi_state_header_first(void)$/;"	f
+vi_state_header_next	state.c	/^struct vi_trace_line_t *vi_state_header_next(void)$/;"	f
+vi_state_init	state.c	/^void vi_state_init(char *trace_file_name)$/;"	f
+vi_state_new_category	state.c	/^void vi_state_new_category(char *name,$/;"	f
+vi_state_new_command	state.c	/^void vi_state_new_command(char *command_name,$/;"	f
+vi_state_process_trace_line_func_t	visual-common.h	/^typedef void (*vi_state_process_trace_line_func_t)(void *user_data, struct vi_trace_line_t *trace_line);$/;"	t
+vi_state_read_checkpoint	state.c	/^static void vi_state_read_checkpoint(int index)$/;"	f	file:
+vi_state_read_checkpoint_func_t	visual-common.h	/^typedef void (*vi_state_read_checkpoint_func_t)(void *user_data, FILE *f);$/;"	t
+vi_state_t	state.c	/^struct vi_state_t$/;"	s	file:
+vi_state_trace_line_first	state.c	/^struct vi_trace_line_t *vi_state_trace_line_first(long long cycle)$/;"	f
+vi_state_trace_line_next	state.c	/^struct vi_trace_line_t *vi_state_trace_line_next(void)$/;"	f
+vi_state_write_checkpoint	state.c	/^static void vi_state_write_checkpoint(void)$/;"	f	file:
+vi_state_write_checkpoint_func_t	visual-common.h	/^typedef void (*vi_state_write_checkpoint_func_t)(void *user_data, FILE *f);$/;"	t
+vi_trace_create	trace.c	/^struct vi_trace_t *vi_trace_create(char *file_name)$/;"	f
+vi_trace_free	trace.c	/^void vi_trace_free(struct vi_trace_t *trace)$/;"	f
+vi_trace_line_create_from_file	trace.c	/^struct vi_trace_line_t *vi_trace_line_create_from_file(FILE *f)$/;"	f
+vi_trace_line_create_from_trace	trace.c	/^struct vi_trace_line_t *vi_trace_line_create_from_trace(struct vi_trace_t *trace)$/;"	f
+vi_trace_line_dump	trace.c	/^void vi_trace_line_dump(struct vi_trace_line_t *line, FILE *f)$/;"	f
+vi_trace_line_dump_plain_text	trace.c	/^void vi_trace_line_dump_plain_text(struct vi_trace_line_t *line, FILE *f)$/;"	f
+vi_trace_line_free	trace.c	/^void vi_trace_line_free(struct vi_trace_line_t *line)$/;"	f
+vi_trace_line_get_command	trace.c	/^char *vi_trace_line_get_command(struct vi_trace_line_t *line)$/;"	f
+vi_trace_line_get_offset	trace.c	/^long int vi_trace_line_get_offset(struct vi_trace_line_t *line)$/;"	f
+vi_trace_line_get_symbol	trace.c	/^char *vi_trace_line_get_symbol(struct vi_trace_line_t *line, char *symbol_name)$/;"	f
+vi_trace_line_get_symbol_hex	trace.c	/^unsigned int vi_trace_line_get_symbol_hex(struct vi_trace_line_t *line, char *symbol_name)$/;"	f
+vi_trace_line_get_symbol_int	trace.c	/^int vi_trace_line_get_symbol_int(struct vi_trace_line_t *line, char *symbol_name)$/;"	f
+vi_trace_line_get_symbol_long_long	trace.c	/^long long vi_trace_line_get_symbol_long_long(struct vi_trace_line_t *line, char *symbol_name)$/;"	f
+vi_trace_line_t	trace.c	/^struct vi_trace_line_t$/;"	s	file:
+vi_trace_t	trace.c	/^struct vi_trace_t$/;"	s	file:
+vi_x86_panel	visual.c	/^struct vi_x86_panel_t *vi_x86_panel;$/;"	v	typeref:struct:vi_x86_panel_t
+visual_cycle_bar_refresh	visual.c	/^static void visual_cycle_bar_refresh(void *user_data, long long cycle)$/;"	f	file:
+visual_destroy_event	visual.c	/^static void visual_destroy_event(GtkWidget *widget, gpointer data)$/;"	f	file:
+visual_run	visual.c	/^void visual_run(char *file_name)$/;"	f
+widget	cycle-bar.c	/^	GtkWidget *widget;$/;"	m	struct:vi_cycle_bar_t	file:
+widget	led.c	/^	GtkWidget *widget;$/;"	m	struct:vi_led_t	file:
+widget	list.c	/^	GtkWidget *widget;$/;"	m	struct:vi_list_t	file:
+width	list.c	/^	int width;$/;"	m	struct:vi_list_t	file:
+window	list.c	/^	GtkWidget *window;$/;"	m	struct:vi_list_popup_t	file:
+window	popup.c	/^	GtkWidget *window;$/;"	m	struct:vi_popup_t	file:
+write_checkpoint_func	state.c	/^	vi_state_write_checkpoint_func_t write_checkpoint_func;$/;"	m	struct:vi_state_category_t	file:

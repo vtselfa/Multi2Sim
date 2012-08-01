@@ -1,0 +1,4 @@
+[ Context 0 ]
+Exe = benchmarks/splash2/radix/radix.i386
+Args = -n262144
+Stdout = benchmarks/splash2/radix/ra.800.ctxout

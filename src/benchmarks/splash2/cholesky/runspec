@@ -1,0 +1,3 @@
+exe = cholesky.i386
+args = -p$NTHREADS -C65536
+stdin = tk15.O

@@ -1,0 +1,5 @@
+[ Context 0 ]
+Exe = benchmarks/splash2/cholesky/cholesky.i386
+Args = -C1048576
+Stdout = benchmarks/splash2/cholesky/cho.080.ctxout
+Stdin = benchmarks/splash2/cholesky/tk15.O

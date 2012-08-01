@@ -1,0 +1,6 @@
+[ Context 0 ]
+exe = GemsFDTD_base.i386
+cwd = /home/crigore/multi2sim/src/benchmarks/spec2006/459.GemsFDTD
+StdOut = GemsFDTD.out
+IPCReport = GemsFDTD.ipc
+IPCReportInterval = 100000

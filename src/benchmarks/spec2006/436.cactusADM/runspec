@@ -1,0 +1,2 @@
+exe = cactusADM_base.i386
+args = benchADM.par

@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = dealII_base.i386
+args = 23
+cwd = benchmarks/spec2006/447.dealII
+StdOut = dealII.out
+IPCReport = dealII.ipc
+IPCReportInterval = 100000

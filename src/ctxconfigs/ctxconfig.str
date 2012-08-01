@@ -1,0 +1,6 @@
+[ Context 0 ]
+Exe = stream_NTIMES_1M.i386
+cwd = benchmarks/stream/stream_NTIMES_1M
+StdOut = str.out
+IPCReport = str.ipc
+IPCReportInterval = 100000

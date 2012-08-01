@@ -1,0 +1,581 @@
+
+reg-file.c,1938
+char *x86_reg_file_kind_map[] = { "Shared", "Private" };x86_reg_file_kind_map25,854
+enum x86_reg_file_kind_t x86_reg_file_kind = x86_reg_file_kind_private;  /* Sharing policy for register file */x86_reg_file_kind26,911
+int x86_reg_file_int_size = 80;  /* Per-thread integer register file size */x86_reg_file_int_size27,1023
+int x86_reg_file_fp_size = 40;  /* Per-thread floating-point register file size */x86_reg_file_fp_size28,1100
+static int x86_reg_file_int_local_size;  /* maximum number of registers allowed per thread */x86_reg_file_int_local_size35,1226
+static int x86_reg_file_fp_local_size;x86_reg_file_fp_local_size36,1320
+static int x86_reg_file_int_reclaim(int core, int thread)x86_reg_file_int_reclaim40,1432
+static int x86_reg_file_fp_reclaim(int core, int thread)x86_reg_file_fp_reclaim58,1996
+static void x86_reg_file_init_thread(int core, int thread)x86_reg_file_init_thread82,2516
+void x86_reg_file_init(void)x86_reg_file_init120,3397
+void x86_reg_file_done(void)x86_reg_file_done152,4356
+struct x86_reg_file_t *x86_reg_file_create(int int_size, int fp_size)x86_reg_file_create162,4497
+void x86_reg_file_free(struct x86_reg_file_t *reg_file)x86_reg_file_free209,5833
+void x86_reg_file_dump(int core, int thread, FILE *f)x86_reg_file_dump219,6032
+void x86_reg_file_count_deps(struct x86_uop_t *uop)x86_reg_file_count_deps280,8232
+int x86_reg_file_can_rename(struct x86_uop_t *uop)x86_reg_file_can_rename332,9450
+void x86_reg_file_rename(struct x86_uop_t *uop)x86_reg_file_rename358,10108
+int x86_reg_file_ready(struct x86_uop_t *uop)x86_reg_file_ready481,13436
+void x86_reg_file_write(struct x86_uop_t *uop)x86_reg_file_write505,13926
+void x86_reg_file_undo(struct x86_uop_t *uop)x86_reg_file_undo528,14395
+void x86_reg_file_commit(struct x86_uop_t *uop)x86_reg_file_commit615,17030
+void x86_reg_file_check_integrity(int core, int thread)x86_reg_file_check_integrity671,18743
+
+fu.c,365
+struct x86_fu_res_t x86_fu_res_pool[x86_fu_count];x86_fu_res_pool29,860
+static enum x86_fu_class_t fu_class_table[x86_uinst_opcode_count] =fu_class_table41,1069
+void x86_fu_init()x86_fu_init125,3612
+void x86_fu_done()x86_fu_done133,3719
+int x86_fu_reserve(struct x86_uop_t *uop)x86_fu_reserve144,3928
+void x86_fu_release(int core)x86_fu_release183,5104
+
+uop.c,555
+#define UOP_MAGIC UOP_MAGIC23,830
+struct x86_uop_t *x86_uop_create(void)x86_uop_create26,863
+void x86_uop_free_if_not_queued(struct x86_uop_t *uop)x86_uop_free_if_not_queued44,1138
+int x86_uop_exists(struct x86_uop_t *uop)x86_uop_exists64,1588
+void x86_uop_list_dump(struct list_t *uop_list, FILE *f)x86_uop_list_dump70,1669
+void x86_uop_linked_list_dump(struct linked_list_t *uop_list, FILE *f)x86_uop_linked_list_dump85,1926
+void x86_uop_linked_list_check_if_ready(struct linked_list_t *uop_list)x86_uop_linked_list_check_if_ready105,2588
+
+bpred.c,2676
+#define BTB_ENTRY(BTB_ENTRY24,831
+struct btb_entry_tbtb_entry_t27,927
+	uint32_t source;  /* eip */source29,948
+	uint32_t target;  /* neip */target30,977
+	int counter;  /* LRU counter */counter31,1007
+struct x86_bpred_tx86_bpred_t36,1078
+	char *name;name38,1099
+	unsigned int *ras;ras41,1124
+	int ras_index;ras_index42,1144
+	struct btb_entry_t *btb;btb46,1256
+	char *bimod;bimod51,1395
+	unsigned int *twolevel_bht;  /* array of level1_size branch history registers */twolevel_bht55,1532
+	char *twolevel_pht;  /* array of level2_size*2^hist_size 2-bit counters */twolevel_pht56,1614
+	char *choice;choice61,1828
+	long long accesses;accesses64,1857
+	long long hits;hits65,1878
+char *x86_bpred_kind_map[] = { "Perfect", "Taken", "NotTaken", "Bimodal", "TwoLevel", "Combined" };x86_bpred_kind_map69,1900
+enum x86_bpred_kind_t x86_bpred_kind;x86_bpred_kind70,2000
+int x86_bpred_btb_sets;  /* Number of BTB sets */x86_bpred_btb_sets71,2038
+int x86_bpred_btb_assoc;  /* Number of BTB ways */x86_bpred_btb_assoc72,2088
+int x86_bpred_ras_size;  /* Return address stack size */x86_bpred_ras_size73,2139
+int x86_bpred_bimod_size;  /* Number of entries for bimodal predictor */x86_bpred_bimod_size74,2196
+int x86_bpred_choice_size;  /* Number of entries for choice predictor */x86_bpred_choice_size75,2269
+int x86_bpred_twolevel_l1size;  /* Two-level adaptive predictor: level-1 size */x86_bpred_twolevel_l1size77,2343
+int x86_bpred_twolevel_l2size;  /* Two-level adaptive predictor: level-2 size */x86_bpred_twolevel_l2size78,2424
+int x86_bpred_twolevel_hist_size;  /* Two-level adaptive predictor: level-2 history size */x86_bpred_twolevel_hist_size79,2505
+static int x86_bpred_twolevel_l2height;x86_bpred_twolevel_l2height80,2597
+void x86_bpred_init()x86_bpred_init90,2670
+void x86_bpred_done()x86_bpred_done126,3900
+struct x86_bpred_t *x86_bpred_create(char *name)x86_bpred_create136,4028
+void x86_bpred_free(struct x86_bpred_t *bpred)x86_bpred_free194,5681
+int x86_bpred_lookup(struct x86_bpred_t *bpred, struct x86_uop_t *uop)x86_bpred_lookup219,6295
+int x86_bpred_lookup_multiple(struct x86_bpred_t *bpred, uint32_t eip, int count)x86_bpred_lookup_multiple289,8699
+void x86_bpred_update(struct x86_bpred_t *bpred, struct x86_uop_t *uop)x86_bpred_update319,9762
+unsigned int x86_bpred_btb_lookup(struct x86_bpred_t *bpred, struct x86_uop_t *uop)x86_bpred_btb_lookup376,11804
+void x86_bpred_btb_update(struct x86_bpred_t *bpred, struct x86_uop_t *uop)x86_bpred_btb_update427,13275
+unsigned int x86_bpred_btb_next_branch(struct x86_bpred_t *bpred, uint32_t eip, uint32_t bsize)x86_bpred_btb_next_branch482,14613
+
+stg-commit.c,379
+static char *err_x86_cpu_commit_stall =err_x86_cpu_commit_stall24,831
+static int x86_cpu_can_commit_thread(int core, int thread)x86_cpu_can_commit_thread31,1118
+static void x86_cpu_commit_thread(int core, int thread, int quant)x86_cpu_commit_thread71,2438
+static void x86_cpu_commit_core(int core)x86_cpu_commit_core161,4700
+void x86_cpu_commit()x86_cpu_commit202,5647
+
+stg-writeback.c,126
+static void x86_cpu_writeback_core(int core)x86_cpu_writeback_core24,831
+void x86_cpu_writeback()x86_cpu_writeback92,2925
+
+stg-decode.c,200
+static void x86_cpu_decode_thread(int core, int thread)x86_cpu_decode_thread24,831
+static void x86_cpu_decode_core(int core)x86_cpu_decode_core79,2279
+void x86_cpu_decode()x86_cpu_decode88,2401
+
+cpu.c,3733
+char *x86_cpu_config_help =x86_cpu_config_help31,880
+struct x86_cpu_t *x86_cpu;x86_cpu204,10281
+int x86_trace_category;x86_trace_category207,10321
+char *x86_cpu_config_file_name = "";x86_cpu_config_file_name212,10388
+char *x86_cpu_report_file_name = "";x86_cpu_report_file_name213,10425
+int x86_cpu_num_cores = 1;x86_cpu_num_cores215,10463
+int x86_cpu_num_threads = 1;x86_cpu_num_threads216,10490
+long long x86_cpu_fast_forward_count;x86_cpu_fast_forward_count218,10520
+int x86_cpu_context_quantum;x86_cpu_context_quantum220,10559
+int x86_cpu_context_switch;x86_cpu_context_switch221,10588
+int x86_cpu_thread_quantum;x86_cpu_thread_quantum223,10617
+int x86_cpu_thread_switch_penalty;x86_cpu_thread_switch_penalty224,10645
+char *x86_cpu_recover_kind_map[] = { "Writeback", "Commit" };x86_cpu_recover_kind_map226,10681
+enum x86_cpu_recover_kind_t x86_cpu_recover_kind;x86_cpu_recover_kind227,10743
+int x86_cpu_recover_penalty;x86_cpu_recover_penalty228,10793
+char *x86_cpu_fetch_kind_map[] = { "Shared", "TimeSlice", "SwitchOnEvent" };x86_cpu_fetch_kind_map230,10823
+enum x86_cpu_fetch_kind_t x86_cpu_fetch_kind;x86_cpu_fetch_kind231,10900
+int x86_cpu_decode_width;x86_cpu_decode_width233,10947
+char *x86_cpu_dispatch_kind_map[] = { "Shared", "TimeSlice" };x86_cpu_dispatch_kind_map235,10974
+enum x86_cpu_dispatch_kind_t x86_cpu_dispatch_kind;x86_cpu_dispatch_kind236,11037
+int x86_cpu_dispatch_width;x86_cpu_dispatch_width237,11089
+char *x86_cpu_issue_kind_map[] = { "Shared", "TimeSlice" };x86_cpu_issue_kind_map239,11118
+enum x86_cpu_issue_kind_t x86_cpu_issue_kind;x86_cpu_issue_kind240,11178
+int x86_cpu_issue_width;x86_cpu_issue_width241,11224
+char *x86_cpu_commit_kind_map[] = { "Shared", "TimeSlice" };x86_cpu_commit_kind_map243,11250
+enum x86_cpu_commit_kind_t x86_cpu_commit_kind;x86_cpu_commit_kind244,11311
+int x86_cpu_commit_width;x86_cpu_commit_width245,11359
+int x86_cpu_occupancy_stats;x86_cpu_occupancy_stats247,11386
+static char *x86_cpu_err_fast_forward =x86_cpu_err_fast_forward256,11448
+static void x86_cpu_config_check(void)x86_cpu_config_check264,11805
+static void x86_cpu_config_dump(FILE *f)x86_cpu_config_dump430,20297
+static void x86_cpu_dump_uop_report(FILE *f, long long *uop_stats, char *prefix, int peak_ipc)x86_cpu_dump_uop_report560,26699
+#define DUMP_FU_STAT(DUMP_FU_STAT605,28304
+#define DUMP_DISPATCH_STAT(DUMP_DISPATCH_STAT612,28660
+#define DUMP_CORE_STRUCT_STATS(DUMP_CORE_STRUCT_STATS616,28804
+#define DUMP_THREAD_STRUCT_STATS(DUMP_THREAD_STRUCT_STATS625,29280
+static void x86_cpu_dump_report(void)x86_cpu_dump_report635,29745
+static void x86_cpu_thread_init(int core, int thread)x86_cpu_thread_init840,37316
+static void x86_cpu_core_init(int core)x86_cpu_core_init845,37376
+#define X86_TRACE_VERSION_MAJOR	X86_TRACE_VERSION_MAJOR863,37692
+#define X86_TRACE_VERSION_MINOR	X86_TRACE_VERSION_MINOR864,37727
+void x86_cpu_init()x86_cpu_init868,37787
+void x86_cpu_done()x86_cpu_done911,38726
+void x86_cpu_load_progs(int argc, char **argv, char *ctxfile)x86_cpu_load_progs944,39343
+void x86_cpu_dump(FILE *f)x86_cpu_dump953,39546
+#define UPDATE_THREAD_OCCUPANCY_STATS(UPDATE_THREAD_OCCUPANCY_STATS1007,40975
+#define UPDATE_CORE_OCCUPANCY_STATS(UPDATE_CORE_OCCUPANCY_STATS1014,41169
+void x86_cpu_update_occupancy_stats()x86_cpu_update_occupancy_stats1021,41375
+void x86_cpu_uop_trace_list_add(struct x86_uop_t *uop)x86_cpu_uop_trace_list_add1059,42398
+void x86_cpu_uop_trace_list_empty(void)x86_cpu_uop_trace_list_empty1069,42595
+void x86_cpu_run_stages()x86_cpu_run_stages1094,43135
+void x86_cpu_run_fast_forward(void)x86_cpu_run_fast_forward1127,44071
+int x86_cpu_run(void)x86_cpu_run1145,44719
+
+stg-issue.c,754
+static int x86_cpu_issue_sq(int core, int thread, int quant)x86_cpu_issue_sq23,830
+static int x86_cpu_issue_lq(int core, int thread, int quant)x86_cpu_issue_lq78,2404
+static int x86_cpu_issue_pq(int core, int thread, int quant)x86_cpu_issue_pq142,4201
+static int x86_cpu_issue_l2pq(int core, int thread, int quant)x86_cpu_issue_l2pq192,5414
+static int x86_cpu_issue_iq(int core, int thread, int quant)x86_cpu_issue_iq252,6851
+static int x86_cpu_issue_thread_lsq(int core, int thread, int quant)x86_cpu_issue_thread_lsq317,8631
+static int x86_cpu_issue_thread_iq(int core, int thread, int quant)x86_cpu_issue_thread_iq327,8915
+static void x86_cpu_issue_core(int core)x86_cpu_issue_core334,9052
+void x86_cpu_issue()x86_cpu_issue393,10480
+
+recover.c,66
+void x86_cpu_recover(int core, int thread)x86_cpu_recover23,830
+
+rob.c,1033
+char *x86_rob_kind_map[] = { "Private", "Shared" };x86_rob_kind_map26,855
+enum x86_rob_kind_t x86_rob_kind;x86_rob_kind27,907
+int x86_rob_size;x86_rob_size28,941
+static int x86_rob_total_size = 0;x86_rob_total_size35,988
+static void x86_rob_trim(int core)x86_rob_trim44,1056
+void x86_rob_init()x86_rob_init79,1644
+void x86_rob_done()x86_rob_done116,2343
+int x86_rob_can_enqueue(struct x86_uop_t *uop)x86_rob_can_enqueue147,2790
+void x86_rob_enqueue(struct x86_uop_t *uop)x86_rob_enqueue169,3147
+int x86_rob_can_dequeue(int core, int thread)x86_rob_can_dequeue202,4042
+struct x86_uop_t *x86_rob_head(int core, int thread)x86_rob_head228,4494
+void x86_rob_remove_head(int core, int thread)x86_rob_remove_head261,5126
+struct x86_uop_t *x86_rob_tail(int core, int thread)x86_rob_tail302,6113
+struct x86_uop_t *x86_rob_get(int core, int thread, int index)x86_rob_get336,6842
+void x86_rob_remove_tail(int core, int thread)x86_rob_remove_tail365,7509
+void x86_rob_dump(int core, FILE *f)x86_rob_dump407,8482
+
+sched.c,569
+int x86_cpu_pipeline_empty(int core, int thread)x86_cpu_pipeline_empty23,830
+static int x86_cpu_context_to_cpu(struct x86_ctx_t *ctx)x86_cpu_context_to_cpu36,1294
+void x86_cpu_map_context(int core, int thread, struct x86_ctx_t *ctx)x86_cpu_map_context73,2361
+void x86_cpu_unmap_context(int core, int thread)x86_cpu_unmap_context98,3098
+void x86_cpu_unmap_context_signal(struct x86_ctx_t *ctx)x86_cpu_unmap_context_signal140,4225
+void x86_cpu_static_schedule()x86_cpu_static_schedule161,4801
+void x86_cpu_dynamic_schedule()x86_cpu_dynamic_schedule194,5751
+
+queues.c,2540
+int x86_fetch_queue_size;x86_fetch_queue_size27,863
+void x86_fetch_queue_init()x86_fetch_queue_init30,891
+void x86_fetch_queue_done()x86_fetch_queue_done38,1055
+struct x86_uop_t *x86_fetch_queue_remove(int core, int thread, int index)x86_fetch_queue_remove56,1392
+void x86_fetch_queue_recover(int core, int thread)x86_fetch_queue_recover82,2041
+int x86_uop_queue_size;x86_uop_queue_size113,2626
+void x86_uop_queue_init()x86_uop_queue_init116,2652
+void x86_uop_queue_done()x86_uop_queue_done126,2816
+void x86_uop_queue_recover(int core, int thread)x86_uop_queue_recover146,3165
+char *x86_iq_kind_map[] = { "Shared", "Private" };x86_iq_kind_map180,3781
+enum x86_iq_kind_t x86_iq_kind;x86_iq_kind181,3832
+int x86_iq_size;x86_iq_size182,3864
+void x86_iq_init()x86_iq_init185,3883
+void x86_iq_done()x86_iq_done195,4012
+int x86_iq_can_insert(struct x86_uop_t *uop)x86_iq_can_insert219,4381
+void x86_iq_insert(struct x86_uop_t *uop)x86_iq_insert233,4824
+void x86_iq_remove(int core, int thread)x86_iq_remove251,5216
+void x86_iq_recover(int core, int thread)x86_iq_recover268,5587
+char *x86_lsq_kind_map[] = { "Shared", "Private" };x86_lsq_kind_map293,5956
+enum x86_lsq_kind_t x86_lsq_kind;x86_lsq_kind294,6008
+int x86_lsq_size;x86_lsq_size295,6042
+void x86_lsq_init()x86_lsq_init298,6062
+void x86_lsq_done()x86_lsq_done312,6278
+int x86_lsq_can_insert(struct x86_uop_t *uop)x86_lsq_can_insert367,7255
+void x86_lsq_insert(struct x86_uop_t *uop)x86_lsq_insert380,7640
+void x86_pq_insert(struct x86_uop_t *uop)x86_pq_insert406,8256
+void x86_lsq_recover(int core, int thread)x86_lsq_recover421,8587
+void x86_lq_remove(int core, int thread)x86_lq_remove459,9371
+void x86_pq_remove(int core, int thread)x86_pq_remove474,9687
+void x86_sq_remove(int core, int thread)x86_sq_remove491,10067
+void x86_event_queue_init()x86_event_queue_init514,10430
+void x86_event_queue_done()x86_event_queue_done523,10542
+static int eventq_compare(const void *item1, const void *item2)eventq_compare536,10783
+int x86_event_queue_long_latency(int core, int thread)x86_event_queue_long_latency545,11015
+int x86_event_queue_cache_miss(int core, int thread)x86_event_queue_cache_miss562,11351
+void x86_event_queue_insert(struct linked_list_t *event_queue, struct x86_uop_t *uop)x86_event_queue_insert579,11723
+struct x86_uop_t *x86_event_queue_extract(struct linked_list_t *event_queue)x86_event_queue_extract596,12112
+void x86_event_queue_recover(int core, int thread)x86_event_queue_recover613,12476
+
+x86-timing.h,17820
+#define X86_TIMING_HX86_TIMING_H21,825
+#define x86_cpu_error_debug(x86_cpu_error_debug39,1067
+extern enum x86_cpu_recover_kind_tx86_cpu_recover_kind_t67,1664
+	x86_cpu_recover_kind_writeback = 0,x86_cpu_recover_kind_writeback69,1701
+	x86_cpu_recover_kind_commitx86_cpu_recover_kind_commit70,1738
+extern enum x86_cpu_fetch_kind_tx86_cpu_fetch_kind_t76,1885
+	x86_cpu_fetch_kind_shared = 0,x86_cpu_fetch_kind_shared78,1920
+	x86_cpu_fetch_kind_timeslice,x86_cpu_fetch_kind_timeslice79,1952
+	x86_cpu_fetch_kind_switchoneventx86_cpu_fetch_kind_switchonevent80,1983
+extern enum x86_cpu_dispatch_kind_tx86_cpu_dispatch_kind_t88,2156
+	x86_cpu_dispatch_kind_shared = 0,x86_cpu_dispatch_kind_shared90,2194
+	x86_cpu_dispatch_kind_timeslice,x86_cpu_dispatch_kind_timeslice91,2229
+extern enum x86_cpu_issue_kind_tx86_cpu_issue_kind_t97,2381
+	x86_cpu_issue_kind_shared = 0,x86_cpu_issue_kind_shared99,2416
+	x86_cpu_issue_kind_timeslice,x86_cpu_issue_kind_timeslice100,2448
+extern enum x86_cpu_commit_kind_tx86_cpu_commit_kind_t106,2593
+	x86_cpu_commit_kind_shared = 0,x86_cpu_commit_kind_shared108,2629
+	x86_cpu_commit_kind_timeslicex86_cpu_commit_kind_timeslice109,2662
+struct x86_uop_tx86_uop_t120,2781
+	struct x86_uinst_t *uinst;uinst123,2825
+	enum x86_uinst_flag_t flags;flags124,2853
+	char name[40];name127,2917
+	long long magic;  /* Magic number for debugging */magic128,2933
+	long long id;  /* Unique ID */id129,2985
+	long long id_in_core;  /* Unique ID in core */id_in_core130,3017
+	struct x86_ctx_t *ctx;ctx133,3086
+	int core;core134,3110
+	int thread;thread135,3121
+	int fetch_trace_cache;  /* True if uop comes from trace cache */fetch_trace_cache138,3153
+	unsigned int eip;  /* Address of x86 macro-instruction */eip139,3219
+	unsigned int neip;  /* Address of next non-speculative x86 macro-instruction */neip140,3278
+	unsigned int pred_neip; /* Address of next predicted x86 macro-instruction (for branches) */pred_neip141,3359
+	unsigned int target_neip;  /* Address of target x86 macro-instruction assuming branch taken (for branches) */target_neip142,3453
+	int specmode;specmode143,3564
+	unsigned int fetch_address;  /* Physical address of memory access to fetch this instruction */fetch_address144,3579
+	long long fetch_access;  /* Access identifier to fetch this instruction */fetch_access145,3675
+	char mop_name[40];mop_name148,3799
+	int mop_index;  /* Index of uop within macroinstruction */mop_index149,3819
+	int mop_count;  /* Number of uops within macroinstruction */mop_count150,3879
+	int mop_size;  /* Corresponding macroinstruction size */mop_size151,3941
+	long long mop_id;  /* Sequence number of macroinstruction */mop_id152,3999
+	int idep_count;idep_count155,4090
+	int odep_count;odep_count156,4107
+	int ph_int_idep_count, ph_fp_idep_count;ph_int_idep_count159,4150
+	int ph_int_idep_count, ph_fp_idep_count;ph_fp_idep_count159,4150
+	int ph_int_odep_count, ph_fp_odep_count;ph_int_odep_count160,4192
+	int ph_int_odep_count, ph_fp_odep_count;ph_fp_odep_count160,4192
+	int ph_idep[X86_UINST_MAX_IDEPS];ph_idep161,4234
+	int ph_odep[X86_UINST_MAX_ODEPS];ph_odep162,4269
+	int ph_oodep[X86_UINST_MAX_ODEPS];ph_oodep163,4304
+	int in_fetch_queue : 1;in_fetch_queue166,4376
+	int in_uop_queue : 1;in_uop_queue167,4401
+	int in_iq : 1;in_iq168,4424
+	int in_lq : 1;in_lq169,4440
+	int in_sq : 1;in_sq170,4456
+	int in_event_queue : 1;in_event_queue171,4472
+	int in_rob : 1;in_rob172,4497
+	int in_uop_trace_list : 1;in_uop_trace_list173,4514
+	int ready;ready176,4569
+	int issued;issued177,4581
+	int completed;completed178,4594
+	unsigned int phy_addr;  /* ... corresponding to 'uop->uinst->address' */phy_addr181,4634
+	long long when;  /* cycle when ready */when184,4723
+	long long issue_try_when;  /* first cycle when f.u. is tried to be reserved */issue_try_when185,4764
+	long long issue_when;  /* cycle when issued */issue_when186,4844
+	int pred;  /* Global prediction (0=not taken, 1=taken) */pred189,4918
+	int bimod_index, bimod_pred;bimod_index190,4977
+	int bimod_index, bimod_pred;bimod_pred190,4977
+	int twolevel_bht_index, twolevel_pht_row, twolevel_pht_col, twolevel_pred;twolevel_bht_index191,5007
+	int twolevel_bht_index, twolevel_pht_row, twolevel_pht_col, twolevel_pred;twolevel_pht_row191,5007
+	int twolevel_bht_index, twolevel_pht_row, twolevel_pht_col, twolevel_pred;twolevel_pht_col191,5007
+	int twolevel_bht_index, twolevel_pht_row, twolevel_pht_col, twolevel_pred;twolevel_pred191,5007
+	int choice_index, choice_pred;choice_index192,5083
+	int choice_index, choice_pred;choice_pred192,5083
+	int prefetch;prefetch195,5125
+	struct mod_t *pref_mod;pref_mod196,5140
+#define X86_FU_RES_MAX X86_FU_RES_MAX214,5587
+enum x86_fu_class_tx86_fu_class_t216,5615
+	x86_fu_none = 0,x86_fu_none218,5637
+	x86_fu_intadd,x86_fu_intadd220,5656
+	x86_fu_intmult,x86_fu_intmult221,5672
+	x86_fu_intdiv,x86_fu_intdiv222,5689
+	x86_fu_effaddr,x86_fu_effaddr223,5705
+	x86_fu_logic,x86_fu_logic224,5722
+	x86_fu_fpsimple,x86_fu_fpsimple226,5738
+	x86_fu_fpadd,x86_fu_fpadd227,5756
+	x86_fu_fpmult,x86_fu_fpmult228,5771
+	x86_fu_fpdiv,x86_fu_fpdiv229,5787
+	x86_fu_fpcomplex,x86_fu_fpcomplex230,5802
+	x86_fu_xmm_int,x86_fu_xmm_int232,5822
+	x86_fu_xmm_float,x86_fu_xmm_float233,5839
+	x86_fu_xmm_logic,x86_fu_xmm_logic234,5858
+	x86_fu_countx86_fu_count236,5878
+struct x86_fu_tx86_fu_t239,5896
+	long long cycle_when_free[x86_fu_count][X86_FU_RES_MAX];cycle_when_free241,5914
+	long long accesses[x86_fu_count];accesses242,5972
+	long long denied[x86_fu_count];denied243,6007
+	long long waiting_time[x86_fu_count];waiting_time244,6040
+struct x86_fu_res_tx86_fu_res_t247,6083
+	int count;count249,6105
+	int oplat;oplat250,6117
+	int issuelat;issuelat251,6129
+	char *name;name252,6144
+extern enum x86_rob_kind_tx86_rob_kind_t300,6831
+	x86_rob_kind_private = 0,x86_rob_kind_private302,6860
+	x86_rob_kind_sharedx86_rob_kind_shared303,6887
+extern enum x86_iq_kind_tx86_iq_kind_t328,7512
+	x86_iq_kind_shared = 0,x86_iq_kind_shared330,7540
+	x86_iq_kind_privatex86_iq_kind_private331,7565
+extern enum x86_lsq_kind_tx86_lsq_kind_t351,7914
+	x86_lsq_kind_shared = 0,x86_lsq_kind_shared353,7943
+	x86_lsq_kind_privatex86_lsq_kind_private354,7969
+#define X86_REG_FILE_MIN_INT_SIZE X86_REG_FILE_MIN_INT_SIZE392,8805
+#define X86_REG_FILE_MIN_FP_SIZE X86_REG_FILE_MIN_FP_SIZE393,8882
+extern enum x86_reg_file_kind_tx86_reg_file_kind_t396,8996
+	x86_reg_file_kind_shared = 0,x86_reg_file_kind_shared398,9030
+	x86_reg_file_kind_privatex86_reg_file_kind_private399,9061
+struct x86_phreg_tx86_phreg_t404,9177
+	int pending;  /* not completed (bit) */pending406,9198
+	int busy;  /* number of mapped logical registers */busy407,9239
+struct x86_reg_file_tx86_reg_file_t410,9296
+	int int_rat[x86_dep_int_count];int_rat413,9345
+	struct x86_phreg_t *int_phreg;int_phreg414,9378
+	int int_phreg_count;int_phreg_count415,9410
+	int *int_free_phreg;int_free_phreg416,9432
+	int int_free_phreg_count;int_free_phreg_count417,9454
+	int fp_top_of_stack;  /* Value between 0 and 7 */fp_top_of_stack420,9502
+	int fp_rat[x86_dep_fp_count];fp_rat421,9553
+	struct x86_phreg_t *fp_phreg;fp_phreg422,9584
+	int fp_phreg_count;fp_phreg_count423,9615
+	int *fp_free_phreg;fp_free_phreg424,9636
+	int fp_free_phreg_count;fp_free_phreg_count425,9657
+extern enum x86_bpred_kind_tx86_bpred_kind_t452,10401
+	x86_bpred_kind_perfect = 0,x86_bpred_kind_perfect454,10432
+	x86_bpred_kind_taken,x86_bpred_kind_taken455,10461
+	x86_bpred_kind_nottaken,x86_bpred_kind_nottaken456,10484
+	x86_bpred_kind_bimod,x86_bpred_kind_bimod457,10510
+	x86_bpred_kind_twolevel,x86_bpred_kind_twolevel458,10533
+	x86_bpred_kind_combx86_bpred_kind_comb459,10559
+#define X86_TRACE_CACHE_ENTRY_SIZE X86_TRACE_CACHE_ENTRY_SIZE493,11548
+#define X86_TRACE_CACHE_ENTRY(X86_TRACE_CACHE_ENTRY496,11678
+struct x86_trace_cache_entry_tx86_trace_cache_entry_t500,11874
+	int counter;  /* lru counter */counter502,11907
+	unsigned int tag;tag503,11940
+	int uop_count, mop_count;uop_count504,11959
+	int uop_count, mop_count;mop_count504,11959
+	int branch_mask, branch_flags, branch_count;branch_mask505,11986
+	int branch_mask, branch_flags, branch_count;branch_flags505,11986
+	int branch_mask, branch_flags, branch_count;branch_count505,11986
+	unsigned int fall_through;fall_through506,12032
+	unsigned int target;target507,12060
+	unsigned int mop_array[0];mop_array512,12325
+struct x86_trace_cache_tx86_trace_cache_t515,12357
+	struct x86_trace_cache_entry_t *entry;entry518,12414
+	struct x86_trace_cache_entry_t *temp;  /* Temporary trace */temp519,12454
+	char name[20];name522,12530
+	long long accesses;accesses523,12546
+	long long hits;hits524,12567
+	long long committed;committed525,12584
+	long long squashed;squashed526,12606
+	long long trace_length_acc;trace_length_acc527,12627
+	long long trace_length_count;trace_length_count528,12656
+#define x86_tracing(x86_tracing558,13500
+#define x86_trace(x86_trace559,13555
+#define x86_trace_header(x86_trace_header560,13617
+#define X86_CORE	X86_CORE565,13751
+#define X86_THREAD	X86_THREAD566,13791
+#define X86_CORE_IDX(X86_CORE_IDX567,13848
+#define X86_THREAD_IDX(X86_THREAD_IDX568,13894
+#define X86_CORE_FOR_EACH	X86_CORE_FOR_EACH569,13954
+#define X86_THREAD_FOR_EACH	X86_THREAD_FOR_EACH570,14029
+enum x86_dispatch_stall_tx86_dispatch_stall_t574,14145
+	x86_dispatch_stall_used = 0,  /* Dispatch slot was used with a finally committed inst. */x86_dispatch_stall_used576,14173
+	x86_dispatch_stall_spec,  /* Used with a speculative inst. */x86_dispatch_stall_spec577,14264
+	x86_dispatch_stall_uop_queue,  /* No instruction in the uop queue */x86_dispatch_stall_uop_queue578,14327
+	x86_dispatch_stall_rob,  /* No space in the rob */x86_dispatch_stall_rob579,14397
+	x86_dispatch_stall_iq,  /* No space in the iq */x86_dispatch_stall_iq580,14449
+	x86_dispatch_stall_lsq,  /* No space in the lsq */x86_dispatch_stall_lsq581,14499
+	x86_dispatch_stall_rename,  /* No free physical register */x86_dispatch_stall_rename582,14551
+	x86_dispatch_stall_ctx,  /* No running ctx */x86_dispatch_stall_ctx583,14612
+	x86_dispatch_stall_maxx86_dispatch_stall_max584,14659
+struct x86_thread_tx86_thread_t589,14701
+	struct x86_ctx_t *ctx;  /* allocated kernel context */ctx591,14723
+	int last_alloc_pid;  /* pid of last allocated context */last_alloc_pid592,14779
+	int rob_count;rob_count595,14860
+	int rob_left_bound;rob_left_bound596,14876
+	int rob_right_bound;rob_right_bound597,14897
+	int rob_head;rob_head598,14919
+	int rob_tail;rob_tail599,14934
+	int iq_count;iq_count602,14994
+	int lsq_count;lsq_count603,15009
+	int reg_file_int_count;reg_file_int_count604,15025
+	int reg_file_fp_count;reg_file_fp_count605,15050
+	struct list_t *fetch_queue;fetch_queue608,15101
+	struct list_t *uop_queue;uop_queue609,15130
+	struct linked_list_t *iq;iq610,15157
+	struct linked_list_t *lq;lq611,15184
+	struct linked_list_t *sq;sq612,15211
+	struct linked_list_t *pq; /* prefetch queue */pq613,15238
+	struct x86_bpred_t *bpred;  /* branch predictor */bpred614,15286
+	struct x86_trace_cache_t *trace_cache;  /* trace cache */trace_cache615,15338
+	struct x86_reg_file_t *reg_file;  /* physical register file */reg_file616,15397
+	unsigned int fetch_eip, fetch_neip;  /* eip and next eip */fetch_eip619,15475
+	unsigned int fetch_eip, fetch_neip;  /* eip and next eip */fetch_neip619,15475
+	int fetchq_occ;  /* Number of bytes occupied in the fetch queue */fetchq_occ620,15536
+	int trace_cache_queue_occ;  /* Number of uops occupied in the trace cache queue */trace_cache_queue_occ621,15604
+	unsigned int fetch_block;  /* Virtual address of last fetched block */fetch_block622,15688
+	unsigned int fetch_address;  /* Physical address of last instruction fetch */fetch_address623,15760
+	long long fetch_access;  /* Module access ID of last instruction fetch */fetch_access624,15839
+	long long fetch_stall_until;  /* Cycle until which fetching is stalled (inclussive) */fetch_stall_until625,15914
+	struct mod_t *data_mod;  /* Entry for data */data_mod628,16039
+	struct mod_t *inst_mod;  /* Entry for instructions */inst_mod629,16086
+	long long fetched;fetched632,16160
+	long long dispatched[x86_uinst_opcode_count];dispatched633,16180
+	long long issued[x86_uinst_opcode_count];issued634,16227
+	long long committed[x86_uinst_opcode_count];committed635,16270
+	long long squashed;squashed636,16316
+	long long branches;branches637,16337
+	long long mispred;mispred638,16358
+	long long last_commit_cycle;last_commit_cycle639,16378
+	long long rob_occupancy;rob_occupancy642,16443
+	long long rob_full;rob_full643,16469
+	long long rob_reads;rob_reads644,16490
+	long long rob_writes;rob_writes645,16512
+	long long iq_occupancy;iq_occupancy647,16536
+	long long iq_full;iq_full648,16561
+	long long iq_reads;iq_reads649,16581
+	long long iq_writes;iq_writes650,16602
+	long long iq_wakeup_accesses;iq_wakeup_accesses651,16624
+	long long lsq_occupancy;lsq_occupancy653,16656
+	long long lsq_full;lsq_full654,16682
+	long long lsq_reads;lsq_reads655,16703
+	long long lsq_writes;lsq_writes656,16725
+	long long lsq_wakeup_accesses;lsq_wakeup_accesses657,16748
+	long long reg_file_int_occupancy;reg_file_int_occupancy659,16781
+	long long reg_file_int_full;reg_file_int_full660,16816
+	long long reg_file_int_reads;reg_file_int_reads661,16846
+	long long reg_file_int_writes;reg_file_int_writes662,16877
+	long long reg_file_fp_occupancy;reg_file_fp_occupancy664,16910
+	long long reg_file_fp_full;reg_file_fp_full665,16944
+	long long reg_file_fp_reads;reg_file_fp_reads666,16973
+	long long reg_file_fp_writes;reg_file_fp_writes667,17003
+	long long rat_int_reads;rat_int_reads669,17035
+	long long rat_int_writes;rat_int_writes670,17061
+	long long rat_fp_reads;rat_fp_reads671,17088
+	long long rat_fp_writes;rat_fp_writes672,17113
+	long long btb_reads;btb_reads674,17140
+	long long btb_writes;btb_writes675,17162
+struct x86_core_tx86_core_t680,17202
+	struct x86_thread_t *thread;thread683,17246
+	struct linked_list_t *event_queue;event_queue686,17302
+	struct x86_fu_t *fu;fu687,17338
+	long long uop_id_counter;  /* Counter for uop ID assignment */uop_id_counter690,17386
+	long long dispatch_seq;  /* Counter for uop ID assignment */dispatch_seq691,17450
+	int iq_count;iq_count692,17512
+	int lsq_count;lsq_count693,17527
+	int reg_file_int_count;reg_file_int_count694,17543
+	int reg_file_fp_count;reg_file_fp_count695,17568
+	struct list_t *rob;rob698,17615
+	int rob_count;rob_count699,17636
+	int rob_head;rob_head700,17652
+	int rob_tail;rob_tail701,17667
+	int fetch_current;  /* Currently fetching thread */fetch_current704,17697
+	long long fetch_switch_when;  /* Cycle for last thread switch (for SwitchOnEvent) */fetch_switch_when705,17750
+	int decode_current;decode_current706,17836
+	int dispatch_current;dispatch_current707,17857
+	int issue_current;issue_current708,17880
+	int commit_current;commit_current709,17900
+	long long dispatch_stall[x86_dispatch_stall_max];dispatch_stall712,17935
+	long long dispatched[x86_uinst_opcode_count];dispatched713,17986
+	long long issued[x86_uinst_opcode_count];issued714,18033
+	long long committed[x86_uinst_opcode_count];committed715,18076
+	long long squashed;squashed716,18122
+	long long branches;branches717,18143
+	long long mispred;mispred718,18164
+	long long rob_occupancy;rob_occupancy721,18226
+	long long rob_full;rob_full722,18252
+	long long rob_reads;rob_reads723,18273
+	long long rob_writes;rob_writes724,18295
+	long long iq_occupancy;iq_occupancy726,18319
+	long long iq_full;iq_full727,18344
+	long long iq_reads;iq_reads728,18364
+	long long iq_writes;iq_writes729,18385
+	long long iq_wakeup_accesses;iq_wakeup_accesses730,18407
+	long long lsq_occupancy;lsq_occupancy732,18439
+	long long lsq_full;lsq_full733,18465
+	long long lsq_reads;lsq_reads734,18486
+	long long lsq_writes;lsq_writes735,18508
+	long long lsq_wakeup_accesses;lsq_wakeup_accesses736,18531
+	long long reg_file_int_occupancy;reg_file_int_occupancy738,18564
+	long long reg_file_int_full;reg_file_int_full739,18599
+	long long reg_file_int_reads;reg_file_int_reads740,18629
+	long long reg_file_int_writes;reg_file_int_writes741,18660
+	long long reg_file_fp_occupancy;reg_file_fp_occupancy743,18693
+	long long reg_file_fp_full;reg_file_fp_full744,18727
+	long long reg_file_fp_reads;reg_file_fp_reads745,18756
+	long long reg_file_fp_writes;reg_file_fp_writes746,18786
+struct x86_cpu_tx86_cpu_t751,18838
+	struct x86_core_t *core;core754,18879
+	long long cycle;cycle757,18944
+	long long inst;inst758,18962
+	long long uop_id_counter;  /* Counter of uop ID assignment */uop_id_counter761,18999
+	char *stage;  /* Name of currently simulated stage */stage762,19062
+	long long ctx_alloc_oldest;  /* Time when oldest context was allocated */ctx_alloc_oldest765,19145
+	int ctx_dealloc_signals;  /* Sent deallocation signals */ctx_dealloc_signals766,19220
+	struct linked_list_t *uop_trace_list;uop_trace_list769,19355
+	long long fast_forward_inst_count;fast_forward_inst_count772,19413
+	long long fetched;fetched773,19449
+	long long dispatched[x86_uinst_opcode_count];dispatched774,19469
+	long long issued[x86_uinst_opcode_count];issued775,19516
+	long long committed[x86_uinst_opcode_count];committed776,19559
+	long long squashed;squashed777,19605
+	long long branches;branches778,19626
+	long long mispred;mispred779,19647
+	double time;time780,19667
+	long long last_committed;last_committed783,19701
+	long long last_dump;last_dump784,19728
+
+stg-fetch.c,499
+static int x86_cpu_can_fetch(int core, int thread)x86_cpu_can_fetch23,830
+static struct x86_uop_t *x86_cpu_fetch_inst(int core, int thread, int fetch_trace_cache)x86_cpu_fetch_inst62,2032
+static int x86_cpu_fetch_thread_trace_cache(int core, int thread)x86_cpu_fetch_thread_trace_cache187,5420
+static void x86_cpu_fetch_thread(int core, int thread)x86_cpu_fetch_thread247,7219
+static void x86_cpu_fetch_core(int core)x86_cpu_fetch_core318,9579
+void x86_cpu_fetch()x86_cpu_fetch417,11950
+
+trace-cache.c,1343
+int x86_trace_cache_present;  /* Use trace cache */x86_trace_cache_present25,848
+int x86_trace_cache_num_sets;  /* Number of sets */x86_trace_cache_num_sets26,900
+int x86_trace_cache_assoc;  /* Number of ways */x86_trace_cache_assoc27,952
+int x86_trace_cache_trace_size;  /* Maximum number of uops in a trace */x86_trace_cache_trace_size28,1001
+int x86_trace_cache_branch_max;  /* Maximum number of branches in a trace */x86_trace_cache_branch_max29,1074
+int x86_trace_cache_queue_size;  /* Fetch queue for pre-decoded uops */x86_trace_cache_queue_size30,1151
+void x86_trace_cache_init()x86_trace_cache_init33,1225
+void x86_trace_cache_done()x86_trace_cache_done73,2742
+struct x86_trace_cache_t *x86_trace_cache_create()x86_trace_cache_create88,2978
+void x86_trace_cache_free(struct x86_trace_cache_t *trace_cache)x86_trace_cache_free126,3889
+void x86_trace_cache_dump_report(struct x86_trace_cache_t *trace_cache, FILE *f)x86_trace_cache_dump_report134,4033
+static void x86_trace_cache_flush_trace(struct x86_trace_cache_t *trace_cache)x86_trace_cache_flush_trace159,5233
+void x86_trace_cache_new_uop(struct x86_trace_cache_t *trace_cache, struct x86_uop_t *uop)x86_trace_cache_new_uop226,7093
+int x86_trace_cache_lookup(struct x86_trace_cache_t *trace_cache, uint32_t eip, int pred,x86_trace_cache_lookup274,8696
+
+stg-dispatch.c,343
+static enum x86_dispatch_stall_t x86_cpu_can_dispatch_thread(int core, int thread)x86_cpu_can_dispatch_thread26,936
+static int x86_cpu_dispatch_thread(int core, int thread, int quant)x86_cpu_dispatch_thread51,1695
+static void x86_cpu_dispatch_core(int core)x86_cpu_dispatch_core112,3051
+void x86_cpu_dispatch()x86_cpu_dispatch143,3888

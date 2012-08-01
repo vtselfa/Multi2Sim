@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = leslie3d_base.i386
+stdin = leslie3d.in
+cwd = benchmarks/spec2006/437.leslie3d
+StdOut = leslie3d.out
+IPCReport = leslie3d.ipc
+IPCReportInterval = 100000

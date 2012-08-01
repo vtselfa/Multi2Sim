@@ -1,0 +1,2 @@
+exe = mcf_base.i386
+args = inp.in

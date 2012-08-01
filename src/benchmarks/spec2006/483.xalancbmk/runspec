@@ -1,0 +1,2 @@
+exe = xalancbmk_base.i386
+args = -v t5.xml xalanc.xsl

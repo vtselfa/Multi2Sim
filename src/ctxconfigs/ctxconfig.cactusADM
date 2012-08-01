@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = cactusADM_base.i386
+args = benchADM.par
+cwd = benchmarks/spec2006/436.cactusADM
+StdOut = cactusADM.out
+IPCReport = cactusADM.ipc
+IPCReportInterval = 100000

@@ -1,0 +1,16 @@
+
+Sparse Cholesky Factorization
+     Problem:         
+     1 Processors
+     Postpass partition size: 32
+     1048576 byte cache
+
+
+true partitions
+Fan-out, no block copy-across
+LB domain, embedded distribution
+No ordering
+1295 supers, 3.05 nodes/super, 211 max super
+1295/526 supers before/after
+165039042/170592915 (1.03) ops before/after amalgamation
+before partition

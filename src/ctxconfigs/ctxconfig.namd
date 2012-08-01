@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = namd_base.i386
+args = --input namd.input --iterations 38 --output namd.out
+cwd = benchmarks/spec2006/444.namd
+StdOut = namd.out
+IPCReport = namd.ipc
+IPCReportInterval = 100000

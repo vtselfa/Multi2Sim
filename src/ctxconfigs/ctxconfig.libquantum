@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = libquantum_base.i386
+args = 1397 8
+cwd = benchmarks/spec2006/462.libquantum
+StdOut = libquantum.out
+IPCReport = libquantum.ipc
+IPCReportInterval = 100000

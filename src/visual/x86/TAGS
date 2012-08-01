@@ -1,0 +1,175 @@
+
+panel.c,3328
+#define VI_X86_TIME_DIA_WINDOW_SIZE_X	VI_X86_TIME_DIA_WINDOW_SIZE_X27,869
+#define VI_X86_TIME_DIA_WINDOW_SIZE_Y	VI_X86_TIME_DIA_WINDOW_SIZE_Y28,911
+struct vi_x86_time_dia_window_tvi_x86_time_dia_window_t30,954
+	GtkWidget *widget;widget32,988
+	struct vi_x86_core_t *core;core35,1039
+	GtkWidget *parent_toggle_button;parent_toggle_button38,1123
+	struct vi_x86_time_dia_t *time_dia;time_dia41,1180
+static void vi_x86_time_dia_window_destroy(GtkWidget *widget,vi_x86_time_dia_window_destroy50,1448
+static gboolean vi_x86_time_dia_window_delete(GtkWidget *widget,vi_x86_time_dia_window_delete57,1614
+static struct vi_x86_time_dia_window_t *vi_x86_time_dia_window_create(struct vi_x86_core_t *core,vi_x86_time_dia_window_create65,1863
+static void vi_x86_time_dia_window_free(struct vi_x86_time_dia_window_t *time_dia_window)vi_x86_time_dia_window_free104,3194
+static void vi_x86_time_dia_window_go_to_cycle(struct vi_x86_time_dia_window_t *time_dia_window,vi_x86_time_dia_window_go_to_cycle110,3314
+static void vi_x86_time_dia_window_refresh(struct vi_x86_time_dia_window_t *time_dia_window)vi_x86_time_dia_window_refresh117,3499
+static GtkWidget *vi_x86_time_dia_window_get_widget(struct vi_x86_time_dia_window_t *time_dia_window)vi_x86_time_dia_window_get_widget123,3651
+#define VI_X86_CORE_BOARD_PADDING	VI_X86_CORE_BOARD_PADDING135,3816
+#define VI_X86_CORE_BOARD_WIDTH	VI_X86_CORE_BOARD_WIDTH136,3853
+#define VI_X86_CORE_BOARD_HEIGHT	VI_X86_CORE_BOARD_HEIGHT137,3890
+struct vi_x86_core_board_tvi_x86_core_board_t140,3929
+	GtkWidget *widget;widget143,3977
+	GtkWidget *time_dia_toggle_button;time_dia_toggle_button145,3998
+	struct vi_x86_time_dia_window_t *time_dia_window;time_dia_window147,4035
+	struct vi_x86_core_t *core;core149,4087
+	struct vi_led_t *led;led150,4116
+	struct vi_list_t *context_list;context_list151,4139
+static void vi_x86_core_board_destroy(GtkWidget *widget, struct vi_x86_core_board_t *board)vi_x86_core_board_destroy165,4459
+static gboolean vi_x86_core_board_time_dia_toggled(GtkWidget *widget, struct vi_x86_core_board_t *board)vi_x86_core_board_time_dia_toggled171,4589
+static struct vi_x86_core_board_t *vi_x86_core_board_create(struct vi_x86_core_t *core)vi_x86_core_board_create198,5269
+static void vi_x86_core_board_free(struct vi_x86_core_board_t *board)vi_x86_core_board_free261,7463
+static GtkWidget *vi_x86_core_board_get_widget(struct vi_x86_core_board_t *board)vi_x86_core_board_get_widget277,7861
+static void vi_x86_core_board_refresh(struct vi_x86_core_board_t *board)vi_x86_core_board_refresh283,7972
+#define VI_X86_PANEL_PADDING	VI_X86_PANEL_PADDING337,9147
+#define VI_X86_PANEL_WIDTH	VI_X86_PANEL_WIDTH339,9179
+#define VI_X86_PANEL_HEIGHT	VI_X86_PANEL_HEIGHT340,9210
+struct vi_x86_panel_tvi_x86_panel_t343,9244
+	GtkWidget *widget;widget345,9268
+	struct list_t *board_list;board_list347,9289
+static void vi_x86_panel_destroy(GtkWidget *widget,vi_x86_panel_destroy351,9322
+struct vi_x86_panel_t *vi_x86_panel_create(void)vi_x86_panel_create359,9469
+void vi_x86_panel_free(struct vi_x86_panel_t *panel)vi_x86_panel_free426,11269
+void vi_x86_panel_refresh(struct vi_x86_panel_t *panel)vi_x86_panel_refresh432,11342
+GtkWidget *vi_x86_panel_get_widget(struct vi_x86_panel_t *panel)vi_x86_panel_get_widget447,11625
+
+time-dia.c,4186
+#define VI_X86_TIME_DIA_CELL_WIDTH	VI_X86_TIME_DIA_CELL_WIDTH23,836
+#define VI_X86_TIME_DIA_CELL_HEIGHT	VI_X86_TIME_DIA_CELL_HEIGHT24,877
+#define VI_X86_TIME_DIA_CONTENT_LAYOUT_WIDTH	VI_X86_TIME_DIA_CONTENT_LAYOUT_WIDTH26,919
+#define VI_X86_TIME_DIA_CONTENT_LAYOUT_HEIGHT	VI_X86_TIME_DIA_CONTENT_LAYOUT_HEIGHT27,969
+#define VI_X86_TIME_DIA_CYCLE_LAYOUT_WIDTH	VI_X86_TIME_DIA_CYCLE_LAYOUT_WIDTH29,1021
+#define VI_X86_TIME_DIA_CYCLE_LAYOUT_HEIGHT	VI_X86_TIME_DIA_CYCLE_LAYOUT_HEIGHT30,1102
+#define VI_X86_TIME_DIA_MACRO_INST_LAYOUT_WIDTH	VI_X86_TIME_DIA_MACRO_INST_LAYOUT_WIDTH32,1176
+#define VI_X86_TIME_DIA_MACRO_INST_LAYOUT_HEIGHT	VI_X86_TIME_DIA_MACRO_INST_LAYOUT_HEIGHT33,1229
+#define VI_X86_TIME_DIA_INST_LAYOUT_WIDTH	VI_X86_TIME_DIA_INST_LAYOUT_WIDTH35,1317
+#define VI_X86_TIME_DIA_INST_LAYOUT_HEIGHT	VI_X86_TIME_DIA_INST_LAYOUT_HEIGHT36,1364
+#define VI_X86_TIME_DIA_FONT_SIZE	VI_X86_TIME_DIA_FONT_SIZE38,1447
+struct vi_x86_time_dia_tvi_x86_time_dia_t41,1488
+	struct vi_x86_core_t *core;core43,1515
+	GtkWidget *widget;widget45,1545
+	GtkWidget *inst_title_layout;inst_title_layout47,1566
+	GtkWidget *macro_inst_title_layout;macro_inst_title_layout48,1597
+	GtkWidget *hscrollbar;hscrollbar50,1635
+	GtkWidget *vscrollbar;vscrollbar51,1659
+	GtkWidget *content_layout;content_layout53,1684
+	GtkWidget *content_table;content_table54,1712
+	struct matrix_t *content_matrix;content_matrix55,1739
+	GtkWidget *macro_inst_layout;macro_inst_layout57,1774
+	GtkWidget *macro_inst_table;macro_inst_table58,1805
+	struct list_t *macro_inst_list;macro_inst_list59,1835
+	GtkWidget *inst_layout;inst_layout61,1869
+	GtkWidget *inst_table;inst_table62,1894
+	struct list_t *inst_list;inst_list63,1918
+	GtkWidget *cycle_layout;cycle_layout65,1946
+	GtkWidget *cycle_table;cycle_table66,1972
+	struct list_t *cycle_list;cycle_list67,1997
+	int content_layout_width;content_layout_width69,2026
+	int content_layout_height;content_layout_height70,2053
+	int macro_inst_layout_width;macro_inst_layout_width72,2082
+	int macro_inst_layout_height;macro_inst_layout_height73,2112
+	int inst_layout_width;inst_layout_width75,2144
+	int inst_layout_height;inst_layout_height76,2168
+	long long left_cycle;left_cycle78,2194
+	int left_offset;left_offset79,2217
+	long long top_inst;top_inst81,2236
+	int top_offset;top_offset82,2257
+static void vi_x86_time_dia_widget_destroy(GtkWidget *widget, struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_widget_destroy86,2279
+static void vi_x86_time_dia_size_allocate(GtkWidget *widget, GdkRectangle *allocation,vi_x86_time_dia_size_allocate92,2416
+static gboolean vi_x86_time_dia_scroll(GtkWidget *widget, GdkEventScroll *event,vi_x86_time_dia_scroll99,2582
+static void vi_x86_time_dia_scrollbar_value_changed(GtkRange *range,vi_x86_time_dia_scrollbar_value_changed115,2942
+static void vi_x86_time_dia_refresh_scrollbars(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_refresh_scrollbars122,3090
+static void vi_x86_time_dia_refresh_content_layout(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_refresh_content_layout168,4418
+static void vi_x86_time_dia_refresh_macro_inst_layout(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_refresh_macro_inst_layout241,6740
+static void vi_x86_time_dia_refresh_inst_layout(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_refresh_inst_layout302,8698
+static void vi_x86_time_dia_refresh_cycle_layout(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_refresh_cycle_layout363,10530
+static void vi_x86_time_dia_refresh_content(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_refresh_content424,12384
+struct vi_x86_time_dia_t *vi_x86_time_dia_create(struct vi_x86_core_t *core)vi_x86_time_dia_create581,15995
+void vi_x86_time_dia_free(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_free707,21148
+GtkWidget *vi_x86_time_dia_get_widget(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_get_widget730,21641
+void vi_x86_time_dia_refresh(struct vi_x86_time_dia_t *time_dia)vi_x86_time_dia_refresh736,21747
+void vi_x86_time_dia_go_to_cycle(struct vi_x86_time_dia_t *time_dia, long long cycle)vi_x86_time_dia_go_to_cycle852,26390
+
+core.c,369
+struct vi_x86_core_t *vi_x86_core_create(char *name)vi_x86_core_create27,864
+void vi_x86_core_free(struct vi_x86_core_t *core)vi_x86_core_free46,1258
+void vi_x86_core_read_checkpoint(struct vi_x86_core_t *core, FILE *f)vi_x86_core_read_checkpoint66,1658
+void vi_x86_core_write_checkpoint(struct vi_x86_core_t *core, FILE *f)vi_x86_core_write_checkpoint117,2964
+
+cpu.c,1131
+static void vi_x86_cpu_map_context(struct vi_x86_cpu_t *cpu,vi_x86_cpu_map_context33,965
+static void vi_x86_cpu_unmap_context(struct vi_x86_cpu_t *cpu,vi_x86_cpu_unmap_context82,2341
+static void vi_x86_cpu_end_context(struct vi_x86_cpu_t *cpu,vi_x86_cpu_end_context120,3384
+static void vi_x86_cpu_new_inst(struct vi_x86_cpu_t *cpu,vi_x86_cpu_new_inst149,4064
+static void vi_x86_cpu_inst(struct vi_x86_cpu_t *cpu,vi_x86_cpu_inst196,5318
+static void vi_x86_cpu_end_inst(struct vi_x86_cpu_t *cpu,vi_x86_cpu_end_inst235,6207
+static void vi_x86_cpu_read_checkpoint(struct vi_x86_cpu_t *cpu, FILE *f)vi_x86_cpu_read_checkpoint265,6903
+static void vi_x86_cpu_write_checkpoint(struct vi_x86_cpu_t *cpu, FILE *f)vi_x86_cpu_write_checkpoint305,7874
+struct vi_x86_cpu_t *vi_x86_cpu;vi_x86_cpu342,8611
+#define VI_X86_TRACE_VERSION_MAJOR	VI_X86_TRACE_VERSION_MAJOR350,8946
+#define VI_X86_TRACE_VERSION_MINOR	VI_X86_TRACE_VERSION_MINOR351,8983
+static char *err_vi_x86_trace_version =err_vi_x86_trace_version353,9023
+void vi_x86_cpu_init(void)vi_x86_cpu_init358,9254
+void vi_x86_cpu_done(void)vi_x86_cpu_done444,11658
+
+visual-x86.h,1571
+#define VISUAL_X86_HVISUAL_X86_H22,832
+#define VI_X86_CONTEXT_EMPTY VI_X86_CONTEXT_EMPTY32,903
+struct vi_x86_context_tvi_x86_context_t34,948
+	char *name;name36,974
+	int id;id37,987
+	int core_id;core_id40,1008
+	int thread_id;thread_id41,1022
+	int parent_id;parent_id42,1038
+	long long creation_cycle;creation_cycle44,1055
+enum vi_x86_inst_stage_tvi_x86_inst_stage_t63,1567
+	vi_x86_inst_stage_invalid = 0,vi_x86_inst_stage_invalid65,1594
+	vi_x86_inst_stage_fetch,vi_x86_inst_stage_fetch67,1627
+	vi_x86_inst_stage_decode,vi_x86_inst_stage_decode68,1653
+	vi_x86_inst_stage_dispatch,vi_x86_inst_stage_dispatch69,1680
+	vi_x86_inst_stage_issue,vi_x86_inst_stage_issue70,1709
+	vi_x86_inst_stage_writeback,vi_x86_inst_stage_writeback71,1735
+	vi_x86_inst_stage_commit,vi_x86_inst_stage_commit72,1765
+	vi_x86_inst_stage_squash,vi_x86_inst_stage_squash73,1792
+	vi_x86_inst_stage_countvi_x86_inst_stage_count75,1820
+struct vi_x86_inst_tvi_x86_inst_t82,2011
+	long long id;id84,2034
+	int spec_mode;spec_mode86,2050
+	char *name;name88,2067
+	char *asm_code;asm_code90,2081
+	char *asm_micro_code;asm_micro_code91,2098
+	enum vi_x86_inst_stage_t stage;stage93,2122
+struct vi_x86_core_tvi_x86_core_t111,2529
+	char *name;name113,2552
+	struct hash_table_t *context_table;context_table118,2686
+	struct hash_table_t *inst_table;inst_table122,2811
+	long long num_insts;num_insts125,2876
+struct vi_x86_cpu_tvi_x86_cpu_t141,3170
+	struct list_t *core_list;core_list143,3192
+	struct hash_table_t *context_table;context_table147,3302
+
+context.c,653
+struct vi_x86_context_t *vi_x86_context_create(char *name, int id, int parent_id)vi_x86_context_create23,836
+void vi_x86_context_free(struct vi_x86_context_t *context)vi_x86_context_free43,1288
+void vi_x86_context_get_name_short(char *context_name, char *buf, int size)vi_x86_context_get_name_short50,1395
+void vi_x86_context_get_desc(char *context_name, char *buf, int size)vi_x86_context_get_desc56,1519
+void vi_x86_context_read_checkpoint(struct vi_x86_context_t *context, FILE *f)vi_x86_context_read_checkpoint97,2576
+void vi_x86_context_write_checkpoint(struct vi_x86_context_t *context, FILE *f)vi_x86_context_write_checkpoint134,3701
+
+inst.c,628
+struct string_map_t vi_x86_inst_stage_map =vi_x86_inst_stage_map23,836
+struct string_map_t vi_x86_inst_stage_name_map =vi_x86_inst_stage_name_map38,1191
+struct string_map_t vi_x86_inst_stage_color_map =vi_x86_inst_stage_color_map53,1555
+struct vi_x86_inst_t *vi_x86_inst_create(long long id, char *name,vi_x86_inst_create68,1951
+void vi_x86_inst_free(struct vi_x86_inst_t *inst)vi_x86_inst_free92,2511
+void vi_x86_inst_read_checkpoint(struct vi_x86_inst_t *inst, FILE *f)vi_x86_inst_read_checkpoint101,2663
+void vi_x86_inst_write_checkpoint(struct vi_x86_inst_t *inst, FILE *f)vi_x86_inst_write_checkpoint136,3711

@@ -1,0 +1,1932 @@
+
+emu.c,1540
+long long x86_emu_max_inst = 0;x86_emu_max_inst29,910
+long long x86_emu_max_cycles = 0;x86_emu_max_cycles30,942
+long long x86_emu_max_time = 0;x86_emu_max_time31,976
+char * x86_emu_last_inst_bytes = 0;x86_emu_last_inst_bytes32,1008
+enum x86_emu_kind_t x86_emu_kind = x86_emu_kind_functional;x86_emu_kind33,1044
+volatile enum x86_emu_finish_t x86_emu_finish = x86_emu_finish_none;x86_emu_finish38,1265
+struct string_map_t x86_emu_finish_map =x86_emu_finish_map40,1335
+struct x86_emu_t *x86_emu;x86_emu58,1953
+void x86_emu_init(void)x86_emu_init70,2035
+void x86_emu_done(void)x86_emu_done126,3279
+void x86_emu_dump(FILE *f)x86_emu_dump161,3884
+void x86_emu_list_insert_head(enum x86_emu_list_kind_t list, struct x86_ctx_t *ctx)x86_emu_list_insert_head178,4186
+void x86_emu_list_insert_tail(enum x86_emu_list_kind_t list, struct x86_ctx_t *ctx)x86_emu_list_insert_tail216,4914
+void x86_emu_list_remove(enum x86_emu_list_kind_t list, struct x86_ctx_t *ctx)x86_emu_list_remove230,5606
+int x86_emu_list_member(enum x86_emu_list_kind_t list, struct x86_ctx_t *ctx)x86_emu_list_member244,6262
+void x86_emu_process_events_schedule()x86_emu_process_events_schedule259,6937
+static void *x86_emu_host_thread_suspend(void *arg)x86_emu_host_thread_suspend271,7379
+static void *x86_emu_host_thread_timer(void *arg)x86_emu_host_thread_timer366,10164
+void x86_emu_process_events()x86_emu_process_events399,11340
+void x86_emu_run(void)x86_emu_run826,24896
+void x86_emu_disasm(char *file_name)x86_emu_disasm874,26350
+
+machine.c,10690
+#define mem_access mem_access24,901
+#define mem_read mem_read25,942
+#define mem_write mem_write26,981
+#define mem_zero mem_zero27,1021
+#define mem_read_string mem_read_string28,1060
+#define mem_write_string mem_write_string29,1106
+#define mem_get_buffer mem_get_buffer30,1153
+#define fatal fatal31,1198
+#define panic panic32,1234
+#define warning warning33,1270
+#undef assertassert35,1322
+#define assert assert37,1343
+void x86_isa_bound_r16_rm32_impl(struct x86_ctx_t *ctx)x86_isa_bound_r16_rm32_impl40,1382
+void x86_isa_bound_r32_rm64_impl(struct x86_ctx_t *ctx)x86_isa_bound_r32_rm64_impl46,1502
+void x86_isa_bsf_r32_rm32_impl(struct x86_ctx_t *ctx)x86_isa_bsf_r32_rm32_impl52,1622
+void x86_isa_bsr_r32_rm32_impl(struct x86_ctx_t *ctx)x86_isa_bsr_r32_rm32_impl82,2258
+void x86_isa_bswap_ir32_impl(struct x86_ctx_t *ctx)x86_isa_bswap_ir32_impl112,2894
+void x86_isa_bt_rm32_r32_impl(struct x86_ctx_t *ctx)x86_isa_bt_rm32_r32_impl133,3282
+void x86_isa_bt_rm32_imm8_impl(struct x86_ctx_t *ctx)x86_isa_bt_rm32_imm8_impl162,3883
+void x86_isa_bts_rm32_imm8_impl(struct x86_ctx_t *ctx)x86_isa_bts_rm32_imm8_impl191,4471
+void x86_isa_call_rel32_impl(struct x86_ctx_t *ctx)x86_isa_call_rel32_impl222,5140
+void x86_isa_call_rm32_impl(struct x86_ctx_t *ctx)x86_isa_call_rm32_impl235,5442
+void x86_isa_cbw_impl(struct x86_ctx_t *ctx)x86_isa_cbw_impl248,5749
+void x86_isa_cdq_impl(struct x86_ctx_t *ctx)x86_isa_cdq_impl257,5983
+void x86_isa_cld_impl(struct x86_ctx_t *ctx)x86_isa_cld_impl268,6219
+void x86_isa_cmpxchg_rm32_r32_impl(struct x86_ctx_t *ctx)x86_isa_cmpxchg_rm32_r32_impl276,6377
+void x86_isa_cmpxchg8b_m64_impl(struct x86_ctx_t *ctx)x86_isa_cmpxchg8b_m64_impl313,7397
+void x86_isa_cpuid_impl(struct x86_ctx_t *ctx)x86_isa_cpuid_impl351,8514
+void x86_isa_cwde_impl(struct x86_ctx_t *ctx)x86_isa_cwde_impl467,12836
+void x86_isa_dec_rm8_impl(struct x86_ctx_t *ctx)x86_isa_dec_rm8_impl476,13075
+void x86_isa_dec_rm32_impl(struct x86_ctx_t *ctx)x86_isa_dec_rm32_impl505,13648
+void x86_isa_dec_ir16_impl(struct x86_ctx_t *ctx)x86_isa_dec_ir16_impl534,14233
+void x86_isa_dec_ir32_impl(struct x86_ctx_t *ctx)x86_isa_dec_ir32_impl563,14817
+void x86_isa_div_rm8_impl(struct x86_ctx_t *ctx)x86_isa_div_rm8_impl592,15402
+void x86_isa_div_rm32_impl(struct x86_ctx_t *ctx)x86_isa_div_rm32_impl632,16313
+void x86_isa_hlt_impl(struct x86_ctx_t *ctx)x86_isa_hlt_impl678,17423
+void x86_isa_idiv_rm32_impl(struct x86_ctx_t *ctx)x86_isa_idiv_rm32_impl684,17534
+void x86_isa_imul_rm32_impl(struct x86_ctx_t *ctx)x86_isa_imul_rm32_impl735,18700
+void x86_isa_imul_r32_rm32_impl(struct x86_ctx_t *ctx)x86_isa_imul_r32_rm32_impl769,19508
+void x86_isa_imul_r32_rm32_imm8_impl(struct x86_ctx_t *ctx)x86_isa_imul_r32_rm32_imm8_impl800,20195
+void x86_isa_imul_r32_rm32_imm32_impl(struct x86_ctx_t *ctx)x86_isa_imul_r32_rm32_imm32_impl832,20899
+void x86_isa_inc_rm8_impl(struct x86_ctx_t *ctx)x86_isa_inc_rm8_impl864,21599
+void x86_isa_inc_rm32_impl(struct x86_ctx_t *ctx)x86_isa_inc_rm32_impl893,22172
+void x86_isa_inc_ir16_impl(struct x86_ctx_t *ctx)x86_isa_inc_ir16_impl922,22757
+void x86_isa_inc_ir32_impl(struct x86_ctx_t *ctx)x86_isa_inc_ir32_impl951,23340
+void x86_isa_int_3_impl(struct x86_ctx_t *ctx)x86_isa_int_3_impl980,23925
+void x86_isa_int_imm8_impl(struct x86_ctx_t *ctx)x86_isa_int_imm8_impl986,24036
+void x86_isa_into_impl(struct x86_ctx_t *ctx)x86_isa_into_impl1005,24488
+void x86_isa_jmp_rel8_impl(struct x86_ctx_t *ctx)x86_isa_jmp_rel8_impl1012,24599
+void x86_isa_jmp_rel32_impl(struct x86_ctx_t *ctx)x86_isa_jmp_rel32_impl1023,24838
+void x86_isa_jmp_rm32_impl(struct x86_ctx_t *ctx)x86_isa_jmp_rm32_impl1034,25071
+void x86_isa_lea_r32_m_impl(struct x86_ctx_t *ctx)x86_isa_lea_r32_m_impl1045,25309
+void x86_isa_leave_impl(struct x86_ctx_t *ctx)x86_isa_leave_impl1061,25676
+void x86_isa_lfence_impl(struct x86_ctx_t *ctx)x86_isa_lfence_impl1085,26365
+void x86_isa_lock_xadd_rm8_r8_impl(struct x86_ctx_t *ctx)x86_isa_lock_xadd_rm8_r8_impl1090,26419
+void x86_isa_lock_xadd_rm32_r32_impl(struct x86_ctx_t *ctx)x86_isa_lock_xadd_rm32_r32_impl1096,26515
+void x86_isa_mov_rm8_imm8_impl(struct x86_ctx_t *ctx)x86_isa_mov_rm8_imm8_impl1102,26615
+void x86_isa_mov_r8_rm8_impl(struct x86_ctx_t *ctx)x86_isa_mov_r8_rm8_impl1111,26816
+void x86_isa_mov_rm8_r8_impl(struct x86_ctx_t *ctx)x86_isa_mov_rm8_r8_impl1120,27029
+void x86_isa_mov_rm16_r16_impl(struct x86_ctx_t *ctx)x86_isa_mov_rm16_r16_impl1129,27242
+void x86_isa_mov_rm32_r32_impl(struct x86_ctx_t *ctx)x86_isa_mov_rm32_r32_impl1138,27462
+void x86_isa_mov_r16_rm16_impl(struct x86_ctx_t *ctx)x86_isa_mov_r16_rm16_impl1147,27680
+void x86_isa_mov_r32_rm32_impl(struct x86_ctx_t *ctx)x86_isa_mov_r32_rm32_impl1156,27900
+void x86_isa_mov_al_moffs8_impl(struct x86_ctx_t *ctx)x86_isa_mov_al_moffs8_impl1165,28118
+void x86_isa_mov_ax_moffs16_impl(struct x86_ctx_t *ctx)x86_isa_mov_ax_moffs16_impl1177,28494
+void x86_isa_mov_eax_moffs32_impl(struct x86_ctx_t *ctx)x86_isa_mov_eax_moffs32_impl1189,28872
+void x86_isa_mov_moffs8_al_impl(struct x86_ctx_t *ctx)x86_isa_mov_moffs8_al_impl1201,29250
+void x86_isa_mov_moffs16_ax_impl(struct x86_ctx_t *ctx)x86_isa_mov_moffs16_ax_impl1211,29619
+void x86_isa_mov_moffs32_eax_impl(struct x86_ctx_t *ctx)x86_isa_mov_moffs32_eax_impl1221,29990
+void x86_isa_mov_ir8_imm8_impl(struct x86_ctx_t *ctx)x86_isa_mov_ir8_imm8_impl1231,30361
+void x86_isa_mov_ir16_imm16_impl(struct x86_ctx_t *ctx)x86_isa_mov_ir16_imm16_impl1240,30562
+void x86_isa_mov_ir32_imm32_impl(struct x86_ctx_t *ctx)x86_isa_mov_ir32_imm32_impl1249,30768
+void x86_isa_mov_rm16_imm16_impl(struct x86_ctx_t *ctx)x86_isa_mov_rm16_imm16_impl1258,30972
+void x86_isa_mov_rm32_imm32_impl(struct x86_ctx_t *ctx)x86_isa_mov_rm32_imm32_impl1267,31178
+void x86_isa_mov_rm16_sreg_impl(struct x86_ctx_t *ctx)x86_isa_mov_rm16_sreg_impl1276,31382
+void x86_isa_mov_rm32_sreg_impl(struct x86_ctx_t *ctx)x86_isa_mov_rm32_sreg_impl1287,31702
+void x86_isa_mov_sreg_rm16_impl(struct x86_ctx_t *ctx)x86_isa_mov_sreg_rm16_impl1293,31797
+void x86_isa_mov_sreg_rm32_impl(struct x86_ctx_t *ctx)x86_isa_mov_sreg_rm32_impl1304,32117
+void x86_isa_movsx_r16_rm8_impl(struct x86_ctx_t *ctx)x86_isa_movsx_r16_rm8_impl1310,32212
+void x86_isa_movsx_r32_rm8_impl(struct x86_ctx_t *ctx)x86_isa_movsx_r32_rm8_impl1319,32438
+void x86_isa_movsx_r32_rm16_impl(struct x86_ctx_t *ctx)x86_isa_movsx_r32_rm16_impl1328,32662
+void x86_isa_movzx_r16_rm8_impl(struct x86_ctx_t *ctx)x86_isa_movzx_r16_rm8_impl1337,32892
+void x86_isa_movzx_r32_rm8_impl(struct x86_ctx_t *ctx)x86_isa_movzx_r32_rm8_impl1346,33110
+void x86_isa_movzx_r32_rm16_impl(struct x86_ctx_t *ctx)x86_isa_movzx_r32_rm16_impl1355,33328
+void x86_isa_mul_rm32_impl(struct x86_ctx_t *ctx)x86_isa_mul_rm32_impl1364,33550
+void x86_isa_neg_rm8_impl(struct x86_ctx_t *ctx)x86_isa_neg_rm8_impl1398,34356
+void x86_isa_neg_rm32_impl(struct x86_ctx_t *ctx)x86_isa_neg_rm32_impl1427,34938
+void x86_isa_nop_impl(struct x86_ctx_t *ctx)x86_isa_nop_impl1456,35532
+void x86_isa_nop_rm16_impl(struct x86_ctx_t *ctx)x86_isa_nop_rm16_impl1461,35583
+void x86_isa_nop_rm32_impl(struct x86_ctx_t *ctx)x86_isa_nop_rm32_impl1466,35639
+void x86_isa_not_rm8_impl(struct x86_ctx_t *ctx)x86_isa_not_rm8_impl1471,35695
+void x86_isa_not_rm16_impl(struct x86_ctx_t *ctx)x86_isa_not_rm16_impl1482,35924
+void x86_isa_not_rm32_impl(struct x86_ctx_t *ctx)x86_isa_not_rm32_impl1492,36157
+void x86_isa_out_imm8_al_impl(struct x86_ctx_t *ctx)x86_isa_out_imm8_al_impl1502,36388
+void x86_isa_out_imm8_ax_impl(struct x86_ctx_t *ctx)x86_isa_out_imm8_ax_impl1508,36505
+void x86_isa_out_imm8_eax_impl(struct x86_ctx_t *ctx)x86_isa_out_imm8_eax_impl1514,36622
+void x86_isa_out_dx_al_impl(struct x86_ctx_t *ctx)x86_isa_out_dx_al_impl1520,36740
+void x86_isa_out_dx_ax_impl(struct x86_ctx_t *ctx)x86_isa_out_dx_ax_impl1526,36855
+void x86_isa_out_dx_eax_impl(struct x86_ctx_t *ctx)x86_isa_out_dx_eax_impl1532,36970
+void x86_isa_pause_impl(struct x86_ctx_t *ctx)x86_isa_pause_impl1538,37086
+void x86_isa_pop_rm32_impl(struct x86_ctx_t *ctx)x86_isa_pop_rm32_impl1543,37139
+void x86_isa_pop_ir32_impl(struct x86_ctx_t *ctx)x86_isa_pop_ir32_impl1558,37611
+void x86_isa_popf_impl(struct x86_ctx_t *ctx)x86_isa_popf_impl1579,38189
+void x86_isa_prefetcht0_impl(struct x86_ctx_t *ctx)x86_isa_prefetcht0_impl1598,38962
+void x86_isa_prefetcht1_impl(struct x86_ctx_t *ctx)x86_isa_prefetcht1_impl1603,39020
+void x86_isa_prefetcht2_impl(struct x86_ctx_t *ctx)x86_isa_prefetcht2_impl1608,39078
+void x86_isa_prefetchnta_impl(struct x86_ctx_t *ctx)x86_isa_prefetchnta_impl1613,39136
+void x86_isa_push_imm8_impl(struct x86_ctx_t *ctx)x86_isa_push_imm8_impl1618,39195
+void x86_isa_push_imm32_impl(struct x86_ctx_t *ctx)x86_isa_push_imm32_impl1632,39683
+void x86_isa_push_rm32_impl(struct x86_ctx_t *ctx)x86_isa_push_rm32_impl1646,40165
+void x86_isa_push_ir32_impl(struct x86_ctx_t *ctx)x86_isa_push_ir32_impl1660,40664
+void x86_isa_pushf_impl(struct x86_ctx_t *ctx)x86_isa_pushf_impl1674,41163
+void x86_isa_rdtsc_impl(struct x86_ctx_t *ctx)x86_isa_rdtsc_impl1688,41716
+void x86_isa_ret_impl(struct x86_ctx_t *ctx)x86_isa_ret_impl1710,42130
+void x86_isa_repz_ret_impl(struct x86_ctx_t *ctx)x86_isa_repz_ret_impl1731,42803
+void x86_isa_ret_imm16_impl(struct x86_ctx_t *ctx)x86_isa_ret_imm16_impl1737,42883
+void x86_isa_sahf_impl(struct x86_ctx_t *ctx)x86_isa_sahf_impl1760,43619
+void x86_isa_sfence_impl(struct x86_ctx_t *ctx)x86_isa_sfence_impl1773,43929
+void x86_isa_shld_rm32_r32_imm8_impl(struct x86_ctx_t *ctx)x86_isa_shld_rm32_r32_imm8_impl1778,43983
+void x86_isa_shld_rm32_r32_cl_impl(struct x86_ctx_t *ctx)x86_isa_shld_rm32_r32_cl_impl1811,44774
+void x86_isa_shrd_rm32_r32_imm8_impl(struct x86_ctx_t *ctx)x86_isa_shrd_rm32_r32_imm8_impl1845,45589
+void x86_isa_shrd_rm32_r32_cl_impl(struct x86_ctx_t *ctx)x86_isa_shrd_rm32_r32_cl_impl1878,46380
+void x86_isa_std_impl(struct x86_ctx_t *ctx)x86_isa_std_impl1912,47195
+void x86_isa_xadd_rm8_r8_impl(struct x86_ctx_t *ctx)x86_isa_xadd_rm8_r8_impl1920,47351
+void x86_isa_xadd_rm32_r32_impl(struct x86_ctx_t *ctx)x86_isa_xadd_rm32_r32_impl1954,48206
+void x86_isa_xchg_ir16_ax_impl(struct x86_ctx_t *ctx)x86_isa_xchg_ir16_ax_impl1988,49077
+void x86_isa_xchg_ir32_eax_impl(struct x86_ctx_t *ctx)x86_isa_xchg_ir32_eax_impl2001,49411
+void x86_isa_xchg_rm8_r8_impl(struct x86_ctx_t *ctx)x86_isa_xchg_rm8_r8_impl2014,49749
+void x86_isa_xchg_rm16_r16_impl(struct x86_ctx_t *ctx)x86_isa_xchg_rm16_r16_impl2028,50061
+void x86_isa_xchg_rm32_r32_impl(struct x86_ctx_t *ctx)x86_isa_xchg_rm32_r32_impl2042,50391
+
+loader.c,2217
+int x86_loader_debug_category;x86_loader_debug_category23,850
+char *x86_loader_help_ctxconfig =x86_loader_help_ctxconfig25,882
+static char *err_x86_ctx_ipc_report =err_x86_ctx_ipc_report68,3029
+static struct string_map_t elf_section_flags_map =elf_section_flags_map74,3282
+static void x86_loader_add_args_vector(struct x86_ctx_t *ctx, int argc, char **argv)x86_loader_add_args_vector84,3418
+static void x86_loader_add_args_string(struct x86_ctx_t *ctx, char *args)x86_loader_add_args_string104,3751
+static void x86_loader_add_environ(struct x86_ctx_t *ctx, char *env)x86_loader_add_environ135,4399
+#define LD_STACK_BASE LD_STACK_BASE176,5160
+#define LD_MAX_ENVIRON LD_MAX_ENVIRON177,5194
+#define LD_STACK_SIZE LD_STACK_SIZE178,5254
+static void x86_loader_load_sections(struct x86_ctx_t *ctx, struct elf_file_t *elf_file)x86_loader_load_sections182,5347
+static void x86_loader_load_interp(struct x86_ctx_t *ctx)x86_loader_load_interp238,7121
+static struct string_map_t elf_program_header_type_map = {elf_program_header_type_map257,7724
+static void x86_loader_load_program_headers(struct x86_ctx_t *ctx)x86_loader_load_program_headers272,8045
+#define X86_LOADER_AV_ENTRY(X86_LOADER_AV_ENTRY348,10652
+static uint32_t x86_loader_load_av(struct x86_ctx_t *ctx, uint32_t where)x86_loader_load_av357,10831
+#undef X86_LOADER_AV_ENTRYX86_LOADER_AV_ENTRY396,12165
+static void x86_loader_load_stack(struct x86_ctx_t *ctx)x86_loader_load_stack428,13114
+void x86_loader_load_exe(struct x86_ctx_t *ctx, char *exe)x86_loader_load_exe505,15269
+struct x86_loader_t *x86_loader_create(void)x86_loader_create586,17815
+void x86_loader_free(struct x86_loader_t *ld)x86_loader_free604,18122
+struct x86_loader_t *x86_loader_link(struct x86_loader_t *ld)x86_loader_link637,18751
+void x86_loader_unlink(struct x86_loader_t *ld)x86_loader_unlink644,18849
+void x86_loader_get_full_path(struct x86_ctx_t *ctx, char *file_name, char *full_path, int size)x86_loader_get_full_path654,19000
+void x86_loader_load_prog_from_ctxconfig(char *file_name)x86_loader_load_prog_from_ctxconfig686,19794
+void x86_loader_load_prog_from_cmdline(int argc, char **argv)x86_loader_load_prog_from_cmdline807,22725
+
+glut-frame-buffer.c,980
+struct x86_glut_frame_buffer_tx86_glut_frame_buffer_t31,903
+	int *buffer;buffer33,936
+	int width;width35,951
+	int height;height36,963
+	int flush_request;flush_request38,977
+static struct x86_glut_frame_buffer_t *x86_glut_frame_buffer;x86_glut_frame_buffer42,1002
+void x86_glut_frame_buffer_init(void)x86_glut_frame_buffer_init45,1066
+void x86_glut_frame_buffer_done(void)x86_glut_frame_buffer_done57,1337
+void x86_glut_frame_buffer_clear(void)x86_glut_frame_buffer_clear65,1486
+void x86_glut_frame_buffer_resize(int width, int height)x86_glut_frame_buffer_resize80,1852
+void x86_glut_frame_buffer_pixel(int x, int y, int color)x86_glut_frame_buffer_pixel117,2852
+void x86_glut_frame_buffer_get_size(int *width, int *height)x86_glut_frame_buffer_get_size152,3601
+void x86_glut_frame_buffer_flush_request(void)x86_glut_frame_buffer_flush_request168,3940
+void x86_glut_frame_buffer_flush_if_requested(void)x86_glut_frame_buffer_flush_if_requested183,4341
+
+uinst.c,1835
+struct list_t *x86_uinst_list;x86_uinst_list27,855
+char *x86_uinst_dep_name[] =x86_uinst_dep_name31,939
+struct string_map_t x86_uinst_dep_map =x86_uinst_dep_map86,1778
+struct x86_uinst_info_t x86_uinst_info[x86_uinst_opcode_count] =x86_uinst_info111,2279
+static int x86_uinst_effaddr_emitted;x86_uinst_effaddr_emitted200,4413
+static int x86_uinst_mem_dep_size(struct x86_uinst_t *uinst, int index, struct x86_ctx_t *ctx)x86_uinst_mem_dep_size205,4563
+static void x86_uinst_emit_effaddr(struct x86_uinst_t *uinst, int index, struct x86_ctx_t *ctx)x86_uinst_emit_effaddr247,5346
+static void x86_uinst_parse_dep(struct x86_uinst_t *uinst, int index, struct x86_ctx_t *ctx)x86_uinst_parse_dep269,6121
+static int x86_uinst_add_idep(struct x86_uinst_t *uinst, enum x86_dep_t dep)x86_uinst_add_idep376,8417
+static void x86_uinst_parse_odep(struct x86_uinst_t *uinst, int index, struct x86_ctx_t *ctx)x86_uinst_parse_odep390,8662
+static void x86_uinst_parse_idep(struct x86_uinst_t *uinst, int index, struct x86_ctx_t *ctx)x86_uinst_parse_idep439,9911
+static char *x86_uinst_dep_name_get(int dep)x86_uinst_dep_name_get485,11091
+void x86_uinst_init(void)x86_uinst_init501,11286
+void x86_uinst_done(void)x86_uinst_done507,11351
+struct x86_uinst_t *x86_uinst_create(void)x86_uinst_create514,11431
+void x86_uinst_free(struct x86_uinst_t *uinst)x86_uinst_free527,11705
+void __x86_uinst_new_mem(struct x86_ctx_t *ctx,__x86_uinst_new_mem533,11772
+void __x86_uinst_new(struct x86_ctx_t *ctx,__x86_uinst_new576,12965
+void x86_uinst_clear(void)x86_uinst_clear586,13296
+void x86_uinst_dump_buf(struct x86_uinst_t *uinst, char *buf, int size)x86_uinst_dump_buf597,13545
+void x86_uinst_dump(struct x86_uinst_t *uinst, FILE *f)x86_uinst_dump646,14537
+void x86_uinst_list_dump(FILE *f)x86_uinst_list_dump655,14698
+
+isa.c,6136
+struct x86_regs_t *x86_isa_regs;x86_isa_regs25,901
+struct mem_t *x86_isa_mem;x86_isa_mem26,934
+int x86_isa_call_debug_category;x86_isa_call_debug_category29,985
+int x86_isa_inst_debug_category;x86_isa_inst_debug_category30,1018
+char *x86_isa_inst_bytes;x86_isa_inst_bytes33,1064
+long long x86_isa_inst_count;x86_isa_inst_count34,1090
+long x86_isa_host_flags;x86_isa_host_flags37,1189
+unsigned short x86_isa_guest_fpcw;x86_isa_guest_fpcw38,1214
+unsigned char x86_isa_host_fpenv[28];x86_isa_host_fpenv39,1249
+typedef void (*x86_isa_inst_func_t)(struct x86_ctx_t *ctx);x86_isa_inst_func_t44,1388
+#define DEFINST(DEFINST48,1539
+#undef DEFINSTDEFINST50,1640
+static x86_isa_inst_func_t x86_isa_inst_func[x86_opcode_count] =x86_isa_inst_func45,1448
+void x86_isa_mem_read(struct x86_ctx_t *ctx, unsigned int addr, int size, void *buf)x86_isa_mem_read61,1835
+void x86_isa_mem_write(struct x86_ctx_t *ctx, unsigned int addr, int size, void *buf)x86_isa_mem_write75,2125
+void x86_isa_error(struct x86_ctx_t *ctx, char *fmt, ...)x86_isa_error89,2420
+#define mem_access mem_access109,2942
+#define mem_read mem_read110,2983
+#define mem_write mem_write111,3022
+#define mem_zero mem_zero112,3062
+#define mem_read_string mem_read_string113,3101
+#define mem_write_string mem_write_string114,3147
+#define mem_get_buffer mem_get_buffer115,3194
+#define fatal fatal116,3239
+#define panic panic117,3275
+#define warning warning118,3311
+#undef assertassert120,3363
+#define assert assert122,3384
+static long long x86_inst_freq[x86_opcode_count];x86_inst_freq131,3459
+void x86_isa_inst_stat_dump(FILE *f)x86_isa_inst_stat_dump134,3511
+void x86_isa_inst_stat_reset(void)x86_isa_inst_stat_reset146,3712
+static void x86_isa_debug_call(struct x86_ctx_t *ctx)x86_isa_debug_call155,3852
+	int shift;shift213,5125
+	int size;size214,5137
+} x86_isa_reg_info[] =x86_isa_reg_info215,5148
+void x86_isa_set_flag(struct x86_ctx_t *ctx, enum x86_flag_t flag)x86_isa_set_flag251,5926
+void x86_isa_clear_flag(struct x86_ctx_t *ctx, enum x86_flag_t flag)x86_isa_clear_flag259,6084
+int x86_isa_get_flag(struct x86_ctx_t *ctx, enum x86_flag_t flag)x86_isa_get_flag267,6246
+static unsigned int x86_isa_bit_mask[5] = { 0, 0xff, 0xffff, 0, 0xffffffff};x86_isa_bit_mask278,6555
+unsigned int x86_isa_load_reg(struct x86_ctx_t *ctx, enum x86_reg_t reg)x86_isa_load_reg281,6634
+void x86_isa_store_reg(struct x86_ctx_t *ctx, enum x86_reg_t reg, unsigned int value)x86_isa_store_reg294,6932
+static unsigned int x86_isa_linear_address(struct x86_ctx_t *ctx, unsigned int offset)x86_isa_linear_address316,7514
+unsigned int x86_isa_effective_address(struct x86_ctx_t *ctx)x86_isa_effective_address349,8270
+unsigned int x86_isa_moffs_address(struct x86_ctx_t *ctx)x86_isa_moffs_address374,8815
+unsigned char x86_isa_load_rm8(struct x86_ctx_t *ctx)x86_isa_load_rm8395,9091
+unsigned short x86_isa_load_rm16(struct x86_ctx_t *ctx)x86_isa_load_rm16408,9433
+unsigned int x86_isa_load_rm32(struct x86_ctx_t *ctx)x86_isa_load_rm32421,9778
+unsigned long long x86_isa_load_m64(struct x86_ctx_t *ctx)x86_isa_load_m64434,10120
+void x86_isa_store_rm8(struct x86_ctx_t *ctx, unsigned char value)x86_isa_store_rm8444,10374
+void x86_isa_store_rm16(struct x86_ctx_t *ctx, unsigned short value)x86_isa_store_rm16456,10711
+void x86_isa_store_rm32(struct x86_ctx_t *ctx, unsigned int value)x86_isa_store_rm32468,11050
+void x86_isa_store_m64(struct x86_ctx_t *ctx, unsigned long long value)x86_isa_store_m64480,11388
+void x86_isa_load_fpu(struct x86_ctx_t *ctx, int index, unsigned char *value)x86_isa_load_fpu494,11645
+void x86_isa_store_fpu(struct x86_ctx_t *ctx, int index, unsigned char *value)x86_isa_store_fpu518,12247
+void x86_isa_push_fpu(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_push_fpu544,12886
+void x86_isa_pop_fpu(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_pop_fpu565,13433
+double x86_isa_load_double(struct x86_ctx_t *ctx)x86_isa_load_double587,13993
+void x86_isa_double_to_extended(double f, unsigned char *e)x86_isa_double_to_extended597,14222
+double x86_isa_extended_to_double(unsigned char *e)x86_isa_extended_to_double604,14354
+void x86_isa_float_to_extended(float f, unsigned char *e)x86_isa_float_to_extended613,14500
+float x86_isa_extended_to_float(unsigned char *e)x86_isa_extended_to_float620,14629
+void x86_isa_load_extended(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_load_extended629,14771
+void x86_isa_store_extended(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_store_extended635,14916
+void x86_isa_store_double(struct x86_ctx_t *ctx, double value)x86_isa_store_double641,15063
+float x86_isa_load_float(struct x86_ctx_t *ctx)x86_isa_load_float648,15278
+void x86_isa_store_float(struct x86_ctx_t *ctx, float value)x86_isa_store_float659,15514
+void x86_isa_store_fpu_code(struct x86_ctx_t *ctx, unsigned short status)x86_isa_store_fpu_code668,15833
+unsigned short x86_isa_load_fpu_status(struct x86_ctx_t *ctx)x86_isa_load_fpu_status682,16150
+void x86_isa_dump_xmm(struct x86_ctx_t *ctx, unsigned char *value, FILE *f)x86_isa_dump_xmm707,16582
+void x86_isa_load_xmm(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_load_xmm727,16946
+void x86_isa_store_xmm(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_store_xmm735,17111
+void x86_isa_load_xmmm32(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_load_xmmm32744,17337
+void x86_isa_store_xmmm32(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_store_xmmm32758,17686
+void x86_isa_load_xmmm64(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_load_xmmm64773,18096
+void x86_isa_store_xmmm64(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_store_xmmm64787,18449
+void x86_isa_load_xmmm128(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_load_xmmm128801,18779
+void x86_isa_store_xmmm128(struct x86_ctx_t *ctx, unsigned char *value)x86_isa_store_xmmm128815,19138
+void x86_isa_init(void)x86_isa_init835,19454
+void x86_isa_done(void)x86_isa_done849,19681
+void x86_isa_execute_inst(struct x86_ctx_t *ctx)x86_isa_execute_inst857,19787
+
+regs.c,384
+struct x86_regs_t *x86_regs_create()x86_regs_create23,827
+void x86_regs_free(struct x86_regs_t *regs)x86_regs_free31,956
+void x86_regs_copy(struct x86_regs_t *dst, struct x86_regs_t *src)x86_regs_copy37,1019
+void x86_regs_fpu_stack_dump(struct x86_regs_t *regs, FILE *f)x86_regs_fpu_stack_dump43,1138
+void x86_regs_dump(struct x86_regs_t *regs, FILE *f)x86_regs_dump63,1551
+
+machine-fp.c,9039
+#define mem_access mem_access24,901
+#define mem_read mem_read25,942
+#define mem_write mem_write26,981
+#define mem_zero mem_zero27,1021
+#define mem_read_string mem_read_string28,1060
+#define mem_write_string mem_write_string29,1106
+#define mem_get_buffer mem_get_buffer30,1153
+#define fatal fatal31,1198
+#define panic panic32,1234
+#define warning warning33,1270
+#undef assertassert35,1322
+#define assert assert37,1343
+void x86_isa_f2xm1_impl(struct x86_ctx_t *ctx)x86_isa_f2xm1_impl40,1382
+void x86_isa_fabs_impl(struct x86_ctx_t *ctx)x86_isa_fabs_impl67,1871
+void x86_isa_fadd_m32_impl(struct x86_ctx_t *ctx)x86_isa_fadd_m32_impl94,2359
+void x86_isa_fadd_m64_impl(struct x86_ctx_t *ctx)x86_isa_fadd_m64_impl124,2950
+void x86_isa_fadd_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fadd_st0_sti_impl154,3544
+void x86_isa_fadd_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fadd_sti_st0_impl183,4152
+void x86_isa_faddp_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_faddp_sti_st0_impl212,4776
+void x86_isa_fchs_impl(struct x86_ctx_t *ctx)x86_isa_fchs_impl221,4960
+void x86_isa_fcmovb_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcmovb_st0_sti_impl248,5448
+void x86_isa_fcmove_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcmove_st0_sti_impl259,5742
+void x86_isa_fcmovbe_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcmovbe_st0_sti_impl270,6037
+void x86_isa_fcmovu_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcmovu_st0_sti_impl281,6380
+void x86_isa_fcmovnb_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcmovnb_st0_sti_impl292,6675
+void x86_isa_fcmovne_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcmovne_st0_sti_impl303,6971
+void x86_isa_fcmovnbe_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcmovnbe_st0_sti_impl314,7268
+void x86_isa_fcmovnu_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcmovnu_st0_sti_impl325,7614
+void x86_isa_fcom_m32_impl(struct x86_ctx_t *ctx)x86_isa_fcom_m32_impl336,7911
+void x86_isa_fcom_m64_impl(struct x86_ctx_t *ctx)x86_isa_fcom_m64_impl363,8413
+void x86_isa_fcom_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcom_sti_impl390,8917
+void x86_isa_fcomp_m32_impl(struct x86_ctx_t *ctx)x86_isa_fcomp_m32_impl417,9444
+void x86_isa_fcomp_m64_impl(struct x86_ctx_t *ctx)x86_isa_fcomp_m64_impl426,9620
+void x86_isa_fcomp_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcomp_sti_impl435,9796
+void x86_isa_fcompp_impl(struct x86_ctx_t *ctx)x86_isa_fcompp_impl444,9972
+void x86_isa_fcomi_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcomi_st0_sti_impl475,10659
+void x86_isa_fcomip_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fcomip_st0_sti_impl505,11302
+void x86_isa_fucomi_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fucomi_st0_sti_impl514,11488
+void x86_isa_fucomip_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fucomip_st0_sti_impl544,12133
+void x86_isa_fcos_impl(struct x86_ctx_t *ctx)x86_isa_fcos_impl553,12321
+void x86_isa_fdiv_m32_impl(struct x86_ctx_t *ctx)x86_isa_fdiv_m32_impl580,12808
+void x86_isa_fdiv_m64_impl(struct x86_ctx_t *ctx)x86_isa_fdiv_m64_impl610,13400
+void x86_isa_fdiv_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fdiv_st0_sti_impl640,13995
+void x86_isa_fdiv_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fdiv_sti_st0_impl669,14604
+void x86_isa_fdivp_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fdivp_sti_st0_impl698,15229
+void x86_isa_fdivr_m32_impl(struct x86_ctx_t *ctx)x86_isa_fdivr_m32_impl707,15413
+void x86_isa_fdivr_m64_impl(struct x86_ctx_t *ctx)x86_isa_fdivr_m64_impl737,16006
+void x86_isa_fdivr_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fdivr_st0_sti_impl767,16602
+void x86_isa_fdivr_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fdivr_sti_st0_impl796,17209
+void x86_isa_fdivrp_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fdivrp_sti_st0_impl825,17832
+void x86_isa_fild_m16_impl(struct x86_ctx_t *ctx)x86_isa_fild_m16_impl834,18018
+void x86_isa_fild_m32_impl(struct x86_ctx_t *ctx)x86_isa_fild_m32_impl857,18476
+void x86_isa_fild_m64_impl(struct x86_ctx_t *ctx)x86_isa_fild_m64_impl880,18934
+void x86_isa_fist_m16_impl(struct x86_ctx_t *ctx)x86_isa_fist_m16_impl903,19392
+void x86_isa_fist_m32_impl(struct x86_ctx_t *ctx)x86_isa_fist_m32_impl925,19793
+void x86_isa_fist_m64_impl(struct x86_ctx_t *ctx)x86_isa_fist_m64_impl947,20194
+void x86_isa_fistp_m16_impl(struct x86_ctx_t *ctx)x86_isa_fistp_m16_impl969,20595
+void x86_isa_fistp_m32_impl(struct x86_ctx_t *ctx)x86_isa_fistp_m32_impl978,20771
+void x86_isa_fistp_m64_impl(struct x86_ctx_t *ctx)x86_isa_fistp_m64_impl987,20947
+void x86_isa_fld1_impl(struct x86_ctx_t *ctx)x86_isa_fld1_impl996,21123
+void x86_isa_fldl2e_impl(struct x86_ctx_t *ctx)x86_isa_fldl2e_impl1015,21467
+void x86_isa_fldl2t_impl(struct x86_ctx_t *ctx)x86_isa_fldl2t_impl1034,21815
+void x86_isa_fldpi_impl(struct x86_ctx_t *ctx)x86_isa_fldpi_impl1053,22163
+void x86_isa_fldlg2_impl(struct x86_ctx_t *ctx)x86_isa_fldlg2_impl1072,22509
+void x86_isa_fldln2_impl(struct x86_ctx_t *ctx)x86_isa_fldln2_impl1091,22857
+void x86_isa_fldz_impl(struct x86_ctx_t *ctx)x86_isa_fldz_impl1110,23205
+void x86_isa_fld_m32_impl(struct x86_ctx_t *ctx)x86_isa_fld_m32_impl1129,23549
+void x86_isa_fld_m64_impl(struct x86_ctx_t *ctx)x86_isa_fld_m64_impl1143,23873
+void x86_isa_fld_m80_impl(struct x86_ctx_t *ctx)x86_isa_fld_m80_impl1157,24200
+void x86_isa_fld_sti_impl(struct x86_ctx_t *ctx)x86_isa_fld_sti_impl1169,24476
+void x86_isa_fldcw_m16_impl(struct x86_ctx_t *ctx)x86_isa_fldcw_m16_impl1181,24854
+void x86_isa_fmul_m32_impl(struct x86_ctx_t *ctx)x86_isa_fmul_m32_impl1212,25473
+void x86_isa_fmul_m64_impl(struct x86_ctx_t *ctx)x86_isa_fmul_m64_impl1242,26065
+void x86_isa_fmul_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fmul_st0_sti_impl1272,26660
+void x86_isa_fmul_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fmul_sti_st0_impl1301,27269
+void x86_isa_fmulp_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fmulp_sti_st0_impl1330,27894
+void x86_isa_fnstcw_m16_impl(struct x86_ctx_t *ctx)x86_isa_fnstcw_m16_impl1339,28078
+void x86_isa_fnstsw_ax_impl(struct x86_ctx_t *ctx)x86_isa_fnstsw_ax_impl1345,28166
+void x86_isa_fpatan_impl(struct x86_ctx_t *ctx)x86_isa_fpatan_impl1354,28400
+void x86_isa_fprem_impl(struct x86_ctx_t *ctx)x86_isa_fprem_impl1385,29060
+void x86_isa_fprem1_impl(struct x86_ctx_t *ctx)x86_isa_fprem1_impl1415,29649
+void x86_isa_fptan_impl(struct x86_ctx_t *ctx)x86_isa_fptan_impl1445,30240
+void x86_isa_frndint_impl(struct x86_ctx_t *ctx)x86_isa_frndint_impl1475,30786
+void x86_isa_fscale_impl(struct x86_ctx_t *ctx)x86_isa_fscale_impl1502,31281
+void x86_isa_fsin_impl(struct x86_ctx_t *ctx)x86_isa_fsin_impl1532,31872
+void x86_isa_fsincos_impl(struct x86_ctx_t *ctx)x86_isa_fsincos_impl1559,32358
+void x86_isa_fsqrt_impl(struct x86_ctx_t *ctx)x86_isa_fsqrt_impl1591,33034
+void x86_isa_fst_m32_impl(struct x86_ctx_t *ctx)x86_isa_fst_m32_impl1618,33524
+void x86_isa_fst_m64_impl(struct x86_ctx_t *ctx)x86_isa_fst_m64_impl1631,33797
+void x86_isa_fst_sti_impl(struct x86_ctx_t *ctx)x86_isa_fst_sti_impl1644,34073
+void x86_isa_fstp_m32_impl(struct x86_ctx_t *ctx)x86_isa_fstp_m32_impl1655,34310
+void x86_isa_fstp_m64_impl(struct x86_ctx_t *ctx)x86_isa_fstp_m64_impl1664,34484
+void x86_isa_fstp_m80_impl(struct x86_ctx_t *ctx)x86_isa_fstp_m80_impl1673,34658
+void x86_isa_fstp_sti_impl(struct x86_ctx_t *ctx)x86_isa_fstp_sti_impl1685,34940
+void x86_isa_fstsw_ax_impl(struct x86_ctx_t *ctx)x86_isa_fstsw_ax_impl1694,35114
+void x86_isa_fsub_m32_impl(struct x86_ctx_t *ctx)x86_isa_fsub_m32_impl1703,35347
+void x86_isa_fsub_m64_impl(struct x86_ctx_t *ctx)x86_isa_fsub_m64_impl1733,35939
+void x86_isa_fsub_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fsub_st0_sti_impl1763,36534
+void x86_isa_fsub_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fsub_sti_st0_impl1792,37143
+void x86_isa_fsubp_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fsubp_sti_st0_impl1821,37768
+void x86_isa_fsubr_m32_impl(struct x86_ctx_t *ctx)x86_isa_fsubr_m32_impl1830,37952
+void x86_isa_fsubr_m64_impl(struct x86_ctx_t *ctx)x86_isa_fsubr_m64_impl1860,38545
+void x86_isa_fsubr_st0_sti_impl(struct x86_ctx_t *ctx)x86_isa_fsubr_st0_sti_impl1890,39141
+void x86_isa_fsubr_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fsubr_sti_st0_impl1919,39751
+void x86_isa_fsubrp_sti_st0_impl(struct x86_ctx_t *ctx)x86_isa_fsubrp_sti_st0_impl1948,40377
+void x86_isa_fstcw_m16_impl(struct x86_ctx_t *ctx)x86_isa_fstcw_m16_impl1957,40563
+void x86_isa_ftst_impl(struct x86_ctx_t *ctx)x86_isa_ftst_impl1976,40961
+void x86_isa_fucom_sti_impl(struct x86_ctx_t *ctx)x86_isa_fucom_sti_impl2002,41408
+void x86_isa_fucomp_sti_impl(struct x86_ctx_t *ctx)x86_isa_fucomp_sti_impl2029,41937
+void x86_isa_fucompp_impl(struct x86_ctx_t *ctx)x86_isa_fucompp_impl2038,42115
+void x86_isa_fxam_impl(struct x86_ctx_t *ctx)x86_isa_fxam_impl2069,42804
+void x86_isa_fxch_sti_impl(struct x86_ctx_t *ctx)x86_isa_fxch_sti_impl2095,43250
+void x86_isa_fyl2x_impl(struct x86_ctx_t *ctx)x86_isa_fyl2x_impl2107,43597
+void x86_isa_fyl2xp1_impl(struct x86_ctx_t *ctx)x86_isa_fyl2xp1_impl2138,44254
+
+file.c,1474
+struct file_desc_t *file_desc_create(enum file_desc_kind_t kind,file_desc_create27,856
+static void file_desc_free(struct file_desc_t *desc)file_desc_free56,1392
+struct file_desc_table_t *file_desc_table_create(void)file_desc_table_create70,1531
+void file_desc_table_free(struct file_desc_table_t *table)file_desc_table_free100,2214
+struct file_desc_table_t *file_desc_table_link(struct file_desc_table_t *fdt)file_desc_table_link122,2622
+void file_desc_table_unlink(struct file_desc_table_t *fdt)file_desc_table_unlink129,2738
+void file_desc_table_dump(struct file_desc_table_t *table, FILE *f)file_desc_table_dump139,2909
+int file_desc_table_get_host_fd(struct file_desc_table_t *table, int guest_fd)file_desc_table_get_host_fd157,3296
+int file_desc_table_get_guest_fd(struct file_desc_table_t *table, int host_fd)file_desc_table_get_guest_fd166,3495
+void file_desc_table_entry_dump(struct file_desc_table_t *table, int index, FILE *f)file_desc_table_entry_dump183,3799
+struct file_desc_t *file_desc_table_entry_get(struct file_desc_table_t *table, int index)file_desc_table_entry_get206,4304
+struct file_desc_t *file_desc_table_entry_new(struct file_desc_table_t *table,file_desc_table_entry_new211,4447
+struct file_desc_t *file_desc_table_entry_new_guest_fd(struct file_desc_table_t *table,file_desc_table_entry_new_guest_fd217,4679
+void file_desc_table_entry_free(struct file_desc_table_t *table, int index)file_desc_table_entry_free250,5570
+
+glut.c,7924
+static char *err_x86_glut_code =err_x86_glut_code27,891
+static char *err_x86_glut_one_window =err_x86_glut_one_window33,1216
+int x86_glut_debug_category;x86_glut_debug_category39,1427
+enum x86_glut_call_tx86_glut_call_t47,1513
+	x86_glut_call_invalid = 0,x86_glut_call_invalid49,1536
+#define X86_GLUT_DEFINE_CALL(X86_GLUT_DEFINE_CALL50,1564
+#undef X86_GLUT_DEFINE_CALLX86_GLUT_DEFINE_CALL52,1654
+	x86_glut_call_countx86_glut_call_count53,1682
+#define X86_GLUT_DEFINE_CALL(X86_GLUT_DEFINE_CALL61,1807
+#undef X86_GLUT_DEFINE_CALLX86_GLUT_DEFINE_CALL63,1875
+char *x86_glut_call_name[x86_glut_call_count + 1] =x86_glut_call_name58,1746
+#define X86_GLUT_DEFINE_CALL(X86_GLUT_DEFINE_CALL69,1967
+#undef X86_GLUT_DEFINE_CALLX86_GLUT_DEFINE_CALL71,2067
+typedef int (*x86_glut_func_t)(void);x86_glut_func_t75,2134
+#define X86_GLUT_DEFINE_CALL(X86_GLUT_DEFINE_CALL79,2251
+#undef X86_GLUT_DEFINE_CALLX86_GLUT_DEFINE_CALL81,2334
+static x86_glut_func_t x86_glut_func_table[x86_glut_call_count + 1] =x86_glut_func_table76,2172
+pthread_mutex_t x86_glut_mutex;x86_glut_mutex94,2433
+pthread_t x86_glut_thread;x86_glut_thread97,2490
+static struct linked_list_t *x86_glut_event_list;x86_glut_event_list101,2608
+static int x86_glut_initialized;x86_glut_initialized106,2828
+enum x86_glut_event_type_tx86_glut_event_type_t115,2887
+	x86_glut_event_invalid = 0,x86_glut_event_invalid117,2916
+	x86_glut_event_display,x86_glut_event_display118,2945
+	x86_glut_event_overlay_display,x86_glut_event_overlay_display119,2970
+	x86_glut_event_reshape,x86_glut_event_reshape120,3003
+	x86_glut_event_keyboard,x86_glut_event_keyboard121,3028
+	x86_glut_event_mouse,x86_glut_event_mouse122,3054
+	x86_glut_event_motion,x86_glut_event_motion123,3077
+	x86_glut_event_passive_motion,x86_glut_event_passive_motion124,3101
+	x86_glut_event_visibility,x86_glut_event_visibility125,3133
+	x86_glut_event_entry,x86_glut_event_entry126,3161
+	x86_glut_event_special,x86_glut_event_special127,3184
+	x86_glut_event_spaceball_motion,x86_glut_event_spaceball_motion128,3209
+	x86_glut_event_spaceball_rotate,x86_glut_event_spaceball_rotate129,3243
+	x86_glut_event_spaceball_button,x86_glut_event_spaceball_button130,3277
+	x86_glut_event_button_box,x86_glut_event_button_box131,3311
+	x86_glut_event_dials,x86_glut_event_dials132,3339
+	x86_glut_event_tablet_motion,x86_glut_event_tablet_motion133,3362
+	x86_glut_event_tablet_button,x86_glut_event_tablet_button134,3393
+	x86_glut_event_menu_status,x86_glut_event_menu_status135,3424
+	x86_glut_event_idle,x86_glut_event_idle136,3453
+	x86_glut_event_timerx86_glut_event_timer137,3475
+struct x86_glut_event_tx86_glut_event_t140,3501
+	enum x86_glut_event_type_t type;type142,3527
+			int win;win148,3585
+		} display;display149,3597
+			int win;win153,3624
+			int width;width154,3636
+			int height;height155,3650
+		} reshape;reshape156,3665
+			int win;win160,3692
+		} overlay_display;overlay_display161,3704
+			int win;win165,3739
+			unsigned char key;key166,3751
+			int x;x167,3773
+			int y;y168,3783
+		} keyboard;keyboard169,3793
+			int win;win173,3821
+			int button;button174,3833
+			int state;state175,3848
+			int x;x176,3862
+			int y;y177,3872
+		} mouse;mouse178,3882
+			int win;win182,3907
+			int x;x183,3919
+			int y;y184,3929
+		} motion;motion185,3939
+			int win;win189,3965
+			int state;state190,3977
+		} visibility;visibility191,3991
+			int win;win195,4021
+			int state;state196,4033
+		} entry;entry197,4047
+			int win;win201,4072
+			int key;key202,4084
+			int x;x203,4096
+			int y;y204,4106
+		} special;special205,4116
+			int win;win209,4143
+			int x;x210,4155
+			int y;y211,4165
+			int z;z212,4175
+		} spaceball_motion;spaceball_motion213,4185
+			int win;win217,4221
+			int x;x218,4233
+			int y;y219,4243
+			int z;z220,4253
+		} spaceball_rotate;spaceball_rotate221,4263
+			int win;win225,4299
+			int button;button226,4311
+			int state;state227,4326
+		} spaceball_button;spaceball_button228,4340
+			int win;win232,4376
+			int button;button233,4388
+			int state;state234,4403
+		} button_box;button_box235,4417
+			int win;win239,4447
+			int dial;dial240,4459
+			int value;value241,4472
+		} dials;dials242,4486
+			int win;win246,4511
+			int x;x247,4523
+			int y;y248,4533
+		} tablet_motion;tablet_motion249,4543
+			int win;win253,4576
+			int button;button254,4588
+			int state;state255,4603
+			int x;x256,4617
+			int y;y257,4627
+		} tablet_button;tablet_button258,4637
+			int status;status262,4670
+			int x;x263,4685
+			int y;y264,4695
+		} menu_status;menu_status265,4705
+			int value;value269,4736
+		} timer;timer270,4750
+	} u;u271,4761
+struct x86_glut_event_t *x86_glut_event_create(enum x86_glut_event_type_t type)x86_glut_event_create275,4772
+void x86_glut_event_free(struct x86_glut_event_t *event)x86_glut_event_free292,5089
+void x86_glut_event_enqueue(struct x86_glut_event_t *event)x86_glut_event_enqueue300,5298
+struct x86_glut_event_t *x86_glut_event_dequeue(void)x86_glut_event_dequeue316,5744
+void x86_glut_idle_func(void)x86_glut_idle_func340,6174
+void x86_glut_display_func(void)x86_glut_display_func354,6426
+void x86_glut_overlay_display_func(void)x86_glut_overlay_display_func365,6630
+void x86_glut_reshape_func(int width, int height)x86_glut_reshape_func376,6850
+void x86_glut_keyboard_func(unsigned char key, int x, int y)x86_glut_keyboard_func398,7387
+void x86_glut_mouse_func(int button, int state, int x, int y)x86_glut_mouse_func412,7702
+void x86_glut_motion_func(int x, int y)x86_glut_motion_func427,8040
+void x86_glut_passive_motion_func(int x, int y)x86_glut_passive_motion_func440,8296
+void x86_glut_visibility_func(int state)x86_glut_visibility_func453,8568
+void x86_glut_entry_func(int state)x86_glut_entry_func465,8821
+void x86_glut_special_func(int key, int x, int y)x86_glut_special_func477,9054
+void x86_glut_spaceball_motion_func(int x, int y, int z)x86_glut_spaceball_motion_func491,9353
+void x86_glut_spaceball_rotate_func(int x, int y, int z)x86_glut_spaceball_rotate_func505,9700
+void x86_glut_spaceball_button_func(int button, int state)x86_glut_spaceball_button_func519,10047
+void x86_glut_button_box_func(int button, int state)x86_glut_button_box_func532,10380
+void x86_glut_dials_func(int dial, int value)x86_glut_dials_func545,10689
+void x86_glut_tablet_motion_func(int x, int y)x86_glut_tablet_motion_func558,10961
+void x86_glut_tablet_button_func(int button, int state, int x, int y)x86_glut_tablet_button_func571,11252
+void x86_glut_tablet_menu_status(int status, int x, int y)x86_glut_tablet_menu_status586,11646
+void x86_glut_timer(int value)x86_glut_timer599,11935
+void x86_glut_init(void)x86_glut_init618,12161
+void x86_glut_done(void)x86_glut_done631,12392
+int x86_glut_call(void)x86_glut_call652,12758
+#define X86_GLUT_RUNTIME_VERSION_MAJOR	X86_GLUT_RUNTIME_VERSION_MAJOR724,15176
+#define X86_GLUT_RUNTIME_VERSION_MINOR	X86_GLUT_RUNTIME_VERSION_MINOR725,15217
+struct x86_glut_version_tx86_glut_version_t727,15261
+	int major;major729,15289
+	int minor;minor730,15301
+static int x86_glut_func_init(void)x86_glut_func_init733,15317
+static int x86_glut_func_get_event(void)x86_glut_func_get_event771,16244
+struct x86_glut_window_properties_tx86_glut_window_properties_t815,17268
+	int x;x817,17306
+	int y;y818,17314
+	int width;width819,17322
+	int height;height820,17334
+static struct x86_glut_window_properties_t *x86_glut_window_properties;x86_glut_window_properties823,17351
+static char *x86_glut_window_title;x86_glut_window_title824,17423
+static void *x86_glut_thread_func(void *arg)x86_glut_thread_func831,17703
+static int x86_glut_func_new_window(void)x86_glut_func_new_window881,19315
+static int x86_glut_func_test_draw(void)x86_glut_func_test_draw943,21231
+
+machine-ctrl.c,1383
+#define mem_access mem_access24,901
+#define mem_read mem_read25,942
+#define mem_write mem_write26,981
+#define mem_zero mem_zero27,1021
+#define mem_read_string mem_read_string28,1060
+#define mem_write_string mem_write_string29,1106
+#define mem_get_buffer mem_get_buffer30,1153
+#define fatal fatal31,1198
+#define panic panic32,1234
+#define warning warning33,1270
+#undef assertassert35,1322
+#define assert assert37,1343
+#define CF CF40,1382
+#define ZF ZF41,1428
+#define SF SF42,1474
+#define OF OF43,1520
+#define PF PF44,1566
+#define cc_a	cc_a47,1614
+#define cc_ae	cc_ae48,1640
+#define cc_b	cc_b49,1660
+#define cc_be	cc_be50,1678
+#define cc_e	cc_e51,1703
+#define cc_g	cc_g52,1721
+#define cc_ge	cc_ge53,1752
+#define cc_l	cc_l54,1777
+#define cc_le	cc_le55,1801
+#define cc_ne	cc_ne56,1832
+#define cc_no	cc_no57,1852
+#define cc_np	cc_np58,1872
+#define cc_ns	cc_ns59,1892
+#define cc_o	cc_o60,1912
+#define cc_p	cc_p61,1930
+#define cc_s	cc_s62,1948
+#define op_setcc(op_setcc65,1968
+#define op_jcc_rel8(op_jcc_rel876,2234
+#define op_jcc_rel32(op_jcc_rel3287,2556
+#define op_cmov_r16_rm16(op_cmov_r16_rm1698,2871
+#define op_cmov_r32_rm32(op_cmov_r32_rm32107,3144
+#define op_cc_all(op_cc_all116,3417
+op_cc_all(setcc)op_cc_all135,4013
+void x86_isa_jcxz_rel8_impl(struct x86_ctx_t *ctx)x86_isa_jcxz_rel8_impl153,4411
+
+machine-std.c,1248
+#define mem_access mem_access25,902
+#define mem_read mem_read26,943
+#define mem_write mem_write27,982
+#define mem_zero mem_zero28,1022
+#define mem_read_string mem_read_string29,1061
+#define mem_write_string mem_write_string30,1107
+#define mem_get_buffer mem_get_buffer31,1154
+#define fatal fatal32,1199
+#define panic panic33,1235
+#define warning warning34,1271
+#undef assertassert36,1323
+#define assert assert38,1344
+#define op_stdop_al_imm8(op_stdop_al_imm841,1383
+#define op_stdop_ax_imm16(op_stdop_ax_imm1672,2255
+#define op_stdop_eax_imm32(op_stdop_eax_imm32103,3133
+#define op_stdop_rm8_imm8(op_stdop_rm8_imm8134,4019
+#define op_stdop_rm16_imm16(op_stdop_rm16_imm16165,4873
+#define op_stdop_rm32_imm32(op_stdop_rm32_imm32196,5744
+#define op_stdop_rm16_imm8(op_stdop_rm16_imm8227,6615
+#define op_stdop_rm32_imm8(op_stdop_rm32_imm8258,7491
+#define op_stdop_rm8_r8(op_stdop_rm8_r8289,8367
+#define op_stdop_rm16_r16(op_stdop_rm16_r16320,9236
+#define op_stdop_rm32_r32(op_stdop_rm32_r32351,10125
+#define op_stdop_r8_rm8(op_stdop_r8_rm8382,11015
+#define op_stdop_r16_rm16(op_stdop_r16_rm16413,11880
+#define op_stdop_r32_rm32(op_stdop_r32_rm32444,12765
+#define op_stdop_all(op_stdop_all475,13650
+
+machine-rot.c,1000
+#define mem_access mem_access24,901
+#define mem_read mem_read25,942
+#define mem_write mem_write26,981
+#define mem_zero mem_zero27,1021
+#define mem_read_string mem_read_string28,1060
+#define mem_write_string mem_write_string29,1106
+#define mem_get_buffer mem_get_buffer30,1153
+#define fatal fatal31,1198
+#define panic panic32,1234
+#define warning warning33,1270
+#undef assertassert35,1322
+#define assert assert37,1343
+#define op_xxx_rm8_1_impl(op_xxx_rm8_1_impl40,1382
+#define op_xxx_rm8_cl_impl(op_xxx_rm8_cl_impl68,2122
+#define op_xxx_rm8_imm8_impl(op_xxx_rm8_imm8_impl96,2906
+#define op_xxx_rm16_1_impl(op_xxx_rm16_1_impl124,3666
+#define op_xxx_rm16_cl_impl(op_xxx_rm16_cl_impl152,4417
+#define op_xxx_rm16_imm8_impl(op_xxx_rm16_imm8_impl180,5212
+#define op_xxx_rm32_1_impl(op_xxx_rm32_1_impl208,5983
+#define op_xxx_rm32_cl_impl(op_xxx_rm32_cl_impl236,6736
+#define op_xxx_rm32_imm8_impl(op_xxx_rm32_imm8_impl264,7533
+#define op_xxx_all(op_xxx_all294,8424
+
+machine-str.c,4782
+#define mem_access mem_access24,901
+#define mem_read mem_read25,942
+#define mem_write mem_write26,981
+#define mem_zero mem_zero27,1021
+#define mem_read_string mem_read_string28,1060
+#define mem_write_string mem_write_string29,1106
+#define mem_get_buffer mem_get_buffer30,1153
+#define fatal fatal31,1198
+#define panic panic32,1234
+#define warning warning33,1270
+#undef assertassert35,1322
+#define assert assert37,1343
+static void x86_isa_rep_init(struct x86_ctx_t *ctx)x86_isa_rep_init41,1446
+#define OP_REP_IMPL(OP_REP_IMPL59,1763
+#define OP_REPZ_IMPL(OP_REPZ_IMPL80,2368
+#define OP_REPNZ_IMPL(OP_REPNZ_IMPL102,3031
+static void x86_isa_cmpsb_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_cmpsb_uinst130,3716
+static void x86_isa_cmpsb_run(struct x86_ctx_t *ctx)x86_isa_cmpsb_run141,4273
+void x86_isa_cmpsb_impl(struct x86_ctx_t *ctx)x86_isa_cmpsb_impl173,4916
+static void x86_isa_cmpsd_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_cmpsd_uinst188,5101
+static void x86_isa_cmpsd_run(struct x86_ctx_t *ctx)x86_isa_cmpsd_run199,5658
+void x86_isa_cmpsd_impl(struct x86_ctx_t *ctx)x86_isa_cmpsd_impl231,6306
+static void x86_isa_insb_run(struct x86_ctx_t *ctx)x86_isa_insb_run246,6490
+static void x86_isa_insb_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_insb_uinst252,6571
+void x86_isa_insb_impl(struct x86_ctx_t *ctx)x86_isa_insb_impl258,6690
+static void x86_isa_insd_run(struct x86_ctx_t *ctx)x86_isa_insd_run274,6929
+static void x86_isa_insd_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_insd_uinst280,7010
+void x86_isa_insd_impl(struct x86_ctx_t *ctx)x86_isa_insd_impl286,7129
+static void x86_isa_lodsb_run(struct x86_ctx_t *ctx)x86_isa_lodsb_run302,7369
+static void x86_isa_lodsb_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_lodsb_uinst308,7451
+void x86_isa_lodsb_impl(struct x86_ctx_t *ctx)x86_isa_lodsb_impl314,7571
+static void x86_isa_lodsd_run(struct x86_ctx_t *ctx)x86_isa_lodsd_run330,7814
+static void x86_isa_lodsd_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_lodsd_uinst336,7896
+void x86_isa_lodsd_impl(struct x86_ctx_t *ctx)x86_isa_lodsd_impl342,8016
+static void x86_isa_movsb_run(struct x86_ctx_t *ctx)x86_isa_movsb_run358,8259
+static void x86_isa_movsb_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_movsb_uinst371,8582
+void x86_isa_movsb_impl(struct x86_ctx_t *ctx)x86_isa_movsb_impl381,9033
+static void x86_isa_movsw_run(struct x86_ctx_t *ctx)x86_isa_movsw_run396,9218
+static void x86_isa_movsw_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_movsw_uinst410,9546
+void x86_isa_movsw_impl(struct x86_ctx_t *ctx)x86_isa_movsw_impl420,9997
+static void x86_isa_movsd_run(struct x86_ctx_t *ctx)x86_isa_movsd_run434,10181
+static void x86_isa_movsd_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_movsd_uinst448,10507
+void x86_isa_movsd_impl(struct x86_ctx_t *ctx)x86_isa_movsd_impl458,10958
+static void x86_isa_outsb_run(struct x86_ctx_t *ctx)x86_isa_outsb_run473,11143
+static void x86_isa_outsb_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_outsb_uinst479,11225
+void x86_isa_outsb_impl(struct x86_ctx_t *ctx)x86_isa_outsb_impl485,11345
+static void x86_isa_outsd_run(struct x86_ctx_t *ctx)x86_isa_outsd_run501,11588
+static void x86_isa_outsd_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_outsd_uinst507,11670
+void x86_isa_outsd_impl(struct x86_ctx_t *ctx)x86_isa_outsd_impl513,11790
+static void x86_isa_scasb_run(struct x86_ctx_t *ctx)x86_isa_scasb_run529,12032
+static void x86_isa_scasb_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_scasb_uinst559,12600
+void x86_isa_scasb_impl(struct x86_ctx_t *ctx)x86_isa_scasb_impl567,12978
+static void x86_isa_scasd_run(struct x86_ctx_t *ctx)x86_isa_scasd_run581,13162
+static void x86_isa_scasd_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_scasd_uinst611,13737
+void x86_isa_scasd_impl(struct x86_ctx_t *ctx)x86_isa_scasd_impl619,14115
+static void x86_isa_stosb_run(struct x86_ctx_t *ctx)x86_isa_stosb_run633,14299
+static void x86_isa_stosb_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_stosb_uinst645,14609
+void x86_isa_stosb_impl(struct x86_ctx_t *ctx)x86_isa_stosb_impl652,14883
+static void x86_isa_stosd_run(struct x86_ctx_t *ctx)x86_isa_stosd_run667,15068
+static void x86_isa_stosd_uinst(struct x86_ctx_t *ctx, unsigned int esi, unsigned int edi)x86_isa_stosd_uinst679,15380
+void x86_isa_stosd_impl(struct x86_ctx_t *ctx)x86_isa_stosd_impl686,15654
+
+syscall.c,18699
+int x86_sys_debug_category;x86_sys_debug_category43,1121
+static char *err_x86_sys_note =err_x86_sys_note53,1183
+#define DEFSYSCALL(DEFSYSCALL64,1673
+#undef DEFSYSCALLDEFSYSCALL66,1734
+static char *x86_sys_call_name[] =x86_sys_call_name62,1636
+#define DEFSYSCALL(DEFSYSCALL74,1792
+#undef DEFSYSCALLDEFSYSCALL76,1874
+	x86_sys_code_countx86_sys_code_count77,1892
+#define DEFSYSCALL(DEFSYSCALL82,1960
+#undef DEFSYSCALLDEFSYSCALL85,2074
+#define DEFSYSCALL(DEFSYSCALL91,2205
+#undef DEFSYSCALLDEFSYSCALL93,2282
+static int (*x86_sys_call_func[x86_sys_code_count + 1])(struct x86_ctx_t *ctx) =x86_sys_call_func89,2122
+static int x86_sys_call_freq[x86_sys_code_count + 1];x86_sys_call_freq99,2328
+#define SIM_EPERM	SIM_EPERM108,2421
+#define SIM_ENOENT	SIM_ENOENT109,2442
+#define SIM_ESRCH	SIM_ESRCH110,2464
+#define SIM_EINTR	SIM_EINTR111,2485
+#define SIM_EIO	SIM_EIO112,2506
+#define SIM_ENXIO	SIM_ENXIO113,2526
+#define SIM_E2BIG	SIM_E2BIG114,2547
+#define SIM_ENOEXEC	SIM_ENOEXEC115,2568
+#define SIM_EBADF	SIM_EBADF116,2591
+#define SIM_ECHILD	SIM_ECHILD117,2612
+#define SIM_EAGAIN	SIM_EAGAIN118,2635
+#define SIM_ENOMEM	SIM_ENOMEM119,2658
+#define SIM_EACCES	SIM_EACCES120,2681
+#define SIM_EFAULT	SIM_EFAULT121,2704
+#define SIM_ENOTBLK	SIM_ENOTBLK122,2727
+#define SIM_EBUSY	SIM_EBUSY123,2751
+#define SIM_EEXIST	SIM_EEXIST124,2773
+#define SIM_EXDEV	SIM_EXDEV125,2796
+#define SIM_ENODEV	SIM_ENODEV126,2818
+#define SIM_ENOTDIR	SIM_ENOTDIR127,2841
+#define SIM_EISDIR	SIM_EISDIR128,2865
+#define SIM_EINVAL	SIM_EINVAL129,2888
+#define SIM_ENFILE	SIM_ENFILE130,2911
+#define SIM_EMFILE	SIM_EMFILE131,2934
+#define SIM_ENOTTY	SIM_ENOTTY132,2957
+#define SIM_ETXTBSY	SIM_ETXTBSY133,2980
+#define SIM_EFBIG	SIM_EFBIG134,3004
+#define SIM_ENOSPC	SIM_ENOSPC135,3026
+#define SIM_ESPIPE	SIM_ESPIPE136,3049
+#define SIM_EROFS	SIM_EROFS137,3072
+#define SIM_EMLINK	SIM_EMLINK138,3094
+#define SIM_EPIPE	SIM_EPIPE139,3117
+#define SIM_EDOM	SIM_EDOM140,3139
+#define SIM_ERANGE	SIM_ERANGE141,3160
+#define SIM_ERRNO_MAX	SIM_ERRNO_MAX143,3184
+static struct string_map_t x86_sys_error_code_map =x86_sys_error_code_map145,3211
+void x86_sys_init(void)x86_sys_init187,3939
+void x86_sys_done(void)x86_sys_done227,5452
+void x86_sys_dump(FILE *f)x86_sys_dump235,5598
+void x86_sys_call(struct x86_ctx_t *ctx)x86_sys_call255,6010
+static int x86_sys_exit_impl(struct x86_ctx_t *ctx)x86_sys_exit_impl300,7162
+static int x86_sys_close_impl(struct x86_ctx_t *ctx)x86_sys_close_impl321,7459
+static int x86_sys_read_impl(struct x86_ctx_t *ctx)x86_sys_read_impl359,8399
+static int x86_sys_write_impl(struct x86_ctx_t *ctx)x86_sys_write_impl445,10176
+static struct string_map_t sys_open_flags_map =sys_open_flags_map522,11756
+static int x86_sys_open_impl(struct x86_ctx_t *ctx)x86_sys_open_impl544,12379
+static struct string_map_t sys_waitpid_options_map =sys_waitpid_options_map637,14942
+static int x86_sys_waitpid_impl(struct x86_ctx_t *ctx)x86_sys_waitpid_impl651,15289
+static int x86_sys_unlink_impl(struct x86_ctx_t *ctx)x86_sys_unlink_impl711,16656
+static char *err_sys_execve_note =err_sys_execve_note749,17451
+static int x86_sys_execve_impl(struct x86_ctx_t *ctx)x86_sys_execve_impl755,17799
+static int x86_sys_time_impl(struct x86_ctx_t *ctx)x86_sys_time_impl878,20792
+static int x86_sys_chmod_impl(struct x86_ctx_t *ctx)x86_sys_chmod_impl906,21191
+static int x86_sys_lseek_impl(struct x86_ctx_t *ctx)x86_sys_lseek_impl946,22045
+static int x86_sys_getpid_impl(struct x86_ctx_t *ctx)x86_sys_getpid_impl982,22637
+struct sim_utimbufsim_utimbuf994,22758
+	unsigned int actime;actime996,22779
+	unsigned int modtime;modtime997,22801
+static void sys_utime_guest_to_host(struct utimbuf *host, struct sim_utimbuf *guest)sys_utime_guest_to_host1000,22828
+static int x86_sys_utime_impl(struct x86_ctx_t *ctx)x86_sys_utime_impl1006,22982
+static struct string_map_t sys_access_mode_map =sys_access_mode_map1060,24226
+static int x86_sys_access_impl(struct x86_ctx_t *ctx)x86_sys_access_impl1069,24343
+static int x86_sys_kill_impl(struct x86_ctx_t *ctx)x86_sys_kill_impl1118,25354
+static int x86_sys_rename_impl(struct x86_ctx_t *ctx)x86_sys_rename_impl1155,26111
+static int x86_sys_mkdir_impl(struct x86_ctx_t *ctx)x86_sys_mkdir_impl1209,27461
+static int x86_sys_dup_impl(struct x86_ctx_t *ctx)x86_sys_dup_impl1253,28282
+static int x86_sys_pipe_impl(struct x86_ctx_t *ctx)x86_sys_pipe_impl1297,29222
+struct sim_tmssim_tms1347,30379
+	unsigned int utime;utime1349,30396
+	unsigned int stime;stime1350,30417
+	unsigned int cutime;cutime1351,30438
+	unsigned int cstime;cstime1352,30460
+static void sys_times_host_to_guest(struct sim_tms *guest, struct tms *host)sys_times_host_to_guest1355,30486
+static int x86_sys_times_impl(struct x86_ctx_t *ctx)x86_sys_times_impl1363,30704
+static int x86_sys_brk_impl(struct x86_ctx_t *ctx)x86_sys_brk_impl1400,31250
+static int x86_sys_ioctl_impl(struct x86_ctx_t *ctx)x86_sys_ioctl_impl1474,33346
+static int x86_sys_getppid_impl(struct x86_ctx_t *ctx)x86_sys_getppid_impl1535,34567
+static struct string_map_t sys_rlimit_res_map =sys_rlimit_res_map1552,34797
+struct sim_rlimitsim_rlimit1575,35443
+	unsigned int cur;cur1577,35463
+	unsigned int max;max1578,35482
+static int x86_sys_setrlimit_impl(struct x86_ctx_t *ctx)x86_sys_setrlimit_impl1581,35505
+struct sim_rusagesim_rusage1639,36635
+	unsigned int utime_sec, utime_usec;utime_sec1641,36655
+	unsigned int utime_sec, utime_usec;utime_usec1641,36655
+	unsigned int stime_sec, stime_usec;stime_sec1642,36692
+	unsigned int stime_sec, stime_usec;stime_usec1642,36692
+	unsigned int maxrss;maxrss1643,36729
+	unsigned int ixrss;ixrss1644,36751
+	unsigned int idrss;idrss1645,36772
+	unsigned int isrss;isrss1646,36793
+	unsigned int minflt;minflt1647,36814
+	unsigned int majflt;majflt1648,36836
+	unsigned int nswap;nswap1649,36858
+	unsigned int inblock;inblock1650,36879
+	unsigned int oublock;oublock1651,36902
+	unsigned int msgsnd;msgsnd1652,36925
+	unsigned int msgrcv;msgrcv1653,36947
+	unsigned int nsignals;nsignals1654,36969
+	unsigned int nvcsw;nvcsw1655,36993
+	unsigned int nivcsw;nivcsw1656,37014
+static void sys_rusage_host_to_guest(struct sim_rusage *guest, struct rusage *host)sys_rusage_host_to_guest1659,37040
+static int x86_sys_getrusage_impl(struct x86_ctx_t *ctx)x86_sys_getrusage_impl1681,37779
+static int x86_sys_gettimeofday_impl(struct x86_ctx_t *ctx)x86_sys_gettimeofday_impl1728,38792
+static int x86_sys_readlink_impl(struct x86_ctx_t *ctx)x86_sys_readlink_impl1772,39525
+#define SYS_MMAP_BASE_ADDRESS SYS_MMAP_BASE_ADDRESS1839,41143
+static struct string_map_t sys_mmap_prot_map =sys_mmap_prot_map1841,41186
+static struct string_map_t sys_mmap_flags_map =sys_mmap_flags_map1853,41441
+static int x86_sys_mmap(struct x86_ctx_t *ctx, unsigned int addr, unsigned int len,x86_sys_mmap1870,41866
+static int x86_sys_mmap_impl(struct x86_ctx_t *ctx)x86_sys_mmap_impl1978,44753
+static int x86_sys_munmap_impl(struct x86_ctx_t *ctx)x86_sys_munmap_impl2024,45936
+static int x86_sys_fchmod_impl(struct x86_ctx_t *ctx)x86_sys_fchmod_impl2057,46518
+static struct string_map_t sys_socketcall_call_map =sys_socketcall_call_map2091,47058
+static struct string_map_t sys_socket_family_map =sys_socket_family_map2114,47555
+static struct string_map_t sys_socket_type_map =sys_socket_type_map2149,48281
+static int x86_sys_socketcall_impl(struct x86_ctx_t *ctx)x86_sys_socketcall_impl2162,48511
+static struct string_map_t sys_itimer_which_map =sys_itimer_which_map2358,53245
+struct sim_timevalsim_timeval2367,53380
+	unsigned int tv_sec;tv_sec2369,53401
+	unsigned int tv_usec;tv_usec2370,53423
+struct sim_itimervalsim_itimerval2373,53450
+	struct sim_timeval it_interval;it_interval2375,53473
+	struct sim_timeval it_value;it_value2376,53506
+static void sim_timeval_dump(struct sim_timeval *sim_timeval)sim_timeval_dump2379,53540
+static void sim_itimerval_dump(struct sim_itimerval *sim_itimerval)sim_itimerval_dump2385,53699
+static int x86_sys_setitimer_impl(struct x86_ctx_t *ctx)x86_sys_setitimer_impl2393,54029
+static int x86_sys_getitimer_impl(struct x86_ctx_t *ctx)x86_sys_getitimer_impl2450,55415
+static int x86_sys_sigreturn_impl(struct x86_ctx_t *ctx)x86_sys_sigreturn_impl2495,56475
+#define SIM_CLONE_VM	SIM_CLONE_VM2512,56687
+#define SIM_CLONE_FS	SIM_CLONE_FS2513,56721
+#define SIM_CLONE_FILES	SIM_CLONE_FILES2514,56755
+#define SIM_CLONE_SIGHAND	SIM_CLONE_SIGHAND2515,56792
+#define SIM_CLONE_PTRACE	SIM_CLONE_PTRACE2516,56830
+#define SIM_CLONE_VFORK	SIM_CLONE_VFORK2517,56867
+#define SIM_CLONE_PARENT	SIM_CLONE_PARENT2518,56904
+#define SIM_CLONE_THREAD	SIM_CLONE_THREAD2519,56941
+#define SIM_CLONE_NEWNS	SIM_CLONE_NEWNS2520,56978
+#define SIM_CLONE_SYSVSEM	SIM_CLONE_SYSVSEM2521,57015
+#define SIM_CLONE_SETTLS	SIM_CLONE_SETTLS2522,57053
+#define SIM_CLONE_PARENT_SETTID	SIM_CLONE_PARENT_SETTID2523,57090
+#define SIM_CLONE_CHILD_CLEARTID	SIM_CLONE_CHILD_CLEARTID2524,57134
+#define SIM_CLONE_DETACHED	SIM_CLONE_DETACHED2525,57178
+#define SIM_CLONE_UNTRACED	SIM_CLONE_UNTRACED2526,57217
+#define SIM_CLONE_CHILD_SETTID	SIM_CLONE_CHILD_SETTID2527,57256
+#define SIM_CLONE_STOPPED	SIM_CLONE_STOPPED2528,57299
+#define SIM_CLONE_NEWUTS	SIM_CLONE_NEWUTS2529,57337
+#define SIM_CLONE_NEWIPC	SIM_CLONE_NEWIPC2530,57374
+#define SIM_CLONE_NEWUSER	SIM_CLONE_NEWUSER2531,57411
+#define SIM_CLONE_NEWPID	SIM_CLONE_NEWPID2532,57449
+#define SIM_CLONE_NEWNET	SIM_CLONE_NEWNET2533,57486
+#define SIM_CLONE_IO	SIM_CLONE_IO2534,57523
+static struct string_map_t sys_clone_flags_map =sys_clone_flags_map2536,57558
+static const unsigned int sys_clone_supported_flags =sys_clone_supported_flags2565,58418
+struct sim_user_descsim_user_desc2577,58686
+	unsigned int entry_number;entry_number2579,58709
+	unsigned int base_addr;base_addr2580,58737
+	unsigned int limit;limit2581,58762
+	unsigned int seg_32bit:1;seg_32bit2582,58783
+	unsigned int contents:2;contents2583,58810
+	unsigned int read_exec_only:1;read_exec_only2584,58836
+	unsigned int limit_in_pages:1;limit_in_pages2585,58868
+	unsigned int seg_not_present:1;seg_not_present2586,58900
+	unsigned int useable:1;useable2587,58933
+static int x86_sys_clone_impl(struct x86_ctx_t *ctx)x86_sys_clone_impl2590,58962
+struct sim_utsnamesim_utsname2738,63264
+	char sysname[65];sysname2740,63285
+	char nodename[65];nodename2741,63304
+	char release[65];release2742,63324
+	char version[65];version2743,63343
+	char machine[65];machine2744,63362
+	char domainname[65];domainname2745,63381
+static struct sim_utsname sim_utsname =sim_utsname2748,63431
+static int x86_sys_newuname_impl(struct x86_ctx_t *ctx)x86_sys_newuname_impl2758,63570
+static int x86_sys_mprotect_impl(struct x86_ctx_t *ctx)x86_sys_mprotect_impl2784,64254
+static int x86_sys_llseek_impl(struct x86_ctx_t *ctx)x86_sys_llseek_impl2819,64877
+struct sys_host_dirent_tsys_host_dirent_t2871,66021
+	long d_ino;d_ino2873,66048
+	off_t d_off;d_off2874,66061
+	unsigned short d_reclen;d_reclen2875,66075
+	char d_name[];d_name2876,66101
+struct sys_guest_dirent_tsys_guest_dirent_t2879,66121
+	unsigned int d_ino;d_ino2881,66149
+	unsigned int d_off;d_off2882,66170
+	unsigned short d_reclen;d_reclen2883,66191
+	char d_name[];d_name2884,66217
+static int x86_sys_getdents_impl(struct x86_ctx_t *ctx)x86_sys_getdents_impl2887,66261
+static void sim_fd_set_dump(char *fd_set_name, fd_set *fds, int n)sim_fd_set_dump2972,68427
+static int sim_fd_set_read(struct x86_ctx_t *ctx, uint32_t addr,sim_fd_set_read3000,68945
+static void sim_fd_set_write(struct x86_ctx_t *ctx, unsigned int addr,sim_fd_set_write3033,69590
+static int x86_sys_select_impl(struct x86_ctx_t *ctx)x86_sys_select_impl3068,70255
+static struct string_map_t sys_msync_flags_map =sys_msync_flags_map3147,71914
+static int x86_sys_msync_impl(struct x86_ctx_t *ctx)x86_sys_msync_impl3156,72043
+static int x86_sys_writev_impl(struct x86_ctx_t *ctx)x86_sys_writev_impl3186,72577
+struct sys_sysctl_args_tsys_sysctl_args_t3264,74091
+	unsigned int pname;pname3266,74118
+	unsigned int nlen;nlen3267,74139
+	unsigned int poldval;poldval3268,74159
+	unsigned int oldlenp;oldlenp3269,74182
+	unsigned int pnewval;pnewval3270,74205
+	unsigned int newlen;newlen3271,74228
+static int x86_sys_sysctl_impl(struct x86_ctx_t *ctx)x86_sys_sysctl_impl3274,74254
+static int x86_sys_sched_setparam_impl(struct x86_ctx_t *ctx)x86_sys_sched_setparam_impl3326,75548
+static int x86_sys_sched_getparam_impl(struct x86_ctx_t *ctx)x86_sys_sched_getparam_impl3354,76073
+static int x86_sys_sched_getscheduler_impl(struct x86_ctx_t *ctx)x86_sys_sched_getscheduler_impl3382,76567
+static int x86_sys_sched_get_priority_max_impl(struct x86_ctx_t *ctx)x86_sys_sched_get_priority_max_impl3403,76859
+static int x86_sys_sched_get_priority_min_impl(struct x86_ctx_t *ctx)x86_sys_sched_get_priority_min_impl3444,77390
+static int x86_sys_nanosleep_impl(struct x86_ctx_t *ctx)x86_sys_nanosleep_impl3485,77906
+static int x86_sys_mremap_impl(struct x86_ctx_t *ctx)x86_sys_mremap_impl3526,78723
+static struct string_map_t x86_sys_clock_gettime_clk_id_map =x86_sys_clock_gettime_clk_id_map3598,80540
+static int x86_sys_clock_gettime_impl(struct x86_ctx_t *ctx)x86_sys_clock_gettime_impl3611,80845
+static struct string_map_t sys_poll_event_map =sys_poll_event_map3680,82218
+struct sim_pollfd_tsim_pollfd_t3692,82478
+	unsigned int fd;fd3694,82500
+	unsigned short events;events3695,82518
+	unsigned short revents;revents3696,82542
+static int x86_sys_poll_impl(struct x86_ctx_t *ctx)x86_sys_poll_impl3699,82571
+static int x86_sys_rt_sigaction_impl(struct x86_ctx_t *ctx)x86_sys_rt_sigaction_impl3814,85717
+static struct string_map_t sys_sigprocmask_how_map =sys_sigprocmask_how_map3877,87117
+static int x86_sys_rt_sigprocmask_impl(struct x86_ctx_t *ctx)x86_sys_rt_sigprocmask_impl3886,87262
+static int x86_sys_rt_sigsuspend_impl(struct x86_ctx_t *ctx)x86_sys_rt_sigsuspend_impl3966,88837
+static int x86_sys_getcwd_impl(struct x86_ctx_t *ctx)x86_sys_getcwd_impl4012,90016
+static int x86_sys_getrlimit_impl(struct x86_ctx_t *ctx)x86_sys_getrlimit_impl4049,90575
+static int x86_sys_mmap2_impl(struct x86_ctx_t *ctx)x86_sys_mmap2_impl4112,91699
+static int x86_sys_ftruncate64_impl(struct x86_ctx_t *ctx)x86_sys_ftruncate64_impl4154,92709
+struct sim_stat64_tsim_stat64_t4188,93259
+	unsigned long long dev;  /* 0 8 */dev4190,93281
+	unsigned int pad1;  /* 8 4 */pad14191,93317
+	unsigned int __ino;  /* 12 4 */__ino4192,93348
+	unsigned int mode;  /* 16 4 */mode4193,93381
+	unsigned int nlink;  /* 20 4 */nlink4194,93413
+	unsigned int uid;  /* 24 4 */uid4195,93446
+	unsigned int gid;  /* 28 4 */gid4196,93477
+	unsigned long long rdev;  /* 32 8 */rdev4197,93508
+	unsigned int pad2;  /* 40 4 */pad24198,93546
+	long long size;  /* 44 8 */size4199,93578
+	unsigned int blksize;  /* 52 4 */blksize4200,93607
+	unsigned long long blocks;  /* 56 8 */blocks4201,93642
+	unsigned int atime;  /* 64 4 */atime4202,93682
+	unsigned int atime_nsec;  /* 68 4 */atime_nsec4203,93715
+	unsigned int mtime;  /* 72 4 */mtime4204,93753
+	unsigned int mtime_nsec;  /* 76 4 */mtime_nsec4205,93786
+	unsigned int ctime;  /* 80 4 */ctime4206,93824
+	unsigned int ctime_nsec;  /* 84 4 */ctime_nsec4207,93857
+	unsigned long long ino;  /* 88 8 */ino4208,93895
+static void sys_stat_host_to_guest(struct sim_stat64_t *guest, struct stat *host)sys_stat_host_to_guest4211,93960
+static int x86_sys_stat64_impl(struct x86_ctx_t *ctx)x86_sys_stat64_impl4240,94936
+static int x86_sys_lstat64_impl(struct x86_ctx_t *ctx)x86_sys_lstat64_impl4290,96067
+static int x86_sys_fstat64_impl(struct x86_ctx_t *ctx)x86_sys_fstat64_impl4339,97181
+static int x86_sys_getuid_impl(struct x86_ctx_t *ctx)x86_sys_getuid_impl4380,97960
+static int x86_sys_getgid_impl(struct x86_ctx_t *ctx)x86_sys_getgid_impl4392,98083
+static int x86_sys_geteuid_impl(struct x86_ctx_t *ctx)x86_sys_geteuid_impl4404,98207
+static int x86_sys_getegid_impl(struct x86_ctx_t *ctx)x86_sys_getegid_impl4416,98333
+static int x86_sys_chown_impl(struct x86_ctx_t *ctx)x86_sys_chown_impl4428,98457
+static int x86_sys_madvise_impl(struct x86_ctx_t *ctx)x86_sys_madvise_impl4474,99402
+struct host_dirent_thost_dirent_t4500,99783
+	long d_ino;d_ino4502,99806
+	off_t d_off;d_off4503,99819
+	unsigned short d_reclen;d_reclen4504,99833
+	char d_name[];d_name4505,99859
+struct guest_dirent64_tguest_dirent64_t4508,99879
+	unsigned long long d_ino;d_ino4510,99905
+	long long d_off;d_off4511,99932
+	unsigned short d_reclen;d_reclen4512,99950
+	unsigned char d_type;d_type4513,99976
+	char d_name[];d_name4514,99999
+static int x86_sys_getdents64_impl(struct x86_ctx_t *ctx)x86_sys_getdents64_impl4517,100043
+static struct string_map_t sys_fcntl_cmp_map =sys_fcntl_cmp_map4606,102329
+static int x86_sys_fcntl64_impl(struct x86_ctx_t *ctx)x86_sys_fcntl64_impl4627,102708
+static int x86_sys_gettid_impl(struct x86_ctx_t *ctx)x86_sys_gettid_impl4718,104394
+static struct string_map_t sys_futex_cmd_map =sys_futex_cmd_map4733,104696
+static int x86_sys_futex_impl(struct x86_ctx_t *ctx)x86_sys_futex_impl4752,105229
+static int x86_sys_sched_setaffinity_impl(struct x86_ctx_t *ctx)x86_sys_sched_setaffinity_impl4965,110452
+static int x86_sys_sched_getaffinity_impl(struct x86_ctx_t *ctx)x86_sys_sched_getaffinity_impl4998,111065
+static int x86_sys_set_thread_area_impl(struct x86_ctx_t *ctx)x86_sys_set_thread_area_impl5030,111778
+static int x86_sys_fadvise64_impl(struct x86_ctx_t *ctx)x86_sys_fadvise64_impl5089,113343
+static int x86_sys_exit_group_impl(struct x86_ctx_t *ctx)x86_sys_exit_group_impl5120,113836
+static int x86_sys_set_tid_address_impl(struct x86_ctx_t *ctx)x86_sys_set_tid_address_impl5142,114148
+static int x86_sys_clock_getres_impl(struct x86_ctx_t *ctx)x86_sys_clock_getres_impl5163,114462
+static int x86_sys_tgkill_impl(struct x86_ctx_t *ctx)x86_sys_tgkill_impl5194,114996
+static int x86_sys_set_robust_list_impl(struct x86_ctx_t *ctx)x86_sys_set_robust_list_impl5236,115850
+static int x86_sys_opencl_impl(struct x86_ctx_t *ctx)x86_sys_opencl_impl5266,116373
+static int x86_sys_glut_impl(struct x86_ctx_t *ctx)x86_sys_glut_impl5285,116700
+static int x86_sys_opengl_impl(struct x86_ctx_t *ctx)x86_sys_opengl_impl5299,116901
+static int x86_sys_cuda_impl(struct x86_ctx_t *ctx)x86_sys_cuda_impl5313,117104
+static int x86_sys_clrt_impl(struct x86_ctx_t *ctx)x86_sys_clrt_impl5326,117300
+#define SYS_NOT_IMPL(SYS_NOT_IMPL5339,117456
+
+opengl.c,13327
+static char *err_x86_opengl_code =err_x86_opengl_code24,869
+#define MAX_MODELVIEW_STACK_DEPTH MAX_MODELVIEW_STACK_DEPTH31,1245
+#define MAX_PROJECTION_STACK_DEPTH MAX_PROJECTION_STACK_DEPTH34,1327
+#define MAX_TEXTURE_STACK_DEPTH MAX_TEXTURE_STACK_DEPTH37,1407
+#define MAX_COLOR_STACK_DEPTH MAX_COLOR_STACK_DEPTH40,1490
+#define MAX_TEXTURE_COORD_UNITS MAX_TEXTURE_COORD_UNITS43,1552
+#define MAX_TEXTURE_IMAGE_UNITS MAX_TEXTURE_IMAGE_UNITS44,1586
+#define MAX_TEXTURE_UNITS MAX_TEXTURE_UNITS45,1621
+#define COLOR_BUFFER_COUNT COLOR_BUFFER_COUNT47,1754
+#define VBO_MAX_PRIM VBO_MAX_PRIM49,1853
+#define VBO_VERT_BUFFER_SIZE VBO_VERT_BUFFER_SIZE52,1951
+int x86_opengl_debug_category;x86_opengl_debug_category55,2015
+enum x86_opengl_call_tx86_opengl_call_t59,2083
+	x86_opengl_call_invalid = 0,x86_opengl_call_invalid61,2108
+#define X86_OPENGL_DEFINE_CALL(X86_OPENGL_DEFINE_CALL62,2138
+#undef X86_OPENGL_DEFINE_CALLX86_OPENGL_DEFINE_CALL64,2234
+	x86_opengl_call_countx86_opengl_call_count65,2264
+#define X86_OPENGL_DEFINE_CALL(X86_OPENGL_DEFINE_CALL73,2397
+#undef X86_OPENGL_DEFINE_CALLX86_OPENGL_DEFINE_CALL75,2469
+char *x86_opengl_call_name[x86_opengl_call_count + 1] =x86_opengl_call_name70,2332
+#define X86_OPENGL_DEFINE_CALL(X86_OPENGL_DEFINE_CALL81,2565
+#undef X86_OPENGL_DEFINE_CALLX86_OPENGL_DEFINE_CALL83,2671
+typedef int (*x86_opengl_func_t)(void);x86_opengl_func_t87,2742
+#define X86_OPENGL_DEFINE_CALL(X86_OPENGL_DEFINE_CALL91,2867
+#undef X86_OPENGL_DEFINE_CALLX86_OPENGL_DEFINE_CALL93,2956
+static x86_opengl_func_t x86_opengl_func_table[x86_opengl_call_count + 1] =x86_opengl_func_table88,2782
+struct x86_opengl_context_capability_tx86_opengl_context_capability_t103,3058
+	GLboolean is_alpha_test;is_alpha_test105,3099
+	GLboolean is_auto_normal;is_auto_normal106,3125
+	GLboolean is_blend;is_blend107,3152
+	GLboolean is_clip_plane0;is_clip_plane0108,3173
+	GLboolean is_clip_plane1;is_clip_plane1109,3200
+	GLboolean is_clip_plane2;is_clip_plane2110,3227
+	GLboolean is_clip_plane3;is_clip_plane3111,3254
+	GLboolean is_clip_plane4;is_clip_plane4112,3281
+	GLboolean is_clip_plane5;is_clip_plane5113,3308
+	GLboolean is_color_logic_op;is_color_logic_op114,3335
+	GLboolean is_color_material;is_color_material115,3365
+	GLboolean is_color_sum;is_color_sum116,3395
+	GLboolean is_color_table;is_color_table117,3420
+	GLboolean is_convolution_1d;is_convolution_1d118,3447
+	GLboolean is_convolution_2d;is_convolution_2d119,3477
+	GLboolean is_cull_face;is_cull_face120,3507
+	GLboolean is_depth_test;is_depth_test121,3532
+	GLboolean is_dither;is_dither122,3558
+	GLboolean is_fog;is_fog123,3580
+	GLboolean is_histogram;is_histogram124,3599
+	GLboolean is_index_logic_op;is_index_logic_op125,3624
+	GLboolean is_light0;is_light0126,3654
+	GLboolean is_light1;is_light1127,3676
+	GLboolean is_light2;is_light2128,3698
+	GLboolean is_light3;is_light3129,3720
+	GLboolean is_light4;is_light4130,3742
+	GLboolean is_light5;is_light5131,3764
+	GLboolean is_light6;is_light6132,3786
+	GLboolean is_light7;is_light7133,3808
+	GLboolean is_lighting;is_lighting134,3830
+	GLboolean is_line_smooth;is_line_smooth135,3854
+	GLboolean is_line_stipple;is_line_stipple136,3881
+	GLboolean is_map1_color_4;is_map1_color_4137,3909
+	GLboolean is_map1_index;is_map1_index138,3937
+	GLboolean is_map1_normal;is_map1_normal139,3963
+	GLboolean is_map1_texture_coord_1;is_map1_texture_coord_1140,3990
+	GLboolean is_map1_texture_coord_2;is_map1_texture_coord_2141,4026
+	GLboolean is_map1_texture_coord_3;is_map1_texture_coord_3142,4062
+	GLboolean is_map1_texture_coord_4;is_map1_texture_coord_4143,4098
+	GLboolean is_map1_vertex_3;is_map1_vertex_3144,4134
+	GLboolean is_map1_vertex_4;is_map1_vertex_4145,4163
+	GLboolean is_map2_color_4;is_map2_color_4146,4192
+	GLboolean is_map2_index;is_map2_index147,4220
+	GLboolean is_map2_normal;is_map2_normal148,4246
+	GLboolean is_map2_texture_coord_1;is_map2_texture_coord_1149,4273
+	GLboolean is_map2_texture_coord_2;is_map2_texture_coord_2150,4309
+	GLboolean is_map2_texture_coord_3;is_map2_texture_coord_3151,4345
+	GLboolean is_map2_texture_coord_4;is_map2_texture_coord_4152,4381
+	GLboolean is_map2_vertex_3;is_map2_vertex_3153,4417
+	GLboolean is_map2_vertex_4;is_map2_vertex_4154,4446
+	GLboolean is_minmax;is_minmax155,4475
+	GLboolean is_multisample;is_multisample156,4497
+	GLboolean is_normalize;is_normalize157,4524
+	GLboolean is_point_smooth;is_point_smooth158,4549
+	GLboolean is_point_sprite;is_point_sprite159,4577
+	GLboolean is_polygon_offset_fill;is_polygon_offset_fill160,4605
+	GLboolean is_polygon_offset_line;is_polygon_offset_line161,4640
+	GLboolean is_polygon_offset_point;is_polygon_offset_point162,4675
+	GLboolean is_polygon_smooth;is_polygon_smooth163,4711
+	GLboolean is_polygon_stipple;is_polygon_stipple164,4741
+	GLboolean is_post_color_matrix_color_table;is_post_color_matrix_color_table165,4772
+	GLboolean is_post_convolution_color_table;is_post_convolution_color_table166,4817
+	GLboolean is_rescale_normal;is_rescale_normal167,4861
+	GLboolean is_sample_alpha_to_coverage;is_sample_alpha_to_coverage168,4891
+	GLboolean is_sample_alpha_to_one;is_sample_alpha_to_one169,4931
+	GLboolean is_sample_coverage;is_sample_coverage170,4966
+	GLboolean is_separable_2d;is_separable_2d171,4997
+	GLboolean is_scissor_test;is_scissor_test172,5025
+	GLboolean is_stencil_test;is_stencil_test173,5053
+	GLboolean is_texture_1d;is_texture_1d174,5081
+	GLboolean is_texture_2d;is_texture_2d175,5107
+	GLboolean is_texture_3d;is_texture_3d176,5133
+	GLboolean is_texture_cube_map;is_texture_cube_map177,5159
+	GLboolean is_texture_gen_q;is_texture_gen_q178,5191
+	GLboolean is_texture_gen_r;is_texture_gen_r179,5220
+	GLboolean is_texture_gen_s;is_texture_gen_s180,5249
+	GLboolean is_texture_gen_t;is_texture_gen_t181,5278
+	GLboolean is_vertex_program_point_size;is_vertex_program_point_size182,5307
+	GLboolean is_vertex_program_two_side;is_vertex_program_two_side183,5348
+struct x86_opengl_render_buffer_tx86_opengl_render_buffer_t187,5418
+	GLuint width;width189,5454
+	GLuint height;height190,5469
+	GLuint *buffer;buffer191,5485
+struct x86_opengl_frame_buffer_tx86_opengl_frame_buffer_t195,5532
+	GLsizei width;width197,5567
+	GLsizei height;height198,5583
+	struct x86_opengl_render_buffer_t *color_buffer[COLOR_BUFFER_COUNT];color_buffer207,5865
+	struct x86_opengl_render_buffer_t *depth_buffer;depth_buffer208,5935
+	struct x86_opengl_render_buffer_t *stencil_buffer;stencil_buffer209,5985
+struct x86_opengl_viewport_attributes_tx86_opengl_viewport_attributes_t213,6073
+	GLint x;x216,6131
+	GLint y;y217,6141
+	GLsizei width;width219,6163
+	GLsizei height;height220,6179
+enum x86_opengl_matrix_mode_t {x86_opengl_matrix_mode_t232,6432
+	MATRIX_GENERAL,		/* general 4x4 matrix */MATRIX_GENERAL233,6464
+	MATRIX_IDENTITY,		/* identity matrix */MATRIX_IDENTITY234,6507
+	MATRIX_3D_NO_ROT,		/* orthogonal projection and others... */MATRIX_3D_NO_ROT235,6548
+	MATRIX_PERSPECTIVE,	/* perspective projection matrix */MATRIX_PERSPECTIVE236,6610
+	MATRIX_2D,			/* 2-D transformation */MATRIX_2D237,6667
+	MATRIX_2D_NO_ROT,		/* 2-D scale & translate only */MATRIX_2D_NO_ROT238,6706
+	MATRIX_3D			/* 3-D transformation */MATRIX_3D239,6759
+static GLfloat Identity[16] = {Identity243,6831
+struct x86_opengl_matrix_tx86_opengl_matrix_t251,6970
+	GLfloat *matrix;	/* Points to 4x4 GLfloat type arrays*/matrix253,6999
+	enum x86_opengl_matrix_mode_t matrix_mode;	matrix_mode254,7056
+struct x86_opengl_matrix_stack_tx86_opengl_matrix_stack_t258,7131
+	struct list_t *stack;stack260,7166
+	GLint depth;depth261,7189
+	GLint max_depth;max_depth262,7203
+struct x86_opengl_context_tx86_opengl_context_t266,7245
+	struct x86_opengl_context_capability_t *context_cap;					/* context capabilities */context_cap268,7275
+	struct x86_opengl_frame_buffer_t *draw_buffer;						/* buffer for writing */draw_buffer270,7361
+	struct x86_opengl_frame_buffer_t *read_buffer;						/* buffer for reading */read_buffer271,7439
+	struct x86_opengl_viewport_attributes_t *viewport;						/* viewport attributes */viewport273,7518
+	struct x86_opengl_matrix_stack_t *modelview_matrix_stack;					/* modelview matrix stack */modelview_matrix_stack275,7602
+	struct x86_opengl_matrix_stack_t *projection_matrix_stack;					/* projection matrix stack */projection_matrix_stack276,7694
+	struct x86_opengl_matrix_stack_t *texture_matrix_stack[MAX_TEXTURE_UNITS];		/* texture matrix stacks */texture_matrix_stack277,7788
+	struct x86_opengl_matrix_stack_t *color_matrix_stack;					/* color matrix stack */color_matrix_stack278,7893
+	struct x86_opengl_matrix_stack_t *current_matrix_stack;					/* current matrix stack, points to one of above stacks */current_matrix_stack279,7977
+struct x86_opengl_context_t *x86_opengl_ctx;x86_opengl_ctx288,8157
+struct x86_opengl_context_capability_t *x86_opengl_context_capability_create(void)x86_opengl_context_capability_create294,8236
+void x86_opengl_context_capability_free(struct x86_opengl_context_capability_t *cap)x86_opengl_context_capability_free312,8796
+struct x86_opengl_render_buffer_t *x86_opengl_render_buffer_create(int width, int height)x86_opengl_render_buffer_create317,8898
+void x86_opengl_render_buffer_free(struct x86_opengl_render_buffer_t *rb)x86_opengl_render_buffer_free335,9310
+void x86_opengl_render_buffer_clear(struct x86_opengl_render_buffer_t *rb, int clear_value)x86_opengl_render_buffer_clear341,9419
+int x86_opengl_render_buffer_resize(struct x86_opengl_render_buffer_t *rb, int width, int height)x86_opengl_render_buffer_resize347,9600
+struct x86_opengl_frame_buffer_t *x86_opengl_frame_buffer_create(int width, int height)x86_opengl_frame_buffer_create381,10400
+void x86_opengl_frame_buffer_free(struct x86_opengl_frame_buffer_t *fb)x86_opengl_frame_buffer_free406,11036
+void x86_opengl_frame_buffer_clear(struct x86_opengl_frame_buffer_t *fb, GLbitfield mask)x86_opengl_frame_buffer_clear419,11337
+int x86_opengl_frame_buffer_resize(struct x86_opengl_frame_buffer_t *fb, int width, int height)x86_opengl_frame_buffer_resize453,12395
+struct x86_opengl_viewport_attributes_t *x86_opengl_viewport_attributes_create(void)x86_opengl_viewport_attributes_create485,13171
+void x86_opengl_viewport_free(struct x86_opengl_viewport_attributes_t *vpt)x86_opengl_viewport_free512,13655
+struct x86_opengl_matrix_t *x86_opengl_matrix_create(enum x86_opengl_matrix_mode_t mode)x86_opengl_matrix_create517,13748
+void x86_opengl_matrix_free(struct x86_opengl_matrix_t *mtx)x86_opengl_matrix_free544,14275
+#define A(A550,14373
+#define B(B551,14409
+#define P(P552,14445
+static void x86_opengl_matrix_matmul4( GLfloat *product, const GLfloat *a, const GLfloat *b )x86_opengl_matrix_matmul4554,14488
+#undef AA567,14975
+#undef BB568,14984
+#undef PP569,14993
+void x86_opengl_matrix_mul_matrix(struct x86_opengl_matrix_t *dst_mtx, struct x86_opengl_matrix_t *mtx_a, struct x86_opengl_matrix_t *mtx_b)x86_opengl_matrix_mul_matrix571,15003
+struct x86_opengl_matrix_stack_t *x86_opengl_matrix_stack_create(GLenum mode)x86_opengl_matrix_stack_create576,15224
+void x86_opengl_matrix_stack_free(struct x86_opengl_matrix_stack_t *mtx_stack)x86_opengl_matrix_stack_free628,16067
+int x86_opengl_matrix_stack_push(struct x86_opengl_matrix_stack_t *mtx_stack, void *mtx)x86_opengl_matrix_stack_push639,16368
+struct x86_opengl_matrix_t *x86_opengl_matrix_stack_pop(struct x86_opengl_matrix_stack_t *mtx_stack)x86_opengl_matrix_stack_pop650,16753
+struct x86_opengl_matrix_t *x86_opengl_matrix_stack_get_current_matrix(struct x86_opengl_context_t *ctx)x86_opengl_matrix_stack_get_current_matrix671,17299
+struct x86_opengl_context_t *x86_opengl_context_create(void)x86_opengl_context_create683,17600
+void x86_opengl_context_free(struct x86_opengl_context_t *ctx)x86_opengl_context_free723,18804
+void x86_opengl_init(void)x86_opengl_init750,19506
+void x86_opengl_done(void)x86_opengl_done756,19586
+int x86_opengl_call(void)x86_opengl_call763,19691
+static int x86_opengl_func_glDrawBuffer(void)x86_opengl_func_glDrawBuffer796,20385
+static int x86_opengl_func_glReadBuffer(void)x86_opengl_func_glReadBuffer826,20898
+static int x86_opengl_func_glEnable(void)x86_opengl_func_glEnable853,21395
+static int x86_opengl_func_glViewport(void)x86_opengl_func_glViewport1518,34322
+static int x86_opengl_func_glMatrixMode(void)x86_opengl_func_glMatrixMode1567,35781
+static int x86_opengl_func_glLoadIdentity(void)x86_opengl_func_glLoadIdentity1623,36951
+static int x86_opengl_func_glOrtho(void)x86_opengl_func_glOrtho1646,37568
+	#define M(M1685,38591
+	#undef MM1705,39025
+static int x86_opengl_func_glClear(void)x86_opengl_func_glClear1762,40171
+static int x86_opengl_func_glBegin(void)x86_opengl_func_glBegin1790,40819
+static int x86_opengl_func_glEnd(void)x86_opengl_func_glEnd1814,41296
+static int x86_opengl_func_glVertex2f(void)x86_opengl_func_glVertex2f1829,41489
+static int x86_opengl_func_glVertex3f(void)x86_opengl_func_glVertex3f1866,42253
+static int x86_opengl_func_glFlush(void)x86_opengl_func_glFlush1903,43041
+static int x86_opengl_func_glColor3f(void)x86_opengl_func_glColor3f1920,43289
+
+signal.c,2845
+struct string_map_t signal_map =signal_map26,866
+struct string_map_t sigaction_flags_map =sigaction_flags_map64,1814
+char *sim_signal_name(int signum)sim_signal_name80,2213
+void sim_sigaction_dump(struct sim_sigaction *sim, FILE *f)sim_sigaction_dump86,2293
+void sim_sigaction_flags_dump(uint32_t flags, FILE *f)sim_sigaction_flags_dump94,2484
+int sim_sigset_member(unsigned long long *sim_sigset, int sig)sim_sigset_member102,2640
+void sim_sigset_add(unsigned long long *sim_sigset, int sig)sim_sigset_add110,2796
+void sim_sigset_del(unsigned long long *sim_sigset, int sig)sim_sigset_del118,2934
+void sim_sigset_dump(unsigned long long sim_sigset, FILE *f)sim_sigset_dump126,3075
+struct signal_mask_table_t *signal_mask_table_create(void)signal_mask_table_create162,3578
+void signal_mask_table_free(struct signal_mask_table_t *table)signal_mask_table_free175,3836
+struct signal_handler_table_t *signal_handler_table_create(void)signal_handler_table_create187,3953
+void signal_handler_table_free(struct signal_handler_table_t *table)signal_handler_table_free201,4226
+struct signal_handler_table_t *signal_handler_table_link(struct signal_handler_table_t *table)signal_handler_table_link208,4343
+void signal_handler_table_unlink(struct signal_handler_table_t *table)signal_handler_table_unlink215,4480
+struct sim_sigframesim_sigframe233,4758
+	uint32_t pretcode;  /* Pointer to return code */pretcode235,4780
+	uint32_t sig;  /* Received signal */sig236,4830
+	uint32_t gs, fs, es, ds;gs238,4869
+	uint32_t gs, fs, es, ds;fs238,4869
+	uint32_t gs, fs, es, ds;es238,4869
+	uint32_t gs, fs, es, ds;ds238,4869
+	uint32_t edi, esi, ebp, esp;edi239,4895
+	uint32_t edi, esi, ebp, esp;esi239,4895
+	uint32_t edi, esi, ebp, esp;ebp239,4895
+	uint32_t edi, esi, ebp, esp;esp239,4895
+	uint32_t ebx, edx, ecx, eax;ebx240,4925
+	uint32_t ebx, edx, ecx, eax;edx240,4925
+	uint32_t ebx, edx, ecx, eax;ecx240,4925
+	uint32_t ebx, edx, ecx, eax;eax240,4925
+	uint32_t trapno, err, eip, cs;trapno241,4955
+	uint32_t trapno, err, eip, cs;err241,4955
+	uint32_t trapno, err, eip, cs;eip241,4955
+	uint32_t trapno, err, eip, cs;cs241,4955
+	uint32_t eflags;eflags242,4987
+	uint32_t esp_at_signal;esp_at_signal243,5005
+	uint32_t ss;ss244,5030
+	uint32_t pfpstate;  /* Pointer to floating-point state */pfpstate245,5044
+	uint32_t oldmask;oldmask246,5103
+	uint32_t cr2;cr2247,5122
+static char signal_retcode[] = "\x58\xb8\x77\x00\x00\x00\xcd\x80";signal_retcode257,5354
+void signal_handler_run(struct x86_ctx_t *ctx, int sig)signal_handler_run261,5450
+void signal_handler_return(struct x86_ctx_t *ctx)signal_handler_return331,7969
+void signal_handler_check_intr(struct x86_ctx_t *ctx)signal_handler_check_intr357,9073
+void signal_handler_check(struct x86_ctx_t *ctx)signal_handler_check397,10104
+
+context.c,2874
+int x86_ctx_debug_category;x86_ctx_debug_category24,851
+int EV_X86_CTX_IPC_REPORT;EV_X86_CTX_IPC_REPORT26,880
+static char *help_x86_ctx_ipc_report =help_x86_ctx_ipc_report28,908
+static struct string_map_t x86_ctx_status_map =x86_ctx_status_map53,1941
+static struct x86_ctx_t *ctx_do_create()ctx_do_create76,2627
+struct x86_ctx_t *x86_ctx_create(void)x86_ctx_create104,3338
+struct x86_ctx_t *x86_ctx_clone(struct x86_ctx_t *ctx)x86_ctx_clone126,3797
+struct x86_ctx_t *x86_ctx_fork(struct x86_ctx_t *ctx)x86_ctx_fork163,4826
+void x86_ctx_free(struct x86_ctx_t *ctx)x86_ctx_free198,5613
+void x86_ctx_dump(struct x86_ctx_t *ctx, FILE *f)x86_ctx_dump250,7185
+void x86_ctx_execute(struct x86_ctx_t *ctx)x86_ctx_execute272,7907
+void x86_ctx_set_eip(struct x86_ctx_t *ctx, uint32_t eip)x86_ctx_set_eip326,9725
+void x86_ctx_recover(struct x86_ctx_t *ctx)x86_ctx_recover341,10100
+int x86_ctx_get_status(struct x86_ctx_t *ctx, enum x86_ctx_status_t status)x86_ctx_get_status350,10327
+static void x86_ctx_update_status(struct x86_ctx_t *ctx, enum x86_ctx_status_t status)x86_ctx_update_status356,10445
+void x86_ctx_set_status(struct x86_ctx_t *ctx, enum x86_ctx_status_t status)x86_ctx_set_status423,12922
+void x86_ctx_clear_status(struct x86_ctx_t *ctx, enum x86_ctx_status_t status)x86_ctx_clear_status429,13056
+struct x86_ctx_t *x86_ctx_get(int pid)x86_ctx_get437,13282
+struct x86_ctx_t *x86_ctx_get_zombie(struct x86_ctx_t *parent, int pid)x86_ctx_get_zombie451,13668
+void __x86_ctx_host_thread_suspend_cancel(struct x86_ctx_t *ctx)__x86_ctx_host_thread_suspend_cancel469,14089
+void x86_ctx_host_thread_suspend_cancel(struct x86_ctx_t *ctx)x86_ctx_host_thread_suspend_cancel481,14412
+void __x86_ctx_host_thread_timer_cancel(struct x86_ctx_t *ctx)__x86_ctx_host_thread_timer_cancel492,14758
+void x86_ctx_host_thread_timer_cancel(struct x86_ctx_t *ctx)x86_ctx_host_thread_timer_cancel504,15073
+void x86_ctx_suspend(struct x86_ctx_t *ctx, x86_ctx_can_wakeup_callback_func_t can_wakeup_callback_func,x86_ctx_suspend515,15461
+void x86_ctx_finish_group(struct x86_ctx_t *ctx, int status)x86_ctx_finish_group536,16338
+void x86_ctx_finish(struct x86_ctx_t *ctx, int status)x86_ctx_finish581,17760
+int x86_ctx_futex_wake(struct x86_ctx_t *ctx, uint32_t futex, uint32_t count, uint32_t bitset)x86_ctx_futex_wake637,19387
+void x86_ctx_exit_robust_list(struct x86_ctx_t *ctx)x86_ctx_exit_robust_list672,20231
+void x86_ctx_gen_proc_self_maps(struct x86_ctx_t *ctx, char *path)x86_ctx_gen_proc_self_maps714,21378
+struct x86_ctx_ipc_report_stack_tx86_ctx_ipc_report_stack_t773,22640
+	int pid;pid775,22676
+	long long inst_count;inst_count776,22686
+void x86_ctx_ipc_report_schedule(struct x86_ctx_t *ctx)x86_ctx_ipc_report_schedule779,22713
+void x86_ctx_ipc_report_handler(int event, void *data)x86_ctx_ipc_report_handler807,23463
+
+checkpoint.c,3434
+struct bin_config_t *ckp;ckp70,2349
+struct cfg_stack_elem_tcfg_stack_elem_t73,2410
+	struct bin_config_elem_t *elem;elem75,2436
+	char *key;key76,2469
+	int child_idx;child_idx77,2481
+struct list_t *cfg_stack;cfg_stack82,2593
+static int cfg_unique_num;cfg_unique_num83,2619
+void x86_checkpoint_load(char *file_name)x86_checkpoint_load85,2647
+void x86_checkpoint_save(char *file_name)x86_checkpoint_save99,2847
+static void load_processes()load_processes113,3047
+static void save_processes()save_processes125,3184
+static void load_process()load_process152,3745
+static void save_process(struct x86_ctx_t *ctx)save_process182,4540
+static void save_process_misc(struct x86_ctx_t *ctx)save_process_misc194,4736
+static void load_memory(struct mem_t *mem)load_memory212,5227
+static void save_memory(struct mem_t *mem)save_memory222,5375
+static void load_memory_data(struct mem_t *mem)load_memory_data232,5519
+static void save_memory_data(struct mem_t *mem)save_memory_data252,5811
+static void load_memory_range(struct mem_t *mem)load_memory_range277,6225
+static void save_memory_page(struct mem_page_t *page)save_memory_page316,7286
+static void load_fds(struct file_desc_table_t *fdt)load_fds329,7553
+static void load_fd(struct file_desc_table_t *fdt)load_fd341,7717
+static void save_fds(struct file_desc_table_t *fdt)save_fds387,8747
+static void load_threads(struct x86_ctx_t *process_ctx)load_threads416,9322
+static void save_threads(struct x86_ctx_t *process_ctx)save_threads441,9674
+static void save_thread(struct x86_ctx_t *ctx)save_thread460,10074
+static void load_regs(struct x86_regs_t *regs)load_regs473,10279
+static void save_regs(struct x86_regs_t *regs)save_regs541,11903
+static void check()check611,13383
+static int index_of(int *array, int value, int n)index_of629,13754
+static void cfg_init()cfg_init641,13899
+static void cfg_done()cfg_done649,14056
+static void cfg_push(char *fmt, ...)cfg_push655,14140
+static void cfg_push_unique()cfg_push_unique669,14430
+static void save_raw_str(char *str)save_raw_str680,14697
+static void cfg_pop()cfg_pop689,14889
+static int cfg_try_descend(char *key)cfg_try_descend695,14971
+static void cfg_descend(char *key)cfg_descend708,15243
+static int cfg_next_child()cfg_next_child715,15408
+static struct cfg_stack_elem_t *cfg_top()cfg_top737,15885
+static char *cfg_path()cfg_path742,15988
+static int key_exists(char *key)key_exists758,16306
+static void load_value(char *key, void **value, int size)load_value770,16488
+static void save_value(char *key, void *value, int size)save_value782,16817
+static void save_value_no_dup(char *key, void *value, int size)save_value_no_dup788,16946
+#define DEF_LOAD_TYPE(DEF_LOAD_TYPE794,17089
+#undef DEF_LOAD_TYPEDEF_LOAD_TYPE805,17305
+#define DEF_SAVE_TYPE(DEF_SAVE_TYPE807,17327
+#undef DEF_SAVE_TYPEDEF_SAVE_TYPE817,17543
+static char *load_str(char *key)load_str819,17565
+static char *load_str_or_dflt(char *key, char *dflt)load_str_or_dflt838,17917
+static void save_str(char *key, char *str)save_str846,18041
+static struct linked_list_t *load_str_list(char *key)load_str_list856,18249
+static void save_str_list(char *key, struct linked_list_t *list)save_str_list874,18576
+static struct cfg_stack_elem_t *cfg_stack_elem_create(cfg_stack_elem_create887,18805
+static void cfg_stack_elem_free(struct cfg_stack_elem_t *elem)cfg_stack_elem_free905,19185
+
+machine-xmm.c,6195
+#define mem_access mem_access24,901
+#define mem_read mem_read25,942
+#define mem_write mem_write26,981
+#define mem_zero mem_zero27,1021
+#define mem_read_string mem_read_string28,1060
+#define mem_write_string mem_write_string29,1106
+#define mem_get_buffer mem_get_buffer30,1153
+#define fatal fatal31,1198
+#define panic panic32,1234
+#define warning warning33,1270
+#undef assertassert35,1322
+#define assert assert37,1343
+void x86_isa_addss_xmm_xmmm32_impl(struct x86_ctx_t *ctx)x86_isa_addss_xmm_xmmm32_impl40,1382
+void x86_isa_cvtsd2ss_xmm_xmmm64_impl(struct x86_ctx_t *ctx)x86_isa_cvtsd2ss_xmm_xmmm64_impl74,2195
+void x86_isa_cvttsd2si_r32_xmmm64_impl(struct x86_ctx_t *ctx)x86_isa_cvttsd2si_r32_xmmm64_impl108,3012
+void x86_isa_cvttss2si_r32_xmmm32_impl(struct x86_ctx_t *ctx)x86_isa_cvttss2si_r32_xmmm32_impl131,3424
+void x86_isa_divss_xmm_xmmm32_impl(struct x86_ctx_t *ctx)x86_isa_divss_xmm_xmmm32_impl154,3836
+void x86_isa_ldmxcsr_m32_impl(struct x86_ctx_t *ctx)x86_isa_ldmxcsr_m32_impl188,4649
+void x86_isa_movaps_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_movaps_xmm_xmmm128_impl194,4766
+void x86_isa_movaps_xmmm128_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movaps_xmmm128_xmm_impl205,5027
+void x86_isa_movd_xmm_rm32_impl(struct x86_ctx_t *ctx)x86_isa_movd_xmm_rm32_impl216,5288
+void x86_isa_movd_rm32_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movd_rm32_xmm_impl229,5580
+void x86_isa_movdqa_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_movdqa_xmm_xmmm128_impl240,5832
+void x86_isa_movdqa_xmmm128_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movdqa_xmmm128_xmm_impl251,6073
+void x86_isa_movdqu_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_movdqu_xmm_xmmm128_impl262,6314
+void x86_isa_movdqu_xmmm128_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movdqu_xmmm128_xmm_impl273,6555
+void x86_isa_movhpd_xmm_m64_impl(struct x86_ctx_t *ctx)x86_isa_movhpd_xmm_m64_impl284,6796
+void x86_isa_movhpd_m64_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movhpd_m64_xmm_impl296,7101
+void x86_isa_movlhps_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_movlhps_xmm_xmmm128_impl307,7357
+void x86_isa_movlpd_xmm_m64_impl(struct x86_ctx_t *ctx)x86_isa_movlpd_xmm_m64_impl321,7727
+void x86_isa_movlpd_m64_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movlpd_m64_xmm_impl333,8032
+void x86_isa_mulss_xmm_xmmm32_impl(struct x86_ctx_t *ctx)x86_isa_mulss_xmm_xmmm32_impl344,8288
+void x86_isa_pmovmskb_r32_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_pmovmskb_r32_xmmm128_impl378,9102
+void x86_isa_movntdq_m128_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movntdq_m128_xmm_impl384,9228
+void x86_isa_movq_xmm_xmmm64_impl(struct x86_ctx_t *ctx)x86_isa_movq_xmm_xmmm64_impl390,9350
+void x86_isa_movq_xmmm64_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movq_xmmm64_xmm_impl402,9615
+void x86_isa_movss_xmm_xmmm32_impl(struct x86_ctx_t *ctx)x86_isa_movss_xmm_xmmm32_impl417,10002
+void x86_isa_movss_xmmm32_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movss_xmmm32_xmm_impl434,10425
+void x86_isa_movups_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_movups_xmm_xmmm128_impl452,10911
+void x86_isa_movups_xmmm128_xmm_impl(struct x86_ctx_t *ctx)x86_isa_movups_xmmm128_xmm_impl463,11172
+void x86_isa_orpd_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_orpd_xmm_xmmm128_impl474,11433
+void x86_isa_paddd_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_paddd_xmm_xmmm128_impl500,11988
+void x86_isa_palignr_xmm_xmmm128_imm8_impl(struct x86_ctx_t *ctx)x86_isa_palignr_xmm_xmmm128_imm8_impl526,12546
+void x86_isa_pand_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_pand_xmm_xmmm128_impl532,12676
+void x86_isa_pcmpeqb_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_pcmpeqb_xmm_xmmm128_impl538,12798
+void x86_isa_pcmpeqw_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_pcmpeqw_xmm_xmmm128_impl544,12923
+void x86_isa_pcmpeqd_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_pcmpeqd_xmm_xmmm128_impl550,13048
+void x86_isa_pcmpistri_xmm_xmmm128_imm8_impl(struct x86_ctx_t *ctx)x86_isa_pcmpistri_xmm_xmmm128_imm8_impl556,13173
+void x86_isa_pinsrb_xmm_r32m8_imm8_impl(struct x86_ctx_t *ctx)x86_isa_pinsrb_xmm_r32m8_imm8_impl562,13305
+void x86_isa_pinsrd_xmm_rm32_imm8_impl(struct x86_ctx_t *ctx)x86_isa_pinsrd_xmm_rm32_imm8_impl568,13432
+void x86_isa_punpcklbw_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_punpcklbw_xmm_xmmm128_impl574,13558
+void x86_isa_punpcklwd_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_punpcklwd_xmm_xmmm128_impl580,13685
+void x86_isa_punpckldq_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_punpckldq_xmm_xmmm128_impl586,13812
+void x86_isa_punpcklqdq_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_punpcklqdq_xmm_xmmm128_impl592,13939
+void x86_isa_pshufb_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_pshufb_xmm_xmmm128_impl598,14067
+void x86_isa_pshufd_xmm_xmmm128_imm8_impl(struct x86_ctx_t *ctx)x86_isa_pshufd_xmm_xmmm128_imm8_impl604,14191
+void x86_isa_pslldq_xmmm128_imm8_impl(struct x86_ctx_t *ctx)x86_isa_pslldq_xmmm128_imm8_impl620,14634
+void x86_isa_psrldq_xmmm128_imm8_impl(struct x86_ctx_t *ctx)x86_isa_psrldq_xmmm128_imm8_impl626,14759
+void x86_isa_stmxcsr_m32_impl(struct x86_ctx_t *ctx)x86_isa_stmxcsr_m32_impl632,14884
+void x86_isa_psubb_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_psubb_xmm_xmmm128_impl638,15001
+void x86_isa_psubw_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_psubw_xmm_xmmm128_impl644,15124
+void x86_isa_psubd_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_psubd_xmm_xmmm128_impl650,15247
+void x86_isa_ptest_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_ptest_xmm_xmmm128_impl656,15370
+void x86_isa_pxor_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_pxor_xmm_xmmm128_impl662,15493
+void x86_isa_shufps_xmm_xmmm128_imm8_impl(struct x86_ctx_t *ctx)x86_isa_shufps_xmm_xmmm128_imm8_impl688,16049
+void x86_isa_sqrtss_xmm_xmmm32_impl(struct x86_ctx_t *ctx)x86_isa_sqrtss_xmm_xmmm32_impl709,16617
+void x86_isa_subsd_xmm_xmmm64_impl(struct x86_ctx_t *ctx)x86_isa_subsd_xmm_xmmm64_impl743,17432
+void x86_isa_subss_xmm_xmmm32_impl(struct x86_ctx_t *ctx)x86_isa_subss_xmm_xmmm32_impl777,18245
+void x86_isa_unpcklps_xmm_xmmm128_impl(struct x86_ctx_t *ctx)x86_isa_unpcklps_xmm_xmmm128_impl811,19058
+
+clrt.c,1320
+static char *x86_clrt_err_call =x86_clrt_err_call24,851
+enum x86_clrt_call_tx86_clrt_call_t31,1138
+	x86_clrt_call_invalid = 0,x86_clrt_call_invalid33,1161
+#define X86_CLRT_DEFINE_CALL(X86_CLRT_DEFINE_CALL34,1189
+#undef X86_CLRT_DEFINE_CALLX86_CLRT_DEFINE_CALL36,1279
+	x86_clrt_call_countx86_clrt_call_count37,1307
+#define X86_CLRT_DEFINE_CALL(X86_CLRT_DEFINE_CALL45,1434
+#undef X86_CLRT_DEFINE_CALLX86_CLRT_DEFINE_CALL47,1502
+char *x86_clrt_call_name[x86_clrt_call_count + 1] =x86_clrt_call_name42,1373
+#define X86_CLRT_DEFINE_CALL(X86_CLRT_DEFINE_CALL53,1596
+#undef X86_CLRT_DEFINE_CALLX86_CLRT_DEFINE_CALL55,1696
+typedef int (*x86_clrt_func_t)(void);x86_clrt_func_t59,1765
+#define X86_CLRT_DEFINE_CALL(X86_CLRT_DEFINE_CALL63,1882
+#undef X86_CLRT_DEFINE_CALLX86_CLRT_DEFINE_CALL65,1965
+static x86_clrt_func_t x86_clrt_func_table[x86_clrt_call_count + 1] =x86_clrt_func_table60,1803
+int x86_clrt_debug_category;x86_clrt_debug_category71,2016
+int x86_clrt_call(void)x86_clrt_call75,2048
+#define X86_CLRT_VERSION_MAJOR X86_CLRT_VERSION_MAJOR109,2671
+#define X86_CLRT_VERSION_MINOR X86_CLRT_VERSION_MINOR110,2705
+struct x86_clrt_version_tx86_clrt_version_t112,2742
+	int major;major114,2770
+	int minor;minor115,2782
+static int x86_clrt_func_init(void)x86_clrt_func_init118,2798
+
+x86-emu.h,25728
+#define X86_EMU_HX86_EMU_H21,822
+struct x86_regs_tx86_regs_t61,1446
+	uint32_t eax, ecx, edx, ebx;eax64,1491
+	uint32_t eax, ecx, edx, ebx;ecx64,1491
+	uint32_t eax, ecx, edx, ebx;edx64,1491
+	uint32_t eax, ecx, edx, ebx;ebx64,1491
+	uint32_t esp, ebp, esi, edi;esp65,1521
+	uint32_t esp, ebp, esi, edi;ebp65,1521
+	uint32_t esp, ebp, esi, edi;esi65,1521
+	uint32_t esp, ebp, esi, edi;edi65,1521
+	uint16_t es, cs, ss, ds, fs, gs;es66,1551
+	uint16_t es, cs, ss, ds, fs, gs;cs66,1551
+	uint16_t es, cs, ss, ds, fs, gs;ss66,1551
+	uint16_t es, cs, ss, ds, fs, gs;ds66,1551
+	uint16_t es, cs, ss, ds, fs, gs;fs66,1551
+	uint16_t es, cs, ss, ds, fs, gs;gs66,1551
+	uint32_t eip;eip67,1585
+	uint32_t eflags;eflags68,1600
+		unsigned char value[10];value73,1657
+		int valid;valid74,1684
+	} fpu_stack[8];fpu_stack75,1697
+	int fpu_top;  /* top of stack (field 'top' of status register) */fpu_top76,1714
+	int fpu_code;  /* field 'code' of status register (C3-C2-C1-C0) */fpu_code77,1781
+	uint16_t fpu_ctrl;  /* fpu control word */fpu_ctrl78,1849
+	unsigned char xmm[8][16];xmm81,1932
+struct x86_loader_tx86_loader_t99,2292
+	int num_links;num_links102,2364
+	struct elf_file_t *elf_file;elf_file105,2401
+	struct linked_list_t *args;args106,2431
+	struct linked_list_t *env;env107,2460
+	char *interp;  /* Executable interpreter */interp108,2488
+	char *exe;  /* Executable file name */exe109,2533
+	char *cwd;  /* Current working directory */cwd110,2573
+	char *stdin_file;  /* File name for stdin */stdin_file111,2618
+	char *stdout_file;  /* File name for stdout */stdout_file112,2664
+	FILE *ipc_report_file;ipc_report_file115,2757
+	int ipc_report_interval;ipc_report_interval116,2781
+	unsigned int stack_base;stack_base119,2821
+	unsigned int stack_top;stack_top120,2847
+	unsigned int stack_size;stack_size121,2872
+	unsigned int environ_base;environ_base122,2898
+	unsigned int bottom;bottom125,2961
+	unsigned int prog_entry;prog_entry128,3007
+	unsigned int interp_prog_entry;interp_prog_entry129,3033
+	unsigned int phdt_base;phdt_base132,3090
+	unsigned int phdr_count;phdr_count133,3115
+	unsigned int at_random_addr;at_random_addr136,3162
+	unsigned int at_random_addr_holder;at_random_addr_holder137,3192
+#define x86_loader_debug(x86_loader_debug141,3234
+enum x86_dep_tx86_dep_t176,4543
+	x86_dep_none = 0,x86_dep_none178,4560
+	x86_dep_eax = 1,x86_dep_eax182,4610
+	x86_dep_ecx = 2,x86_dep_ecx183,4628
+	x86_dep_edx = 3,x86_dep_edx184,4646
+	x86_dep_ebx = 4,x86_dep_ebx185,4664
+	x86_dep_esp = 5,x86_dep_esp186,4682
+	x86_dep_ebp = 6,x86_dep_ebp187,4700
+	x86_dep_esi = 7,x86_dep_esi188,4718
+	x86_dep_edi = 8,x86_dep_edi189,4736
+	x86_dep_es = 9,x86_dep_es191,4755
+	x86_dep_cs = 10,x86_dep_cs192,4772
+	x86_dep_ss = 11,x86_dep_ss193,4790
+	x86_dep_ds = 12,x86_dep_ds194,4808
+	x86_dep_fs = 13,x86_dep_fs195,4826
+	x86_dep_gs = 14,x86_dep_gs196,4844
+	x86_dep_zps = 15,x86_dep_zps198,4863
+	x86_dep_of = 16,x86_dep_of199,4882
+	x86_dep_cf = 17,x86_dep_cf200,4900
+	x86_dep_df = 18,x86_dep_df201,4918
+	x86_dep_aux = 19,  /* Intermediate results for uops */x86_dep_aux203,4937
+	x86_dep_aux2 = 20,x86_dep_aux2204,4993
+	x86_dep_ea = 21,  /* Internal - Effective address */x86_dep_ea205,5013
+	x86_dep_data = 22,  /* Internal - Data for load/store */x86_dep_data206,5067
+	x86_dep_int_first = x86_dep_eax,x86_dep_int_first208,5126
+	x86_dep_int_last = x86_dep_data,x86_dep_int_last209,5160
+	x86_dep_int_count = x86_dep_int_last - x86_dep_int_first + 1,x86_dep_int_count210,5194
+	x86_dep_flag_first = x86_dep_zps,x86_dep_flag_first212,5258
+	x86_dep_flag_last = x86_dep_df,x86_dep_flag_last213,5293
+	x86_dep_flag_count = x86_dep_flag_last - x86_dep_flag_first + 1,x86_dep_flag_count214,5326
+	x86_dep_st0 = 23,  /* FP registers */x86_dep_st0219,5431
+	x86_dep_st1 = 24,x86_dep_st1220,5470
+	x86_dep_st2 = 25,x86_dep_st2221,5489
+	x86_dep_st3 = 26,x86_dep_st3222,5508
+	x86_dep_st4 = 27,x86_dep_st4223,5527
+	x86_dep_st5 = 28,x86_dep_st5224,5546
+	x86_dep_st6 = 29,x86_dep_st6225,5565
+	x86_dep_st7 = 30,x86_dep_st7226,5584
+	x86_dep_fpst = 31,  /* FP status word */x86_dep_fpst227,5603
+	x86_dep_fpcw = 32,  /* FP control word */x86_dep_fpcw228,5645
+	x86_dep_fpaux = 33,  /* Auxiliary FP reg */x86_dep_fpaux229,5688
+	x86_dep_fp_first = x86_dep_st0,x86_dep_fp_first231,5734
+	x86_dep_fp_last = x86_dep_fpaux,x86_dep_fp_last232,5767
+	x86_dep_fp_count = x86_dep_fp_last - x86_dep_fp_first + 1,x86_dep_fp_count233,5801
+	x86_dep_fp_stack_first = x86_dep_st0,x86_dep_fp_stack_first235,5862
+	x86_dep_fp_stack_last  = x86_dep_st7,x86_dep_fp_stack_last236,5901
+	x86_dep_fp_stack_count = x86_dep_fp_stack_last - x86_dep_fp_stack_first + 1,x86_dep_fp_stack_count237,5940
+	x86_dep_xmm0 = 34,x86_dep_xmm0242,6045
+	x86_dep_xmm1 = 35,x86_dep_xmm1243,6065
+	x86_dep_xmm2 = 36,x86_dep_xmm2244,6085
+	x86_dep_xmm3 = 37,x86_dep_xmm3245,6105
+	x86_dep_xmm4 = 38,x86_dep_xmm4246,6125
+	x86_dep_xmm5 = 39,x86_dep_xmm5247,6145
+	x86_dep_xmm6 = 40,x86_dep_xmm6248,6165
+	x86_dep_xmm7 = 41,x86_dep_xmm7249,6185
+	x86_dep_xmm_first = x86_dep_xmm0,x86_dep_xmm_first251,6206
+	x86_dep_xmm_last = x86_dep_xmm7,x86_dep_xmm_last252,6241
+	x86_dep_xmm_count = x86_dep_xmm_last - x86_dep_xmm_first + 1,x86_dep_xmm_count253,6275
+	x86_dep_rm8 = 0x100,x86_dep_rm8258,6370
+	x86_dep_rm16 = 0x101,x86_dep_rm16259,6392
+	x86_dep_rm32 = 0x102,x86_dep_rm32260,6415
+	x86_dep_ir8 = 0x200,x86_dep_ir8262,6439
+	x86_dep_ir16 = 0x201,x86_dep_ir16263,6461
+	x86_dep_ir32 = 0x202,x86_dep_ir32264,6484
+	x86_dep_r8 = 0x300,x86_dep_r8266,6508
+	x86_dep_r16 = 0x301,x86_dep_r16267,6529
+	x86_dep_r32 = 0x302,x86_dep_r32268,6551
+	x86_dep_sreg = 0x400,x86_dep_sreg269,6573
+	x86_dep_mem8 = 0x500,x86_dep_mem8271,6597
+	x86_dep_mem16 = 0x501,x86_dep_mem16272,6620
+	x86_dep_mem32 = 0x502,x86_dep_mem32273,6644
+	x86_dep_mem64 = 0x503,x86_dep_mem64274,6668
+	x86_dep_mem80 = 0x504,x86_dep_mem80275,6692
+	x86_dep_mem128 = 0x505,x86_dep_mem128276,6716
+	x86_dep_easeg = 0x601,  /* Effective address - segment */x86_dep_easeg278,6742
+	x86_dep_eabas = 0x602,  /* Effective address - base */x86_dep_eabas279,6801
+	x86_dep_eaidx = 0x603,  /* Effective address - index */x86_dep_eaidx280,6857
+	x86_dep_sti = 0x700,  /* FP - ToS+Index */x86_dep_sti282,6915
+	x86_dep_xmmm32 = 0x800,x86_dep_xmmm32284,6960
+	x86_dep_xmmm64 = 0x801,x86_dep_xmmm64285,6985
+	x86_dep_xmmm128 = 0x802,x86_dep_xmmm128286,7010
+	x86_dep_xmm = 0x900x86_dep_xmm288,7037
+#define X86_DEP_IS_INT_REG(X86_DEP_IS_INT_REG291,7062
+#define X86_DEP_IS_FP_REG(X86_DEP_IS_FP_REG292,7152
+#define X86_DEP_IS_XMM_REG(X86_DEP_IS_XMM_REG293,7239
+#define X86_DEP_IS_FLAG(X86_DEP_IS_FLAG294,7330
+#define X86_DEP_IS_VALID(X86_DEP_IS_VALID295,7419
+enum x86_uinst_flag_tx86_uinst_flag_t298,7530
+	X86_UINST_INT		= 0x001,  /* Arithmetic integer instruction */X86_UINST_INT300,7554
+	X86_UINST_LOGIC		= 0x002,  /* Logic computation */X86_UINST_LOGIC301,7617
+	X86_UINST_FP		= 0x004,  /* Floating-point micro-instruction */X86_UINST_FP302,7669
+	X86_UINST_MEM		= 0x008,  /* Memory micro-instructions */X86_UINST_MEM303,7733
+	X86_UINST_CTRL		= 0x010,  /* Micro-instruction affecting control flow */X86_UINST_CTRL304,7791
+	X86_UINST_COND		= 0x020,  /* Conditional branch */X86_UINST_COND305,7865
+	X86_UINST_UNCOND	= 0x040,  /* Unconditional jump */X86_UINST_UNCOND306,7917
+	X86_UINST_XMM		= 0x080   /* XMM micro-instruction */X86_UINST_XMM307,7970
+enum x86_uinst_opcode_tx86_uinst_opcode_t316,8302
+	x86_uinst_nop = 0,x86_uinst_nop318,8328
+	x86_uinst_move,x86_uinst_move320,8349
+	x86_uinst_add,x86_uinst_add321,8366
+	x86_uinst_sub,x86_uinst_sub322,8382
+	x86_uinst_mult,x86_uinst_mult323,8398
+	x86_uinst_div,x86_uinst_div324,8415
+	x86_uinst_effaddr,x86_uinst_effaddr325,8431
+	x86_uinst_and,x86_uinst_and327,8452
+	x86_uinst_or,x86_uinst_or328,8468
+	x86_uinst_xor,x86_uinst_xor329,8483
+	x86_uinst_not,x86_uinst_not330,8499
+	x86_uinst_shift,x86_uinst_shift331,8515
+	x86_uinst_sign,x86_uinst_sign332,8533
+	x86_uinst_fp_move,x86_uinst_fp_move334,8551
+	x86_uinst_fp_sign,x86_uinst_fp_sign335,8571
+	x86_uinst_fp_round,x86_uinst_fp_round336,8591
+	x86_uinst_fp_add,x86_uinst_fp_add338,8613
+	x86_uinst_fp_sub,x86_uinst_fp_sub339,8632
+	x86_uinst_fp_comp,x86_uinst_fp_comp340,8651
+	x86_uinst_fp_mult,x86_uinst_fp_mult341,8671
+	x86_uinst_fp_div,x86_uinst_fp_div342,8691
+	x86_uinst_fp_exp,x86_uinst_fp_exp344,8711
+	x86_uinst_fp_log,x86_uinst_fp_log345,8730
+	x86_uinst_fp_sin,x86_uinst_fp_sin346,8749
+	x86_uinst_fp_cos,x86_uinst_fp_cos347,8768
+	x86_uinst_fp_sincos,x86_uinst_fp_sincos348,8787
+	x86_uinst_fp_tan,x86_uinst_fp_tan349,8809
+	x86_uinst_fp_atan,x86_uinst_fp_atan350,8828
+	x86_uinst_fp_sqrt,x86_uinst_fp_sqrt351,8848
+	x86_uinst_fp_push,x86_uinst_fp_push353,8869
+	x86_uinst_fp_pop,x86_uinst_fp_pop354,8889
+	x86_uinst_xmm_and,x86_uinst_xmm_and356,8909
+	x86_uinst_xmm_or,x86_uinst_xmm_or357,8929
+	x86_uinst_xmm_xor,x86_uinst_xmm_xor358,8948
+	x86_uinst_xmm_not,x86_uinst_xmm_not359,8968
+	x86_uinst_xmm_shift,x86_uinst_xmm_shift360,8988
+	x86_uinst_xmm_sign,x86_uinst_xmm_sign361,9010
+	x86_uinst_xmm_add,x86_uinst_xmm_add363,9032
+	x86_uinst_xmm_sub,x86_uinst_xmm_sub364,9052
+	x86_uinst_xmm_comp,x86_uinst_xmm_comp365,9072
+	x86_uinst_xmm_mult,x86_uinst_xmm_mult366,9093
+	x86_uinst_xmm_div,x86_uinst_xmm_div367,9114
+	x86_uinst_xmm_fp_add,x86_uinst_xmm_fp_add369,9135
+	x86_uinst_xmm_fp_sub,x86_uinst_xmm_fp_sub370,9158
+	x86_uinst_xmm_fp_comp,x86_uinst_xmm_fp_comp371,9181
+	x86_uinst_xmm_fp_mult,x86_uinst_xmm_fp_mult372,9205
+	x86_uinst_xmm_fp_div,x86_uinst_xmm_fp_div373,9229
+	x86_uinst_xmm_fp_sqrt,x86_uinst_xmm_fp_sqrt375,9253
+	x86_uinst_xmm_move,x86_uinst_xmm_move377,9278
+	x86_uinst_xmm_shuf,x86_uinst_xmm_shuf378,9299
+	x86_uinst_xmm_conv,x86_uinst_xmm_conv379,9320
+	x86_uinst_load,x86_uinst_load381,9342
+	x86_uinst_store,x86_uinst_store382,9359
+	x86_uinst_call,x86_uinst_call384,9378
+	x86_uinst_ret,x86_uinst_ret385,9395
+	x86_uinst_jump,x86_uinst_jump386,9411
+	x86_uinst_branch,x86_uinst_branch387,9428
+	x86_uinst_ibranch,x86_uinst_ibranch388,9447
+	x86_uinst_syscall,x86_uinst_syscall390,9468
+	x86_uinst_opcode_countx86_uinst_opcode_count392,9489
+extern struct x86_uinst_info_tx86_uinst_info_t396,9518
+	char *name;name398,9551
+	enum x86_uinst_flag_t flags;flags399,9564
+#define X86_UINST_MAX_IDEPS X86_UINST_MAX_IDEPS403,9638
+#define X86_UINST_MAX_ODEPS X86_UINST_MAX_ODEPS404,9668
+#define X86_UINST_MAX_DEPS X86_UINST_MAX_DEPS405,9698
+struct x86_uinst_tx86_uinst_t407,9771
+	enum x86_uinst_opcode_t opcode;opcode410,9809
+	enum x86_dep_t dep[X86_UINST_MAX_IDEPS + X86_UINST_MAX_ODEPS];dep413,9862
+	enum x86_dep_t *idep;  /* First 'X86_UINST_MAX_IDEPS' elements of 'dep' */idep414,9926
+	enum x86_dep_t *odep;  /* Last 'X86_UINST_MAX_ODEPS' elements of 'dep' */odep415,10002
+	unsigned int address;address418,10099
+	int size;size419,10122
+#define x86_uinst_new(x86_uinst_new433,10521
+#define x86_uinst_new_mem(x86_uinst_new_mem436,10737
+#define x86_isa_call_debug(x86_isa_call_debug467,11853
+#define x86_isa_inst_debug(x86_isa_inst_debug468,11933
+#define __X86_ISA_ASM_START__ __X86_ISA_ASM_START__476,12129
+#define __X86_ISA_ASM_END__ __X86_ISA_ASM_END__481,12239
+#define __X86_ISA_FP_ASM_START__ __X86_ISA_FP_ASM_START__490,12436
+#define __X86_ISA_FP_ASM_END__ __X86_ISA_FP_ASM_END__499,12725
+#define DEFINST(DEFINST509,13025
+#undef DEFINSTDEFINST512,13157
+#define x86_isa_load_r8(x86_isa_load_r8536,14339
+#define x86_isa_load_r16(x86_isa_load_r16537,14418
+#define x86_isa_load_r32(x86_isa_load_r32538,14498
+#define x86_isa_load_sreg(x86_isa_load_sreg539,14579
+#define x86_isa_store_r8(x86_isa_store_r8540,14660
+#define x86_isa_store_r16(x86_isa_store_r16541,14755
+#define x86_isa_store_r32(x86_isa_store_r32542,14851
+#define x86_isa_store_sreg(x86_isa_store_sreg543,14948
+#define x86_isa_load_ir8(x86_isa_load_ir8545,15046
+#define x86_isa_load_ir16(x86_isa_load_ir16546,15130
+#define x86_isa_load_ir32(x86_isa_load_ir32547,15215
+#define x86_isa_store_ir8(x86_isa_store_ir8548,15301
+#define x86_isa_store_ir16(x86_isa_store_ir16549,15401
+#define x86_isa_store_ir32(x86_isa_store_ir32550,15502
+#define x86_sys_debug(x86_sys_debug603,17694
+#define x86_sys_debug_buffer(x86_sys_debug_buffer604,17764
+#define x86_glut_debug(x86_glut_debug625,18310
+#define x86_opengl_debug(x86_opengl_debug659,19197
+#define x86_clrt_debug(x86_clrt_debug674,19436
+struct signal_mask_table_tsignal_mask_table_t700,19782
+	unsigned long long pending;  /* Mask of pending signals */pending702,19811
+	unsigned long long blocked;  /* Mask of blocked signals */blocked703,19871
+	unsigned long long backup;  /* Backup of blocked signals while suspended */backup704,19931
+	struct x86_regs_t *regs;  /* Backup of regs while executing handler */regs705,20008
+	unsigned int pretcode;  /* Base address of a memory page allocated for retcode execution */pretcode706,20080
+struct signal_handler_table_tsignal_handler_table_t713,20303
+	int num_links;num_links716,20385
+	struct sim_sigactionsim_sigaction719,20425
+		unsigned int handler;handler721,20450
+		unsigned int flags;flags722,20474
+		unsigned int restorer;restorer723,20496
+		unsigned long long mask;mask724,20521
+	} sigaction[64];sigaction725,20548
+enum file_desc_kind_tfile_desc_kind_t755,21547
+	file_desc_invalid = 0,file_desc_invalid757,21571
+	file_desc_regular,  /* Regular file */file_desc_regular758,21595
+	file_desc_std,  /* Standard input or output */file_desc_std759,21635
+	file_desc_pipe,  /* A pipe */file_desc_pipe760,21683
+	file_desc_virtual,  /* A virtual file with artificial contents */file_desc_virtual761,21714
+	file_desc_gpu,  /* GPU device */file_desc_gpu762,21781
+	file_desc_socket  /* Network socket */file_desc_socket763,21815
+struct file_desc_tfile_desc_t768,21882
+	enum file_desc_kind_t kind;  /* File type */kind770,21903
+	int guest_fd;  /* Guest file descriptor id */guest_fd771,21949
+	int host_fd;  /* Equivalent open host file */host_fd772,21996
+	int flags;  /* O_xxx flags */flags773,22043
+	char *path;  /* Associated path if applicable */path774,22074
+struct file_desc_table_tfile_desc_table_t779,22157
+	int num_links;num_links782,22230
+	struct list_t *file_desc_list;file_desc_list785,22274
+#define x86_ctx_debug(x86_ctx_debug815,23404
+typedef int (*x86_ctx_can_wakeup_callback_func_t)(struct x86_ctx_t *ctx, void *data);x86_ctx_can_wakeup_callback_func_t821,23617
+typedef void (*x86_ctx_wakeup_callback_func_t)(struct x86_ctx_t *ctx, void *data);x86_ctx_wakeup_callback_func_t822,23703
+struct x86_ctx_tx86_ctx_t824,23787
+	int status;status827,23832
+	int pid;  /* Context ID */pid828,23845
+	int address_space_index;  /* Virtual memory address space index */address_space_index829,23873
+	struct x86_ctx_t *parent;parent832,23964
+	struct x86_ctx_t *group_parent;group_parent836,24121
+	int exit_signal;  /* Signal to send parent when finished */exit_signal838,24155
+	int exit_code;  /* For zombie contexts */exit_code839,24216
+	unsigned int clear_child_tid;clear_child_tid841,24260
+	unsigned int robust_list_head;  /* robust futex list */robust_list_head842,24291
+	unsigned int last_eip;  /* Address of last emulated instruction */last_eip845,24377
+	unsigned int curr_eip;  /* Address of currently emulated instruction */curr_eip846,24445
+	unsigned int target_eip;  /* Target address for branch, even if not taken */target_eip847,24518
+	struct x86_inst_t inst;inst850,24635
+	unsigned int str_op_esi;  /* Initial value for register 'esi' in string operation */str_op_esi853,24703
+	unsigned int str_op_edi;  /* Initial value for register 'edi' in string operation */str_op_edi854,24789
+	int str_op_dir;  /* Direction: 1 = forward, -1 = backward */str_op_dir855,24875
+	int str_op_count;  /* Number of iterations in string operation */str_op_count856,24937
+	long long alloc_when;  /* esim_cycle of allocation */alloc_when859,25043
+	long long dealloc_when;  /* esim_cycle of deallocation */dealloc_when860,25098
+	int alloc_core, alloc_thread;  /* core/thread id of last allocation */alloc_core861,25157
+	int alloc_core, alloc_thread;  /* core/thread id of last allocation */alloc_thread861,25157
+	int dealloc_signal;  /* signal to deallocate context */dealloc_signal862,25229
+	unsigned int glibc_segment_base;glibc_segment_base865,25331
+	unsigned int glibc_segment_limit;glibc_segment_limit866,25365
+	int libopencl_open_attempt;libopencl_open_attempt869,25438
+	int function_level;function_level872,25553
+	pthread_t host_thread_suspend;  /* Thread */host_thread_suspend879,25949
+	int host_thread_suspend_active;  /* Thread-spawned flag */host_thread_suspend_active880,25995
+	pthread_t host_thread_timer;  /* Thread */host_thread_timer883,26145
+	int host_thread_timer_active;  /* Thread-spawned flag */host_thread_timer_active884,26189
+	long long host_thread_timer_wakeup;  /* Time when the thread will wake up */host_thread_timer_wakeup885,26247
+	long long itimer_value[3];  /* Time when current occurrence of timer expires (0=inactive) */itimer_value888,26405
+	long long itimer_interval[3];  /* Interval (in usec) of repetition (0=inactive) */itimer_interval889,26499
+	long long wakeup_time;  /* x86_emu_timer time to wake up (poll/nanosleep) */wakeup_time892,26637
+	int wakeup_fd;  /* File descriptor (read/write/poll) */wakeup_fd893,26715
+	int wakeup_events;  /* Events for wake up (poll) */wakeup_events894,26772
+	int wakeup_pid;  /* Pid waiting for (waitpid) */wakeup_pid895,26825
+	unsigned int wakeup_futex;  /* Address of futex where context is suspended */wakeup_futex896,26875
+	unsigned int wakeup_futex_bitset;  /* Bit mask for selective futex wakeup */wakeup_futex_bitset897,26954
+	long long wakeup_futex_sleep;  /* Assignment from x86_emu->futex_sleep_count */wakeup_futex_sleep898,27032
+	x86_ctx_can_wakeup_callback_func_t can_wakeup_callback_func;can_wakeup_callback_func903,27313
+	x86_ctx_wakeup_callback_func_t wakeup_callback_func;wakeup_callback_func904,27375
+	void *can_wakeup_callback_data;can_wakeup_callback_data905,27429
+	void *wakeup_callback_data;wakeup_callback_data906,27462
+	struct x86_ctx_t *context_list_next, *context_list_prev;context_list_next909,27540
+	struct x86_ctx_t *context_list_next, *context_list_prev;context_list_prev909,27540
+	struct x86_ctx_t *running_list_next, *running_list_prev;running_list_next910,27598
+	struct x86_ctx_t *running_list_next, *running_list_prev;running_list_prev910,27598
+	struct x86_ctx_t *suspended_list_next, *suspended_list_prev;suspended_list_next911,27656
+	struct x86_ctx_t *suspended_list_next, *suspended_list_prev;suspended_list_prev911,27656
+	struct x86_ctx_t *finished_list_next, *finished_list_prev;finished_list_next912,27718
+	struct x86_ctx_t *finished_list_next, *finished_list_prev;finished_list_prev912,27718
+	struct x86_ctx_t *zombie_list_next, *zombie_list_prev;zombie_list_next913,27778
+	struct x86_ctx_t *zombie_list_next, *zombie_list_prev;zombie_list_prev913,27778
+	struct x86_ctx_t *alloc_list_next, *alloc_list_prev;alloc_list_next914,27834
+	struct x86_ctx_t *alloc_list_next, *alloc_list_prev;alloc_list_prev914,27834
+	struct x86_loader_t *loader;loader917,27910
+	struct mem_t *mem;  /* Virtual memory image */mem918,27940
+	struct spec_mem_t *spec_mem;  /* Speculative memory */spec_mem919,27988
+	struct x86_regs_t *regs;  /* Logical register file */regs920,28044
+	struct x86_regs_t *backup_regs;  /* Backup when entering in speculative mode */backup_regs921,28099
+	struct file_desc_table_t *file_desc_table;  /* File descriptor table */file_desc_table922,28180
+	struct signal_mask_table_t *signal_mask_table;signal_mask_table923,28253
+	struct signal_handler_table_t *signal_handler_table;signal_handler_table924,28301
+	long long inst_count;inst_count931,28491
+enum x86_ctx_status_tx86_ctx_status_t934,28518
+	x86_ctx_running      = 0x00001,  /* it is able to run instructions */x86_ctx_running936,28542
+	x86_ctx_spec_mode     = 0x00002,  /* executing in speculative mode */x86_ctx_spec_mode937,28613
+	x86_ctx_suspended    = 0x00004,  /* suspended in a system call */x86_ctx_suspended938,28684
+	x86_ctx_finished     = 0x00008,  /* no more inst to execute */x86_ctx_finished939,28751
+	x86_ctx_exclusive    = 0x00010,  /* executing in excl mode */x86_ctx_exclusive940,28815
+	x86_ctx_locked       = 0x00020,  /* another context is running in excl mode */x86_ctx_locked941,28878
+	x86_ctx_handler      = 0x00040,  /* executing a signal handler */x86_ctx_handler942,28958
+	x86_ctx_sigsuspend   = 0x00080,  /* suspended after syscall 'sigsuspend' */x86_ctx_sigsuspend943,29025
+	x86_ctx_nanosleep    = 0x00100,  /* suspended after syscall 'nanosleep' */x86_ctx_nanosleep944,29102
+	x86_ctx_poll         = 0x00200,  /* 'poll' system call */x86_ctx_poll945,29178
+	x86_ctx_read         = 0x00400,  /* 'read' system call */x86_ctx_read946,29237
+	x86_ctx_write        = 0x00800,  /* 'write' system call */x86_ctx_write947,29296
+	x86_ctx_waitpid      = 0x01000,  /* 'waitpid' system call */x86_ctx_waitpid948,29356
+	x86_ctx_zombie       = 0x02000,  /* zombie context */x86_ctx_zombie949,29418
+	x86_ctx_futex        = 0x04000,  /* suspended in a futex */x86_ctx_futex950,29473
+	x86_ctx_alloc        = 0x08000,  /* allocated to a core/thread */x86_ctx_alloc951,29534
+	x86_ctx_callback     = 0x10000,  /* suspended after syscall with callback */x86_ctx_callback952,29601
+	x86_ctx_none         = 0x00000x86_ctx_none953,29679
+enum gpu_emulator_kind_t gpu_emulator_kind_t997,31429
+	gpu_emulator_evg = 0,gpu_emulator_evg999,31457
+	gpu_emulator_sigpu_emulator_si1000,31480
+struct x86_emu_tx86_emu_t1008,31530
+	int current_pid;current_pid1011,31593
+	struct m2s_timer_t *timer;timer1014,31647
+	pthread_mutex_t process_events_mutex;process_events_mutex1019,31882
+	int process_events_force;process_events_force1020,31921
+	long long futex_sleep_count;futex_sleep_count1024,32046
+	int context_reschedule;context_reschedule1027,32152
+	struct x86_ctx_t *context_list_head;context_list_head1030,32202
+	struct x86_ctx_t *context_list_tail;context_list_tail1031,32240
+	int context_list_count;context_list_count1032,32278
+	int context_list_max;context_list_max1033,32303
+	struct x86_ctx_t *running_list_head;running_list_head1036,32359
+	struct x86_ctx_t *running_list_tail;running_list_tail1037,32397
+	int running_list_count;running_list_count1038,32435
+	int running_list_max;running_list_max1039,32460
+	struct x86_ctx_t *suspended_list_head;suspended_list_head1042,32518
+	struct x86_ctx_t *suspended_list_tail;suspended_list_tail1043,32558
+	int suspended_list_count;suspended_list_count1044,32598
+	int suspended_list_max;suspended_list_max1045,32625
+	struct x86_ctx_t *zombie_list_head;zombie_list_head1048,32682
+	struct x86_ctx_t *zombie_list_tail;zombie_list_tail1049,32719
+	int zombie_list_count;zombie_list_count1050,32756
+	int zombie_list_max;zombie_list_max1051,32780
+	struct x86_ctx_t *finished_list_head;finished_list_head1054,32836
+	struct x86_ctx_t *finished_list_tail;finished_list_tail1055,32875
+	int finished_list_count;finished_list_count1056,32914
+	int finished_list_max;finished_list_max1057,32940
+	struct x86_ctx_t *alloc_list_head;alloc_list_head1060,32999
+	struct x86_ctx_t *alloc_list_tail;alloc_list_tail1061,33035
+	int alloc_list_count;alloc_list_count1062,33071
+	int alloc_list_max;alloc_list_max1063,33094
+	long long inst_count;  /* Number of emulated instructions */inst_count1066,33129
+	enum gpu_emulator_kind_t gpu_emulator;gpu_emulator1069,33244
+enum x86_emu_list_kind_tx86_emu_list_kind_t1072,33288
+	x86_emu_list_context = 0,x86_emu_list_context1074,33315
+	x86_emu_list_running,x86_emu_list_running1075,33342
+	x86_emu_list_suspended,x86_emu_list_suspended1076,33365
+	x86_emu_list_zombie,x86_emu_list_zombie1077,33390
+	x86_emu_list_finished,x86_emu_list_finished1078,33412
+	x86_emu_list_allocx86_emu_list_alloc1079,33436
+extern volatile enum x86_emu_finish_tx86_emu_finish_t1091,33871
+	x86_emu_finish_none,  /* Simulation not finished */x86_emu_finish_none1093,33911
+	x86_emu_finish_ctx,  /* Contexts finished */x86_emu_finish_ctx1094,33964
+	x86_emu_finish_last_cpu_inst_bytes, /* Last CPU instruction reached */x86_emu_finish_last_cpu_inst_bytes1095,34010
+	x86_emu_finish_max_cpu_inst,  /* Maximum instruction count reached in CPU */x86_emu_finish_max_cpu_inst1096,34082
+	x86_emu_finish_max_cpu_cycles,  /* Maximum cycle count reached in CPU */x86_emu_finish_max_cpu_cycles1097,34160
+	x86_emu_finish_max_gpu_inst,  /* Maximum instruction count reached in GPU */x86_emu_finish_max_gpu_inst1098,34234
+	x86_emu_finish_max_gpu_cycles,  /* Maximum cycle count reached in GPU */x86_emu_finish_max_gpu_cycles1099,34312
+	x86_emu_finish_max_gpu_kernels,  /* Maximum number of GPU kernels */x86_emu_finish_max_gpu_kernels1100,34386
+	x86_emu_finish_max_time,  /* Maximum simulation time reached */x86_emu_finish_max_time1101,34456
+	x86_emu_finish_signal,  /* Signal received */x86_emu_finish_signal1102,34521
+	x86_emu_finish_stall,  /* Simulation stalled */x86_emu_finish_stall1103,34568
+	x86_emu_finish_gpu_no_faults  /* GPU-REL: no fault in '--evg_gpu-stack-faults' caused error */x86_emu_finish_gpu_no_faults1104,34617
+extern enum x86_emu_kind_tx86_emu_kind_t1116,34950
+	x86_emu_kind_functional,x86_emu_kind_functional1118,34979
+	x86_emu_kind_detailedx86_emu_kind_detailed1119,35005

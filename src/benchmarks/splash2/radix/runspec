@@ -1,0 +1,2 @@
+exe = radix.i386
+args = -n524288

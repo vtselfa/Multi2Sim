@@ -1,0 +1,19 @@
+ctxconfig.cholesky
+[ Context 0 ]
+Exe = ./benchmarks/splash2/cholesky/cholesky.i386
+Args = -p8 -C1048576
+Stdout = ./benchmarks/splash2/cholesky/cho.080.ctxout
+Stdin = ./benchmarks/splash2/cholesky/tk15.O
+
+ctxconfig.fft
+[ Context 0 ]
+Exe = ./benchmarks/splash2/fft/fft.i386
+Args = -m16 -p8 -n1024 -l6 -s -t
+Stdout = ./benchmarks/splash2/fft/fft.008.ctxout
+
+ctxconfig.radix
+[ Context 0 ]
+Exe = ./benchmarks/splash2/radix/radix.i386
+Args = -p8 -n524288
+Stdout = ./benchmarks/splash2/radix/ra.800.ctxout
+

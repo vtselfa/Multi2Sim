@@ -1,0 +1,194 @@
+
+trace.c,1702
+struct vi_trace_tvi_trace_t25,841
+	char *name;name27,861
+	gzFile *f;f28,874
+	int line_num;line_num32,984
+struct vi_trace_line_tvi_trace_line_t36,1004
+	int line_num;line_num39,1048
+	char *command;command42,1091
+	struct hash_table_t *symbol_table;symbol_table43,1107
+	long int offset;offset46,1193
+#define isidchar(isidchar56,1240
+struct vi_trace_line_t *vi_trace_line_create_from_file(FILE *f)vi_trace_line_create_from_file78,1876
+struct vi_trace_line_t *vi_trace_line_create_from_trace(struct vi_trace_t *trace)vi_trace_line_create_from_trace143,3234
+void vi_trace_line_free(struct vi_trace_line_t *line)vi_trace_line_free242,5363
+void vi_trace_line_dump(struct vi_trace_line_t *line, FILE *f)vi_trace_line_dump256,5656
+void vi_trace_line_dump_plain_text(struct vi_trace_line_t *line, FILE *f)vi_trace_line_dump_plain_text288,6394
+long int vi_trace_line_get_offset(struct vi_trace_line_t *line)vi_trace_line_get_offset308,6777
+char *vi_trace_line_get_command(struct vi_trace_line_t *line)vi_trace_line_get_command314,6869
+char *vi_trace_line_get_symbol(struct vi_trace_line_t *line, char *symbol_name)vi_trace_line_get_symbol320,6960
+int vi_trace_line_get_symbol_int(struct vi_trace_line_t *line, char *symbol_name)vi_trace_line_get_symbol_int329,7147
+long long vi_trace_line_get_symbol_long_long(struct vi_trace_line_t *line, char *symbol_name)vi_trace_line_get_symbol_long_long338,7341
+unsigned int vi_trace_line_get_symbol_hex(struct vi_trace_line_t *line, char *symbol_name)vi_trace_line_get_symbol_hex347,7548
+struct vi_trace_t *vi_trace_create(char *file_name)vi_trace_create371,7913
+void vi_trace_free(struct vi_trace_t *trace)vi_trace_free395,8392
+
+led.c,589
+struct vi_led_tvi_led_t23,839
+	GtkWidget *widget;widget25,857
+	GdkColor color;color27,878
+static void vi_led_destroy(GtkWidget *widget, struct vi_led_t *led)vi_led_destroy31,900
+static gboolean vi_led_draw(GtkWidget *widget, GdkEventConfigure *event, struct vi_led_t *led)vi_led_draw37,993
+struct vi_led_t *vi_led_create(int radius)vi_led_create68,1734
+void vi_led_free(struct vi_led_t *led)vi_led_free94,2363
+void vi_led_set_color(struct vi_led_t *led, GdkColor *color)vi_led_set_color100,2420
+GtkWidget *vi_led_get_widget(struct vi_led_t *led)vi_led_get_widget107,2547
+
+cycle-bar.c,2598
+static char cycle_bar_back_single_path[MAX_PATH_SIZE];cycle_bar_back_single_path23,839
+static char cycle_bar_back_double_path[MAX_PATH_SIZE];cycle_bar_back_double_path24,894
+static char cycle_bar_back_triple_path[MAX_PATH_SIZE];cycle_bar_back_triple_path25,949
+static char cycle_bar_forward_single_path[MAX_PATH_SIZE];cycle_bar_forward_single_path27,1005
+static char cycle_bar_forward_double_path[MAX_PATH_SIZE];cycle_bar_forward_double_path28,1063
+static char cycle_bar_forward_triple_path[MAX_PATH_SIZE];cycle_bar_forward_triple_path29,1121
+static char cycle_bar_go_path[MAX_PATH_SIZE];cycle_bar_go_path31,1180
+struct vi_cycle_bar_tvi_cycle_bar_t34,1228
+	GtkWidget *widget;widget36,1252
+	GtkWidget *scale;scale37,1272
+	GtkWidget *go_to_entry;go_to_entry38,1291
+	vi_cycle_bar_refresh_func_t refresh_func;refresh_func40,1317
+	void *refresh_func_arg;refresh_func_arg41,1360
+static struct vi_cycle_bar_t *vi_cycle_bar;vi_cycle_bar45,1390
+static void vi_cycle_bar_go_to_cycle(long long cycle)vi_cycle_bar_go_to_cycle48,1436
+static gboolean vi_cycle_bar_change_value_event(GtkWidget *widget, GtkScrollType scroll,vi_cycle_bar_change_value_event72,2024
+static gboolean vi_cycle_bar_back_single_clicked_event(GtkWidget *button, gpointer data)vi_cycle_bar_back_single_clicked_event80,2198
+static gboolean vi_cycle_bar_back_double_clicked_event(GtkWidget *button, gpointer data)vi_cycle_bar_back_double_clicked_event90,2427
+static gboolean vi_cycle_bar_back_triple_clicked_event(GtkWidget *button, gpointer data)vi_cycle_bar_back_triple_clicked_event100,2657
+static gboolean vi_cycle_bar_forward_single_clicked_event(GtkWidget *button, gpointer data)vi_cycle_bar_forward_single_clicked_event110,2888
+static gboolean vi_cycle_bar_forward_double_clicked_event(GtkWidget *button, gpointer data)vi_cycle_bar_forward_double_clicked_event120,3120
+static gboolean vi_cycle_bar_forward_triple_clicked_event(GtkWidget *button, gpointer data)vi_cycle_bar_forward_triple_clicked_event130,3353
+static gboolean vi_cycle_bar_go_to_clicked_event(GtkWidget *button, gpointer data)vi_cycle_bar_go_to_clicked_event140,3587
+static gboolean cycle_bar_go_to_key_press_event(GtkWidget *entry, GdkEventKey *event, gpointer data)cycle_bar_go_to_key_press_event150,3818
+void vi_cycle_bar_init(vi_cycle_bar_refresh_func_t refresh_func, void *user_data)vi_cycle_bar_init164,4244
+void vi_cycle_bar_done(void)vi_cycle_bar_done282,10496
+GtkWidget *vi_cycle_bar_get_widget(void)vi_cycle_bar_get_widget288,10552
+long long vi_cycle_bar_get_cycle(void)vi_cycle_bar_get_cycle294,10629
+
+state.c,3364
+#define VI_STATE_CHECKPOINT_INTERVAL VI_STATE_CHECKPOINT_INTERVAL28,868
+#define VI_STATE_PROGRESS_INTERVAL VI_STATE_PROGRESS_INTERVAL29,910
+struct vi_state_checkpoint_tvi_state_checkpoint_t31,954
+	long long cycle;cycle33,985
+	long int unzipped_trace_file_offset;unzipped_trace_file_offset36,1029
+	long int checkpoint_file_offset;checkpoint_file_offset37,1067
+struct vi_state_checkpoint_t *vi_state_checkpoint_create(long long cycle,vi_state_checkpoint_create41,1106
+void vi_state_checkpoint_free(struct vi_state_checkpoint_t *checkpoint)vi_state_checkpoint_free61,1658
+struct vi_state_command_tvi_state_command_t73,1782
+	vi_state_process_trace_line_func_t process_trace_line_func;process_trace_line_func75,1810
+	void *user_data;user_data76,1871
+struct vi_state_command_t *vi_state_command_create(vi_state_command_create80,1894
+void vi_state_command_free(struct vi_state_command_t *command)vi_state_command_free100,2346
+struct vi_state_category_tvi_state_category_t112,2459
+	char *name;name114,2488
+	vi_state_read_checkpoint_func_t read_checkpoint_func;read_checkpoint_func116,2502
+	vi_state_write_checkpoint_func_t write_checkpoint_func;write_checkpoint_func117,2557
+	void *user_data;user_data120,2678
+struct vi_state_category_t *vi_state_category_create(char *name,vi_state_category_create124,2701
+void vi_state_category_free(struct vi_state_category_t *category)vi_state_category_free151,3388
+struct vi_state_tvi_state_t164,3524
+	char *unzipped_trace_file_name;unzipped_trace_file_name167,3575
+	FILE *unzipped_trace_file;unzipped_trace_file168,3608
+	char *checkpoint_file_name;checkpoint_file_name171,3660
+	FILE *checkpoint_file;checkpoint_file172,3689
+	long long cycle;cycle175,3728
+	long long num_cycles;num_cycles176,3746
+	struct list_t *category_list;category_list179,3796
+	struct list_t *checkpoint_list;checkpoint_list182,3862
+	struct hash_table_t *command_table;command_table186,4037
+	struct vi_trace_line_t *header_trace_line;header_trace_line189,4116
+	long int header_trace_line_offset;header_trace_line_offset190,4160
+	struct vi_trace_line_t *body_trace_line;body_trace_line193,4236
+	long int body_trace_line_offset;body_trace_line_offset194,4278
+static struct vi_state_t *vi_state;vi_state198,4317
+static void vi_state_read_checkpoint(int index)vi_state_read_checkpoint201,4355
+static void vi_state_write_checkpoint(void)vi_state_write_checkpoint227,5116
+void vi_state_init(char *trace_file_name)vi_state_init242,5443
+void vi_state_done(void)vi_state_done302,7252
+long long vi_state_get_num_cycles(void)vi_state_get_num_cycles356,8633
+long long vi_state_get_current_cycle(void)vi_state_get_current_cycle362,8709
+void vi_state_create_checkpoints(void)vi_state_create_checkpoints368,8783
+void vi_state_new_category(char *name,vi_state_new_category452,11184
+void vi_state_new_command(char *command_name,vi_state_new_command465,11547
+struct vi_trace_line_t *vi_state_header_first(void)vi_state_header_first477,11913
+struct vi_trace_line_t *vi_state_header_next(void)vi_state_header_next484,12044
+struct vi_trace_line_t *vi_state_trace_line_first(long long cycle)vi_state_trace_line_first523,13029
+struct vi_trace_line_t *vi_state_trace_line_next(void)vi_state_trace_line_next581,14845
+void vi_state_go_to_cycle(long long cycle)vi_state_go_to_cycle606,15641
+
+list.c,3169
+struct vi_list_item_tvi_list_item_t23,839
+	GtkWidget *event_box;event_box26,893
+	GtkWidget *label;label27,916
+	GdkColor label_color;label_color28,935
+	struct vi_list_t *list;list31,995
+	void *elem;elem34,1075
+struct vi_list_popup_tvi_list_popup_t38,1093
+	GtkWidget *window;window41,1137
+	GtkWidget *image_close;image_close42,1157
+	struct list_t *item_list;item_list45,1224
+	struct vi_list_t *list;list48,1297
+struct vi_list_tvi_list_t57,1504
+	GtkWidget *widget;widget60,1550
+	int width;width63,1608
+	int height;height64,1620
+	struct list_t *elem_list;elem_list67,1670
+	struct list_t *item_list;item_list71,1854
+	void (*get_elem_name)(void *elem, char *buf, int size);get_elem_name74,1947
+	void (*get_elem_desc)(void *elem, char *buf, int size);get_elem_desc75,2004
+	char *title;title78,2080
+	int text_size;text_size79,2094
+static struct vi_list_item_t *vi_list_item_create(void)vi_list_item_create91,2147
+static void vi_list_item_free(struct vi_list_item_t *item)vi_list_item_free104,2390
+static gboolean vi_list_item_enter_notify_event(GtkWidget *widget,vi_list_item_enter_notify_event110,2468
+static gboolean vi_list_item_leave_notify_event(GtkWidget *widget,vi_list_item_leave_notify_event142,3264
+static gboolean vi_list_item_button_press_event(GtkWidget *widget,vi_list_item_button_press_event162,3820
+static gboolean vi_list_item_more_press_event(GtkWidget *widget,vi_list_item_more_press_event180,4255
+char vi_list_image_close_path[MAX_PATH_SIZE];vi_list_image_close_path196,4487
+char vi_list_image_close_sel_path[MAX_PATH_SIZE];vi_list_image_close_sel_path197,4533
+static gboolean vi_list_popup_image_close_enter_notify_event(GtkWidget *widget,vi_list_popup_image_close_enter_notify_event200,4585
+static gboolean vi_list_popup_image_close_leave_notify_event(GtkWidget *widget,vi_list_popup_image_close_leave_notify_event208,4822
+static void vi_list_popup_image_close_clicked_event(GtkWidget *widget,vi_list_popup_image_close_clicked_event216,5055
+static void vi_list_popup_destroy_event(GtkWidget *widget, struct vi_list_popup_t *popup)vi_list_popup_destroy_event223,5223
+struct vi_list_popup_t *vi_list_popup_create(struct vi_list_t *list)vi_list_popup_create235,5510
+void vi_list_popup_free(struct vi_list_popup_t *popup)vi_list_popup_free368,10155
+void vi_list_popup_show(struct vi_list_t *list)vi_list_popup_show374,10230
+static void vi_list_size_allocate_event(GtkWidget *widget, GdkRectangle *allocation, struct vi_list_t *list)vi_list_size_allocate_event390,10417
+struct vi_list_t *vi_list_create(char *title, int width, int height,vi_list_create397,10634
+void vi_list_free(struct vi_list_t *list)vi_list_free430,11493
+int vi_list_count(struct vi_list_t *list)vi_list_count446,11778
+void vi_list_add(struct vi_list_t *list, void *elem)vi_list_add452,11863
+void *vi_list_get(struct vi_list_t *list, int index)vi_list_get458,11963
+void *vi_list_remove_at(struct vi_list_t *list, int index)vi_list_remove_at464,12064
+void vi_list_refresh(struct vi_list_t *list)vi_list_refresh470,12177
+GtkWidget *vi_list_get_widget(struct vi_list_t *list)vi_list_get_widget603,15618
+
+visual.c,482
+struct vi_cycle_bar_t *vi_cycle_bar;vi_cycle_bar31,945
+struct vi_mem_panel_t *vi_mem_panel;vi_mem_panel32,982
+struct vi_evg_panel_t *vi_evg_panel;vi_evg_panel33,1019
+struct vi_x86_panel_t *vi_x86_panel;vi_x86_panel34,1056
+static void visual_destroy_event(GtkWidget *widget, gpointer data)visual_destroy_event37,1095
+static void visual_cycle_bar_refresh(void *user_data, long long cycle)visual_cycle_bar_refresh43,1186
+void visual_run(char *file_name)visual_run51,1374
+
+popup.c,635
+struct vi_popup_tvi_popup_t23,839
+	GtkWidget *window;window25,859
+static gboolean vi_popup_button_press_event(GtkWidget *widget, GdkEventButton *event, gpointer data)vi_popup_button_press_event29,884
+static gboolean vi_popup_motion_event(GtkWidget *widget, GdkEventMotion *event, gpointer data)vi_popup_motion_event45,1328
+static void vi_popup_destroy_event(GtkWidget *widget, struct vi_popup_t *popup)vi_popup_destroy_event61,1767
+struct vi_popup_t *vi_popup_create(char *text)vi_popup_create67,1876
+void vi_popup_free(struct vi_popup_t *popup)vi_popup_free130,4040
+void vi_popup_show(char *text)vi_popup_show136,4105
+
+visual-common.h,896
+#define VISUAL_COMMON_HVISUAL_COMMON_H22,835
+typedef void (*vi_state_write_checkpoint_func_t)(void *user_data, FILE *f);vi_state_write_checkpoint_func_t88,2389
+typedef void (*vi_state_read_checkpoint_func_t)(void *user_data, FILE *f);vi_state_read_checkpoint_func_t89,2465
+typedef void (*vi_state_process_trace_line_func_t)(void *user_data, struct vi_trace_line_t *trace_line);vi_state_process_trace_line_func_t90,2540
+#define VI_STATE_FOR_EACH_HEADER(VI_STATE_FOR_EACH_HEADER92,2646
+typedef void (*vi_list_get_elem_name_func_t)(void *elem, char *buf, int size);vi_list_get_elem_name_func_t147,3948
+typedef void (*vi_list_get_elem_desc_func_t)(void *elem, char *buf, int size);vi_list_get_elem_desc_func_t148,4027
+#define VI_LIST_FOR_EACH(VI_LIST_FOR_EACH150,4107
+typedef void (*vi_cycle_bar_refresh_func_t)(void *user_data, long long cycle);vi_cycle_bar_refresh_func_t190,4955

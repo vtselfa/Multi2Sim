@@ -1,0 +1,2 @@
+exe = astar_base.i386
+args = rivers.cfg

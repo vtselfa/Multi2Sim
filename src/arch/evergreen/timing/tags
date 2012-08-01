@@ -1,0 +1,275 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+EVERGREEN_TIMING_H	evergreen-timing.h	21;"	d
+EVG_GPU_FOREACH_COMPUTE_UNIT	evergreen-timing.h	429;"	d
+EVG_GPU_FOREACH_WORK_ITEM_IN_SUBWAVEFRONT	evergreen-timing.h	432;"	d
+EVG_TRACE_VERSION_MAJOR	gpu.c	160;"	d	file:
+EVG_TRACE_VERSION_MINOR	gpu.c	161;"	d	file:
+EVG_UOP_DEP_COUNT	evergreen-timing.h	83;"	d
+EVG_UOP_DEP_LDS	evergreen-timing.h	82;"	d
+EVG_UOP_DEP_NONE	evergreen-timing.h	76;"	d
+EVG_UOP_DEP_PS	evergreen-timing.h	81;"	d
+EVG_UOP_DEP_PV	evergreen-timing.h	80;"	d
+EVG_UOP_DEP_REG	evergreen-timing.h	78;"	d
+EVG_UOP_DEP_REG_FIRST	evergreen-timing.h	77;"	d
+EVG_UOP_DEP_REG_LAST	evergreen-timing.h	79;"	d
+EVG_UOP_MAX_IDEP	evergreen-timing.h	73;"	d
+EVG_UOP_MAX_ODEP	evergreen-timing.h	74;"	d
+active	evergreen-timing.h	/^	unsigned int active : 1;  \/* Active after instruction emulation *\/$/;"	m	struct:evg_work_item_uop_t
+active_mask_id	faults.c	/^	int active_mask_id;  \/* [ 0, EVG_MAX_STACK_SIZE - 1 ] *\/$/;"	m	struct:evg_fault_t	file:
+active_mask_pop	evergreen-timing.h	/^	int active_mask_pop;  \/* Number of entries the stack was popped *\/$/;"	m	struct:evg_uop_t
+active_mask_push	evergreen-timing.h	/^	int active_mask_push;  \/* Number of entries the stack was pushed *\/$/;"	m	struct:evg_uop_t
+active_mask_stack_top	evergreen-timing.h	/^	int active_mask_stack_top;  \/* Top of stack *\/$/;"	m	struct:evg_uop_t
+active_mask_update	evergreen-timing.h	/^	unsigned int active_mask_update : 1;$/;"	m	struct:evg_uop_t
+alu_clause_trigger	evergreen-timing.h	/^	unsigned int alu_clause_trigger : 1;  \/* Instruction triggers ALU clause *\/$/;"	m	struct:evg_uop_t
+alu_clause_trigger_count	evergreen-timing.h	/^		long long alu_clause_trigger_count;$/;"	m	struct:evg_compute_unit_t::__anon1
+alu_engine	evergreen-timing.h	/^	} alu_engine;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::__anon2
+bit	faults.c	/^	int bit;$/;"	m	struct:evg_fault_t	file:
+busy_list_count	evergreen-timing.h	/^	int busy_list_count;$/;"	m	struct:evg_gpu_t
+busy_list_head	evergreen-timing.h	/^	struct evg_compute_unit_t *busy_list_head;$/;"	m	struct:evg_gpu_t	typeref:struct:evg_gpu_t::evg_compute_unit_t
+busy_list_max	evergreen-timing.h	/^	int busy_list_max;$/;"	m	struct:evg_gpu_t
+busy_list_next	evergreen-timing.h	/^	struct evg_compute_unit_t *busy_list_next;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::evg_compute_unit_t
+busy_list_prev	evergreen-timing.h	/^	struct evg_compute_unit_t *busy_list_prev;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::evg_compute_unit_t
+busy_list_tail	evergreen-timing.h	/^	struct evg_compute_unit_t *busy_list_tail;$/;"	m	struct:evg_gpu_t	typeref:struct:evg_gpu_t::evg_compute_unit_t
+byte	faults.c	/^	int byte;$/;"	m	struct:evg_fault_t	file:
+cf_engine	evergreen-timing.h	/^	} cf_engine;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::__anon1
+cf_uop	evergreen-timing.h	/^	struct evg_uop_t *cf_uop;  \/* For ALU\/TEX uops, CF uop that triggered clause *\/$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_uop_t
+complete_queue	evergreen-timing.h	/^		struct linked_list_t *complete_queue;  \/* Queue of completed instructions *\/$/;"	m	struct:evg_compute_unit_t::__anon1	typeref:struct:evg_compute_unit_t::__anon1::linked_list_t
+compute_unit	evergreen-timing.h	/^	struct evg_compute_unit_t *compute_unit;  \/* Compute unit it belongs to *\/$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_compute_unit_t
+compute_unit_id	faults.c	/^	int compute_unit_id;  \/* 0, evg_gpu_num_compute_units - 1 ] *\/$/;"	m	struct:evg_fault_t	file:
+compute_units	evergreen-timing.h	/^	struct evg_compute_unit_t **compute_units;$/;"	m	struct:evg_gpu_t	typeref:struct:evg_gpu_t::evg_compute_unit_t
+cycle	evergreen-timing.h	/^		long long cycle;$/;"	m	struct:evg_compute_unit_t::__anon2
+cycle	evergreen-timing.h	/^		long long cycle;$/;"	m	struct:evg_compute_unit_t::__anon3
+cycle	evergreen-timing.h	/^	long long cycle;$/;"	m	struct:evg_compute_unit_t
+cycle	evergreen-timing.h	/^	long long cycle;$/;"	m	struct:evg_gpu_t
+cycle	faults.c	/^	long long cycle;$/;"	m	struct:evg_fault_t	file:
+decode_index	evergreen-timing.h	/^		int decode_index;  \/* Next uop in 'fetch_buffer' to decode *\/$/;"	m	struct:evg_compute_unit_t::__anon1
+dep_list_count	evergreen-timing.h	/^	int dep_list_count;$/;"	m	struct:evg_uop_t
+dep_list_head	evergreen-timing.h	/^	struct evg_uop_t *dep_list_head;$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_uop_t
+dep_list_max	evergreen-timing.h	/^	int dep_list_max;$/;"	m	struct:evg_uop_t
+dep_list_next	evergreen-timing.h	/^	struct evg_uop_t *dep_list_next;$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_uop_t
+dep_list_prev	evergreen-timing.h	/^	struct evg_uop_t *dep_list_prev;$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_uop_t
+dep_list_tail	evergreen-timing.h	/^	struct evg_uop_t *dep_list_tail;$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_uop_t
+err_gnuplot_msg	calc.c	/^static char *err_gnuplot_msg =$/;"	v	file:
+event_queue	evergreen-timing.h	/^		struct heap_t *event_queue;  \/* Events for instruction execution *\/$/;"	m	struct:evg_compute_unit_t::__anon2	typeref:struct:evg_compute_unit_t::__anon2::heap_t
+evg_alu_engine_decode	alu-engine.c	/^static void evg_alu_engine_decode(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_alu_engine_execute	alu-engine.c	/^static void evg_alu_engine_execute(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_alu_engine_fetch	alu-engine.c	/^static void evg_alu_engine_fetch(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_alu_engine_read	alu-engine.c	/^static void evg_alu_engine_read(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_alu_engine_write	alu-engine.c	/^static void evg_alu_engine_write(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_calc_get_work_groups_per_compute_unit	calc.c	/^int evg_calc_get_work_groups_per_compute_unit(int work_items_per_work_group,$/;"	f
+evg_calc_plot	calc.c	/^void evg_calc_plot(void)$/;"	f
+evg_calc_plot_local_mem_per_work_group	calc.c	/^static void evg_calc_plot_local_mem_per_work_group(void)$/;"	f	file:
+evg_calc_plot_registers_per_work_item	calc.c	/^static void evg_calc_plot_registers_per_work_item(void)$/;"	f	file:
+evg_calc_plot_work_items_per_work_group	calc.c	/^static void evg_calc_plot_work_items_per_work_group(void)$/;"	f	file:
+evg_cf_engine_complete	cf-engine.c	/^static void evg_cf_engine_complete(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_cf_engine_decode	cf-engine.c	/^static void evg_cf_engine_decode(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_cf_engine_execute	cf-engine.c	/^static void evg_cf_engine_execute(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_cf_engine_fetch	cf-engine.c	/^static void evg_cf_engine_fetch(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_compute_unit_create	compute-unit.c	/^struct evg_compute_unit_t *evg_compute_unit_create()$/;"	f
+evg_compute_unit_free	compute-unit.c	/^void evg_compute_unit_free(struct evg_compute_unit_t *compute_unit)$/;"	f
+evg_compute_unit_map_work_group	compute-unit.c	/^void evg_compute_unit_map_work_group(struct evg_compute_unit_t *compute_unit, struct evg_work_group_t *work_group)$/;"	f
+evg_compute_unit_run	compute-unit.c	/^void evg_compute_unit_run(struct evg_compute_unit_t *compute_unit)$/;"	f
+evg_compute_unit_run_alu_engine	alu-engine.c	/^void evg_compute_unit_run_alu_engine(struct evg_compute_unit_t *compute_unit)$/;"	f
+evg_compute_unit_run_cf_engine	cf-engine.c	/^void evg_compute_unit_run_cf_engine(struct evg_compute_unit_t *compute_unit)$/;"	f
+evg_compute_unit_run_tex_engine	tex-engine.c	/^void evg_compute_unit_run_tex_engine(struct evg_compute_unit_t *compute_unit)$/;"	f
+evg_compute_unit_schedule	sched.c	/^struct evg_wavefront_t *evg_compute_unit_schedule(struct evg_compute_unit_t *compute_unit)$/;"	f
+evg_compute_unit_t	evergreen-timing.h	/^struct evg_compute_unit_t$/;"	s
+evg_compute_unit_unmap_work_group	compute-unit.c	/^void evg_compute_unit_unmap_work_group(struct evg_compute_unit_t *compute_unit, struct evg_work_group_t *work_group)$/;"	f
+evg_config_dump	gpu.c	/^static void evg_config_dump(FILE *f)$/;"	f	file:
+evg_config_read	gpu.c	/^static void evg_config_read(void)$/;"	f	file:
+evg_fault_ams	faults.c	/^	evg_fault_ams,$/;"	e	enum:evg_fault_type_enum	file:
+evg_fault_errors	faults.c	/^static int evg_fault_errors;$/;"	v	file:
+evg_fault_list	faults.c	/^static struct linked_list_t *evg_fault_list;$/;"	v	typeref:struct:linked_list_t	file:
+evg_fault_mem	faults.c	/^	evg_fault_mem$/;"	e	enum:evg_fault_type_enum	file:
+evg_fault_reg	faults.c	/^	evg_fault_reg,$/;"	e	enum:evg_fault_type_enum	file:
+evg_fault_t	faults.c	/^struct evg_fault_t$/;"	s	file:
+evg_fault_type_enum	faults.c	/^enum evg_fault_type_enum$/;"	g	file:
+evg_faults_debug	evergreen-timing.h	32;"	d
+evg_faults_debug_category	faults.c	/^int evg_faults_debug_category;$/;"	v
+evg_faults_debug_file_name	faults.c	/^char *evg_faults_debug_file_name = "";$/;"	v
+evg_faults_done	faults.c	/^void evg_faults_done(void)$/;"	f
+evg_faults_file_name	faults.c	/^char *evg_faults_file_name = "";$/;"	v
+evg_faults_init	faults.c	/^void evg_faults_init(void)$/;"	f
+evg_faults_insert	faults.c	/^void evg_faults_insert(void)$/;"	f
+evg_gpu	gpu.c	/^struct evg_gpu_t *evg_gpu;$/;"	v	typeref:struct:evg_gpu_t
+evg_gpu_alu_engine_fetch_queue_size	alu-engine.c	/^int evg_gpu_alu_engine_fetch_queue_size = 64;  \/* Number of bytes *\/$/;"	v
+evg_gpu_alu_engine_inst_mem_latency	alu-engine.c	/^int evg_gpu_alu_engine_inst_mem_latency = 2;  \/* Latency of instruction memory *\/$/;"	v
+evg_gpu_alu_engine_pe_latency	alu-engine.c	/^int evg_gpu_alu_engine_pe_latency = 4;  \/* Processing element latency *\/$/;"	v
+evg_gpu_calc_file_name	calc.c	/^char *evg_gpu_calc_file_name = "";$/;"	v
+evg_gpu_cf_engine_inst_mem_latency	cf-engine.c	/^int evg_gpu_cf_engine_inst_mem_latency = 2;  \/* Instruction memory latency *\/$/;"	v
+evg_gpu_config_file_name	gpu.c	/^char *evg_gpu_config_file_name = "";$/;"	v
+evg_gpu_config_help	gpu.c	/^char *evg_gpu_config_help =$/;"	v
+evg_gpu_device_init	gpu.c	/^static void evg_gpu_device_init()$/;"	f	file:
+evg_gpu_done	gpu.c	/^void evg_gpu_done()$/;"	f
+evg_gpu_dump_report	gpu.c	/^void evg_gpu_dump_report(void)$/;"	f
+evg_gpu_init	gpu.c	/^void evg_gpu_init(void)$/;"	f
+evg_gpu_local_mem_alloc_size	gpu.c	/^int evg_gpu_local_mem_alloc_size = 1024;  \/* 1 KB *\/$/;"	v
+evg_gpu_local_mem_block_size	gpu.c	/^int evg_gpu_local_mem_block_size = 256;$/;"	v
+evg_gpu_local_mem_latency	gpu.c	/^int evg_gpu_local_mem_latency = 2;$/;"	v
+evg_gpu_local_mem_num_ports	gpu.c	/^int evg_gpu_local_mem_num_ports = 2;$/;"	v
+evg_gpu_local_mem_size	gpu.c	/^int evg_gpu_local_mem_size = 32768;  \/* 32 KB *\/$/;"	v
+evg_gpu_map_ndrange	gpu.c	/^static void evg_gpu_map_ndrange(struct evg_ndrange_t *ndrange)$/;"	f	file:
+evg_gpu_max_wavefronts_per_compute_unit	gpu.c	/^int evg_gpu_max_wavefronts_per_compute_unit = 32;$/;"	v
+evg_gpu_max_work_groups_per_compute_unit	gpu.c	/^int evg_gpu_max_work_groups_per_compute_unit = 8;$/;"	v
+evg_gpu_num_compute_units	gpu.c	/^int evg_gpu_num_compute_units = 20;$/;"	v
+evg_gpu_num_registers	gpu.c	/^int evg_gpu_num_registers = 16384;$/;"	v
+evg_gpu_num_stream_cores	gpu.c	/^int evg_gpu_num_stream_cores = 16;$/;"	v
+evg_gpu_register_alloc_granularity	gpu.c	/^enum evg_gpu_register_alloc_granularity_t evg_gpu_register_alloc_granularity;$/;"	v	typeref:enum:evg_gpu_register_alloc_granularity_t
+evg_gpu_register_alloc_granularity_map	gpu.c	/^struct string_map_t evg_gpu_register_alloc_granularity_map =$/;"	v	typeref:struct:string_map_t
+evg_gpu_register_alloc_granularity_t	evergreen-timing.h	/^extern enum evg_gpu_register_alloc_granularity_t$/;"	g
+evg_gpu_register_alloc_invalid	evergreen-timing.h	/^	evg_gpu_register_alloc_invalid = 0,  \/* For invalid user input *\/$/;"	e	enum:evg_gpu_register_alloc_granularity_t
+evg_gpu_register_alloc_size	gpu.c	/^int evg_gpu_register_alloc_size = 32;$/;"	v
+evg_gpu_register_alloc_wavefront	evergreen-timing.h	/^	evg_gpu_register_alloc_wavefront,$/;"	e	enum:evg_gpu_register_alloc_granularity_t
+evg_gpu_register_alloc_work_group	evergreen-timing.h	/^	evg_gpu_register_alloc_work_group$/;"	e	enum:evg_gpu_register_alloc_granularity_t
+evg_gpu_report_file_name	gpu.c	/^char *evg_gpu_report_file_name = "";$/;"	v
+evg_gpu_run	gpu.c	/^void evg_gpu_run(struct evg_ndrange_t *ndrange)$/;"	f
+evg_gpu_sched_greedy	evergreen-timing.h	/^	evg_gpu_sched_greedy$/;"	e	enum:evg_gpu_sched_policy_t
+evg_gpu_sched_invalid	evergreen-timing.h	/^	evg_gpu_sched_invalid = 0,  \/* For invalid user input *\/$/;"	e	enum:evg_gpu_sched_policy_t
+evg_gpu_sched_policy	sched.c	/^enum evg_gpu_sched_policy_t evg_gpu_sched_policy;$/;"	v	typeref:enum:evg_gpu_sched_policy_t
+evg_gpu_sched_policy_map	sched.c	/^struct string_map_t evg_gpu_sched_policy_map =$/;"	v	typeref:struct:string_map_t
+evg_gpu_sched_policy_t	evergreen-timing.h	/^extern enum evg_gpu_sched_policy_t$/;"	g
+evg_gpu_sched_round_robin	evergreen-timing.h	/^	evg_gpu_sched_round_robin,$/;"	e	enum:evg_gpu_sched_policy_t
+evg_gpu_t	evergreen-timing.h	/^struct evg_gpu_t$/;"	s
+evg_gpu_tex_engine_fetch_queue_size	tex-engine.c	/^int evg_gpu_tex_engine_fetch_queue_size = 32;  \/* Number of bytes *\/$/;"	v
+evg_gpu_tex_engine_inst_mem_latency	tex-engine.c	/^int evg_gpu_tex_engine_inst_mem_latency = 2;  \/* Instruction memory latency *\/$/;"	v
+evg_gpu_tex_engine_load_queue_size	tex-engine.c	/^int evg_gpu_tex_engine_load_queue_size = 8;  \/* Maximum number of in-flight global memory reads *\/$/;"	v
+evg_gpu_unmap_ndrange	gpu.c	/^static void evg_gpu_unmap_ndrange(void)$/;"	f	file:
+evg_gpu_uop_trash_add	gpu.c	/^void evg_gpu_uop_trash_add(struct evg_uop_t *uop)$/;"	f
+evg_gpu_uop_trash_empty	gpu.c	/^void evg_gpu_uop_trash_empty(void)$/;"	f
+evg_periodic_report_active	periodic-report.c	/^int evg_periodic_report_active;$/;"	v
+evg_periodic_report_config_read	periodic-report.c	/^void evg_periodic_report_config_read(struct config_t *config)$/;"	f
+evg_periodic_report_done	periodic-report.c	/^void evg_periodic_report_done(void)$/;"	f
+evg_periodic_report_dump_entry	periodic-report.c	/^void evg_periodic_report_dump_entry(struct evg_wavefront_t *wavefront)$/;"	f
+evg_periodic_report_file_name	periodic-report.c	/^static char *evg_periodic_report_file_name;$/;"	v	file:
+evg_periodic_report_init	periodic-report.c	/^void evg_periodic_report_init(void)$/;"	f
+evg_periodic_report_interval	periodic-report.c	/^static int evg_periodic_report_interval = 1000;$/;"	v	file:
+evg_periodic_report_intro	periodic-report.c	/^static char *evg_periodic_report_intro =$/;"	v	file:
+evg_periodic_report_new_inst	periodic-report.c	/^void evg_periodic_report_new_inst(struct evg_uop_t *uop)$/;"	f
+evg_periodic_report_scope	periodic-report.c	/^} evg_periodic_report_scope;$/;"	v	typeref:enum:evg_periodic_report_scope_t	file:
+evg_periodic_report_scope_all_wavefronts_all_workgroups	periodic-report.c	/^	evg_periodic_report_scope_all_wavefronts_all_workgroups,$/;"	e	enum:evg_periodic_report_scope_t	file:
+evg_periodic_report_scope_all_wavefronts_first_workgroup	periodic-report.c	/^	evg_periodic_report_scope_all_wavefronts_first_workgroup,$/;"	e	enum:evg_periodic_report_scope_t	file:
+evg_periodic_report_scope_count	periodic-report.c	/^	evg_periodic_report_scope_count$/;"	e	enum:evg_periodic_report_scope_t	file:
+evg_periodic_report_scope_first_wavefront_all_workgroups	periodic-report.c	/^	evg_periodic_report_scope_first_wavefront_all_workgroups,$/;"	e	enum:evg_periodic_report_scope_t	file:
+evg_periodic_report_scope_first_wavefront_first_workgroup	periodic-report.c	/^	evg_periodic_report_scope_first_wavefront_first_workgroup,$/;"	e	enum:evg_periodic_report_scope_t	file:
+evg_periodic_report_scope_invalid	periodic-report.c	/^	evg_periodic_report_scope_invalid = 0,$/;"	e	enum:evg_periodic_report_scope_t	file:
+evg_periodic_report_scope_map	periodic-report.c	/^static struct string_map_t evg_periodic_report_scope_map =$/;"	v	typeref:struct:string_map_t	file:
+evg_periodic_report_scope_str	periodic-report.c	/^static char *evg_periodic_report_scope_str = "FirstWavefrontFirstWorkgroup";$/;"	v	file:
+evg_periodic_report_scope_t	periodic-report.c	/^static enum evg_periodic_report_scope_t$/;"	g	file:
+evg_periodic_report_section_name	periodic-report.c	/^static char *evg_periodic_report_section_name = "PeriodicReport";$/;"	v	file:
+evg_periodic_report_wavefront_done	periodic-report.c	/^void evg_periodic_report_wavefront_done(struct evg_wavefront_t *wavefront)$/;"	f
+evg_periodic_report_wavefront_init	periodic-report.c	/^void evg_periodic_report_wavefront_init(struct evg_wavefront_t *wavefront)$/;"	f
+evg_schedule_greedy	sched.c	/^static struct evg_wavefront_t *evg_schedule_greedy(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_schedule_round_robin	sched.c	/^static struct evg_wavefront_t *evg_schedule_round_robin(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_stack_debug	evergreen-timing.h	52;"	d
+evg_stack_debug_category	uop.c	/^int evg_stack_debug_category;$/;"	v
+evg_stack_faults_is_idep	faults.c	/^static int evg_stack_faults_is_idep(struct evg_uop_t *uop,$/;"	f	file:
+evg_stack_faults_is_odep	faults.c	/^static int evg_stack_faults_is_odep(struct evg_uop_t *uop,$/;"	f	file:
+evg_tex_engine_decode	tex-engine.c	/^static void evg_tex_engine_decode(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_tex_engine_fetch	tex-engine.c	/^static void evg_tex_engine_fetch(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_tex_engine_read	tex-engine.c	/^static void evg_tex_engine_read(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_tex_engine_write	tex-engine.c	/^static void evg_tex_engine_write(struct evg_compute_unit_t *compute_unit)$/;"	f	file:
+evg_trace	evergreen-timing.h	346;"	d
+evg_trace_category	gpu.c	/^int evg_trace_category;$/;"	v
+evg_trace_header	evergreen-timing.h	347;"	d
+evg_tracing	evergreen-timing.h	345;"	d
+evg_uop_add_src_idep	uop.c	/^static void evg_uop_add_src_idep(struct evg_uop_t *uop, struct evg_inst_t *inst, int src_idx)$/;"	f	file:
+evg_uop_create	uop.c	/^struct evg_uop_t *evg_uop_create()$/;"	f
+evg_uop_create_from_alu_group	uop.c	/^struct evg_uop_t *evg_uop_create_from_alu_group(struct evg_alu_group_t *alu_group)$/;"	f
+evg_uop_debug_active_mask	uop.c	/^void evg_uop_debug_active_mask(struct evg_uop_t *uop)$/;"	f
+evg_uop_done	uop.c	/^void evg_uop_done()$/;"	f
+evg_uop_dump_dep_list	uop.c	/^void evg_uop_dump_dep_list(char *buf, int size, int *dep_list, int dep_count)$/;"	f
+evg_uop_free	uop.c	/^void evg_uop_free(struct evg_uop_t *gpu_uop)$/;"	f
+evg_uop_init	uop.c	/^void evg_uop_init()$/;"	f
+evg_uop_list_free	uop.c	/^void evg_uop_list_free(struct linked_list_t *gpu_uop_list)$/;"	f
+evg_uop_save_active_mask	uop.c	/^void evg_uop_save_active_mask(struct evg_uop_t *uop)$/;"	f
+evg_uop_t	evergreen-timing.h	/^struct evg_uop_t$/;"	s
+evg_work_item_uop_t	evergreen-timing.h	/^struct evg_work_item_uop_t$/;"	s
+exec_buffer	evergreen-timing.h	/^		struct evg_uop_t *exec_buffer;  \/* Uop from read to execute stage *\/$/;"	m	struct:evg_compute_unit_t::__anon2	typeref:struct:evg_compute_unit_t::__anon2::evg_uop_t
+exec_subwavefront_count	evergreen-timing.h	/^	int exec_subwavefront_count;$/;"	m	struct:evg_uop_t
+execute_index	evergreen-timing.h	/^		int execute_index;  \/* Next uop in 'inst_buffer' to execute *\/$/;"	m	struct:evg_compute_unit_t::__anon1
+fetch_buffer	evergreen-timing.h	/^		struct evg_uop_t **fetch_buffer;  \/* Array of uops (MaxWavefrontsPerComputeUnit elements) *\/$/;"	m	struct:evg_compute_unit_t::__anon1	typeref:struct:evg_compute_unit_t::__anon1::evg_uop_t
+fetch_queue	evergreen-timing.h	/^		struct linked_list_t *fetch_queue;  \/* Uops from fetch to decode stage *\/$/;"	m	struct:evg_compute_unit_t::__anon2	typeref:struct:evg_compute_unit_t::__anon2::linked_list_t
+fetch_queue	evergreen-timing.h	/^		struct linked_list_t *fetch_queue;  \/* Uops from fetch to decode stage *\/$/;"	m	struct:evg_compute_unit_t::__anon3	typeref:struct:evg_compute_unit_t::__anon3::linked_list_t
+fetch_queue_length	evergreen-timing.h	/^		int fetch_queue_length;  \/* Number of bytes occupied in fetch queue *\/$/;"	m	struct:evg_compute_unit_t::__anon2
+fetch_queue_length	evergreen-timing.h	/^		int fetch_queue_length;  \/* Number of bytes occupied in fetch queue *\/$/;"	m	struct:evg_compute_unit_t::__anon3
+finished_queue	evergreen-timing.h	/^		struct linked_list_t *finished_queue;$/;"	m	struct:evg_compute_unit_t::__anon2	typeref:struct:evg_compute_unit_t::__anon2::linked_list_t
+finished_queue	evergreen-timing.h	/^		struct linked_list_t *finished_queue;$/;"	m	struct:evg_compute_unit_t::__anon3	typeref:struct:evg_compute_unit_t::__anon3::linked_list_t
+global_mem_access_addr	evergreen-timing.h	/^	uint32_t global_mem_access_addr;$/;"	m	struct:evg_work_item_uop_t
+global_mem_access_size	evergreen-timing.h	/^	uint32_t global_mem_access_size;$/;"	m	struct:evg_work_item_uop_t
+global_mem_read	evergreen-timing.h	/^	unsigned int global_mem_read : 1;$/;"	m	struct:evg_uop_t
+global_mem_witness	evergreen-timing.h	/^	int global_mem_witness;$/;"	m	struct:evg_uop_t
+global_mem_write	evergreen-timing.h	/^	unsigned int global_mem_write : 1;$/;"	m	struct:evg_uop_t
+global_mem_write_count	evergreen-timing.h	/^		long long global_mem_write_count;$/;"	m	struct:evg_compute_unit_t::__anon1
+global_memory	evergreen-timing.h	/^	struct mod_t *global_memory;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::mod_t
+gpu_uop_dump_active_mask	uop.c	/^void gpu_uop_dump_active_mask(struct evg_uop_t *uop, FILE *f)$/;"	f
+gpu_uop_id_counter	evergreen-timing.h	/^	long long gpu_uop_id_counter;  \/* Counter to assign 'id_in_compute_unit' to uops *\/$/;"	m	struct:evg_compute_unit_t
+gpu_uop_id_counter	uop.c	/^static long long gpu_uop_id_counter = 0;$/;"	v	file:
+gpu_uop_repos	uop.c	/^static struct repos_t *gpu_uop_repos;$/;"	v	typeref:struct:repos_t	file:
+id	evergreen-timing.h	/^	int id;$/;"	m	struct:evg_compute_unit_t
+id	evergreen-timing.h	/^	long long id;$/;"	m	struct:evg_uop_t
+id_in_compute_unit	evergreen-timing.h	/^	long long id_in_compute_unit;$/;"	m	struct:evg_uop_t
+idep	evergreen-timing.h	/^	int idep[EVG_UOP_MAX_IDEP];$/;"	m	struct:evg_uop_t
+idep_count	evergreen-timing.h	/^	int idep_count;$/;"	m	struct:evg_uop_t
+inst_buffer	evergreen-timing.h	/^		struct evg_uop_t **inst_buffer;  \/* Array of uops (MaxWavefrontsPerComputeUnit elements) *\/$/;"	m	struct:evg_compute_unit_t::__anon1	typeref:struct:evg_compute_unit_t::__anon1::evg_uop_t
+inst_buffer	evergreen-timing.h	/^		struct evg_uop_t *inst_buffer;  \/* Uop from decode to read stage *\/$/;"	m	struct:evg_compute_unit_t::__anon2	typeref:struct:evg_compute_unit_t::__anon2::evg_uop_t
+inst_buffer	evergreen-timing.h	/^		struct evg_uop_t *inst_buffer;  \/* Uop from decode to read stage *\/$/;"	m	struct:evg_compute_unit_t::__anon3	typeref:struct:evg_compute_unit_t::__anon3::evg_uop_t
+inst_count	evergreen-timing.h	/^		long long inst_count;$/;"	m	struct:evg_compute_unit_t::__anon1
+inst_count	evergreen-timing.h	/^		long long inst_count;$/;"	m	struct:evg_compute_unit_t::__anon2
+inst_count	evergreen-timing.h	/^		long long inst_count;$/;"	m	struct:evg_compute_unit_t::__anon3
+inst_count	evergreen-timing.h	/^	long long inst_count;$/;"	m	struct:evg_compute_unit_t
+inst_mem_ready	evergreen-timing.h	/^	long long inst_mem_ready;  \/* Cycle when instruction memory access completes *\/$/;"	m	struct:evg_uop_t
+inst_slot_count	evergreen-timing.h	/^		long long inst_slot_count;$/;"	m	struct:evg_compute_unit_t::__anon2
+last	evergreen-timing.h	/^	unsigned int last : 1;  \/* Last instruction in the clause *\/$/;"	m	struct:evg_uop_t
+length	evergreen-timing.h	/^	int length;  \/* Number of bytes occupied by ALU group *\/$/;"	m	struct:evg_uop_t
+load_queue	evergreen-timing.h	/^		struct linked_list_t *load_queue;  \/* Uops from read to write stage *\/$/;"	m	struct:evg_compute_unit_t::__anon3	typeref:struct:evg_compute_unit_t::__anon3::linked_list_t
+local_mem_access_addr	evergreen-timing.h	/^	uint32_t local_mem_access_addr[EVG_MAX_LOCAL_MEM_ACCESSES_PER_INST];$/;"	m	struct:evg_work_item_uop_t
+local_mem_access_count	evergreen-timing.h	/^	int local_mem_access_count;$/;"	m	struct:evg_work_item_uop_t
+local_mem_access_kind	evergreen-timing.h	/^	enum mod_access_kind_t local_mem_access_kind[EVG_MAX_LOCAL_MEM_ACCESSES_PER_INST];$/;"	m	struct:evg_work_item_uop_t	typeref:enum:evg_work_item_uop_t::mod_access_kind_t
+local_mem_access_size	evergreen-timing.h	/^	uint32_t local_mem_access_size[EVG_MAX_LOCAL_MEM_ACCESSES_PER_INST];$/;"	m	struct:evg_work_item_uop_t
+local_mem_read	evergreen-timing.h	/^	unsigned int local_mem_read : 1;$/;"	m	struct:evg_uop_t
+local_mem_slot_count	evergreen-timing.h	/^		long long local_mem_slot_count;$/;"	m	struct:evg_compute_unit_t::__anon2
+local_mem_witness	evergreen-timing.h	/^	int local_mem_witness;$/;"	m	struct:evg_uop_t
+local_mem_write	evergreen-timing.h	/^	unsigned int local_mem_write : 1;$/;"	m	struct:evg_uop_t
+local_memory	evergreen-timing.h	/^	struct mod_t *local_memory;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::mod_t
+mapped_work_groups	evergreen-timing.h	/^	long long mapped_work_groups;$/;"	m	struct:evg_compute_unit_t
+ndrange	evergreen-timing.h	/^	struct evg_ndrange_t *ndrange;$/;"	m	struct:evg_gpu_t	typeref:struct:evg_gpu_t::evg_ndrange_t
+no_clause_trigger	evergreen-timing.h	/^	unsigned int no_clause_trigger : 1;  \/* Instruction does not trigger secondary clause *\/$/;"	m	struct:evg_uop_t
+odep	evergreen-timing.h	/^	int odep[EVG_UOP_MAX_ODEP];$/;"	m	struct:evg_uop_t
+odep_count	evergreen-timing.h	/^	int odep_count;$/;"	m	struct:evg_uop_t
+pending_queue	evergreen-timing.h	/^		struct linked_list_t *pending_queue;$/;"	m	struct:evg_compute_unit_t::__anon2	typeref:struct:evg_compute_unit_t::__anon2::linked_list_t
+pending_queue	evergreen-timing.h	/^		struct linked_list_t *pending_queue;$/;"	m	struct:evg_compute_unit_t::__anon3	typeref:struct:evg_compute_unit_t::__anon3::linked_list_t
+producers	evergreen-timing.h	/^		struct evg_uop_t *producers[EVG_UOP_DEP_COUNT];$/;"	m	struct:evg_compute_unit_t::__anon2	typeref:struct:evg_compute_unit_t::__anon2::evg_uop_t
+ready	evergreen-timing.h	/^	unsigned int ready : 1;$/;"	m	struct:evg_uop_t
+ready_list_count	evergreen-timing.h	/^	int ready_list_count;$/;"	m	struct:evg_gpu_t
+ready_list_head	evergreen-timing.h	/^	struct evg_compute_unit_t *ready_list_head;$/;"	m	struct:evg_gpu_t	typeref:struct:evg_gpu_t::evg_compute_unit_t
+ready_list_max	evergreen-timing.h	/^	int ready_list_max;$/;"	m	struct:evg_gpu_t
+ready_list_next	evergreen-timing.h	/^	struct evg_compute_unit_t *ready_list_next;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::evg_compute_unit_t
+ready_list_prev	evergreen-timing.h	/^	struct evg_compute_unit_t *ready_list_prev;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::evg_compute_unit_t
+ready_list_tail	evergreen-timing.h	/^	struct evg_compute_unit_t *ready_list_tail;$/;"	m	struct:evg_gpu_t	typeref:struct:evg_gpu_t::evg_compute_unit_t
+reg_id	faults.c	/^	int reg_id;$/;"	m	struct:evg_fault_t	file:
+stack_id	faults.c	/^	int stack_id;  \/* [ 0, evg_gpu_max_wavefronts_per_compute_unit - 1 ] *\/$/;"	m	struct:evg_fault_t	file:
+subwavefront_count	evergreen-timing.h	/^	int subwavefront_count;$/;"	m	struct:evg_uop_t
+tex_clause_trigger	evergreen-timing.h	/^	unsigned int tex_clause_trigger : 1;  \/* Instruction triggers TEX clause *\/$/;"	m	struct:evg_uop_t
+tex_clause_trigger_count	evergreen-timing.h	/^		long long tex_clause_trigger_count;$/;"	m	struct:evg_compute_unit_t::__anon1
+tex_engine	evergreen-timing.h	/^	} tex_engine;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::__anon3
+trash_uop_list	evergreen-timing.h	/^	struct linked_list_t *trash_uop_list;$/;"	m	struct:evg_gpu_t	typeref:struct:evg_gpu_t::linked_list_t
+type	faults.c	/^	enum evg_fault_type_enum type;$/;"	m	struct:evg_fault_t	typeref:enum:evg_fault_t::evg_fault_type_enum	file:
+vliw_slots	evergreen-timing.h	/^		long long vliw_slots[5];$/;"	m	struct:evg_compute_unit_t::__anon2
+vliw_slots	evergreen-timing.h	/^	int vliw_slots;  \/* Number of slots for ALU group, or 1 for CF\/TEX instructions *\/$/;"	m	struct:evg_uop_t
+wavefront	evergreen-timing.h	/^	struct evg_wavefront_t *wavefront;  \/* Wavefront it belongs to *\/$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_wavefront_t
+wavefront_count	evergreen-timing.h	/^		long long wavefront_count;$/;"	m	struct:evg_compute_unit_t::__anon2
+wavefront_count	evergreen-timing.h	/^		long long wavefront_count;$/;"	m	struct:evg_compute_unit_t::__anon3
+wavefront_pool	evergreen-timing.h	/^	struct linked_list_t *wavefront_pool;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::linked_list_t
+wavefronts_per_compute_unit	evergreen-timing.h	/^	int wavefronts_per_compute_unit;$/;"	m	struct:evg_gpu_t
+work_group	evergreen-timing.h	/^	struct evg_work_group_t *work_group;  \/* Work-group it belongs to *\/$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_work_group_t
+work_group_count	evergreen-timing.h	/^	int work_group_count;$/;"	m	struct:evg_compute_unit_t
+work_groups	evergreen-timing.h	/^	struct evg_work_group_t **work_groups;$/;"	m	struct:evg_compute_unit_t	typeref:struct:evg_compute_unit_t::evg_work_group_t
+work_groups_per_compute_unit	evergreen-timing.h	/^	int work_groups_per_compute_unit;$/;"	m	struct:evg_gpu_t
+work_item_uop	evergreen-timing.h	/^	struct evg_work_item_uop_t work_item_uop[0];$/;"	m	struct:evg_uop_t	typeref:struct:evg_uop_t::evg_work_item_uop_t
+work_items_per_compute_unit	evergreen-timing.h	/^	int work_items_per_compute_unit;$/;"	m	struct:evg_gpu_t
+write_subwavefront_count	evergreen-timing.h	/^	int write_subwavefront_count;$/;"	m	struct:evg_uop_t

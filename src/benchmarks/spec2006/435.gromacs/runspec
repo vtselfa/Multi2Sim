@@ -1,0 +1,2 @@
+exe = gromacs_base.i386
+args = -silent -deffnm gromacs -nice 0

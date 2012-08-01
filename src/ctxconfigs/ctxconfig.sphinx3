@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = sphinx3_base.i386
+args = ctlfile . args.an4
+cwd = benchmarks/spec2006/482.sphinx3
+StdOut = sphinx3.out
+IPCReport = sphinx3.ipc
+IPCReportInterval = 100000

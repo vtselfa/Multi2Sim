@@ -1,0 +1,210 @@
+
+panel.c,2690
+struct vi_mod_window_tvi_mod_window_t28,872
+	GtkWidget *widget;widget30,897
+	struct vi_mod_t *mod;mod33,950
+	GtkWidget *parent_toggle_button;parent_toggle_button36,1028
+	struct vi_mod_widget_t *mod_widget;mod_widget39,1084
+static void vi_mod_window_destroy(GtkWidget *widget, struct vi_mod_window_t *mod_window)vi_mod_window_destroy47,1304
+static gboolean vi_mod_window_delete(GtkWidget *widget, GdkEvent *event, struct vi_mod_window_t *mod_window)vi_mod_window_delete53,1432
+static struct vi_mod_window_t *vi_mod_window_create(struct vi_mod_t *mod, GtkWidget *parent_toggle_button)vi_mod_window_create60,1652
+static void vi_mod_window_free(struct vi_mod_window_t *mod_window)vi_mod_window_free97,2821
+static void vi_mod_window_refresh(struct vi_mod_window_t *mod_window)vi_mod_window_refresh103,2913
+static GtkWidget *vi_mod_window_get_widget(struct vi_mod_window_t *mod_window)vi_mod_window_get_widget109,3037
+#define VI_MOD_BOARD_PADDING	VI_MOD_BOARD_PADDING121,3183
+#define VI_MOD_BOARD_WIDTH	VI_MOD_BOARD_WIDTH122,3216
+#define VI_MOD_BOARD_HEIGHT	VI_MOD_BOARD_HEIGHT123,3248
+struct vi_mod_board_tvi_mod_board_t126,3283
+	GtkWidget *widget;widget129,3326
+	struct vi_mod_window_t *mod_window;mod_window132,3383
+	GtkWidget *toggle_button;toggle_button135,3468
+	struct vi_mod_t *mod;mod137,3496
+	struct vi_list_t *access_list;access_list138,3519
+	struct vi_led_t *led;led139,3551
+static void vi_mod_board_destroy(GtkWidget *widget, struct vi_mod_board_t *board)vi_mod_board_destroy149,3780
+static gboolean vi_mod_board_toggle_button_toggled(GtkWidget *widget, struct vi_mod_board_t *board)vi_mod_board_toggle_button_toggled155,3895
+static struct vi_mod_board_t *vi_mod_board_create(struct vi_mod_t *mod)vi_mod_board_create182,4482
+static void vi_mod_board_free(struct vi_mod_board_t *board)vi_mod_board_free244,6564
+static void vi_mod_board_refresh(struct vi_mod_board_t *board)vi_mod_board_refresh260,6930
+#define VI_MEM_PANEL_PADDING	VI_MEM_PANEL_PADDING303,7824
+#define VI_MEM_PANEL_WIDTH	VI_MEM_PANEL_WIDTH305,7856
+#define VI_MEM_PANEL_HEIGHT	VI_MEM_PANEL_HEIGHT306,7887
+struct vi_mem_panel_tvi_mem_panel_t309,7921
+	GtkWidget *widget;widget311,7945
+	struct list_t *board_list;board_list313,7966
+static void vi_mem_panel_destroy(GtkWidget *widget,vi_mem_panel_destroy317,7999
+struct vi_mem_panel_t *vi_mem_panel_create(void)vi_mem_panel_create325,8146
+void vi_mem_panel_free(struct vi_mem_panel_t *panel)vi_mem_panel_free409,10371
+void vi_mem_panel_refresh(struct vi_mem_panel_t *panel)vi_mem_panel_refresh415,10444
+GtkWidget *vi_mem_panel_get_widget(struct vi_mem_panel_t *panel)vi_mem_panel_get_widget436,10821
+
+mem-system.c,1746
+static void vi_mem_system_set_block(struct vi_mem_system_t *system,vi_mem_system_set_block28,883
+static void vi_mem_system_set_sharer(struct vi_mem_system_t *system,vi_mem_system_set_sharer58,1610
+static void vi_mem_system_clear_sharer(struct vi_mem_system_t *system,vi_mem_system_clear_sharer87,2336
+static void vi_mem_system_clear_all_sharers(struct vi_mem_system_t *system,vi_mem_system_clear_all_sharers116,3066
+static void vi_mem_system_set_owner(struct vi_mem_system_t *system,vi_mem_system_set_owner143,3723
+static void vi_mem_system_new_access(struct vi_mem_system_t *system,vi_mem_system_new_access172,4443
+static void vi_mem_system_end_access(struct vi_mem_system_t *system,vi_mem_system_end_access196,5043
+static void vi_mem_system_new_access_block(struct vi_mem_system_t *system,vi_mem_system_new_access_block216,5470
+static void vi_mem_system_end_access_block(struct vi_mem_system_t *system,vi_mem_system_end_access_block258,6560
+static void vi_mem_system_access(struct vi_mem_system_t *system,vi_mem_system_access308,7879
+static void vi_mem_system_read_checkpoint(struct vi_mem_system_t *system, FILE *f)vi_mem_system_read_checkpoint330,8393
+static void vi_mem_system_write_checkpoint(struct vi_mem_system_t *system, FILE *f)vi_mem_system_write_checkpoint376,9546
+struct vi_mem_system_t *vi_mem_system;vi_mem_system412,10307
+#define VI_MEM_SYSTEM_TRACE_VERSION_MAJOR	VI_MEM_SYSTEM_TRACE_VERSION_MAJOR420,10656
+#define VI_MEM_SYSTEM_TRACE_VERSION_MINOR	VI_MEM_SYSTEM_TRACE_VERSION_MINOR421,10700
+static char *err_vi_mem_system_trace_version =err_vi_mem_system_trace_version423,10747
+void vi_mem_system_init(void)vi_mem_system_init428,10995
+void vi_mem_system_done(void)vi_mem_system_done536,14579
+
+mod-widget.c,4110
+#define VI_MOD_CELL_WIDTH	VI_MOD_CELL_WIDTH23,839
+#define VI_MOD_CELL_HEIGHT	VI_MOD_CELL_HEIGHT24,871
+#define VI_MOD_FIRST_ROW_HEIGHT	VI_MOD_FIRST_ROW_HEIGHT26,904
+#define VI_MOD_FIRST_COL_WIDTH	VI_MOD_FIRST_COL_WIDTH27,941
+#define VI_MOD_FONT_SIZE	VI_MOD_FONT_SIZE29,979
+#define VI_MOD_LABEL_BLOCK_LEFT	VI_MOD_LABEL_BLOCK_LEFT31,1010
+#define VI_MOD_LABEL_BLOCK_WIDTH	VI_MOD_LABEL_BLOCK_WIDTH32,1046
+#define VI_MOD_SHARERS_LABEL_LEFT	VI_MOD_SHARERS_LABEL_LEFT34,1085
+#define VI_MOD_SHARERS_LABEL_WIDTH	VI_MOD_SHARERS_LABEL_WIDTH35,1124
+#define VI_MOD_ACCESSES_LABEL_LEFT	VI_MOD_ACCESSES_LABEL_LEFT37,1164
+#define VI_MOD_ACCESSES_LABEL_WIDTH	VI_MOD_ACCESSES_LABEL_WIDTH38,1204
+struct sharers_label_tsharers_label_t47,1273
+	GtkWidget *widget;widget49,1298
+	GtkWidget *label;label50,1318
+	GdkColor label_color;label_color52,1338
+	char *mod_name;mod_name54,1362
+	int set;set56,1380
+	int way;way57,1390
+static void sharers_label_destroy(GtkWidget *widget,sharers_label_destroy67,1663
+static gboolean sharers_label_enter_notify(GtkWidget *widget,sharers_label_enter_notify74,1798
+static gboolean sharers_label_leave_notify(GtkWidget *widget,sharers_label_leave_notify106,2635
+static void sharers_label_clicked(GtkWidget *widget,sharers_label_clicked125,3222
+static struct sharers_label_t *sharers_label_create(char *mod_name, int set, int way)sharers_label_create218,5563
+static void sharers_label_free(struct sharers_label_t *sharers_label)sharers_label_free295,7789
+static GtkWidget *sharers_label_get_widget(struct sharers_label_t *sharers_label)sharers_label_get_widget302,7919
+struct accesses_label_taccesses_label_t314,8066
+	GtkWidget *widget;widget316,8092
+	GtkWidget *label;label317,8112
+	GdkColor label_color;label_color319,8132
+	char *mod_name;mod_name321,8156
+	int set;set323,8174
+	int way;way324,8184
+static void accesses_label_destroy(GtkWidget *widget,accesses_label_destroy334,8465
+static gboolean accesses_label_enter_notify(GtkWidget *widget,accesses_label_enter_notify341,8605
+static gboolean accesses_label_leave_notify(GtkWidget *widget,accesses_label_leave_notify373,9448
+static void accesses_label_clicked(GtkWidget *widget,accesses_label_clicked392,10041
+static struct accesses_label_t *accesses_label_create(char *mod_name, int set, int way)accesses_label_create450,11493
+static void accesses_label_free(struct accesses_label_t *accesses_label)accesses_label_free528,13828
+static GtkWidget *accesses_label_get_widget(struct accesses_label_t *accesses_label)accesses_label_get_widget535,13963
+static struct string_map_t vi_mod_block_state_map =vi_mod_block_state_map548,14121
+#define VI_MOD_NUM_BLOCK_COLORS VI_MOD_NUM_BLOCK_COLORS561,14272
+static char *vi_mod_block_color[VI_MOD_NUM_BLOCK_COLORS] =vi_mod_block_color563,14308
+struct vi_mod_widget_tvi_mod_widget_t574,14524
+	char *name;name576,14549
+	GtkWidget *widget;widget578,14563
+	GtkWidget *hscrollbar;hscrollbar579,14583
+	GtkWidget *vscrollbar;vscrollbar580,14607
+	GtkWidget *layout;layout582,14632
+	GtkWidget *first_row_layout;first_row_layout583,14652
+	GtkWidget *first_col_layout;first_col_layout584,14682
+	struct vi_list_t *access_list;access_list586,14713
+	int width;width588,14746
+	int height;height589,14758
+static void vi_mod_widget_destroy(GtkWidget *widget,vi_mod_widget_destroy593,14776
+static void vi_mod_widget_size_allocate(GtkWidget *widget, GdkRectangle *allocation,vi_mod_widget_size_allocate600,14905
+static gboolean vi_mod_widget_scroll(GtkWidget *widget, GdkEventScroll *event,vi_mod_widget_scroll609,15161
+static void vi_mod_widget_scroll_bar_value_changed(GtkRange *range,vi_mod_widget_scroll_bar_value_changed624,15522
+struct vi_mod_widget_t *vi_mod_widget_create(char *name)vi_mod_widget_create631,15669
+void vi_mod_widget_free(struct vi_mod_widget_t *mod_widget)vi_mod_widget_free743,20010
+void vi_mod_widget_refresh(struct vi_mod_widget_t *mod_widget)vi_mod_widget_refresh757,20308
+GtkWidget *vi_mod_widget_get_widget(struct vi_mod_widget_t *mod_widget)vi_mod_widget_get_widget1016,27799
+
+visual-memory.h,1917
+#define VISUAL_MEMORY_HVISUAL_MEMORY_H22,835
+struct vi_mem_system_tvi_mem_system_t32,915
+	struct hash_table_t *mod_table;mod_table34,940
+	struct hash_table_t *net_table;net_table35,973
+	struct hash_table_t *access_table;access_table36,1006
+	struct list_t *mod_level_list;mod_level_list37,1042
+struct vi_mod_access_tvi_mod_access_t54,1225
+	char *name;name56,1250
+	char *state;state57,1263
+	unsigned int address;address59,1278
+	int num_links;num_links65,1569
+	long long creation_cycle;creation_cycle67,1586
+	long long state_update_cycle;state_update_cycle68,1613
+#define VI_MOD_DIR_ENTRY_SHARERS_SIZE(VI_MOD_DIR_ENTRY_SHARERS_SIZE90,2265
+#define VI_MOD_DIR_ENTRY_SIZE(VI_MOD_DIR_ENTRY_SIZE91,2339
+struct vi_mod_dir_entry_tvi_mod_dir_entry_t94,2453
+	int owner;owner96,2481
+	int num_sharers;num_sharers97,2493
+	unsigned char sharers[0];sharers100,2578
+struct vi_mod_block_tvi_mod_block_t103,2609
+	struct vi_mod_t *mod;mod105,2633
+	int set;set107,2657
+	int way;way108,2667
+	int state;state109,2677
+	unsigned int tag;tag110,2689
+	struct linked_list_t *access_list;access_list112,2709
+	struct vi_mod_dir_entry_t *dir_entries;dir_entries114,2746
+struct vi_mod_tvi_mod_t117,2791
+	char *name;name119,2809
+	int num_sets;num_sets121,2823
+	int assoc;assoc122,2838
+	int block_size;block_size123,2850
+	int sub_block_size;sub_block_size124,2867
+	int num_sub_blocks;num_sub_blocks125,2888
+	int num_sharers;num_sharers126,2909
+	int level;level127,2927
+	int high_net_node_index;high_net_node_index129,2940
+	int low_net_node_index;low_net_node_index130,2966
+	struct vi_net_t *high_net;high_net132,2992
+	struct vi_net_t *low_net;low_net133,3020
+	struct vi_mod_block_t *blocks;blocks135,3048
+	struct hash_table_t *access_table;access_table137,3081
+struct vi_net_tvi_net_t182,4672
+	char *name;name184,4690
+	struct list_t *node_list;node_list186,4704
+
+mod-access.c,848
+struct vi_mod_access_t *vi_mod_access_create(char *name, unsigned int address)vi_mod_access_create27,867
+void vi_mod_access_free(struct vi_mod_access_t *access)vi_mod_access_free46,1292
+void vi_mod_access_set_state(struct vi_mod_access_t *access, char *state)vi_mod_access_set_state54,1420
+void vi_mod_access_read_checkpoint(struct vi_mod_access_t *access, FILE *f)vi_mod_access_read_checkpoint61,1608
+void vi_mod_access_write_checkpoint(struct vi_mod_access_t *access, FILE *f)vi_mod_access_write_checkpoint98,2770
+void vi_mod_access_get_name_long(char *access_name, char *buf, int size)vi_mod_access_get_name_long130,3852
+void vi_mod_access_get_name_short(char *access_name, char *buf, int size)vi_mod_access_get_name_short149,4368
+void vi_mod_access_get_desc(char *access_name, char *buf, int size)vi_mod_access_get_desc163,4708
+
+mod.c,1946
+static struct string_map_t vi_mod_block_state_map =vi_mod_block_state_map23,839
+struct vi_mod_t *vi_mod_create(struct vi_trace_line_t *trace_line)vi_mod_create42,1020
+void vi_mod_free(struct vi_mod_t *mod)vi_mod_free124,3488
+void vi_mod_add_access(struct vi_mod_t *mod, int set, int way, struct vi_mod_access_t *access)vi_mod_add_access166,4330
+struct vi_mod_access_t *vi_mod_find_access(struct vi_mod_t *mod, int set, int way, char *access_name)vi_mod_find_access183,4746
+struct vi_mod_access_t *vi_mod_remove_access(struct vi_mod_t *mod, int set, int way, char *access_name)vi_mod_remove_access213,5407
+struct linked_list_t *vi_mod_get_access_list(struct vi_mod_t *mod,vi_mod_get_access_list244,6115
+void vi_mod_block_set(struct vi_mod_t *mod, int set, int way,vi_mod_block_set258,6421
+int vi_mod_block_get_num_sharers(struct vi_mod_t *mod, int set, int way)vi_mod_block_get_num_sharers275,6929
+void vi_mod_read_checkpoint(struct vi_mod_t *mod, FILE *f)vi_mod_read_checkpoint293,7259
+void vi_mod_write_checkpoint(struct vi_mod_t *mod, FILE *f)vi_mod_write_checkpoint380,9285
+struct vi_mod_dir_entry_t *vi_mod_dir_entry_get(struct vi_mod_t *mod,vi_mod_dir_entry_get446,10734
+void vi_mod_dir_entry_set_sharer(struct vi_mod_t *mod,vi_mod_dir_entry_set_sharer464,11249
+void vi_mod_dir_entry_clear_sharer(struct vi_mod_t *mod,vi_mod_dir_entry_clear_sharer484,11825
+void vi_mod_dir_entry_clear_all_sharers(struct vi_mod_t *mod,vi_mod_dir_entry_clear_all_sharers504,12394
+int vi_mod_dir_entry_is_sharer(struct vi_mod_t *mod,vi_mod_dir_entry_is_sharer519,12719
+void vi_mod_dir_entry_set_owner(struct vi_mod_t *mod,vi_mod_dir_entry_set_owner533,13083
+void vi_mod_dir_entry_read_checkpoint(struct vi_mod_t *mod, int x, int y, int z, FILE *f)vi_mod_dir_entry_read_checkpoint547,13407
+void vi_mod_dir_entry_write_checkpoint(struct vi_mod_t *mod, int x, int y, int z, FILE *f)vi_mod_dir_entry_write_checkpoint562,13889
+
+net.c,538
+struct vi_net_node_tvi_net_node_t27,863
+	struct vi_mod_t *mod;mod29,886
+struct vi_net_node_t *vi_net_node_create(void)vi_net_node_create33,914
+void vi_net_node_free(struct vi_net_node_t *node)vi_net_node_free47,1147
+struct vi_net_t *vi_net_create(struct vi_trace_line_t *trace_line)vi_net_create59,1237
+void vi_net_free(struct vi_net_t *net)vi_net_free91,1873
+void vi_net_attach_mod(struct vi_net_t *net,vi_net_attach_mod106,2107
+struct vi_mod_t *vi_net_get_mod(struct vi_net_t *net, int node_index)vi_net_get_mod122,2454

@@ -1,0 +1,5 @@
+[ Context 0 ]
+exe = gcc_base.i386
+args = 166.i -o 166.s
+cwd = benchmarks/spec2006/403.gcc
+StdOut = gcc.out

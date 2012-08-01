@@ -1,0 +1,2 @@
+exe = omnetpp_base.i386
+args = omnetpp.ini

@@ -1,0 +1,180 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+VISUAL_EVERGREEN_H	visual-evergreen.h	22;"	d
+VI_CU_BOARD_HEIGHT	panel.c	141;"	d	file:
+VI_CU_BOARD_PADDING	panel.c	139;"	d	file:
+VI_CU_BOARD_WIDTH	panel.c	140;"	d	file:
+VI_EVG_PANEL_HEIGHT	panel.c	345;"	d	file:
+VI_EVG_PANEL_PADDING	panel.c	342;"	d	file:
+VI_EVG_PANEL_WIDTH	panel.c	344;"	d	file:
+VI_EVG_TIME_DIA_CELL_HEIGHT	time-dia.c	24;"	d	file:
+VI_EVG_TIME_DIA_CELL_WIDTH	time-dia.c	23;"	d	file:
+VI_EVG_TIME_DIA_CONTENT_LAYOUT_HEIGHT	time-dia.c	32;"	d	file:
+VI_EVG_TIME_DIA_CONTENT_LAYOUT_WIDTH	time-dia.c	31;"	d	file:
+VI_EVG_TIME_DIA_CYCLE_LAYOUT_HEIGHT	time-dia.c	35;"	d	file:
+VI_EVG_TIME_DIA_CYCLE_LAYOUT_WIDTH	time-dia.c	34;"	d	file:
+VI_EVG_TIME_DIA_FIRST_COL_WIDTH	time-dia.c	27;"	d	file:
+VI_EVG_TIME_DIA_FIRST_ROW_HEIGHT	time-dia.c	26;"	d	file:
+VI_EVG_TIME_DIA_FONT_SIZE	time-dia.c	29;"	d	file:
+VI_EVG_TIME_DIA_INST_LAYOUT_HEIGHT	time-dia.c	38;"	d	file:
+VI_EVG_TIME_DIA_INST_LAYOUT_WIDTH	time-dia.c	37;"	d	file:
+VI_EVG_TIME_DIA_LEGEND_LAYOUT_HEIGHT	time-dia.c	41;"	d	file:
+VI_EVG_TIME_DIA_LEGEND_LAYOUT_WIDTH	time-dia.c	40;"	d	file:
+VI_EVG_TIME_DIA_WINDOW_SIZE_X	panel.c	27;"	d	file:
+VI_EVG_TIME_DIA_WINDOW_SIZE_Y	panel.c	28;"	d	file:
+VI_EVG_TRACE_VERSION_MAJOR	gpu.c	295;"	d	file:
+VI_EVG_TRACE_VERSION_MINOR	gpu.c	296;"	d	file:
+asm_code	visual-evergreen.h	/^	char *asm_code;$/;"	m	struct:vi_evg_inst_t
+asm_code_t	visual-evergreen.h	/^	char *asm_code_t;$/;"	m	struct:vi_evg_inst_t
+asm_code_w	visual-evergreen.h	/^	char *asm_code_w;$/;"	m	struct:vi_evg_inst_t
+asm_code_x	visual-evergreen.h	/^	char *asm_code_x;$/;"	m	struct:vi_evg_inst_t
+asm_code_y	visual-evergreen.h	/^	char *asm_code_y;$/;"	m	struct:vi_evg_inst_t
+asm_code_z	visual-evergreen.h	/^	char *asm_code_z;$/;"	m	struct:vi_evg_inst_t
+board_list	panel.c	/^	struct list_t *board_list;$/;"	m	struct:vi_evg_panel_t	typeref:struct:vi_evg_panel_t::list_t	file:
+cat	visual-evergreen.h	/^	enum vi_evg_inst_cat_t cat;$/;"	m	struct:vi_evg_inst_t	typeref:enum:vi_evg_inst_t::vi_evg_inst_cat_t
+compute_unit	panel.c	/^	struct vi_evg_compute_unit_t *compute_unit;$/;"	m	struct:vi_cu_board_t	typeref:struct:vi_cu_board_t::vi_evg_compute_unit_t	file:
+compute_unit	panel.c	/^	struct vi_evg_compute_unit_t *compute_unit;$/;"	m	struct:vi_evg_time_dia_window_t	typeref:struct:vi_evg_time_dia_window_t::vi_evg_compute_unit_t	file:
+compute_unit	time-dia.c	/^	struct vi_evg_compute_unit_t *compute_unit;$/;"	m	struct:vi_evg_time_dia_t	typeref:struct:vi_evg_time_dia_t::vi_evg_compute_unit_t	file:
+compute_unit_id	visual-evergreen.h	/^	int compute_unit_id;$/;"	m	struct:vi_evg_inst_t
+compute_unit_list	visual-evergreen.h	/^	struct list_t *compute_unit_list;$/;"	m	struct:vi_evg_gpu_t	typeref:struct:vi_evg_gpu_t::list_t
+content_layout	time-dia.c	/^	GtkWidget *content_layout;$/;"	m	struct:vi_evg_time_dia_t	file:
+content_layout_height	time-dia.c	/^	int content_layout_height;$/;"	m	struct:vi_evg_time_dia_t	file:
+content_layout_width	time-dia.c	/^	int content_layout_width;$/;"	m	struct:vi_evg_time_dia_t	file:
+content_matrix	time-dia.c	/^	struct matrix_t *content_matrix;$/;"	m	struct:vi_evg_time_dia_t	typeref:struct:vi_evg_time_dia_t::matrix_t	file:
+content_table	time-dia.c	/^	GtkWidget *content_table;$/;"	m	struct:vi_evg_time_dia_t	file:
+cycle_layout	time-dia.c	/^	GtkWidget *cycle_layout;$/;"	m	struct:vi_evg_time_dia_t	file:
+cycle_list	time-dia.c	/^	struct list_t *cycle_list;$/;"	m	struct:vi_evg_time_dia_t	typeref:struct:vi_evg_time_dia_t::list_t	file:
+cycle_table	time-dia.c	/^	GtkWidget *cycle_table;$/;"	m	struct:vi_evg_time_dia_t	file:
+err_vi_evg_trace_version	gpu.c	/^static char *err_vi_evg_trace_version =$/;"	v	file:
+hscrollbar	time-dia.c	/^	GtkWidget *hscrollbar;$/;"	m	struct:vi_evg_time_dia_t	file:
+id	visual-evergreen.h	/^	int id;$/;"	m	struct:vi_evg_work_group_t
+id	visual-evergreen.h	/^	long long id;$/;"	m	struct:vi_evg_inst_t
+inst_layout	time-dia.c	/^	GtkWidget *inst_layout;$/;"	m	struct:vi_evg_time_dia_t	file:
+inst_layout_height	time-dia.c	/^	int inst_layout_height;$/;"	m	struct:vi_evg_time_dia_t	file:
+inst_layout_width	time-dia.c	/^	int inst_layout_width;$/;"	m	struct:vi_evg_time_dia_t	file:
+inst_list	time-dia.c	/^	struct list_t *inst_list;$/;"	m	struct:vi_evg_time_dia_t	typeref:struct:vi_evg_time_dia_t::list_t	file:
+inst_table	time-dia.c	/^	GtkWidget *inst_table;$/;"	m	struct:vi_evg_time_dia_t	file:
+inst_table	visual-evergreen.h	/^	struct hash_table_t *inst_table;$/;"	m	struct:vi_evg_compute_unit_t	typeref:struct:vi_evg_compute_unit_t::hash_table_t
+led	panel.c	/^	struct vi_led_t *led;$/;"	m	struct:vi_cu_board_t	typeref:struct:vi_cu_board_t::vi_led_t	file:
+left_cycle	time-dia.c	/^	long long left_cycle;$/;"	m	struct:vi_evg_time_dia_t	file:
+left_offset	time-dia.c	/^	int left_offset;$/;"	m	struct:vi_evg_time_dia_t	file:
+legend_layout	time-dia.c	/^	GtkWidget *legend_layout;$/;"	m	struct:vi_evg_time_dia_t	file:
+name	visual-evergreen.h	/^	char *name;$/;"	m	struct:vi_evg_compute_unit_t
+name	visual-evergreen.h	/^	char *name;$/;"	m	struct:vi_evg_inst_t
+name	visual-evergreen.h	/^	char *name;$/;"	m	struct:vi_evg_work_group_t
+num_insts	visual-evergreen.h	/^	long long num_insts;$/;"	m	struct:vi_evg_compute_unit_t
+parent_toggle_button	panel.c	/^	GtkWidget *parent_toggle_button;$/;"	m	struct:vi_evg_time_dia_window_t	file:
+stage	visual-evergreen.h	/^	enum vi_evg_inst_stage_t stage;$/;"	m	struct:vi_evg_inst_t	typeref:enum:vi_evg_inst_t::vi_evg_inst_stage_t
+time_dia	panel.c	/^	struct vi_evg_time_dia_t *time_dia;$/;"	m	struct:vi_evg_time_dia_window_t	typeref:struct:vi_evg_time_dia_window_t::vi_evg_time_dia_t	file:
+time_dia_toggle_button	panel.c	/^	GtkWidget *time_dia_toggle_button;$/;"	m	struct:vi_cu_board_t	file:
+time_dia_window	panel.c	/^	struct vi_evg_time_dia_window_t *time_dia_window;$/;"	m	struct:vi_cu_board_t	typeref:struct:vi_cu_board_t::vi_evg_time_dia_window_t	file:
+top_inst	time-dia.c	/^	long long top_inst;$/;"	m	struct:vi_evg_time_dia_t	file:
+top_offset	time-dia.c	/^	int top_offset;$/;"	m	struct:vi_evg_time_dia_t	file:
+vi_cu_board_create	panel.c	/^static struct vi_cu_board_t *vi_cu_board_create(struct vi_evg_compute_unit_t *compute_unit)$/;"	f	file:
+vi_cu_board_destroy	panel.c	/^static void vi_cu_board_destroy(GtkWidget *widget, struct vi_cu_board_t *board)$/;"	f	file:
+vi_cu_board_free	panel.c	/^static void vi_cu_board_free(struct vi_cu_board_t *board)$/;"	f	file:
+vi_cu_board_get_widget	panel.c	/^static GtkWidget *vi_cu_board_get_widget(struct vi_cu_board_t *board)$/;"	f	file:
+vi_cu_board_refresh	panel.c	/^static void vi_cu_board_refresh(struct vi_cu_board_t *board)$/;"	f	file:
+vi_cu_board_t	panel.c	/^struct vi_cu_board_t$/;"	s	file:
+vi_cu_board_time_dia_toggled	panel.c	/^static gboolean vi_cu_board_time_dia_toggled(GtkWidget *widget, struct vi_cu_board_t *board)$/;"	f	file:
+vi_evg_compute_unit_create	compute-unit.c	/^struct vi_evg_compute_unit_t *vi_evg_compute_unit_create(char *name)$/;"	f
+vi_evg_compute_unit_free	compute-unit.c	/^void vi_evg_compute_unit_free(struct vi_evg_compute_unit_t *compute_unit)$/;"	f
+vi_evg_compute_unit_read_checkpoint	compute-unit.c	/^void vi_evg_compute_unit_read_checkpoint(struct vi_evg_compute_unit_t *compute_unit, FILE *f)$/;"	f
+vi_evg_compute_unit_t	visual-evergreen.h	/^struct vi_evg_compute_unit_t$/;"	s
+vi_evg_compute_unit_write_checkpoint	compute-unit.c	/^void vi_evg_compute_unit_write_checkpoint(struct vi_evg_compute_unit_t *compute_unit, FILE *f)$/;"	f
+vi_evg_gpu	gpu.c	/^struct vi_evg_gpu_t *vi_evg_gpu;$/;"	v	typeref:struct:vi_evg_gpu_t
+vi_evg_gpu_done	gpu.c	/^void vi_evg_gpu_done(void)$/;"	f
+vi_evg_gpu_end_inst	gpu.c	/^static void vi_evg_gpu_end_inst(struct vi_evg_gpu_t *gpu, struct vi_trace_line_t *trace_line)$/;"	f	file:
+vi_evg_gpu_init	gpu.c	/^void vi_evg_gpu_init(void)$/;"	f
+vi_evg_gpu_inst	gpu.c	/^static void vi_evg_gpu_inst(struct vi_evg_gpu_t *gpu, struct vi_trace_line_t *trace_line)$/;"	f	file:
+vi_evg_gpu_map_work_group	gpu.c	/^static void vi_evg_gpu_map_work_group(struct vi_evg_gpu_t *gpu,$/;"	f	file:
+vi_evg_gpu_new_inst	gpu.c	/^static void vi_evg_gpu_new_inst(struct vi_evg_gpu_t *gpu, struct vi_trace_line_t *trace_line)$/;"	f	file:
+vi_evg_gpu_new_ndrange	gpu.c	/^static void vi_evg_gpu_new_ndrange(struct vi_evg_gpu_t *gpu,$/;"	f	file:
+vi_evg_gpu_read_checkpoint	gpu.c	/^static void vi_evg_gpu_read_checkpoint(struct vi_evg_gpu_t *gpu, FILE *f)$/;"	f	file:
+vi_evg_gpu_t	visual-evergreen.h	/^struct vi_evg_gpu_t$/;"	s
+vi_evg_gpu_unmap_work_group	gpu.c	/^static void vi_evg_gpu_unmap_work_group(struct vi_evg_gpu_t *gpu,$/;"	f	file:
+vi_evg_gpu_write_checkpoint	gpu.c	/^static void vi_evg_gpu_write_checkpoint(struct vi_evg_gpu_t *gpu, FILE *f)$/;"	f	file:
+vi_evg_inst_cat_alu	visual-evergreen.h	/^	vi_evg_inst_cat_alu,$/;"	e	enum:vi_evg_inst_cat_t
+vi_evg_inst_cat_cf	visual-evergreen.h	/^	vi_evg_inst_cat_cf,$/;"	e	enum:vi_evg_inst_cat_t
+vi_evg_inst_cat_invalid	visual-evergreen.h	/^	vi_evg_inst_cat_invalid = 0,$/;"	e	enum:vi_evg_inst_cat_t
+vi_evg_inst_cat_map	inst.c	/^struct string_map_t vi_evg_inst_cat_map =$/;"	v	typeref:struct:string_map_t
+vi_evg_inst_cat_t	visual-evergreen.h	/^enum vi_evg_inst_cat_t$/;"	g
+vi_evg_inst_cat_tex	visual-evergreen.h	/^	vi_evg_inst_cat_tex$/;"	e	enum:vi_evg_inst_cat_t
+vi_evg_inst_create	inst.c	/^struct vi_evg_inst_t *vi_evg_inst_create(char *name, long long id,$/;"	f
+vi_evg_inst_free	inst.c	/^void vi_evg_inst_free(struct vi_evg_inst_t *inst)$/;"	f
+vi_evg_inst_get_markup	inst.c	/^void vi_evg_inst_get_markup(struct vi_evg_inst_t *inst, char *buf, int size)$/;"	f
+vi_evg_inst_read_checkpoint	inst.c	/^void vi_evg_inst_read_checkpoint(struct vi_evg_inst_t *inst, FILE *f)$/;"	f
+vi_evg_inst_stage_alu_decode	visual-evergreen.h	/^	vi_evg_inst_stage_alu_decode,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_alu_execute	visual-evergreen.h	/^	vi_evg_inst_stage_alu_execute,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_alu_fetch	visual-evergreen.h	/^	vi_evg_inst_stage_alu_fetch,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_alu_read	visual-evergreen.h	/^	vi_evg_inst_stage_alu_read,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_alu_write	visual-evergreen.h	/^	vi_evg_inst_stage_alu_write,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_cf_complete	visual-evergreen.h	/^	vi_evg_inst_stage_cf_complete,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_cf_decode	visual-evergreen.h	/^	vi_evg_inst_stage_cf_decode,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_cf_execute	visual-evergreen.h	/^	vi_evg_inst_stage_cf_execute,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_cf_fetch	visual-evergreen.h	/^	vi_evg_inst_stage_cf_fetch,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_color_map	inst.c	/^struct string_map_t vi_evg_inst_stage_color_map =$/;"	v	typeref:struct:string_map_t
+vi_evg_inst_stage_count	visual-evergreen.h	/^	vi_evg_inst_stage_count$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_invalid	visual-evergreen.h	/^	vi_evg_inst_stage_invalid = 0,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_map	inst.c	/^struct string_map_t vi_evg_inst_stage_map =$/;"	v	typeref:struct:string_map_t
+vi_evg_inst_stage_name_map	inst.c	/^struct string_map_t vi_evg_inst_stage_name_map =$/;"	v	typeref:struct:string_map_t
+vi_evg_inst_stage_t	visual-evergreen.h	/^enum vi_evg_inst_stage_t$/;"	g
+vi_evg_inst_stage_tex_decode	visual-evergreen.h	/^	vi_evg_inst_stage_tex_decode,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_tex_fetch	visual-evergreen.h	/^	vi_evg_inst_stage_tex_fetch,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_tex_read	visual-evergreen.h	/^	vi_evg_inst_stage_tex_read,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_stage_tex_write	visual-evergreen.h	/^	vi_evg_inst_stage_tex_write,$/;"	e	enum:vi_evg_inst_stage_t
+vi_evg_inst_t	visual-evergreen.h	/^struct vi_evg_inst_t$/;"	s
+vi_evg_inst_write_checkpoint	inst.c	/^void vi_evg_inst_write_checkpoint(struct vi_evg_inst_t *inst, FILE *f)$/;"	f
+vi_evg_panel_create	panel.c	/^struct vi_evg_panel_t *vi_evg_panel_create(void)$/;"	f
+vi_evg_panel_destroy	panel.c	/^static void vi_evg_panel_destroy(GtkWidget *widget,$/;"	f	file:
+vi_evg_panel_free	panel.c	/^void vi_evg_panel_free(struct vi_evg_panel_t *panel)$/;"	f
+vi_evg_panel_get_widget	panel.c	/^GtkWidget *vi_evg_panel_get_widget(struct vi_evg_panel_t *panel)$/;"	f
+vi_evg_panel_refresh	panel.c	/^void vi_evg_panel_refresh(struct vi_evg_panel_t *panel)$/;"	f
+vi_evg_panel_t	panel.c	/^struct vi_evg_panel_t$/;"	s	file:
+vi_evg_time_dia_create	time-dia.c	/^struct vi_evg_time_dia_t *vi_evg_time_dia_create(struct vi_evg_compute_unit_t *compute_unit)$/;"	f
+vi_evg_time_dia_free	time-dia.c	/^void vi_evg_time_dia_free(struct vi_evg_time_dia_t *time_dia)$/;"	f
+vi_evg_time_dia_get_widget	time-dia.c	/^GtkWidget *vi_evg_time_dia_get_widget(struct vi_evg_time_dia_t *time_dia)$/;"	f
+vi_evg_time_dia_go_to_cycle	time-dia.c	/^void vi_evg_time_dia_go_to_cycle(struct vi_evg_time_dia_t *time_dia, long long cycle)$/;"	f
+vi_evg_time_dia_refresh	time-dia.c	/^void vi_evg_time_dia_refresh(struct vi_evg_time_dia_t *time_dia)$/;"	f
+vi_evg_time_dia_refresh_content	time-dia.c	/^static void vi_evg_time_dia_refresh_content(struct vi_evg_time_dia_t *time_dia)$/;"	f	file:
+vi_evg_time_dia_refresh_content_layout	time-dia.c	/^static void vi_evg_time_dia_refresh_content_layout(struct vi_evg_time_dia_t *time_dia)$/;"	f	file:
+vi_evg_time_dia_refresh_cycle_layout	time-dia.c	/^static void vi_evg_time_dia_refresh_cycle_layout(struct vi_evg_time_dia_t *time_dia)$/;"	f	file:
+vi_evg_time_dia_refresh_inst_layout	time-dia.c	/^static void vi_evg_time_dia_refresh_inst_layout(struct vi_evg_time_dia_t *time_dia)$/;"	f	file:
+vi_evg_time_dia_refresh_scrollbars	time-dia.c	/^static void vi_evg_time_dia_refresh_scrollbars(struct vi_evg_time_dia_t *time_dia)$/;"	f	file:
+vi_evg_time_dia_scroll	time-dia.c	/^static gboolean vi_evg_time_dia_scroll(GtkWidget *widget, GdkEventScroll *event,$/;"	f	file:
+vi_evg_time_dia_scrollbar_value_changed	time-dia.c	/^static void vi_evg_time_dia_scrollbar_value_changed(GtkRange *range,$/;"	f	file:
+vi_evg_time_dia_size_allocate	time-dia.c	/^static void vi_evg_time_dia_size_allocate(GtkWidget *widget, GdkRectangle *allocation,$/;"	f	file:
+vi_evg_time_dia_t	time-dia.c	/^struct vi_evg_time_dia_t$/;"	s	file:
+vi_evg_time_dia_widget_destroy	time-dia.c	/^static void vi_evg_time_dia_widget_destroy(GtkWidget *widget, struct vi_evg_time_dia_t *time_dia)$/;"	f	file:
+vi_evg_time_dia_window_create	panel.c	/^static struct vi_evg_time_dia_window_t *vi_evg_time_dia_window_create($/;"	f	file:
+vi_evg_time_dia_window_delete	panel.c	/^static gboolean vi_evg_time_dia_window_delete(GtkWidget *widget,$/;"	f	file:
+vi_evg_time_dia_window_destroy	panel.c	/^static void vi_evg_time_dia_window_destroy(GtkWidget *widget,$/;"	f	file:
+vi_evg_time_dia_window_free	panel.c	/^static void vi_evg_time_dia_window_free(struct vi_evg_time_dia_window_t *time_dia_window)$/;"	f	file:
+vi_evg_time_dia_window_get_widget	panel.c	/^static GtkWidget *vi_evg_time_dia_window_get_widget(struct vi_evg_time_dia_window_t *time_dia_window)$/;"	f	file:
+vi_evg_time_dia_window_go_to_cycle	panel.c	/^static void vi_evg_time_dia_window_go_to_cycle(struct vi_evg_time_dia_window_t *time_dia_window,$/;"	f	file:
+vi_evg_time_dia_window_refresh	panel.c	/^static void vi_evg_time_dia_window_refresh(struct vi_evg_time_dia_window_t *time_dia_window)$/;"	f	file:
+vi_evg_time_dia_window_t	panel.c	/^struct vi_evg_time_dia_window_t$/;"	s	file:
+vi_evg_work_group_create	work-group.c	/^struct vi_evg_work_group_t *vi_evg_work_group_create(char *name, int id,$/;"	f
+vi_evg_work_group_free	work-group.c	/^void vi_evg_work_group_free(struct vi_evg_work_group_t *work_group)$/;"	f
+vi_evg_work_group_get_desc	work-group.c	/^void vi_evg_work_group_get_desc(char *work_group_name, char *buf, int size)$/;"	f
+vi_evg_work_group_get_name_short	work-group.c	/^void vi_evg_work_group_get_name_short(char *work_group_name, char *buf, int size)$/;"	f
+vi_evg_work_group_read_checkpoint	work-group.c	/^void vi_evg_work_group_read_checkpoint(struct vi_evg_work_group_t *work_group, FILE *f)$/;"	f
+vi_evg_work_group_t	visual-evergreen.h	/^struct vi_evg_work_group_t$/;"	s
+vi_evg_work_group_write_checkpoint	work-group.c	/^void vi_evg_work_group_write_checkpoint(struct vi_evg_work_group_t *work_group, FILE *f)$/;"	f
+vscrollbar	time-dia.c	/^	GtkWidget *vscrollbar;$/;"	m	struct:vi_evg_time_dia_t	file:
+wavefront_count	visual-evergreen.h	/^	int wavefront_count;$/;"	m	struct:vi_evg_work_group_t
+wavefront_id	visual-evergreen.h	/^	int wavefront_id;$/;"	m	struct:vi_evg_inst_t
+wavefront_id_first	visual-evergreen.h	/^	int wavefront_id_first;$/;"	m	struct:vi_evg_work_group_t
+widget	panel.c	/^	GtkWidget *widget;$/;"	m	struct:vi_cu_board_t	file:
+widget	panel.c	/^	GtkWidget *widget;$/;"	m	struct:vi_evg_panel_t	file:
+widget	panel.c	/^	GtkWidget *widget;$/;"	m	struct:vi_evg_time_dia_window_t	file:
+widget	time-dia.c	/^	GtkWidget *widget;$/;"	m	struct:vi_evg_time_dia_t	file:
+work_group_id	visual-evergreen.h	/^	int work_group_id;$/;"	m	struct:vi_evg_inst_t
+work_group_list	panel.c	/^	struct vi_list_t *work_group_list;$/;"	m	struct:vi_cu_board_t	typeref:struct:vi_cu_board_t::vi_list_t	file:
+work_group_table	visual-evergreen.h	/^	struct hash_table_t *work_group_table;$/;"	m	struct:vi_evg_compute_unit_t	typeref:struct:vi_evg_compute_unit_t::hash_table_t
+work_item_count	visual-evergreen.h	/^	int work_item_count;$/;"	m	struct:vi_evg_work_group_t
+work_item_id_first	visual-evergreen.h	/^	int work_item_id_first;$/;"	m	struct:vi_evg_work_group_t

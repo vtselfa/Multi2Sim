@@ -1,0 +1,3 @@
+exe = gobmk_base.i386
+args = --quiet --mode gtp
+stdin = trevord.tst

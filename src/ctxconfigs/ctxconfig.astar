@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = astar_base.i386
+args = rivers.cfg
+cwd = benchmarks/spec2006/473.astar
+StdOut = astar.out
+IPCReport = astar.ipc
+IPCReportInterval = 100000

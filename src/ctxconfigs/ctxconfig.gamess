@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = gamess_base.i386
+stdin = triazolium.config
+cwd = benchmarks/spec2006/416.gamess
+StdOut = gamess.out
+IPCReport = gamess.ipc
+IPCReportInterval = 100000

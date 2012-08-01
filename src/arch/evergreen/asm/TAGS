@@ -1,0 +1,526 @@
+
+dump.c,4964
+static struct string_map_t evg_fmt_rel_map =evg_fmt_rel_map30,889
+static struct string_map_t evg_fmt_chan_map =evg_fmt_chan_map39,991
+static struct string_map_t evg_fmt_sel_map =evg_fmt_sel_map50,1128
+static struct string_map_t evg_fmt_cf_index_mode_map =evg_fmt_cf_index_mode_map64,1317
+static struct string_map_t evg_fmt_kcache_mode_map =evg_fmt_kcache_mode_map75,1482
+struct string_map_t evg_inst_category_map =evg_inst_category_map86,1672
+struct string_map_t evg_fmt_cf_inst_map =evg_fmt_cf_inst_map100,1960
+static void evg_fmt_invalid_dump(void *buf, FILE *f)evg_fmt_invalid_dump168,3874
+struct string_map_t evg_fmt_cf_word0_jts_map = {evg_fmt_cf_word0_jts_map180,4017
+void evg_fmt_cf_word0_dump(void *buf, FILE *f)evg_fmt_cf_word0_dump192,4301
+struct string_map_t evg_fmt_cf_gws_word0_val_index_mode_map = {evg_fmt_cf_gws_word0_val_index_mode_map207,4646
+struct string_map_t evg_fmt_cf_gws_word0_gws_opcode_map = {evg_fmt_cf_gws_word0_gws_opcode_map216,4823
+void evg_fmt_cf_gws_word0_dump(void *buf, FILE *f)evg_fmt_cf_gws_word0_dump226,4987
+struct string_map_t evg_fmt_cf_word1_cond_map = {evg_fmt_cf_word1_cond_map247,5705
+void evg_fmt_cf_word1_dump(void *buf, FILE *f)evg_fmt_cf_word1_dump257,5875
+void evg_fmt_cf_alu_word0_dump(void *buf, FILE *f)evg_fmt_cf_alu_word0_dump281,6630
+struct string_map_t evg_fmt_cf_alu_inst_map = {evg_fmt_cf_alu_inst_map299,7099
+void evg_fmt_cf_alu_word1_dump(void *buf, FILE *f)evg_fmt_cf_alu_word1_dump313,7426
+void evg_fmt_cf_alu_word0_ext_dump(void *buf, FILE *f)evg_fmt_cf_alu_word0_ext_dump335,8159
+void evg_fmt_cf_alu_word1_ext_dump(void *buf, FILE *f)evg_fmt_cf_alu_word1_ext_dump361,9228
+struct string_map_t evg_fmt_cf_alloc_export_type_map = {evg_fmt_cf_alloc_export_type_map380,9835
+void evg_fmt_cf_alloc_export_word0_dump(void *buf, FILE *f)evg_fmt_cf_alloc_export_word0_dump390,10058
+struct string_map_t evg_fmt_cf_alloc_export_rat_inst_map = {evg_fmt_cf_alloc_export_rat_inst_map410,10690
+void evg_fmt_cf_alloc_export_word0_rat_dump(void *buf, FILE *f)evg_fmt_cf_alloc_export_word0_rat_dump455,12272
+void evg_fmt_cf_alloc_export_word1_buf_dump(void *buf, FILE *f)evg_fmt_cf_alloc_export_word1_buf_dump476,13156
+void evg_fmt_cf_alloc_export_word1_swiz_dump(void *buf, FILE *f)evg_fmt_cf_alloc_export_word1_swiz_dump498,13893
+struct string_map_t evg_fmt_alu_src_sel_map =evg_fmt_alu_src_sel_map522,14866
+struct string_map_t evg_fmt_alu_word0_index_mode_map = {evg_fmt_alu_word0_index_mode_map562,16001
+struct string_map_t evg_fmt_alu_word0_pred_sel_map = {evg_fmt_alu_word0_pred_sel_map571,16171
+static void evg_fmt_alu_src_sel_dump_buf(uint32_t src_sel, char **pbuf, int *psize)evg_fmt_alu_src_sel_dump_buf579,16314
+void evg_fmt_alu_word0_dump(void *buf, FILE *f)evg_fmt_alu_word0_dump596,17019
+struct string_map_t evg_fmt_alu_word1_op2_omod_map = {evg_fmt_alu_word1_op2_omod_map633,18422
+struct string_map_t evg_fmt_alu_word1_op2_alu_inst_map = {evg_fmt_alu_word1_op2_alu_inst_map642,18586
+struct string_map_t evg_fmt_alu_bank_swizzle_map = {evg_fmt_alu_bank_swizzle_map823,24549
+void evg_fmt_alu_word1_op2_dump(void *buf, FILE *f)evg_fmt_alu_word1_op2_dump835,24823
+struct string_map_t evg_fmt_alu_word1_op3_alu_inst_map = {evg_fmt_alu_word1_op3_alu_inst_map861,25920
+void evg_fmt_alu_word1_op3_dump(void *buf, FILE *f)evg_fmt_alu_word1_op3_dump892,26785
+void evg_fmt_alu_word0_lds_idx_op_dump(void *buf, FILE *f)evg_fmt_alu_word0_lds_idx_op_dump922,27999
+struct string_map_t evg_fmt_lds_op_map = {evg_fmt_lds_op_map959,29469
+void evg_fmt_alu_word1_lds_idx_op_dump(void *buf, FILE *f)evg_fmt_alu_word1_lds_idx_op_dump1010,30564
+struct string_map_t evg_fmt_vc_inst_map = {evg_fmt_vc_inst_map1041,31895
+struct string_map_t evg_fmt_vtx_fetch_type_map = {  /* VTX_FETCH prefix omitted */evg_fmt_vtx_fetch_type_map1050,32047
+struct string_map_t evg_fmt_vtx_src_sel_map = {evg_fmt_vtx_src_sel_map1059,32221
+void evg_fmt_vtx_word0_dump(void *buf, FILE *f)evg_fmt_vtx_word0_dump1069,32354
+struct string_map_t evg_fmt_vtx_data_format_map = {evg_fmt_vtx_data_format_map1091,33137
+struct string_map_t evg_fmt_vtx_num_format_map = {  /* Prefix NUM_FORMAT omitted */evg_fmt_vtx_num_format_map1161,34553
+struct string_map_t evg_fmt_vtx_format_comp_map = {  /* Prefix FORMAT_COMP omitted */evg_fmt_vtx_format_comp_map1170,34702
+struct string_map_t evg_fmt_vtx_srf_mode_map = {  /* Prefix SRF_MODE omitted */evg_fmt_vtx_srf_mode_map1178,34841
+void evg_fmt_vtx_word1_gpr_dump(void *buf, FILE *f)evg_fmt_vtx_word1_gpr_dump1186,34987
+struct string_map_t evg_fmt_vtx_endian_swap_map = {  /* Prefix ENDIAN omitted */evg_fmt_vtx_endian_swap_map1211,36243
+void evg_fmt_vtx_word2_dump(void *buf, FILE *f)evg_fmt_vtx_word2_dump1220,36390
+evg_fmt_dump_func_t evg_fmt_dump_func_list[EVG_FMT_COUNT] = {evg_fmt_dump_func_list1242,37065
+void evg_inst_word_dump(void *buf, enum evg_fmt_enum fmt, FILE *f)evg_inst_word_dump1289,38423
+
+asm.c,4379
+struct evg_inst_info_t evg_inst_info[EVG_INST_COUNT];evg_inst_info35,1041
+#define EVG_INST_INFO_CF_LONG_SIZE EVG_INST_INFO_CF_LONG_SIZE38,1166
+#define EVG_INST_INFO_CF_SHORT_SIZE EVG_INST_INFO_CF_SHORT_SIZE39,1206
+#define EVG_INST_INFO_ALU_LONG_SIZE EVG_INST_INFO_ALU_LONG_SIZE40,1245
+#define EVG_INST_INFO_ALU_SHORT_SIZE EVG_INST_INFO_ALU_SHORT_SIZE41,1285
+#define EVG_INST_INFO_TEX_SIZE EVG_INST_INFO_TEX_SIZE42,1325
+static struct evg_inst_info_t *evg_inst_info_cf_long[EVG_INST_INFO_CF_LONG_SIZE];  /* for 8-bit cf_inst */evg_inst_info_cf_long44,1360
+static struct evg_inst_info_t *evg_inst_info_cf_short[EVG_INST_INFO_CF_SHORT_SIZE];  /* for 4-bit cf_inst */evg_inst_info_cf_short45,1467
+static struct evg_inst_info_t *evg_inst_info_alu_long[EVG_INST_INFO_ALU_LONG_SIZE];  /* for ALU_OP2 */evg_inst_info_alu_long46,1576
+static struct evg_inst_info_t *evg_inst_info_alu_short[EVG_INST_INFO_ALU_SHORT_SIZE];  /* for ALU_OP3 */evg_inst_info_alu_short47,1679
+static struct evg_inst_info_t *evg_inst_info_tex[EVG_INST_INFO_TEX_SIZE];  /* For tex instructions */evg_inst_info_tex48,1784
+void evg_disasm_init()evg_disasm_init51,1888
+#define DEFINST(DEFINST60,2068
+#undef DEFINSTDEFINST73,2612
+void evg_disasm_done()evg_disasm_done116,4001
+void evg_disasm_buffer(struct elf_buffer_t *buffer, FILE *f)evg_disasm_buffer123,4174
+void *evg_inst_decode_cf(void *buf, struct evg_inst_t *inst)evg_inst_decode_cf202,5983
+void *evg_inst_decode_alu(void *buf, struct evg_inst_t *inst)evg_inst_decode_alu238,7144
+void *evg_inst_decode_alu_group(void *buf, int group_id, struct evg_alu_group_t *group)evg_inst_decode_alu_group263,7929
+void *evg_inst_decode_tc(void *buf, struct evg_inst_t *inst)evg_inst_decode_tc330,10098
+struct string_map_t evg_pv_map = {evg_pv_map355,10658
+struct string_map_t evg_alu_map = {evg_alu_map365,10832
+struct string_map_t evg_bank_swizzle_map = {evg_bank_swizzle_map375,10994
+struct string_map_t evg_rat_inst_map = {evg_rat_inst_map386,11164
+struct string_map_t evg_cf_cond_map = {evg_cf_cond_map431,12341
+struct string_map_t evg_src_sel_map = {evg_src_sel_map441,12469
+struct string_map_t evg_dst_sel_map = {evg_dst_sel_map478,13619
+struct string_map_t export_type_map = {export_type_map490,13769
+static int evg_inst_is_token(char *fmt_str, char *token_str, int *token_str_len)evg_inst_is_token500,13892
+static char *evg_inst_token_prefix(int loop_idx, int *nl)evg_inst_token_prefix508,14109
+static void evg_inst_dump_kcache_buf(int kcache_idx, int kcache_bank, int kcache_mode, int kcache_addr,evg_inst_dump_kcache_buf530,14514
+static void evg_inst_dump_gpr_buf(int gpr, int rel, int chan, int im,evg_inst_dump_gpr_buf549,15148
+static void evg_inst_dump_op_dest_buf(struct evg_inst_t *inst, char **buf_ptr, int *size_ptr)evg_inst_dump_op_dest_buf581,15963
+void evg_inst_copy(struct evg_inst_t *dest, struct evg_inst_t *src)evg_inst_copy605,16835
+void evg_alu_group_copy(struct evg_alu_group_t *dest, struct evg_alu_group_t *src)evg_alu_group_copy613,17095
+void evg_inst_get_op_src(struct evg_inst_t *inst, int src_idx,evg_inst_get_op_src623,17382
+void amd_inst_dump_op_src_buf(struct evg_inst_t *inst, int src_idx, char **buf_ptr, int *size_ptr)amd_inst_dump_op_src_buf714,20002
+void evg_inst_slot_dump_buf(struct evg_inst_t *inst, int count, int loop_idx, int slot,evg_inst_slot_dump_buf793,22079
+void evg_inst_dump_buf(struct evg_inst_t *inst, int count, int loop_idx,evg_inst_dump_buf1605,48098
+void evg_inst_dump_gpr(int gpr, int rel, int chan, int im, FILE *f)evg_inst_dump_gpr1613,48264
+void evg_inst_slot_dump(struct evg_inst_t *inst, int count, int loop_idx, int slot, FILE *f)evg_inst_slot_dump1624,48497
+void evg_inst_dump(struct evg_inst_t *inst, int count, int loop_idx, FILE *f)evg_inst_dump1633,48727
+void evg_inst_dump_debug(struct evg_inst_t *inst, int count, int loop_idx, FILE *f)evg_inst_dump_debug1640,48864
+void evg_inst_words_dump(struct evg_inst_t *inst, FILE *f)evg_inst_words_dump1655,49276
+void evg_alu_group_dump(struct evg_alu_group_t *group, int shift, FILE *f)evg_alu_group_dump1668,49535
+void evg_alu_group_dump_buf(struct evg_alu_group_t *alu_group, char *buf, int size)evg_alu_group_dump_buf1681,49793
+void evg_alu_group_dump_debug(struct evg_alu_group_t *alu_group, int count, int loop_idx, FILE *f)evg_alu_group_dump_debug1709,50424
+
+evergreen-asm.h,26437
+#define EVERGREEN_ASM_HEVERGREEN_ASM_H21,828
+enum evg_fmt_enumevg_fmt_enum28,922
+	EVG_FMT_NONE = 0,EVG_FMT_NONE30,942
+	EVG_FMT_CF_WORD0,EVG_FMT_CF_WORD033,995
+	EVG_FMT_CF_GWS_WORD0,EVG_FMT_CF_GWS_WORD034,1014
+	EVG_FMT_CF_WORD1,EVG_FMT_CF_WORD135,1037
+	EVG_FMT_CF_ALU_WORD0,EVG_FMT_CF_ALU_WORD037,1057
+	EVG_FMT_CF_ALU_WORD1,EVG_FMT_CF_ALU_WORD138,1080
+	EVG_FMT_CF_ALU_WORD0_EXT,EVG_FMT_CF_ALU_WORD0_EXT40,1105
+	EVG_FMT_CF_ALU_WORD1_EXT,EVG_FMT_CF_ALU_WORD1_EXT41,1132
+	EVG_FMT_CF_ALLOC_EXPORT_WORD0,EVG_FMT_CF_ALLOC_EXPORT_WORD043,1160
+	EVG_FMT_CF_ALLOC_EXPORT_WORD0_RAT,EVG_FMT_CF_ALLOC_EXPORT_WORD0_RAT44,1192
+	EVG_FMT_CF_ALLOC_EXPORT_WORD1_BUF,EVG_FMT_CF_ALLOC_EXPORT_WORD1_BUF45,1228
+	EVG_FMT_CF_ALLOC_EXPORT_WORD1_SWIZ,EVG_FMT_CF_ALLOC_EXPORT_WORD1_SWIZ46,1264
+	EVG_FMT_ALU_WORD0,EVG_FMT_ALU_WORD049,1333
+	EVG_FMT_ALU_WORD1_OP2,EVG_FMT_ALU_WORD1_OP250,1353
+	EVG_FMT_ALU_WORD1_OP3,EVG_FMT_ALU_WORD1_OP351,1377
+	EVG_FMT_ALU_WORD0_LDS_IDX_OP,EVG_FMT_ALU_WORD0_LDS_IDX_OP54,1433
+	EVG_FMT_ALU_WORD1_LDS_IDX_OP,EVG_FMT_ALU_WORD1_LDS_IDX_OP55,1464
+	EVG_FMT_ALU_WORD1_LDS_DIRECT_LITERAL_LO,EVG_FMT_ALU_WORD1_LDS_DIRECT_LITERAL_LO56,1495
+	EVG_FMT_ALU_WORD1_LDS_DIRECT_LITERAL_HI,EVG_FMT_ALU_WORD1_LDS_DIRECT_LITERAL_HI57,1537
+	EVG_FMT_VTX_WORD0,EVG_FMT_VTX_WORD060,1642
+	EVG_FMT_VTX_WORD1_GPR,EVG_FMT_VTX_WORD1_GPR61,1662
+	EVG_FMT_VTX_WORD1_SEM,EVG_FMT_VTX_WORD1_SEM62,1686
+	EVG_FMT_VTX_WORD2,EVG_FMT_VTX_WORD263,1710
+	EVG_FMT_TEX_WORD0,EVG_FMT_TEX_WORD066,1794
+	EVG_FMT_TEX_WORD1,EVG_FMT_TEX_WORD167,1814
+	EVG_FMT_TEX_WORD2,EVG_FMT_TEX_WORD268,1834
+	EVG_FMT_MEM_RD_WORD0,EVG_FMT_MEM_RD_WORD071,1887
+	EVG_FMT_MEM_RD_WORD1,EVG_FMT_MEM_RD_WORD172,1910
+	EVG_FMT_MEM_RD_WORD2,EVG_FMT_MEM_RD_WORD273,1933
+	EVG_FMT_MEM_GDS_WORD0,EVG_FMT_MEM_GDS_WORD076,2006
+	EVG_FMT_MEM_GDS_WORD1,EVG_FMT_MEM_GDS_WORD177,2030
+	EVG_FMT_MEM_GDS_WORD2,EVG_FMT_MEM_GDS_WORD278,2054
+	EVG_FMT_COUNTEVG_FMT_COUNT81,2090
+enum evg_alu_enumevg_alu_enum86,2121
+	EVG_ALU_X = 0,EVG_ALU_X88,2141
+	EVG_ALU_Y,EVG_ALU_Y89,2157
+	EVG_ALU_Z,EVG_ALU_Z90,2169
+	EVG_ALU_W,EVG_ALU_W91,2181
+	EVG_ALU_TRANS,EVG_ALU_TRANS92,2193
+	EVG_ALU_COUNTEVG_ALU_COUNT94,2210
+struct evg_fmt_cf_word0_tevg_fmt_cf_word0_t127,2984
+	unsigned int addr : 24;  /* [23:0] */addr129,3012
+	unsigned int jump_table_sel : 3;  /* [26:24] */jump_table_sel130,3051
+	unsigned int __reserved0 : 5;  /* [31:27] */__reserved0131,3100
+struct evg_fmt_cf_gws_word0_tevg_fmt_cf_gws_word0_t135,3151
+	unsigned int value : 10;  /* [9:0] */value137,3183
+	unsigned int __reserved0 : 6;  /* [15:10] */__reserved0138,3222
+	unsigned int resource : 5;  /* [20:16] */resource139,3268
+	unsigned int __reserved1 : 4;  /* [24:21] */__reserved1140,3311
+	unsigned int s : 1;  /* [25] */s141,3357
+	unsigned int val_index_mode : 2;  /* [27:26] */val_index_mode142,3390
+	unsigned int rsrc_index_mode : 2;  /* [29:28] */rsrc_index_mode143,3439
+	unsigned int gws_opcode : 2;  /* [31:30] */gws_opcode144,3489
+struct evg_fmt_cf_word1_tevg_fmt_cf_word1_t148,3539
+	unsigned int pop_count : 3;  /* [2:0] */pop_count150,3567
+	unsigned int cf_const : 5;  /* [7:3] */cf_const151,3609
+	unsigned int cond : 2;  /* [9:8] */cond152,3650
+	unsigned int count : 6;  /* [15:10] */count153,3687
+	unsigned int __reserved0 : 4;  /* [19:16] */__reserved0154,3727
+	unsigned int valid_pixel_mode : 1;  /* [20] */valid_pixel_mode155,3773
+	unsigned int end_of_program : 1;  /* [21] */end_of_program156,3821
+	unsigned int cf_inst : 8;  /* [29:22] */cf_inst157,3867
+	unsigned int whole_quad_mode : 1;  /* [30] */whole_quad_mode158,3909
+	unsigned int barrier : 1;  /* [31] */barrier159,3956
+struct evg_fmt_cf_alu_word0_tevg_fmt_cf_alu_word0_t163,4000
+	unsigned int addr : 22;  /* [21:0] */addr165,4032
+	unsigned int kcache_bank0 : 4;  /* [25:22] */kcache_bank0166,4071
+	unsigned int kcache_bank1 : 4;  /* [29:26] */kcache_bank1167,4118
+	unsigned int kcache_mode0 : 2;  /* [31:30] */kcache_mode0168,4165
+struct evg_fmt_cf_alu_word1_tevg_fmt_cf_alu_word1_t172,4217
+	unsigned int kcache_mode1 : 2;  /* [1:0] */kcache_mode1174,4249
+	unsigned int kcache_addr0 : 8;  /* [9:2] */kcache_addr0175,4294
+	unsigned int kcache_addr1 : 8;  /* [17:10] */kcache_addr1176,4339
+	unsigned int count : 7;  /* [24:18] */count177,4386
+	unsigned int alt_const : 1;  /* [25] */alt_const178,4426
+	unsigned int cf_inst : 4;  /* [29:26] */cf_inst179,4467
+	unsigned int whole_quad_mode : 1;  /* [30] */whole_quad_mode180,4509
+	unsigned int barrier : 1;  /* [31] */barrier181,4556
+struct evg_fmt_cf_alu_word0_ext_tevg_fmt_cf_alu_word0_ext_t185,4600
+	unsigned int __reserved0 : 4;  /* [3:0] */__reserved0187,4636
+	unsigned int kcache_bank_index_mode0 : 2;  /* [5:4] */kcache_bank_index_mode0188,4680
+	unsigned int kcache_bank_index_mode1 : 2;  /* [7:6] */kcache_bank_index_mode1189,4736
+	unsigned int kcache_bank_index_mode2 : 2;  /* [9:8] */kcache_bank_index_mode2190,4792
+	unsigned int kcache_bank_index_mode3 : 2;  /* [11:10] */kcache_bank_index_mode3191,4848
+	unsigned int __reserved1 : 10;  /* [21:12] */__reserved1192,4906
+	unsigned int kcache_bank2 : 4;  /* [25:22] */kcache_bank2193,4953
+	unsigned int kcache_bank3 : 4;  /* [29:26] */kcache_bank3194,5000
+	unsigned int kcache_mode2 : 2;  /* [31:30] */kcache_mode2195,5047
+struct evg_fmt_cf_alu_word1_ext_tevg_fmt_cf_alu_word1_ext_t199,5099
+	unsigned int kcache_mode3 : 2;  /* [1:0] */kcache_mode3201,5135
+	unsigned int kcache_addr2 : 8;  /* [9:2] */kcache_addr2202,5180
+	unsigned int kcache_addr3 : 8;  /* [17:10] */kcache_addr3203,5225
+	unsigned int __reserved0 : 8;  /* [25:18] */__reserved0204,5272
+	unsigned int cf_inst : 4;  /* [29:26] */cf_inst205,5318
+	unsigned int __reserved1 : 1;  /* [30] */__reserved1206,5360
+	unsigned int barrier : 1;  /* [31] */barrier207,5403
+struct evg_fmt_cf_alloc_export_word0_tevg_fmt_cf_alloc_export_word0_t211,5447
+	unsigned int array_base : 13;  /* [12:0] */array_base213,5488
+	unsigned int type : 2;  /* [14:13] */type214,5533
+	unsigned int rw_gpr : 7;  /* [21:15] */rw_gpr215,5572
+	unsigned int rr : 1;  /* [22] */rr216,5613
+	unsigned int index_gpr : 7;  /* [29:23] */index_gpr217,5647
+	unsigned int elem_size : 2;  /* [31:30] */elem_size218,5691
+struct evg_fmt_cf_alloc_export_word0_rat_tevg_fmt_cf_alloc_export_word0_rat_t222,5740
+	unsigned int rat_id : 4;  /* [3:0] */rat_id224,5785
+	unsigned int rat_inst : 6;  /* [9:4] */rat_inst225,5824
+	unsigned int __reserved0 : 1;  /* [10] */__reserved0226,5865
+	unsigned int rat_index_mode : 2;  /* [12:11] */rat_index_mode227,5908
+	unsigned int type : 2;  /* [14:13] */type228,5957
+	unsigned int rw_gpr : 7;  /* [21:15] */rw_gpr229,5996
+	unsigned int rr : 1;  /* rw_rel [22] */rr230,6037
+	unsigned int index_gpr : 7;  /* [29:23] */index_gpr231,6078
+	unsigned int elem_size : 2;  /* [31:30] */elem_size232,6122
+struct evg_fmt_cf_alloc_export_word1_buf_tevg_fmt_cf_alloc_export_word1_buf_t236,6171
+	unsigned int array_size : 12;  /* [11:0] */array_size238,6216
+	unsigned int comp_mask : 4;  /* [15:12] */comp_mask239,6261
+	unsigned int burst_count : 4;  /* [19:16] */burst_count240,6305
+	unsigned int valid_pixel_mode : 1;  /* [20] */valid_pixel_mode241,6351
+	unsigned int end_of_program : 1;  /* [21] */end_of_program242,6399
+	unsigned int cf_inst : 8;  /* [29:22] */cf_inst243,6445
+	unsigned int mark : 1;  /* [30] */mark244,6487
+	unsigned int barrier : 1;  /* [31] */barrier245,6523
+struct evg_fmt_cf_alloc_export_word1_swiz_tevg_fmt_cf_alloc_export_word1_swiz_t249,6567
+	unsigned int sel_x : 3;  /* [2:0] */sel_x251,6613
+	unsigned int sel_y : 3;  /* [5:3] */sel_y252,6651
+	unsigned int sel_z : 3;  /* [8:6] */sel_z253,6689
+	unsigned int sel_w : 3;  /* [11:9] */sel_w254,6727
+	unsigned int __reserved0 : 4;  /* [15:12] */__reserved0255,6766
+	unsigned int burst_count : 4;  /* [19:16] */burst_count256,6812
+	unsigned int valid_pixel_mode : 1;  /* [20] */valid_pixel_mode257,6858
+	unsigned int end_of_program : 1;  /* [21] */end_of_program258,6906
+	unsigned int cf_inst : 8;  /* [29:22] */cf_inst259,6952
+	unsigned int mark : 1;  /* [30] */mark260,6994
+	unsigned int barrier : 1;  /* [31] */barrier261,7030
+struct evg_fmt_alu_word0_tevg_fmt_alu_word0_t265,7074
+	unsigned int src0_sel : 9;  /* [8:0] */src0_sel267,7103
+	unsigned int src0_rel : 1;  /* [9] */src0_rel268,7144
+	unsigned int src0_chan : 2;  /* [11:10] */src0_chan269,7183
+	unsigned int src0_neg : 1;  /* [12] */src0_neg270,7227
+	unsigned int src1_sel : 9;  /* [21:13] */src1_sel271,7267
+	unsigned int src1_rel : 1;  /* [22] */src1_rel272,7310
+	unsigned int src1_chan : 2;  /* [24:23] */src1_chan273,7350
+	unsigned int src1_neg : 1;  /* [25] */src1_neg274,7394
+	unsigned int index_mode : 3;  /* [28:26] */index_mode275,7434
+	unsigned int pred_sel : 2;  /* [30:29] */pred_sel276,7479
+	unsigned int last : 1;  /* [31] */last277,7522
+struct evg_fmt_alu_word1_op2_tevg_fmt_alu_word1_op2_t281,7563
+	unsigned int src0_abs : 1;  /* [0] */src0_abs283,7596
+	unsigned int src1_abs : 1;  /* [1] */src1_abs284,7635
+	unsigned int update_exec_mask : 1;  /* [2] */update_exec_mask285,7674
+	unsigned int update_pred : 1;  /* [3] */update_pred286,7721
+	unsigned int write_mask : 1;  /* [4] */write_mask287,7763
+	unsigned int omod : 2;  /* [6:5] */omod288,7804
+	unsigned int alu_inst : 11;  /* [17:7] */alu_inst289,7841
+	unsigned int bank_swizzle : 3;  /* [20:18] */bank_swizzle290,7884
+	unsigned int dst_gpr : 7;  /* [27:21] */dst_gpr291,7931
+	unsigned int dst_rel : 1;  /* [28] */dst_rel292,7973
+	unsigned int dst_chan : 2;  /* [30:29] */dst_chan293,8012
+	unsigned int clamp : 1;  /* [31] */clamp294,8055
+struct evg_fmt_alu_word1_op3_tevg_fmt_alu_word1_op3_t298,8097
+	unsigned int src2_sel : 9;  /* [8:0] */src2_sel300,8130
+	unsigned int src2_rel : 1;  /* [9] */src2_rel301,8171
+	unsigned int src2_chan : 2;  /* [11:10] */src2_chan302,8210
+	unsigned int src2_neg : 1;  /* [12] */src2_neg303,8254
+	unsigned int alu_inst : 5;  /* [17:13] */alu_inst304,8294
+	unsigned int bank_swizzle : 3;  /* [20:18] */bank_swizzle305,8337
+	unsigned int dst_gpr : 7;  /* [27:21] */dst_gpr306,8384
+	unsigned int dst_rel : 1;  /* [28] */dst_rel307,8426
+	unsigned int dst_chan : 2;  /* [30:29] */dst_chan308,8465
+	unsigned int clamp : 1;  /* [31] */clamp309,8508
+struct evg_fmt_alu_word0_lds_idx_op_tevg_fmt_alu_word0_lds_idx_op_t313,8550
+	unsigned int src0_sel : 9;  /* [8:0] */src0_sel315,8590
+	unsigned int src0_rel : 1;  /* [9] */src0_rel316,8631
+	unsigned int src0_chan : 2;  /* [11:10] */src0_chan317,8670
+	unsigned int idx_offset_4 : 1;  /* [12] */idx_offset_4318,8714
+	unsigned int src1_sel : 9;  /* [21:13] */src1_sel319,8758
+	unsigned int src1_rel : 1;  /* [22] */src1_rel320,8801
+	unsigned int src1_chan : 2;  /* [24:23] */src1_chan321,8841
+	unsigned int idx_offset_5 : 1;  /* [25] */idx_offset_5322,8885
+	unsigned int index_mode : 3;  /* [28:26] */index_mode323,8929
+	unsigned int pred_sel : 2;  /* [30:29] */pred_sel324,8974
+	unsigned int last : 1;  /* [31] */last325,9017
+struct evg_fmt_alu_word1_lds_idx_op_tevg_fmt_alu_word1_lds_idx_op_t329,9058
+	unsigned int src2_sel : 9;  /* [8:0] */src2_sel331,9098
+	unsigned int src2_rel : 1;  /* [9] */src2_rel332,9139
+	unsigned int src2_chan : 2;  /* [11:10] */src2_chan333,9178
+	unsigned int idx_offset_1 : 1;  /* [12] */idx_offset_1334,9222
+	unsigned int alu_inst : 5;  /* [17:13] */alu_inst335,9266
+	unsigned int bank_swizzle : 3;  /* [20:18] */bank_swizzle336,9309
+	unsigned int lds_op : 6;  /* [26:21] */lds_op337,9356
+	unsigned int idx_offset_0 : 1;  /* [27] */idx_offset_0338,9397
+	unsigned int idx_offset_2 : 1;  /* [28] */idx_offset_2339,9441
+	unsigned int dst_chan : 2;  /* [30:29] */dst_chan340,9485
+	unsigned int idx_offset_3 : 1;  /* [31] */idx_offset_3341,9528
+struct evg_fmt_vtx_word0_tevg_fmt_vtx_word0_t345,9577
+	unsigned int vc_inst : 5;  /* [4:0] */vc_inst347,9606
+	unsigned int fetch_type : 2;  /* [5:6] */fetch_type348,9646
+	unsigned int fetch_whole_quad : 1;  /* [7] */fetch_whole_quad349,9689
+	unsigned int buffer_id : 8;  /* [15:8] */buffer_id350,9736
+	unsigned int src_gpr : 7;  /* [22:16] */src_gpr351,9779
+	unsigned int src_rel : 1;  /* [23] */src_rel352,9821
+	unsigned int src_sel_x : 2;  /* [25:24] */src_sel_x353,9860
+	unsigned int mega_fetch_count : 6;  /* [31:26] */mega_fetch_count354,9904
+struct evg_fmt_vtx_word1_gpr_tevg_fmt_vtx_word1_gpr_t358,9960
+	unsigned int dst_gpr : 7;  /* [6:0] */dst_gpr360,9993
+	unsigned int dst_rel : 1;  /* [7] */dst_rel361,10033
+	unsigned int __reserved0 : 1;  /* [8] */__reserved0362,10071
+	unsigned int dst_sel_x : 3;	 /* [11:9] */dst_sel_x363,10113
+	unsigned int dst_sel_y : 3;  /* [14:12] */dst_sel_y364,10156
+	unsigned int dst_sel_z : 3;  /* [17:15] */dst_sel_z365,10200
+	unsigned int dst_sel_w : 3;  /* [20:17] */dst_sel_w366,10244
+	unsigned int use_const_fields : 1; /* [21] */use_const_fields367,10288
+	unsigned int data_format : 6;  /* [27:22] */data_format368,10335
+	unsigned int num_format_all : 2;  /* [29:28] */num_format_all369,10381
+	unsigned int format_comp_all : 1;  /* [30] */format_comp_all370,10430
+	unsigned int srf_mode_all : 1;  /* [31] */srf_mode_all371,10477
+struct evg_fmt_vtx_word1_sem_tevg_fmt_vtx_word1_sem_t375,10526
+	unsigned int semantic_id : 8;  /* [7:0] */semantic_id377,10559
+	unsigned int __reserved0 : 1;  /* [8] */__reserved0378,10603
+	unsigned int dst_sel_x : 3;  /* [11:9] */dst_sel_x379,10645
+	unsigned int dst_sel_y : 3;  /* [14:12] */dst_sel_y380,10688
+	unsigned int dst_sel_z : 3;  /* [17:15] */dst_sel_z381,10732
+	unsigned int dst_sel_w : 3;  /* [20:18] */dst_sel_w382,10776
+	unsigned int use_const_fields : 1;  /* [21] */use_const_fields383,10820
+	unsigned int data_format : 6;  /* [27:22] */data_format384,10868
+	unsigned int num_format_all : 2;  /* [29:28] */num_format_all385,10914
+	unsigned int format_comp_all : 1; /* [30] */format_comp_all386,10963
+	unsigned int srf_mode_all : 1;  /* [31] */srf_mode_all387,11009
+struct evg_fmt_vtx_word2_tevg_fmt_vtx_word2_t391,11058
+	unsigned int offset : 16;  /* [15:0] */offset393,11087
+	unsigned int endian_swap : 2;  /* [17:16] */endian_swap394,11128
+	unsigned int const_buf_no_stride : 1;  /* [18] */const_buf_no_stride395,11174
+	unsigned int mega_fetch : 1;  /* [19] */mega_fetch396,11225
+	unsigned int __reserved0 : 12;  /* [31:21] */__reserved0401,11446
+struct evg_fmt_tex_word0_tevg_fmt_tex_word0_t405,11498
+	unsigned int tex_inst : 5;	/* [4:0] */tex_inst407,11527
+	unsigned int inst_mod : 2;  /* [6:5] */inst_mod408,11567
+	unsigned int fwq : 1;  /* [7] */fwq409,11608
+	unsigned int resource_id : 8;  /* [15:8] */resource_id410,11642
+	unsigned int src_gpr : 7;  /* [22:16] */src_gpr411,11687
+	unsigned int sr : 1;  /* [23] */sr412,11729
+	unsigned int ac : 1;  /* [24] */ac413,11763
+	unsigned int rim : 2;  /* [26:25] */rim414,11797
+	unsigned int sim : 2;  /* [28:27] */sim415,11835
+	unsigned int __reserved0 : 3;  /* [31:29] */__reserved0416,11873
+struct evg_fmt_tex_word1_tevg_fmt_tex_word1_t420,11924
+	unsigned int dst_gpr : 7;  /* [6:0] */dst_gpr422,11953
+	unsigned int dr : 1;  /* [7] */dr423,11993
+	unsigned int __reserved0 : 1;  /* [8] */__reserved0424,12026
+	unsigned int dsx : 3;  /* [11:9] */dsx425,12068
+	unsigned int dsy : 3;  /* [14:12] */dsy426,12105
+	unsigned int dsz : 3;  /* [17:15] */dsz427,12143
+	unsigned int dsw : 3;  /* [20:18] */dsw428,12181
+	unsigned int lod_bias : 7;  /* [27:21] */lod_bias429,12219
+	unsigned int ctx : 1;  /* [28] */ctx430,12262
+	unsigned int cty : 1;  /* [29] */cty431,12297
+	unsigned int ctz : 1;  /* [30] */ctz432,12332
+	unsigned int ctw : 1;  /* [31] */ctw433,12367
+struct evg_fmt_tex_word2_tevg_fmt_tex_word2_t437,12407
+	unsigned int offset_x : 5;  /* [4:0] */offset_x439,12436
+	unsigned int offset_y : 5;  /* [9:5] */offset_y440,12477
+	unsigned int offset_z : 5;  /* [14:10] */offset_z441,12518
+	unsigned int sampler_id : 5;  /* [19:15] */sampler_id442,12561
+	unsigned int ssx : 3;  /* [22:20] */ssx443,12606
+	unsigned int ssy : 3;  /* [25:23] */ssy444,12644
+	unsigned int ssz : 3;  /* [28:26] */ssz445,12682
+	unsigned int ssw : 3;  /* [31:29] */ssw446,12720
+struct evg_fmt_mem_rd_word0_tevg_fmt_mem_rd_word0_t450,12841
+	unsigned int mem_inst : 5;  /* [4:0] */mem_inst452,12873
+	unsigned int elem_size : 2;  /* [6:5] */elem_size453,12914
+	unsigned int fwq : 1;  /* [7] */fwq454,12956
+	unsigned int mem_op : 3;  /* [10:8] */mem_op455,12990
+	unsigned int uncached : 1;  /* [11] */uncached456,13030
+	unsigned int indexed : 1;  /* [12] */indexed457,13070
+	unsigned int __reserved0 : 3;  /* [15:13] */__reserved0458,13109
+	unsigned int src_gpr : 7;  /* [22:16] */src_gpr459,13155
+	unsigned int src_rel : 1;  /* [23] */src_rel460,13197
+	unsigned int ssx : 2;  /* [25:24] */ssx461,13236
+	unsigned int burst_count : 4;  /* [29:26] */burst_count462,13274
+	unsigned int _reserved1 : 2;  /* [31:30] */_reserved1463,13320
+struct evg_fmt_mem_rd_word1_tevg_fmt_mem_rd_word1_t466,13369
+	unsigned int dst_gpr : 7;  /* [6:0] */dst_gpr468,13401
+	unsigned int dst_rel : 1;  /* [7] */dst_rel469,13441
+	unsigned int __reserved0 : 1;  /* [8] */__reserved0470,13479
+	unsigned int dsx : 3;  /* [11:9] */dsx471,13521
+	unsigned int dsy : 3;  /* [14:12] */dsy472,13558
+	unsigned int dsw : 3;  /* [17:15] */dsw473,13596
+	unsigned int dsz : 3;  /* [20:18] */dsz474,13634
+	unsigned int __reserved1 : 1;  /* [21] */__reserved1475,13672
+	unsigned int data_format : 6;  /* [27:22] */data_format476,13715
+	unsigned int num_format_all : 2;  /* [29:28] */num_format_all477,13761
+	unsigned int format_comp_all : 1;  /* [30] */format_comp_all478,13810
+	unsigned int srf_mode_all : 1;  /* [31] */srf_mode_all479,13857
+struct evg_fmt_mem_rd_word2_tevg_fmt_mem_rd_word2_t482,13905
+	unsigned int array_base : 13;  /* [12:0] */array_base484,13937
+	unsigned int __reserved0 : 3;  /* [15:13] */__reserved0485,13982
+	unsigned int endian_swap : 2;  /* [17:16] */endian_swap486,14028
+	unsigned int __reserved1 : 2;  /* [19:18] */__reserved1487,14074
+	unsigned int array_size : 12;  /* [31:20] */array_size488,14120
+struct evg_fmt_mem_gds_word0_tevg_fmt_mem_gds_word0_t491,14170
+	unsigned int mem_inst : 5;  /* [4:0] */mem_inst493,14203
+	unsigned int __reserved0 : 3;  /* [7:5] */__reserved0494,14244
+	unsigned int mem_op : 3;  /* [10:8] */mem_op495,14288
+	unsigned int src_gpr : 7;  /* [17:11] */src_gpr496,14328
+	unsigned int src_rel_mode : 2;  /* [19:18] */src_rel_mode497,14370
+	unsigned int ssx : 3;  /* [22:20] */ssx498,14417
+	unsigned int ssy : 3;  /* [25:23] */ssy499,14455
+	unsigned int ssz : 3;  /* [29:26] */ssz500,14493
+	unsigned int __reserved1 : 3;  /* [31:29] */__reserved1501,14531
+struct evg_fmt_mem_gds_word1_tevg_fmt_mem_gds_word1_t504,14581
+	unsigned int dst_gpr : 7;  /* [6:0] */dst_gpr506,14614
+	unsigned int dst_rel_mode : 2;  /* [8:7] */dst_rel_mode507,14654
+	unsigned int gds_op : 6;  /* [14:9] */gds_op508,14699
+	unsigned int __reserved0 : 1;  /* [15] */__reserved0509,14739
+	unsigned int src_gpr : 7;  /* [22:16] */src_gpr510,14782
+	unsigned int __reserved1 : 1;  /* [23] */__reserved1511,14824
+	unsigned int uim : 2;  /* [25:24] */uim512,14867
+	unsigned int uav_id : 4;  /* [29:26] */uav_id513,14905
+	unsigned int alloc_consume : 1;  /* [30] */alloc_consume514,14946
+	unsigned int bcast_first_req : 1;  /* [31] */bcast_first_req515,14991
+struct evg_fmt_mem_gds_word2_tevg_fmt_mem_gds_word2_t518,15042
+	unsigned int dsx : 3;  /* [2:0] */dsx520,15075
+	unsigned int dsy : 3;  /* [5:3] */dsy521,15111
+	unsigned int dsz : 3;  /* [8:6] */dsz522,15147
+	unsigned int dsw : 3;  /* [11:9] */dsw523,15183
+	unsigned int __reserved0 : 20;  /* [31:12] */__reserved0524,15220
+enum evg_inst_category_enumevg_inst_category_enum530,15323
+	EVG_INST_CAT_NONE = 0,EVG_INST_CAT_NONE532,15353
+	EVG_INST_CAT_CF,  /* Control-flow instructions */EVG_INST_CAT_CF534,15378
+	EVG_INST_CAT_ALU,  /* ALU clause instructions */EVG_INST_CAT_ALU535,15429
+	EVG_INST_CAT_LDS,  /* LDS clause instructions */EVG_INST_CAT_LDS536,15479
+	EVG_INST_CAT_VTX,  /* Instructions for a fetch through a vertex cache clause */EVG_INST_CAT_VTX537,15529
+	EVG_INST_CAT_TEX,  /* Instructions for a fetch through a texture cache clause */EVG_INST_CAT_TEX538,15610
+	EVG_INST_CAT_MEM_RD,  /* Memory read instructions */EVG_INST_CAT_MEM_RD539,15692
+	EVG_INST_CAT_MEM_GDS, /* Global data-share read/write instructions */EVG_INST_CAT_MEM_GDS540,15746
+	EVG_INST_CAT_COUNTEVG_INST_CAT_COUNT542,15818
+enum evg_inst_flag_enumevg_inst_flag_enum546,15843
+	EVG_INST_FLAG_NONE         = 0x0000,EVG_INST_FLAG_NONE548,15869
+	EVG_INST_FLAG_TRANS_ONLY   = 0x0001,  /* Only executable in transcendental unit */EVG_INST_FLAG_TRANS_ONLY549,15907
+	EVG_INST_FLAG_INC_LOOP_IDX = 0x0002,  /* CF inst increasing loop depth index */EVG_INST_FLAG_INC_LOOP_IDX550,15991
+	EVG_INST_FLAG_DEC_LOOP_IDX = 0x0004,  /* CF inst decreasing loop index */EVG_INST_FLAG_DEC_LOOP_IDX551,16072
+	EVG_INST_FLAG_DST_INT      = 0x0008,  /* Inst with integer dest operand */EVG_INST_FLAG_DST_INT552,16147
+	EVG_INST_FLAG_DST_UINT     = 0x0010,  /* Inst with unsigned int dest op */EVG_INST_FLAG_DST_UINT553,16223
+	EVG_INST_FLAG_DST_FLOAT    = 0x0020,  /* Inst with float dest op */EVG_INST_FLAG_DST_FLOAT554,16299
+	EVG_INST_FLAG_ACT_MASK     = 0x0040,  /* Inst affects the active mask (control flow) */EVG_INST_FLAG_ACT_MASK555,16368
+	EVG_INST_FLAG_LDS          = 0x0080,  /* Access to local memory */EVG_INST_FLAG_LDS556,16457
+	EVG_INST_FLAG_MEM          = 0x0100,  /* Access to global memory */EVG_INST_FLAG_MEM557,16525
+	EVG_INST_FLAG_MEM_READ     = 0x0200,  /* Read to global memory */EVG_INST_FLAG_MEM_READ558,16594
+	EVG_INST_FLAG_MEM_WRITE    = 0x0400,  /* Write to global memory */EVG_INST_FLAG_MEM_WRITE559,16661
+	EVG_INST_FLAG_PRED_MASK    = 0x0800   /* Inst affects the predicate mask */EVG_INST_FLAG_PRED_MASK560,16729
+enum evg_inst_enumevg_inst_enum564,16811
+	EVG_INST_NONE = 0,EVG_INST_NONE566,16832
+#define DEFINST(DEFINST568,16853
+#undef DEFINSTDEFINST571,16986
+	EVG_INST_COUNTEVG_INST_COUNT574,17014
+union evg_inst_word_tevg_inst_word_t578,17035
+	char bytes[4];bytes580,17059
+	struct evg_fmt_cf_word0_t cf_word0;cf_word0582,17076
+	struct evg_fmt_cf_gws_word0_t cf_gws_word0;cf_gws_word0583,17113
+	struct evg_fmt_cf_word1_t cf_word1;cf_word1584,17158
+	struct evg_fmt_cf_alu_word0_t cf_alu_word0;cf_alu_word0586,17196
+	struct evg_fmt_cf_alu_word1_t cf_alu_word1;cf_alu_word1587,17241
+	struct evg_fmt_cf_alu_word0_ext_t cf_alu_word0_ext;cf_alu_word0_ext589,17289
+	struct evg_fmt_cf_alu_word1_ext_t cf_alu_word1_ext;cf_alu_word1_ext590,17342
+	struct evg_fmt_cf_alloc_export_word0_t cf_alloc_export_word0;cf_alloc_export_word0592,17398
+	struct evg_fmt_cf_alloc_export_word0_rat_t cf_alloc_export_word0_rat;cf_alloc_export_word0_rat593,17461
+	struct evg_fmt_cf_alloc_export_word1_buf_t cf_alloc_export_word1_buf;cf_alloc_export_word1_buf594,17532
+	struct evg_fmt_cf_alloc_export_word1_swiz_t cf_alloc_export_word1_swiz;cf_alloc_export_word1_swiz595,17603
+	struct evg_fmt_alu_word0_t alu_word0;alu_word0597,17677
+	struct evg_fmt_alu_word1_op2_t alu_word1_op2;alu_word1_op2598,17716
+	struct evg_fmt_alu_word1_op3_t alu_word1_op3;alu_word1_op3599,17763
+	struct evg_fmt_alu_word0_lds_idx_op_t alu_word0_lds_idx_op;alu_word0_lds_idx_op601,17811
+	struct evg_fmt_alu_word1_lds_idx_op_t alu_word1_lds_idx_op;alu_word1_lds_idx_op602,17872
+	struct evg_fmt_vtx_word0_t vtx_word0;vtx_word0604,17934
+	struct evg_fmt_vtx_word1_gpr_t vtx_word1_gpr;vtx_word1_gpr605,17973
+	struct evg_fmt_vtx_word1_sem_t vtx_word1_sem;vtx_word1_sem606,18020
+	struct evg_fmt_vtx_word2_t vtx_word2;vtx_word2607,18067
+	struct evg_fmt_tex_word0_t tex_word0;tex_word0609,18107
+	struct evg_fmt_tex_word1_t tex_word1;tex_word1610,18146
+	struct evg_fmt_tex_word2_t tex_word2;tex_word2611,18185
+	struct evg_fmt_mem_rd_word0_t mem_rd_word0;mem_rd_word0613,18225
+	struct evg_fmt_mem_rd_word1_t mem_rd_word1;mem_rd_word1614,18270
+	struct evg_fmt_mem_rd_word2_t mem_rd_word2;mem_rd_word2615,18315
+	struct evg_fmt_mem_gds_word0_t mem_gds_word0;mem_gds_word0617,18361
+	struct evg_fmt_mem_gds_word1_t mem_gds_word1;mem_gds_word1618,18408
+	struct evg_fmt_mem_gds_word2_t mem_gds_word2;mem_gds_word2619,18455
+#define EVG_INST_MAX_WORDS EVG_INST_MAX_WORDS624,18508
+struct evg_inst_info_tevg_inst_info_t626,18539
+	enum evg_inst_enum inst;inst628,18564
+	enum evg_inst_category_enum category;category629,18590
+	char *name;name630,18629
+	char *fmt_str;fmt_str631,18642
+	enum evg_fmt_enum fmt[EVG_INST_MAX_WORDS];  /* Word formats */fmt632,18658
+	int opcode;  /* Operation code */opcode633,18722
+	enum evg_inst_flag_enum flags;  /* Flag bitmap */flags634,18757
+	int size;  /* Number of words (32-bit) */size635,18808
+union evg_reg_tevg_reg_t638,18855
+	signed int as_int;as_int640,18873
+	unsigned int as_uint;as_uint641,18893
+	signed short int as_short[2];as_short643,18917
+	unsigned short int as_ushort[2];as_ushort644,18948
+	float as_float;as_float646,18983
+struct evg_inst_tevg_inst_t649,19004
+	struct evg_inst_info_t *info;  /* Pointer to 'amd_inst_info' table */info652,19054
+	union evg_inst_word_t words[EVG_INST_MAX_WORDS];words653,19125
+	enum evg_alu_enum alu;  /*  identifier of assigned ALU (ALU_[X,Y,Z,W] or ALU_TRANS) */alu656,19201
+	struct evg_alu_group_t *alu_group;  /* 'alu_group' where it belongs */alu_group657,19289
+#define EVG_ALU_GROUP_SIZE EVG_ALU_GROUP_SIZE661,19366
+#define EVG_ALU_GROUP_MAX_LITERALS EVG_ALU_GROUP_MAX_LITERALS662,19396
+struct evg_alu_group_tevg_alu_group_t664,19435
+	int id;  /* Identifier of ALU group */id666,19460
+	int inst_count;  /* Number of instruction slots (max. 5) */inst_count667,19500
+	int literal_count;  /* Number of literal constant slots (max. 2) */literal_count668,19561
+	struct evg_inst_t inst[EVG_ALU_GROUP_SIZE];inst669,19630
+		unsigned int as_uint;as_uint674,19730
+		float as_float;as_float675,19754
+	} literal[EVG_ALU_GROUP_MAX_LITERALS];literal676,19772
+typedef void (*evg_fmt_dump_func_t)(void *buf, FILE *);evg_fmt_dump_func_t683,19934

@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = h264ref_base.i386
+args = -d sss_encoder_main.cfg
+cwd = benchmarks/spec2006/464.h264ref
+StdOut = h264ref.out
+IPCReport = h264ref.ipc
+IPCReportInterval = 100000

@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = xalancbmk_base.i386
+args = -v t5.xml xalanc.xsl
+cwd = benchmarks/spec2006/483.xalancbmk
+StdOut = xalancbmk.out
+IPCReport = xalancbmk.ipc
+IPCReportInterval = 100000

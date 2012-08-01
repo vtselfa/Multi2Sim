@@ -1,0 +1,13 @@
+[ Context 0 ]
+exe = calculix_base.i386
+args = -i hyperviscoplastic
+cwd = benchmarks/spec2006/454.calculix
+StdOut = CALCULIX-gamess.out
+IPCReport = calculix-gamess.ipc
+IPCReportInterval = 100000
+[ Context 1 ]
+exe = gamess_base.i386
+stdin = triazolium.config
+cwd = benchmarks/spec2006/416.gamess
+IPCs = calculix-GAMESS.ipcs
+StdOut = calculix-GAMESS.out

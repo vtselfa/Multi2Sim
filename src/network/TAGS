@@ -1,0 +1,202 @@
+
+routing-table.c,1426
+static char *err_net_cycle =err_net_cycle28,857
+static char *err_net_routing = err_net_routing33,1104
+#define NET_NODE_COLOR_WHITE NET_NODE_COLOR_WHITE39,1370
+#define NET_NODE_COLOR_GRAY NET_NODE_COLOR_GRAY40,1412
+#define NET_NODE_COLOR_BLACK NET_NODE_COLOR_BLACK41,1453
+static void routing_table_cycle_detection_dfs_visit(struct net_routing_table_t *routing_table, struct list_t *buffer_list,routing_table_cycle_detection_dfs_visit45,1586
+static void net_routing_table_cycle_detection(struct net_routing_table_t *routing_table)net_routing_table_cycle_detection116,3975
+struct net_routing_table_t *net_routing_table_create(struct net_t *net)net_routing_table_create166,5170
+void net_routing_table_free(struct net_routing_table_t *routing_table)net_routing_table_free183,5520
+void net_routing_table_initiate(struct net_routing_table_t *routing_table)net_routing_table_initiate192,5719
+void net_routing_table_floyd_warshall(struct net_routing_table_t *routing_table)net_routing_table_floyd_warshall245,7332
+void net_routing_table_dump(struct net_routing_table_t *routing_table, FILE *f)net_routing_table_dump363,10419
+struct net_routing_table_entry_t *net_routing_table_lookup(struct net_routing_table_t *routing_table,net_routing_table_lookup434,12049
+void net_routing_table_route_update(struct net_routing_table_t *routing_table, struct net_node_t *src_node,net_routing_table_route_update448,12589
+
+node.c,614
+struct net_node_t *net_node_create(struct net_t *net,net_node_create27,855
+void net_node_free(struct net_node_t *node)net_node_free62,1812
+void net_node_dump(struct net_node_t *node, FILE *f)net_node_dump82,2284
+void net_node_dump_report(struct net_node_t *node, FILE *f)net_node_dump_report90,2559
+struct net_buffer_t *net_node_add_input_buffer(struct net_node_t *node)net_node_add_input_buffer134,3864
+struct net_buffer_t *net_node_add_output_buffer(struct net_node_t *node)net_node_add_output_buffer147,4274
+struct net_buffer_t *net_node_schedule(struct net_node_t *node,net_node_schedule164,4878
+
+network.h,4979
+#define NETWORK_HNETWORK_H21,822
+struct net_stack_tnet_stack_t70,1562
+	struct net_t *net;net73,1606
+	struct net_msg_t *msg;msg74,1626
+	int ret_event;ret_event77,1671
+	struct net_stack_t *ret_stack;ret_stack78,1687
+struct net_msg_tnet_msg_t94,1940
+	struct net_t *net;net96,1959
+	long long id;id98,1980
+	int size;size99,1995
+	long long send_cycle;  /* Cycle when it was sent */send_cycle101,2007
+	long long busy;  /* In transit until cycle */busy102,2060
+	struct net_node_t *src_node;src_node103,2107
+	struct net_node_t *dst_node;dst_node104,2137
+	void *data;data105,2167
+	struct net_node_t *node;node108,2216
+	struct net_buffer_t *buffer;buffer109,2242
+	struct net_buffer_t *src_buffer;  /* Original source buffer */src_buffer113,2383
+	struct net_buffer_t *dst_buffer;  /* Final destination buffer */dst_buffer114,2447
+	struct net_msg_t *bucket_next;bucket_next117,2567
+struct net_link_tnet_link_t136,3010
+	struct net_t *net;net138,3030
+	char *name;name139,3050
+	struct net_node_t *src_node;src_node142,3090
+	struct net_buffer_t *src_buffer;src_buffer143,3120
+	struct net_node_t *dst_node;dst_node146,3186
+	struct net_buffer_t *dst_buffer;dst_buffer147,3216
+	int bandwidth;bandwidth149,3251
+	long long busy;  /* Busy until this cycle inclusive */busy150,3267
+	long long busy_cycles;busy_cycles153,3337
+	long long transferred_bytes;transferred_bytes154,3361
+	long long transferred_msgs;transferred_msgs155,3391
+struct net_buffer_wakeup_tnet_buffer_wakeup_t176,3830
+	int event;event178,3859
+	void *stack;stack179,3871
+struct net_buffer_tnet_buffer_t183,3890
+	struct net_t *net;  /* Network it belongs to */net185,3912
+	struct net_node_t *node;  /* Node where it belongs */node186,3961
+	char *name;  /* String identifier */name187,4016
+	int index;  /* Index in input/output buffer list of node */index189,4055
+	int size;  /* Total size */size190,4116
+	int count;  /* Occupied buffer size */count191,4145
+	long long read_busy;read_busy194,4244
+	long long write_busy;write_busy195,4266
+	struct net_link_t *link;link198,4322
+	struct list_t *msg_list;msg_list201,4387
+	long long sched_when;  /* Last cycle when scheduler was called */sched_when204,4451
+	struct net_buffer_t *sched_buffer;  /* Input buffer to fetch data from */sched_buffer205,4518
+	struct linked_list_t *wakeup_list;wakeup_list209,4730
+	int occupancy_bytes_value;occupancy_bytes_value212,4780
+	int occupancy_msgs_value;occupancy_msgs_value213,4808
+	long long occupancy_measured_cycle;occupancy_measured_cycle214,4835
+	long long occupancy_bytes_acc;occupancy_bytes_acc215,4872
+	long long occupancy_msgs_acc;occupancy_msgs_acc216,4904
+enum net_node_kind_tnet_node_kind_t244,5637
+	net_node_invalid = 0,net_node_invalid246,5660
+	net_node_end,net_node_end247,5683
+	net_node_switch,net_node_switch248,5698
+	net_node_busnet_node_bus249,5716
+struct net_node_tnet_node_t254,5746
+	struct net_t *net;net256,5766
+	enum net_node_kind_t kind;kind257,5786
+	int index;  /* Used to index routing table */index258,5814
+	char *name;name259,5861
+	void *user_data;user_data260,5874
+	int bandwidth;bandwidth263,5922
+	long long bus_busy;bus_busy264,5938
+	int input_buffer_size;input_buffer_size267,5976
+	int output_buffer_size;output_buffer_size268,6000
+	struct list_t *input_buffer_list;input_buffer_list269,6025
+	struct list_t *output_buffer_list;output_buffer_list270,6060
+	long long bytes_received;bytes_received273,6110
+	long long msgs_received;msgs_received274,6137
+	long long bytes_sent;bytes_sent275,6163
+	long long msgs_sent;msgs_sent276,6186
+struct net_routing_table_entry_tnet_routing_table_entry_t305,6884
+	int cost;  /* Cost in hops */cost307,6919
+	struct net_node_t *next_node;  /* Next node to destination */next_node308,6950
+	struct net_buffer_t *output_buffer;  /* Output buffer to destination */output_buffer309,7013
+struct net_routing_table_tnet_routing_table_t313,7102
+	struct net_t *net;  /* Associated network */net315,7131
+	int dim;  /* Array dimensions ('dim' x 'dim') */dim318,7219
+	struct net_routing_table_entry_t *entries;entries319,7269
+	int has_cycle;has_cycle322,7356
+#define NET_MSG_TABLE_SIZE NET_MSG_TABLE_SIZE343,8114
+struct net_tnet_t346,8159
+	char *name;name349,8192
+	long long msg_id_counter;  /* Counter to assign message IDs */msg_id_counter350,8205
+	struct list_t *node_list;node_list353,8284
+	int node_count;node_count354,8311
+	int end_node_count;  /* Number of end nodes */end_node_count355,8328
+	struct list_t *link_list;link_list358,8390
+	struct net_routing_table_t *routing_table;routing_table361,8439
+	struct net_msg_t *msg_table[NET_MSG_TABLE_SIZE];msg_table364,8553
+	long long transfers;  /* Transfers */transfers367,8617
+	long long lat_acc;  /* Accumulated latency */lat_acc368,8656
+	long long msg_size_acc;  /* Accumulated message size */msg_size_acc369,8703
+#define net_debug(net_debug431,10813
+
+message.c,392
+struct net_msg_t *net_msg_create(struct net_t *net, struct net_node_t *src_node,net_msg_create27,846
+void net_msg_free(struct net_msg_t *msg)net_msg_free52,1368
+struct net_stack_t *net_stack_create(struct net_t *net,net_stack_create64,1464
+void net_stack_return(struct net_stack_t *stack)net_stack_return84,1834
+void net_event_handler(int event, void *data)net_event_handler94,2033
+
+link.c,232
+struct net_link_t *net_link_create(struct net_t *net,net_link_create23,827
+void net_link_free(struct net_link_t *link)net_link_free64,1865
+void net_link_dump_report(struct net_link_t *link, FILE *f)net_link_dump_report71,1947
+
+buffer.c,844
+struct net_buffer_t *net_buffer_create(struct net_t *net, struct net_node_t *node,net_buffer_create27,855
+void net_buffer_free(struct net_buffer_t *buffer)net_buffer_free52,1398
+void net_buffer_dump(struct net_buffer_t *buffer, FILE *f)net_buffer_dump61,1560
+void net_buffer_dump_report(struct net_buffer_t *buffer, FILE *f)net_buffer_dump_report76,1849
+void net_buffer_insert(struct net_buffer_t *buffer, struct net_msg_t *msg)net_buffer_insert91,2393
+void net_buffer_extract(struct net_buffer_t *buffer, struct net_msg_t *msg)net_buffer_extract118,2959
+void net_buffer_wait(struct net_buffer_t *buffer, int event, void *stack)net_buffer_wait153,3800
+void net_buffer_wakeup(struct net_buffer_t *buffer)net_buffer_wakeup175,4330
+void net_buffer_update_occupancy(struct net_buffer_t *buffer)net_buffer_update_occupancy194,4766
+
+netlib.c,1580
+int net_debug_category;net_debug_category29,885
+char *net_config_help =net_config_help31,910
+char *err_net_end_nodes =err_net_end_nodes85,3572
+char *err_net_no_route =err_net_no_route90,3796
+char *err_net_large_message =err_net_large_message96,4053
+char *err_net_node_name_duplicate =err_net_node_name_duplicate102,4355
+char *err_net_config =err_net_config107,4563
+char *err_net_can_send =err_net_can_send113,4875
+int EV_NET_SEND;EV_NET_SEND121,5185
+int EV_NET_OUTPUT_BUFFER;EV_NET_OUTPUT_BUFFER122,5202
+int EV_NET_INPUT_BUFFER;EV_NET_INPUT_BUFFER123,5228
+int EV_NET_RECEIVE;EV_NET_RECEIVE124,5253
+static struct hash_table_t *net_table;net_table127,5297
+char *net_config_file_name = "";net_config_file_name130,5368
+char *net_report_file_name = "";net_report_file_name132,5402
+FILE *net_report_file;net_report_file133,5435
+char *net_sim_network_name = "";net_sim_network_name135,5459
+long long net_max_cycles = 1000000;  /* 1M cycles default */net_max_cycles136,5492
+double net_injection_rate = 0.01;  /* 1 packet every 100 cycles */net_injection_rate137,5553
+int net_msg_size = 1;  /* Message size in bytes */net_msg_size138,5620
+static double exp_random(double lambda)exp_random146,5703
+void net_config_load(void)net_config_load161,5853
+void net_init(void)net_init241,7858
+void net_done(void)net_done263,8526
+struct net_t *net_find(char *name)net_find288,8973
+struct net_t *net_find_first(void)net_find_first299,9139
+struct net_t *net_find_next(void)net_find_next313,9351
+void net_sim(char *debug_file_name)net_sim327,9560
+
+network.c,1975
+void net_msg_table_insert(struct net_t *net, struct net_msg_t *msg)net_msg_table_insert28,919
+struct net_msg_t *net_msg_table_get(struct net_t *net, long long id)net_msg_table_get40,1208
+struct net_msg_t *net_msg_table_extract(struct net_t *net, long long id)net_msg_table_extract54,1516
+struct net_t *net_create(char *name)net_create84,2016
+struct net_t *net_create_from_config(struct config_t *config, char *name)net_create_from_config104,2382
+void net_free(struct net_t *net)net_free341,9450
+void net_dump(struct net_t *net, FILE *f)net_dump376,10146
+void net_dump_report(struct net_t *net, FILE *f)net_dump_report395,10482
+struct net_node_t *net_add_end_node(struct net_t *net,net_add_end_node428,11246
+struct net_node_t *net_add_bus(struct net_t *net, int bandwidth, char *name)net_add_bus454,11733
+struct net_node_t *net_add_switch(struct net_t *net,net_add_switch480,12232
+struct net_node_t *net_get_node_by_name(struct net_t *net, char *name)net_get_node_by_name507,12786
+struct net_node_t *net_get_node_by_user_data(struct net_t *net, void *user_data)net_get_node_by_user_data523,13122
+struct net_link_t *net_add_link(struct net_t *net,net_add_link539,13443
+void net_add_bidirectional_link(struct net_t *net,net_add_bidirectional_link570,14321
+int net_can_send(struct net_t *net, struct net_node_t *src_node,net_can_send581,14692
+int net_can_send_ev(struct net_t *net, struct net_node_t *src_node,net_can_send_ev614,15717
+struct net_msg_t *net_send(struct net_t *net, struct net_node_t *src_node,net_send661,17218
+struct net_msg_t *net_send_ev(struct net_t *net, struct net_node_t *src_node,net_send_ev676,17868
+struct net_msg_t *net_try_send(struct net_t *net, struct net_node_t *src_node,net_try_send704,18678
+struct net_msg_t *net_try_send_ev(struct net_t *net, struct net_node_t *src_node,net_try_send_ev717,19042
+void net_receive(struct net_t *net, struct net_node_t *node, struct net_msg_t *msg)net_receive731,19552

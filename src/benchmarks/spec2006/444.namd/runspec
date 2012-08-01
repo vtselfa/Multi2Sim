@@ -1,0 +1,2 @@
+exe = namd_base.i386
+args = --input namd.input --iterations 38 --output namd.out

@@ -1,0 +1,2 @@
+exe = gamess_base.i386
+stdin = triazolium.config

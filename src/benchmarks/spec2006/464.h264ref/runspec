@@ -1,0 +1,2 @@
+exe = h264ref_base.i386
+args = -d sss_encoder_main.cfg

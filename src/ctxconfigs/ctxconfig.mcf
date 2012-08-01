@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = mcf_base.i386
+args = inp.in
+cwd = benchmarks/spec2006/429.mcf
+StdOut = mcf.out
+IPCReport = mcf.ipc
+IPCReportInterval = 100000

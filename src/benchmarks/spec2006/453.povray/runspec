@@ -1,0 +1,2 @@
+exe = povray_base.i386
+args = SPEC-benchmark-ref.ini

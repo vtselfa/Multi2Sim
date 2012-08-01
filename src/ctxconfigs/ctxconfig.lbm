@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = lbm_base.i386
+args = 3000 reference.dat 0 0 100_100_130_ldc.of
+cwd = benchmarks/spec2006/470.lbm
+StdOut = lbm.out
+IPCReport = lbm.ipc
+IPCReportInterval = 100000

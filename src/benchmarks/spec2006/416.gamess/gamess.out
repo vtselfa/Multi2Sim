@@ -1,0 +1,300 @@
+          ******************************************************
+          *         GAMESS VERSION = 12 DEC 2003 (R2)          *
+          *             FROM IOWA STATE UNIVERSITY             *
+          * M.W.SCHMIDT, K.K.BALDRIDGE, J.A.BOATZ, S.T.ELBERT, *
+          *   M.S.GORDON, J.H.JENSEN, S.KOSEKI, N.MATSUNAGA,   *
+          *          K.A.NGUYEN, S.J.SU, T.L.WINDUS,           *
+          *       TOGETHER WITH M.DUPUIS, J.A.MONTGOMERY       *
+          *         J.COMPUT.CHEM.  14, 1347-1363(1993)        *
+          **************** SPEC-CPU2006 VERSION ****************
+
+     SINCE 1993, STUDENTS AND POSTDOCS WORKING AT IOWA STATE UNIVERSITY
+     AND ALSO IN THEIR VARIOUS JOBS AFTER LEAVING ISU HAVE MADE IMPORTANT
+     CONTRIBUTIONS TO THE CODE:
+     IVANA ADAMOVIC, CHRISTINE AIKENS, ROB BELL, PRADIPTA BANDYOPADHYAY,
+     BRETT BODE, GALINA CHABAN, WEI CHEN, CHEOL HO CHOI, PAUL DAY,
+     TIM DUDLEY, DMITRI FEDOROV, GRAHAM FLETCHER, MARK FREITAG,
+     KURT GLAESEMANN, GRANT MERRILL, HEATHER NETZLOFF, RYAN OLSON,
+     MIKE PAK, JIM SHOEMAKER, TETSUYA TAKETSUGU, SIMON WEBB.
+
+     ADDITIONAL CODE HAS BEEN PROVIDED BY COLLABORATORS IN OTHER GROUPS:
+     IOWA STATE UNIVERSITY: JOE IVANIC, KLAUS RUEDENBERG
+     UNIVERSITY OF TOKYO: KIMIHIKO HIRAO, HARUYUKI NAKANO, TAKAHITO
+          NAKAJIMA, TAKAO TSUNEDA, MUNEAKI KAMIYA, SUSUMU YANAGISAWA
+     ODENSE UNIVERSITY: FRANK JENSEN
+     UNIVERSITY OF IOWA: VISVALDAS KAIRYS, HUI LI
+     NATIONAL INST. OF STANDARDS AND TECHNOLOGY: WALT STEVENS, DAVID GARMER
+     UNIVERSITY OF PISA: BENEDETTA MENNUCCI, JACOPO TOMASI
+     UNIVERSITY OF MEMPHIS: HENRY KURTZ, PRAKASHAN KORAMBATH
+     UNIVERSITY OF ALBERTA: MARIUSZ KLOBUKOWSKI
+     UNIVERSITY OF NEW ENGLAND: MARK SPACKMAN
+     MIE UNIVERSITY: HIROAKI UMEDA
+     MICHIGAN STATE UNIVERSITY: KAROL KOWALSKI, PIOTR PIECUCH
+     UNIVERSITY OF SILESIA: MONIKA MUSIAL, STANISLAW KUCHARSKI
+     FACULTES UNIVERSITAIRES NOTRE-DAME DE LA PAIX:
+          OLIVIER QUINET, BENOIT CHAMPAGNE
+     UNIVERSITY OF CALIFORNIA - SANTA BARBARA: BERNARD KIRTMAN
+
+ EXECUTION OF GAMESS BEGUN 
+
+            ECHO OF THE FIRST FEW INPUT CARDS -
+ INPUT CARD>!    doubly substituted triazolium cation, from unpublished                     
+ INPUT CARD>!    research by M. W. Schmidt (2005).                                          
+ INPUT CARD>!    the MCSCF gradient with the 6-31++G(d,p) basis has 202 AOs.                
+ INPUT CARD>!                                                                               
+ INPUT CARD>!    MCSCF has the FINAL E= -585.4208823991, 23 iters, RMS grad= 0.035184652    
+ INPUT CARD>!                                                                               
+ INPUT CARD>!    This computation took 2058 seconds on a machine installed at ISU.          
+ INPUT CARD>!    disk requirement is about 12 MBytes.                                       
+ INPUT CARD>!                                                                               
+ INPUT CARD> $contrl scftyp=mcscf runtyp=gradient nzvar=30 icharg=+1 $end                   
+ INPUT CARD> $system mwords=5 memddi=0 $end                                                 
+ INPUT CARD> $basis  gbasis=n31 ngauss=6 ndfunc=1 npfunc=1 diffsp=.t. diffs=.t. $end        
+ INPUT CARD> $guess  guess=moread norb=202 norder=1                                         
+ INPUT CARD>         iorder(25)=26,27,28,29,30,31,32,33,34,  25,35,36,37,39,  38 $end       
+ INPUT CARD> $trans  dirtrf=.true. $end                                                     
+ INPUT CARD> $mcscf  acurcy=1d-6 $end                                                       
+ INPUT CARD> $det ncore = 33 nact=5 nels=6 $end                                             
+ INPUT CARD> $zmat   izmat(1)=1,1,2,  1,2,3,  1,3,4,  1,4,5,  1,5,1,                        
+ INPUT CARD>                  2,2,3,4,  2,4,5,1,  3,1,2,3,4,   3,4,5,1,2                    
+ INPUT CARD>            1,3,6,  2,6,3,2,  3,6,3,2,1,                                        
+ INPUT CARD>            1,5,7,  2,7,5,1,  3,7,5,1,2,                                        
+ INPUT CARD>            1,8,1,  2,8,1,2,  3,8,1,2,3,                                        
+ INPUT CARD>            1,9,8, 2,9,8,1, 3,9,8,1,2,  1,10,8,  2,10,8,1,  3,10,8,1,2,         
+ INPUT CARD>            1,11,4,  2,11,4,3,  3,11,4,3,2                                      
+ INPUT CARD>            1,11,12,  2,12,11,4,  4,12,11,3,5  $end                             
+ INPUT CARD> $data                                                                          
+ INPUT CARD>1-NF2,4-cyano-1,2,4-triazolium ion...MP2/6-31++G(d,p) geometry                  
+ INPUT CARD>Cs                                                                              
+ INPUT CARD>                                                                                
+ INPUT CARD>N           7.0    .6276827108    .1135173087    .0000000000                    
+ INPUT CARD>N           7.0   -.7197954777    .0135796606    .0000000000                    
+ INPUT CARD>C           6.0  -1.1137985684   1.2721378108    .0000000000                    
+ INPUT CARD>N           7.0   -.0174462602   2.1275879754    .0000000000                    
+ INPUT CARD>C           6.0   1.0958991612   1.3611552266    .0000000000                    
+ INPUT CARD>H           1.0  -2.1380803969   1.6121505226    .0000000000                    
+ INPUT CARD>H           1.0   2.1280654965   1.6804345388    .0000000000                    
+ INPUT CARD>N           7.0   1.5141451241  -1.0150413991    .0000000000                    
+ INPUT CARD>F           9.0   1.0699884795  -1.7522991794   1.0855943184                    
+ INPUT CARD>C           6.0   -.0523280592   3.4995367309    .0000000000                    
+ INPUT CARD>N           7.0   -.1017707368   4.6818127169    .0000000000                    
+ INPUT CARD> $end                                                                           
+ INPUT CARD>                                                                                
+ INPUT CARD>     the starting orbitals have MVOQ=4 virtuals...                              
+ INPUT CARD>                                                                                
+ INPUT CARD>--- CLOSED SHELL ORBITALS --- GENERATED AT Thu Mar  3 09:36:54 2005             
+ INPUT CARD>1-NF2,4-cyano-1,2,4-triazolium ion...E(RHF)= -585.3647805573                    
+ INPUT CARD> $VEC                                                                           
+ INPUT CARD> 1  1-0.00000000E+00-0.00000000E+00-0.00000000E+00-0.00000000E+00 4.08254416E-05
+ INPUT CARD> 1  2-0.00000000E+00-0.00000000E+00-0.00000000E+00 5.15086947E-05-0.00000000E+00
+ INPUT CARD> 1  3-0.00000000E+00-0.00000000E+00-7.14911865E-05-0.00000000E+00-0.00000000E+00
+
+ ..... DONE SETTING UP THE RUN .....
+LOCMEM is    1   1
+    5000000 WORDS OF MEMORY AVAILABLE
+
+     BASIS OPTIONS
+     -------------
+     GBASIS=N31          IGAUSS=       6      POLAR=POPLE   
+     NDFUNC=       1     NFFUNC=       0     DIFFSP=       T
+     NPFUNC=       1      DIFFS=       T
+
+
+     RUN TITLE
+     ---------
+ 1-NF2,4-cyano-1,2,4-triazolium ion...MP2/6-31++G(d,p) geometry                  
+
+ THE POINT GROUP OF THE MOLECULE IS CS      
+ THE ORDER OF THE PRINCIPAL AXIS IS     0
+
+ ATOM      ATOMIC                      COORDINATES (BOHR)
+           CHARGE         X                   Y                   Z
+ N           7.0     1.1861483306        0.2145166083        0.0000000000
+ N           7.0    -1.3602162201        0.0256618375        0.0000000000
+ C           6.0    -2.1047740998        2.4039918810        0.0000000000
+ N           7.0    -0.0329686513        4.0205582883        0.0000000000
+ C           6.0     2.0709491248        2.5722104050        0.0000000000
+ H           1.0    -4.0403860899        3.0465227387        0.0000000000
+ H           1.0     4.0214606723        3.1755608186        0.0000000000
+ N           7.0     2.8613193902       -1.9181501105        0.0000000000
+ F           9.0     2.0219850363       -3.3113652976       -2.0514757956
+ F           9.0     2.0219850363       -3.3113652976        2.0514757956
+ C           6.0    -0.0988856934        6.6131655054        0.0000000000
+ N           7.0    -0.1923188061        8.8473431608        0.0000000000
+
+          INTERNUCLEAR DISTANCES (ANGS.)
+          ------------------------------
+
+                    N              N              C              N         
+
+  1  N               0.0000000      1.3511791 *    2.0916880 *    2.1148693 *  
+  2  N               1.3511791 *    0.0000000      1.3187900 *    2.2276278 *  
+  3  C               2.0916880 *    1.3187900 *    0.0000000      1.3906054 *  
+  4  N               2.1148693 *    2.2276278 *    1.3906054 *    0.0000000    
+  5  C               1.3326016 *    2.2611296 *    2.2114900 *    1.3516498 *  
+  6  H               3.1456871      2.1370449 *    1.0792414 *    2.1823760 *  
+  7  H               2.1694188 *    3.2998056      3.2674744      2.1916129 *  
+  8  N               1.4350820 *    2.4593804 *    3.4838595      3.4959822    
+  9  F               2.2035019 *    2.7386438 *    3.8851847      4.1730748    
+ 10  F               2.2035019 *    2.7386438 *    3.8851847      4.1730748    
+ 11  C               3.4536274      3.5492829      2.4673925 *    1.3723921 *  
+ 12  N               4.6261674      4.7089653      3.5566956      2.5556163 *  
+
+                    C              H              H              N         
+
+  1  N               1.3326016 *    3.1456871      2.1694188 *    1.4350820 *  
+  2  N               2.2611296 *    2.1370449 *    3.2998056      2.4593804 *  
+  3  C               2.2114900 *    1.0792414 *    3.2674744      3.4838595    
+  4  N               1.3516498 *    2.1823760 *    2.1916129 *    3.4959822    
+  5  C               0.0000000      3.2437050      1.0804197 *    2.4127246 *  
+  6  H               3.2437050      0.0000000      4.2666923      4.4989875    
+  7  H               1.0804197 *    4.2666923      0.0000000      2.7645052 *  
+  8  N               2.4127246 *    4.4989875      2.7645052 *    0.0000000    
+  9  F               3.2973906      4.7738604      3.7525595      1.3854022 *  
+ 10  F               3.2973906      4.7738604      3.7525595      1.3854022 *  
+ 11  C               2.4271591 *    2.8129325 *    2.8395860 *    4.7786247    
+ 12  N               3.5300396      3.6836643      3.7390427      5.9215987    
+
+                    F              F              C              N         
+
+  1  N               2.2035019 *    2.2035019 *    3.4536274      4.6261674    
+  2  N               2.7386438 *    2.7386438 *    3.5492829      4.7089653    
+  3  C               3.8851847      3.8851847      2.4673925 *    3.5566956    
+  4  N               4.1730748      4.1730748      1.3723921 *    2.5556163 *  
+  5  C               3.2973906      3.2973906      2.4271591 *    3.5300396    
+  6  H               4.7738604      4.7738604      2.8129325 *    3.6836643    
+  7  H               3.7525595      3.7525595      2.8395860 *    3.7390427    
+  8  N               1.3854022 *    1.3854022 *    4.7786247      5.9215987    
+  9  F               0.0000000      2.1711886 *    5.4790410      6.6294291    
+ 10  F               2.1711886 *    0.0000000      5.4790410      6.6294291    
+ 11  C               5.4790410      5.4790410      0.0000000      1.1833094 *  
+ 12  N               6.6294291      6.6294291      1.1833094 *    0.0000000    
+
+  * ... LESS THAN  3.000
+
+
+     ATOMIC BASIS SET
+     ----------------
+ THE CONTRACTED PRIMITIVE FUNCTIONS HAVE BEEN UNNORMALIZED
+ THE CONTRACTED BASIS FUNCTIONS ARE NOW NORMALIZED TO UNITY
+
+ SHELL TYPE PRIMITIVE    EXPONENT          CONTRACTION COEFFICIENTS
+
+ N         
+
+   1   S    1          4173.5114600      0.001834772160
+   1   S    2           627.4579110      0.013994627002
+   1   S    3           142.9020930      0.068586551812
+   1   S    4            40.2343293      0.232240873040
+   1   S    5            12.8202129      0.469069948082
+   1   S    6             4.3904370      0.360455199063
+
+   2   L    7            11.6263619     -0.114961181702      0.067579743878
+   2   L    8             2.7162798     -0.169117478561      0.323907295893
+   2   L    9             0.7722184      1.145851947027      0.740895139755
+
+   3   L   10             0.2120315      1.000000000000      1.000000000000
+
+   4   L   11             0.0639000      1.000000000000      1.000000000000
+
+   5   D   12             0.8000000      1.000000000000
+
+ N         
+
+   6   S   13          4173.5114600      0.001834772160
+   6   S   14           627.4579110      0.013994627002
+   6   S   15           142.9020930      0.068586551812
+   6   S   16            40.2343293      0.232240873040
+   6   S   17            12.8202129      0.469069948082
+   6   S   18             4.3904370      0.360455199063
+
+   7   L   19            11.6263619     -0.114961181702      0.067579743878
+   7   L   20             2.7162798     -0.169117478561      0.323907295893
+   7   L   21             0.7722184      1.145851947027      0.740895139755
+
+   8   L   22             0.2120315      1.000000000000      1.000000000000
+
+   9   L   23             0.0639000      1.000000000000      1.000000000000
+
+  10   D   24             0.8000000      1.000000000000
+
+ C         
+
+  11   S   25          3047.5248800      0.001834737132
+  11   S   26           457.3695180      0.014037322813
+  11   S   27           103.9486850      0.068842622264
+  11   S   28            29.2101553      0.232184443216
+  11   S   29             9.2866630      0.467941348435
+  11   S   30             3.1639270      0.362311985337
+
+  12   L   31             7.8682723     -0.119332419775      0.068999066591
+  12   L   32             1.8812885     -0.160854151696      0.316423960957
+  12   L   33             0.5442493      1.143456437840      0.744308290898
+
+  13   L   34             0.1687145      1.000000000000      1.000000000000
+
+  14   L   35             0.0438000      1.000000000000      1.000000000000
+
+  15   D   36             0.8000000      1.000000000000
+
+ N         
+
+  16   S   37          4173.5114600      0.001834772160
+  16   S   38           627.4579110      0.013994627002
+  16   S   39           142.9020930      0.068586551812
+  16   S   40            40.2343293      0.232240873040
+  16   S   41            12.8202129      0.469069948082
+  16   S   42             4.3904370      0.360455199063
+
+  17   L   43            11.6263619     -0.114961181702      0.067579743878
+  17   L   44             2.7162798     -0.169117478561      0.323907295893
+  17   L   45             0.7722184      1.145851947027      0.740895139755
+
+  18   L   46             0.2120315      1.000000000000      1.000000000000
+
+  19   L   47             0.0639000      1.000000000000      1.000000000000
+
+  20   D   48             0.8000000      1.000000000000
+
+ C         
+
+  21   S   49          3047.5248800      0.001834737132
+  21   S   50           457.3695180      0.014037322813
+  21   S   51           103.9486850      0.068842622264
+  21   S   52            29.2101553      0.232184443216
+  21   S   53             9.2866630      0.467941348435
+  21   S   54             3.1639270      0.362311985337
+
+  22   L   55             7.8682723     -0.119332419775      0.068999066591
+  22   L   56             1.8812885     -0.160854151696      0.316423960957
+  22   L   57             0.5442493      1.143456437840      0.744308290898
+
+  23   L   58             0.1687145      1.000000000000      1.000000000000
+
+  24   L   59             0.0438000      1.000000000000      1.000000000000
+
+  25   D   60             0.8000000      1.000000000000
+
+ H         
+
+  26   S   61            18.7311370      0.033494604338
+  26   S   62             2.8253944      0.234726953484
+  26   S   63             0.6401217      0.813757326146
+
+  27   S   64             0.1612778      1.000000000000
+
+  28   S   65             0.0360000      1.000000000000
+
+  29   P   66             1.1000000      1.000000000000
+
+ H         
+
+  30   S   67            18.7311370      0.033494604338
+  30   S   68             2.8253944      0.234726953484
+  30   S   69             0.6401217      0.813757326146
+
+  31   S   70             0.1612778      1.000000000000
+
+  32   S   71             0.0360000      1.000000000000
+
+  33   P   72

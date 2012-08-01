@@ -1,0 +1,4 @@
+[ Context 0 ]
+Exe = ./benchmarks/splash2/fft/fft.i386
+Args = -m16 -p8 -n1024 -l6 -s -t
+Stdout = ./benchmarks/splash2/fft/fft.008.ctxout

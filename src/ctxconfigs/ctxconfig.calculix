@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = calculix_base.i386
+args = -i hyperviscoplastic
+cwd = benchmarks/spec2006/454.calculix
+StdOut = calculix.out
+IPCReport = calculix.ipc
+IPCReportInterval = 100000

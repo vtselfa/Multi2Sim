@@ -1,0 +1,29 @@
+
+FFT with Blocking Transpose
+   1024 Complex Doubles
+   1 Processors
+   1024 Cache lines
+   64 Byte line size
+   4096 Bytes per page
+
+
+                 PROCESS STATISTICS
+            Computation      Transpose     Transpose
+ Proc          Time            Time        Fraction
+    0                 0              0           nan
+  Avg                 0              0           nan
+  Max                 0              0           nan
+  Min                 0              0           nan
+
+                 TIMING INFORMATION
+Start time                        :       1339495785
+Initialization finish time        :       1339495785
+Overall finish time               :       1339495785
+Total time with initialization    :                0
+Total time without initialization :                0
+Overall transpose time            :                0
+Overall transpose fraction        :              nan
+
+              INVERSE FFT TEST RESULTS
+Checksum difference is 0.000 (1033.228, 1033.228)
+TEST PASSED

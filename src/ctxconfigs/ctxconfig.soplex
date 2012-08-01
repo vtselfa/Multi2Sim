@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = soplex_base.i386
+args = -m3500 ref.mps
+cwd = benchmarks/spec2006/450.soplex
+StdOut = soplex.out
+IPCReport = soplex.ipc
+IPCReportInterval = 100000

@@ -1,0 +1,10 @@
+[ Context 0 ]
+exe = wrf_base.i386
+<<<<<<< .mine
+cwd = ./benchmarks/spec2006/481.wrf
+=======
+cwd = benchmarks/spec2006/481.wrf
+>>>>>>> .r58
+StdOut = wrf.out
+IPCReport = wrf.ipc
+IPCReportInterval = 100000

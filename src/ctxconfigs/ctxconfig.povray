@@ -1,0 +1,7 @@
+[ Context 0 ]
+exe = povray_base.i386
+args = SPEC-benchmark-ref.ini
+cwd = benchmarks/spec2006/453.povray
+StdOut = povray.out
+IPCReport = povray.ipc
+IPCReportInterval = 100000

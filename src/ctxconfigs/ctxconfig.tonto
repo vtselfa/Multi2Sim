@@ -1,0 +1,6 @@
+[ Context 0 ]
+exe = tonto_base.i386
+cwd = benchmarks/spec2006/465.tonto
+StdOut = tonto.out
+IPCReport = tonto.ipc
+IPCReportInterval = 100000
