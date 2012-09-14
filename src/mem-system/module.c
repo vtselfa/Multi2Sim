@@ -289,40 +289,47 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 
 /* Look for a block in prefetch buffer.
  * The function returns TRUE on hit, FALSE on miss. */
-int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_slot_ptr) 
+int mod_find_pref_block(struct mod_t *mod, unsigned int addr,
+	int *pref_stream_ptr, int *pref_slot_ptr) 
 {
 	struct cache_t *cache = mod->cache;
 	struct cache_block_t *blk;
 	struct dir_lock_t *dir_lock;
+	struct stream_buffer_t *sb;
 
 	/* A transient tag is considered a hit if the block is
 	 * locked in the corresponding directory??? */
 	int tag = addr & ~cache->block_mask;
 	
-	int slot;
-	int psize = cache->num_pref_streams;
-	for(slot=0; slot<psize; slot++)  /*VVV canviar lo de psize*/
-	{
-		blk = &cache->prefetched_blocks[slot];
+	int stream, slot;
+	int ssize = cache->num_pref_streams;
+	for(stream = 0; stream < ssize; stream++){
+		sb = cache->stream_buffers[stream];
+		if(stream_buffer_empty(sb)) continue;
+		
+		slot = sb->head;
+		blk = &sb->elem[slot];
 		if (blk->tag == tag && blk->state)
 			break;
-		if (blk->transient_tag == tag)
-		{
-			dir_lock = dir_pref_lock_get(mod->dir, slot);
+		
+		if (blk->transient_tag == tag){
+			dir_lock = dir_pref_lock_get(mod->dir, stream, slot);
 			if (dir_lock->lock)
 				break;
 		}
 	}
 
 	/* Miss */
-	if (slot==psize)
+	if (stream == ssize)
 	{
+		PTR_ASSIGN(pref_stream_ptr, -1);
 		PTR_ASSIGN(pref_slot_ptr, -1);
 		return 0;
 	}
 
 	/* Hit */
-	PTR_ASSIGN(pref_slot_ptr, slot);	
+	PTR_ASSIGN(pref_stream_ptr, stream);
+	PTR_ASSIGN(pref_slot_ptr, slot);
 	return 1;
 }
 
@@ -752,8 +759,8 @@ struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	stack->way = -1;
 	stack->set = -1;
 	stack->tag = -1;
-	stack->prefetch_slot = -1;
-
+	stack->pref_stream = -1;
+	stack->pref_slot = -1;
 	/* Return */
 	return stack;
 }

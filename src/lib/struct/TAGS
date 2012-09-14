@@ -114,6 +114,14 @@ void *hash_table_remove(struct hash_table_t *table, char *key)hash_table_remove
 char *hash_table_find_first(struct hash_table_t *table, void **data_ptr)hash_table_find_first364,6956
 char *hash_table_find_next(struct hash_table_t *table, void **data_ptr)hash_table_find_next401,7625
 
+circular-buffer.h,346
+struct circular_buffer_tcircular_buffer_t2,20
+    void **elem;     	// bufferelem4,47
+    size_t capacity;  	// maximum number of items in the buffercapacity5,79
+    size_t count;     	// number of items in the buffercount6,143
+    size_t head;       	// position of headhead7,199
+    size_t tail;       	// position of tailtail8,243
+
 config.c,4273
 #define MAX_STRING_SIZE	MAX_STRING_SIZE32,995
 #define HASH_TABLE_SIZE	HASH_TABLE_SIZE33,1025
@@ -366,6 +374,14 @@ void fatal(char *fmt, ...)fatal322,5692
 void panic(char *fmt, ...)panic334,5864
 void warning(char *fmt, ...)warning346,6036
 void __x86_cuda_debug(int category, char *fmt, ...)__x86_cuda_debug356,6187
+
+circular-buffer.c,525
+struct circular_buffer_t* circular_buffer_create(size_t capacity)circular_buffer_create3,30
+void circular_buffer_free(struct circular_buffer_t *cb)circular_buffer_free19,345
+int circular_buffer_empty(struct circular_buffer_t *cb)circular_buffer_empty25,437
+int circular_buffer_full(struct circular_buffer_t *cb)circular_buffer_full30,518
+void circular_buffer_push(struct circular_buffer_t *cb, void *item)circular_buffer_push35,613
+void* circular_buffer_pop(struct circular_buffer_t *cb)circular_buffer_pop44,917
 
 buffer.h,33
 #define BUFFER_HBUFFER_H21,821

@@ -117,11 +117,12 @@ static void cache_update_waylist(struct cache_set_t *set,
 
 
 struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int block_size,
-	unsigned int assoc, unsigned int num_pref_streams, enum cache_policy_t policy)
+	unsigned int assoc, unsigned int num_pref_streams, unsigned int pref_aggressivity,
+	enum cache_policy_t policy)
 {
 	struct cache_t *cache;
 	struct cache_block_t *block;
-	unsigned int set, way;
+	unsigned int set, way, stream;
 
 	/* Create cache */
 	cache = calloc(1, sizeof(struct cache_t));
@@ -139,6 +140,7 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	cache->assoc = assoc;
 	cache->policy = policy;
 	cache->num_pref_streams = num_pref_streams;
+	cache->pref_aggressivity = pref_aggressivity;
 	cache->fifo = 0;
 
 	/* Derived fields */
@@ -148,9 +150,16 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	cache->log_block_size = log_base2(block_size);
 	cache->block_mask = block_size - 1;
 
-	/* Create array of prefetched blocks */
-	cache->prefetched_blocks = calloc(num_pref_streams, sizeof(struct cache_block_t));
-	if (!cache->prefetched_blocks)
+	/* Create prefetch stream buffers */
+	cache->stream_buffers = calloc(num_pref_streams, sizeof(struct stream_buffer_t *));
+	if (!cache->stream_buffers)
+		fatal("%s: out of memory", __FUNCTION__);
+	for(stream = 0; stream < num_pref_streams; stream++){
+		cache->stream_buffers[stream] = stream_buffer_create(pref_aggressivity);
+		if (!cache->stream_buffers[stream])
+			fatal("%s: out of memory", __FUNCTION__);
+	}
+	if (!cache->stream_buffers)
 		fatal("%s: out of memory", __FUNCTION__);
 
 	/* Create array of sets */
@@ -186,11 +195,13 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 
 void cache_free(struct cache_t *cache)
 {
-	unsigned int set;
+	unsigned int set,stream;
 
 	for (set = 0; set < cache->num_sets; set++)
 		free(cache->sets[set].blocks);
-	free(cache->prefetched_blocks);
+	for(stream = 0; stream < cache->num_pref_streams; stream++)
+		stream_buffer_free(cache->stream_buffers[stream]);
+	free(cache->stream_buffers);
 	free(cache->sets);
 	free(cache->name);
 	free(cache);
@@ -259,19 +270,35 @@ void cache_set_block(struct cache_t *cache, int set, int way, int tag, int state
 
 
 /* Set the tag and state of a prefetched block */
-void cache_set_pref_block(struct cache_t *cache, int prefetch_slot, int tag, int state)
+void cache_set_pref_block(struct cache_t *cache, int pref_stream, int pref_slot, int tag, int state)
 {
-	assert(prefetch_slot >= 0 && prefetch_slot < cache->num_pref_streams);
+	assert(pref_stream >= 0 && pref_stream < cache->num_pref_streams);
 
 	mem_trace("mem.set_block in prefetch buffer of \"%s\"\
-			prefetch_slot=%d tag=0x%x state=\"%s\"\n",
-			cache->name, prefetch_slot, tag,
+			pref_stream=%d pref_slot=%d tag=0x%x state=\"%s\"\n",
+			cache->name, pref_stream, pref_slot, tag,
 			map_value(&cache_block_state_map, state));
-
-	cache->prefetched_blocks[prefetch_slot].tag = tag;
-	cache->prefetched_blocks[prefetch_slot].state = state;
+	struct stream_buffer_t *sb = cache->stream_buffers[pref_stream];
+	struct cache_block_t *block = &sb->elem[pref_slot];
+	block->tag = tag;
+	block->state = state;
 }
 
+/* Insert new block in stream buffer prefetched block */
+void cache_enqueue_pref_block(struct cache_t *cache, int pref_stream, int tag, int state)
+{
+	assert(pref_stream >= 0 && pref_stream < cache->num_pref_streams);
+	mem_trace("mem.set_block in prefetch buffer of \"%s\"\
+			pref_stream=%d tag=0x%x state=\"%s\"\n",
+			cache->name, pref_stream, tag,
+			map_value(&cache_block_state_map, state));
+	struct stream_buffer_t *sb = cache->stream_buffers[pref_stream];
+	struct cache_block_t *block = &sb->elem[sb->tail];
+	assert(!block->state);
+	sb->tail = (sb->tail + 1) % sb->capacity;
+	block->tag = tag;
+	block->state = state;
+}
 
 void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int *state_ptr)
 {
@@ -281,11 +308,15 @@ void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int 
 	PTR_ASSIGN(state_ptr, cache->sets[set].blocks[way].state);
 }
 
-void cache_get_pref_block(struct cache_t *cache, int pref_slot, int *tag_ptr, int *state_ptr)
+void cache_get_pref_block(struct cache_t *cache, int pref_stream,
+	int *tag_ptr, int *state_ptr)
 {
-	assert(pref_slot>=0 && pref_slot < cache->num_pref_streams);
-	PTR_ASSIGN(tag_ptr, cache->prefetched_blocks[pref_slot].tag);
-	PTR_ASSIGN(state_ptr, cache->prefetched_blocks[pref_slot].state);
+	assert(pref_stream>=0 && pref_stream < cache->num_pref_streams);
+	
+	struct stream_buffer_t * sb = cache->stream_buffers[pref_stream];
+	
+	PTR_ASSIGN(tag_ptr, sb->elem[sb->head].tag);
+	PTR_ASSIGN(state_ptr, sb->elem[sb->head].state);
 }
 
 

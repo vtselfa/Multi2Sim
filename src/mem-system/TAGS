@@ -1,4 +1,12 @@
 
+stream-buffer.c,500
+struct stream_buffer_t* stream_buffer_create(size_t capacity)stream_buffer_create3,25
+void stream_buffer_free(struct stream_buffer_t *sb)stream_buffer_free19,347
+int stream_buffer_empty(struct stream_buffer_t *sb)stream_buffer_empty25,435
+int stream_buffer_full(struct stream_buffer_t *sb)stream_buffer_full30,512
+void stream_buffer_remove(struct stream_buffer_t *sb)stream_buffer_remove45,906
+struct cache_block_t* stream_buffer_head(struct stream_buffer_t *sb)stream_buffer_head55,1143
+
 spec-mem.c,911
 static struct spec_mem_page_t *spec_mem_page_get(struct spec_mem_t *spec_mem, uint32_t addr)spec_mem_page_get27,859
 static struct spec_mem_page_t *spec_mem_page_create(struct spec_mem_t *spec_mem, uint32_t addr)spec_mem_page_create46,1285
@@ -89,16 +97,16 @@ int EV_MOD_PREF_MISS;EV_MOD_PREF_MISS108,3501
 int EV_MOD_PREF_UNLOCK;EV_MOD_PREF_UNLOCK109,3523
 int EV_MOD_PREF_FINISH;EV_MOD_PREF_FINISH110,3547
 void mod_handler_pref(int event, void *data)mod_handler_pref114,3595
-void mod_handler_nmoesi_load(int event, void *data)mod_handler_nmoesi_load315,9297
-void mod_handler_nmoesi_store(int event, void *data)mod_handler_nmoesi_store553,16077
-void mod_handler_nmoesi_nc_store(int event, void *data)mod_handler_nmoesi_nc_store740,21474
-void mod_handler_nmoesi_find_and_lock(int event, void *data)mod_handler_nmoesi_find_and_lock975,28402
-void mod_handler_nmoesi_evict(int event, void *data)mod_handler_nmoesi_evict1347,39501
-void mod_handler_nmoesi_pref_evict(int event, void *data)mod_handler_nmoesi_pref_evict1718,50389
-void mod_handler_nmoesi_read_request(int event, void *data)mod_handler_nmoesi_read_request1940,56782
-void mod_handler_nmoesi_write_request(int event, void *data)mod_handler_nmoesi_write_request2675,80407
-void mod_handler_nmoesi_peer(int event, void *data)mod_handler_nmoesi_peer3084,93723
-void mod_handler_nmoesi_invalidate(int event, void *data)mod_handler_nmoesi_invalidate3151,95658
+void mod_handler_nmoesi_load(int event, void *data)mod_handler_nmoesi_load315,9325
+void mod_handler_nmoesi_store(int event, void *data)mod_handler_nmoesi_store553,16117
+void mod_handler_nmoesi_nc_store(int event, void *data)mod_handler_nmoesi_nc_store740,21526
+void mod_handler_nmoesi_find_and_lock(int event, void *data)mod_handler_nmoesi_find_and_lock975,28454
+void mod_handler_nmoesi_evict(int event, void *data)mod_handler_nmoesi_evict1350,39967
+void mod_handler_nmoesi_pref_evict(int event, void *data)mod_handler_nmoesi_pref_evict1721,50855
+void mod_handler_nmoesi_read_request(int event, void *data)mod_handler_nmoesi_read_request1944,57279
+void mod_handler_nmoesi_write_request(int event, void *data)mod_handler_nmoesi_write_request2681,81044
+void mod_handler_nmoesi_peer(int event, void *data)mod_handler_nmoesi_peer3091,94312
+void mod_handler_nmoesi_invalidate(int event, void *data)mod_handler_nmoesi_invalidate3158,96247
 
 mem-system.c,474
 int mem_debug_category;mem_debug_category29,899
@@ -127,28 +135,28 @@ static void mem_config_read_general(struct config_t *config)mem_config_read_gen
 static void mem_config_read_networks(struct config_t *config)mem_config_read_networks426,19024
 static void mem_config_insert_module_in_network(struct config_t *config,mem_config_insert_module_in_network474,20348
 static struct mod_t *mem_config_read_cache(struct config_t *config, char *section)mem_config_read_cache579,23780
-static struct mod_t *mem_config_read_main_memory(struct config_t *config, char *section)mem_config_read_main_memory687,27532
-static void mem_config_read_module_address_range(struct config_t *config,mem_config_read_module_address_range760,30044
-static void mem_config_read_modules(struct config_t *config)mem_config_read_modules875,33107
-static void mem_config_check_route_to_main_memory(struct mod_t *mod, int block_size, int level)mem_config_check_route_to_main_memory931,34719
-static void mem_config_read_low_modules(struct config_t *config)mem_config_read_low_modules970,35902
-static void mem_config_read_cpu_entries(struct config_t *config)mem_config_read_cpu_entries1040,37863
-static void mem_config_read_gpu_entries(struct config_t *config)mem_config_read_gpu_entries1179,42013
-static void mem_config_create_switches(struct config_t *config)mem_config_create_switches1283,44887
-static void mem_config_check_routes(void)mem_config_check_routes1351,46940
-static void mem_config_set_mod_color(struct mod_t *mod, int color)mem_config_set_mod_color1427,49319
-static int mem_config_check_mod_color(struct mod_t *mod, int color)mem_config_check_mod_color1447,49801
-static void mem_config_check_disjoint(void)mem_config_check_disjoint1469,50273
-static void mem_config_calculate_sub_block_sizes(void)mem_config_calculate_sub_block_sizes1496,50978
-static void mem_config_set_mod_level(struct mod_t *mod, int level)mem_config_set_mod_level1540,52288
-static void mem_config_calculate_mod_levels(void)mem_config_calculate_mod_levels1558,52675
-#define MEM_SYSTEM_TRACE_VERSION_MAJOR	MEM_SYSTEM_TRACE_VERSION_MAJOR1602,53685
-#define MEM_SYSTEM_TRACE_VERSION_MINOR	MEM_SYSTEM_TRACE_VERSION_MINOR1603,53727
-static void mem_config_trace(void)mem_config_trace1606,53773
-static void mem_config_read_commands(struct config_t *config)mem_config_read_commands1672,55515
-void mem_system_config_read(void)mem_system_config_read1714,56380
+static struct mod_t *mem_config_read_main_memory(struct config_t *config, char *section)mem_config_read_main_memory695,27948
+static void mem_config_read_module_address_range(struct config_t *config,mem_config_read_module_address_range768,30452
+static void mem_config_read_modules(struct config_t *config)mem_config_read_modules883,33515
+static void mem_config_check_route_to_main_memory(struct mod_t *mod, int block_size, int level)mem_config_check_route_to_main_memory939,35127
+static void mem_config_read_low_modules(struct config_t *config)mem_config_read_low_modules978,36310
+static void mem_config_read_cpu_entries(struct config_t *config)mem_config_read_cpu_entries1048,38271
+static void mem_config_read_gpu_entries(struct config_t *config)mem_config_read_gpu_entries1187,42421
+static void mem_config_create_switches(struct config_t *config)mem_config_create_switches1291,45295
+static void mem_config_check_routes(void)mem_config_check_routes1359,47348
+static void mem_config_set_mod_color(struct mod_t *mod, int color)mem_config_set_mod_color1435,49727
+static int mem_config_check_mod_color(struct mod_t *mod, int color)mem_config_check_mod_color1455,50209
+static void mem_config_check_disjoint(void)mem_config_check_disjoint1477,50681
+static void mem_config_calculate_sub_block_sizes(void)mem_config_calculate_sub_block_sizes1504,51386
+static void mem_config_set_mod_level(struct mod_t *mod, int level)mem_config_set_mod_level1551,52784
+static void mem_config_calculate_mod_levels(void)mem_config_calculate_mod_levels1569,53171
+#define MEM_SYSTEM_TRACE_VERSION_MAJOR	MEM_SYSTEM_TRACE_VERSION_MAJOR1613,54181
+#define MEM_SYSTEM_TRACE_VERSION_MINOR	MEM_SYSTEM_TRACE_VERSION_MINOR1614,54223
+static void mem_config_trace(void)mem_config_trace1617,54269
+static void mem_config_read_commands(struct config_t *config)mem_config_read_commands1683,56011
+void mem_system_config_read(void)mem_system_config_read1725,56876
 
-cache.c,1565
+cache.c,1536
 struct string_map_t cache_policy_map =cache_policy_map26,844
 struct string_map_t cache_block_state_map =cache_block_state_map35,998
 enum cache_waylist_enumcache_waylist_enum54,1284
@@ -156,18 +164,18 @@ enum cache_waylist_enumcache_waylist_enum54,1284
 	cache_waylist_tailcache_waylist_tail57,1331
 static void cache_update_waylist(struct cache_set_t *set,cache_update_waylist60,1355
 struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int block_size,cache_create119,2465
-void cache_free(struct cache_t *cache)cache_free186,4434
-void cache_decode_address(struct cache_t *cache, unsigned int addr, int *set_ptr, int *tag_ptr, cache_decode_address200,4716
-int cache_find_block(struct cache_t *cache, unsigned int addr, int *set_ptr, int *way_ptr, cache_find_block212,5245
-void cache_set_block(struct cache_t *cache, int set, int way, int tag, int state, unsigned int prefetched)cache_set_block240,6042
-void cache_set_pref_block(struct cache_t *cache, int prefetch_slot, int tag, int state)cache_set_pref_block261,6775
-void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int *state_ptr)cache_get_block275,7235
-void cache_get_pref_block(struct cache_t *cache, int pref_slot, int *tag_ptr, int *state_ptr)cache_get_pref_block283,7533
-void cache_access_block(struct cache_t *cache, int set, int way)cache_access_block293,7918
-int cache_replace_block(struct cache_t *cache, int set)cache_replace_block314,8677
-void cache_set_transient_tag(struct cache_t *cache, int set, int way, int tag)cache_set_transient_tag345,9507
+void cache_free(struct cache_t *cache)cache_free196,4824
+void cache_decode_address(struct cache_t *cache, unsigned int addr, int *set_ptr, int *tag_ptr, cache_decode_address212,5224
+int cache_find_block(struct cache_t *cache, unsigned int addr, int *set_ptr, int *way_ptr, cache_find_block224,5753
+void cache_set_block(struct cache_t *cache, int set, int way, int tag, int state, unsigned int prefetched)cache_set_block252,6550
+void cache_set_pref_block(struct cache_t *cache, int pref_stream, int tag, int state)cache_set_pref_block273,7283
+void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int *state_ptr)cache_get_block289,7797
+void cache_get_pref_block(struct cache_t *cache, int pref_stream,cache_get_pref_block297,8095
+void cache_access_block(struct cache_t *cache, int set, int way)cache_access_block311,8524
+int cache_replace_block(struct cache_t *cache, int set)cache_replace_block332,9283
+void cache_set_transient_tag(struct cache_t *cache, int set, int way, int tag)cache_set_transient_tag363,10113
 
-module.c,2728
+module.c,2708
 struct string_map_t mod_access_kind_map =mod_access_kind_map23,849
 struct mod_t *mod_create(char *name, enum mod_kind_t kind, int num_ports,mod_create40,1077
 void mod_free(struct mod_t *mod)mod_free84,2061
@@ -176,29 +184,29 @@ long long mod_access(struct mod_t *mod, enum mod_access_kind_t access_kind, mod
 int mod_can_access(struct mod_t *mod, unsigned int addr)mod_can_access190,4343
 void mod_get_tag_set(struct mod_t *mod, unsigned int addr, int *tag_ptr, int *set_ptr)mod_get_tag_set210,4910
 int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,mod_find_block236,5621
-int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_slot_ptr) mod_find_pref_block292,6947
-void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event)mod_lock_port334,7960
-void mod_unlock_port(struct mod_t *mod, struct mod_port_t *port,mod_unlock_port370,8743
-void mod_access_start(struct mod_t *mod, struct mod_stack_t *stack,mod_access_start403,9559
-void mod_access_finish(struct mod_t *mod, struct mod_stack_t *stack)mod_access_finish424,10153
-int mod_in_flight_access(struct mod_t *mod, long long id, unsigned int addr)mod_in_flight_access453,11043
-struct mod_stack_t *mod_in_flight_address(struct mod_t *mod, unsigned int addr,mod_in_flight_address473,11707
-struct mod_stack_t *mod_in_flight_write(struct mod_t *mod,mod_in_flight_write501,12542
-int mod_serves_address(struct mod_t *mod, unsigned int addr)mod_serves_address521,12997
-struct mod_t *mod_get_low_mod(struct mod_t *mod, unsigned int addr)mod_get_low_mod541,13520
-int mod_get_retry_latency(struct mod_t *mod)mod_get_retry_latency582,14507
-struct mod_stack_t *mod_can_coalesce(struct mod_t *mod,mod_can_coalesce593,14896
-void mod_coalesce(struct mod_t *mod, struct mod_stack_t *master_stack,mod_coalesce705,17674
-long long mod_stack_id;mod_stack_id736,18508
-struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,mod_stack_create738,18533
-void mod_stack_return(struct mod_stack_t *stack)mod_stack_return770,19255
-void mod_stack_wait_in_mod(struct mod_stack_t *stack,mod_stack_wait_in_mod785,19565
-void mod_stack_wakeup_mod(struct mod_t *mod)mod_stack_wakeup_mod796,19884
-void mod_stack_wait_in_port(struct mod_stack_t *stack,mod_stack_wait_in_port812,20215
-void mod_stack_wakeup_port(struct mod_port_t *port)mod_stack_wakeup_port823,20545
-void mod_stack_wait_in_stack(struct mod_stack_t *stack,mod_stack_wait_in_stack839,20887
-void mod_stack_wakeup_stack(struct mod_stack_t *master_stack)mod_stack_wakeup_stack851,21247
-void mod_stack_set_reply(struct mod_stack_t *stack, int reply)mod_stack_set_reply881,22090
+int mod_find_pref_block(struct mod_t *mod, unsigned int addr,mod_find_pref_block292,6947
+void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event)mod_lock_port349,8427
+void mod_unlock_port(struct mod_t *mod, struct mod_port_t *port,mod_unlock_port385,9210
+void mod_access_start(struct mod_t *mod, struct mod_stack_t *stack,mod_access_start418,10026
+void mod_access_finish(struct mod_t *mod, struct mod_stack_t *stack)mod_access_finish439,10620
+int mod_in_flight_access(struct mod_t *mod, long long id, unsigned int addr)mod_in_flight_access468,11510
+struct mod_stack_t *mod_in_flight_address(struct mod_t *mod, unsigned int addr,mod_in_flight_address488,12174
+struct mod_stack_t *mod_in_flight_write(struct mod_t *mod,mod_in_flight_write516,13009
+int mod_serves_address(struct mod_t *mod, unsigned int addr)mod_serves_address536,13464
+struct mod_t *mod_get_low_mod(struct mod_t *mod, unsigned int addr)mod_get_low_mod556,13987
+int mod_get_retry_latency(struct mod_t *mod)mod_get_retry_latency597,14974
+struct mod_stack_t *mod_can_coalesce(struct mod_t *mod,mod_can_coalesce608,15363
+void mod_coalesce(struct mod_t *mod, struct mod_stack_t *master_stack,mod_coalesce712,17890
+long long mod_stack_id;mod_stack_id743,18729
+struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,mod_stack_create745,18754
+void mod_stack_return(struct mod_stack_t *stack)mod_stack_return777,19497
+void mod_stack_wait_in_mod(struct mod_stack_t *stack,mod_stack_wait_in_mod792,19807
+void mod_stack_wakeup_mod(struct mod_t *mod)mod_stack_wakeup_mod803,20126
+void mod_stack_wait_in_port(struct mod_stack_t *stack,mod_stack_wait_in_port819,20457
+void mod_stack_wakeup_port(struct mod_port_t *port)mod_stack_wakeup_port830,20787
+void mod_stack_wait_in_stack(struct mod_stack_t *stack,mod_stack_wait_in_stack846,21129
+void mod_stack_wakeup_stack(struct mod_stack_t *master_stack)mod_stack_wakeup_stack858,21489
+void mod_stack_set_reply(struct mod_stack_t *stack, int reply)mod_stack_set_reply888,22332
 
 local-mem-protocol.c,1020
 int EV_MOD_LOCAL_MEM_LOAD;EV_MOD_LOCAL_MEM_LOAD24,834
@@ -215,298 +223,309 @@ void mod_handler_local_mem_load(int event, void *data)mod_handler_local_mem_loa
 void mod_handler_local_mem_store(int event, void *data)mod_handler_local_mem_store144,4103
 void mod_handler_local_mem_find_and_lock(int event, void *data)mod_handler_local_mem_find_and_lock243,6752
 
-mem-system.h,14298
+mem-system.h,14951
 #define MEM_SYSTEM_HMEM_SYSTEM_H20,811
-#define PREF_BLOCKS PREF_BLOCKS32,1030
-#define MEM_LOG_PAGE_SIZE MEM_LOG_PAGE_SIZE39,1100
-#define MEM_PAGE_SHIFT MEM_PAGE_SHIFT40,1130
-#define MEM_PAGE_SIZE MEM_PAGE_SIZE41,1172
-#define MEM_PAGE_MASK MEM_PAGE_MASK42,1220
-#define MEM_PAGE_COUNT MEM_PAGE_COUNT43,1266
-enum mem_access_tmem_access_t45,1296
-	mem_access_none   = 0x00,mem_access_none47,1316
-	mem_access_read   = 0x01,mem_access_read48,1343
-	mem_access_write  = 0x02,mem_access_write49,1370
-	mem_access_exec   = 0x04,mem_access_exec50,1397
-	mem_access_init   = 0x08,mem_access_init51,1424
-	mem_access_modif  = 0x10mem_access_modif52,1451
-struct mem_page_tmem_page_t59,1551
-	unsigned int tag;tag61,1571
-	enum mem_access_t perm;  /* Access permissions; combination of flags */perm62,1590
-	struct mem_page_t *next;next63,1663
-	unsigned char *data;data64,1689
-struct mem_tmem_t67,1715
-	int num_links;num_links70,1783
-	struct mem_page_t *pages[MEM_PAGE_COUNT];pages73,1820
-	int safe;safe76,1881
-	unsigned int heap_break;heap_break79,1928
-	unsigned int last_address;last_address82,1984
-#define SPEC_MEM_PAGE_TABLE_SIZE SPEC_MEM_PAGE_TABLE_SIZE138,4171
-#define SPEC_MEM_LOG_PAGE_SIZE SPEC_MEM_LOG_PAGE_SIZE142,4317
-#define SPEC_MEM_PAGE_SIZE SPEC_MEM_PAGE_SIZE143,4351
-#define SPEC_MEM_PAGE_MASK SPEC_MEM_PAGE_MASK144,4409
-#define SPEC_MEM_MAX_PAGE_COUNT SPEC_MEM_MAX_PAGE_COUNT150,4726
-struct spec_mem_page_tspec_mem_page_t152,4764
-	unsigned int addr;addr154,4789
-	unsigned char data[SPEC_MEM_PAGE_SIZE];data155,4809
-	struct spec_mem_page_t *next;next156,4850
-struct spec_mem_tspec_mem_t159,4885
-	struct mem_t *mem;  /* Associated non-speculative memory */mem161,4905
-	int page_count;  /* Number of words currently written */page_count163,4967
-	struct spec_mem_page_t *pages[SPEC_MEM_PAGE_TABLE_SIZE];  /* Hash table */pages164,5025
-enum cache_policy_tcache_policy_t185,5564
-	cache_policy_invalid = 0,cache_policy_invalid187,5586
-	cache_policy_lru,cache_policy_lru188,5613
-	cache_policy_fifo,cache_policy_fifo189,5632
-	cache_policy_randomcache_policy_random190,5652
-enum cache_block_state_tcache_block_state_t193,5677
-	cache_block_invalid = 0,cache_block_invalid195,5704
-	cache_block_noncoherent,cache_block_noncoherent196,5730
-	cache_block_modified,cache_block_modified197,5756
-	cache_block_owned,cache_block_owned198,5779
-	cache_block_exclusive,cache_block_exclusive199,5799
-	cache_block_sharedcache_block_shared200,5823
-struct cache_block_tcache_block_t203,5847
-	struct cache_block_t *way_next;way_next205,5870
-	struct cache_block_t *way_prev;way_prev206,5903
-	int tag;tag208,5937
-	int transient_tag;transient_tag209,5947
-	int way;way210,5967
-	enum cache_block_state_t state;state212,5978
-	unsigned int prefetched;prefetched213,6011
-struct cache_set_tcache_set_t216,6041
-	struct cache_block_t *way_head;way_head218,6062
-	struct cache_block_t *way_tail;way_tail219,6095
-	struct cache_block_t *blocks;blocks220,6128
-struct cache_tcache_t223,6163
-	char *name;name225,6180
-	unsigned int num_sets;num_sets227,6194
-	unsigned int block_size;block_size228,6218
-	unsigned int assoc;assoc229,6244
-	enum cache_policy_t policy;policy230,6265
-	unsigned int num_pref_streams; /* Number of streams for prefetch */num_pref_streams232,6296
-	struct cache_block_t *prefetched_blocks;prefetched_blocks233,6365
-	struct cache_set_t *sets;sets235,6408
-	unsigned int block_mask;block_mask236,6435
-	int log_block_size;log_block_size237,6461
-struct dir_lock_tdir_lock_t268,7550
-	int lock;lock270,7570
-	long long stack_id;stack_id271,7581
-	struct mod_stack_t *lock_queue;lock_queue272,7602
-#define DIR_ENTRY_OWNER_NONE DIR_ENTRY_OWNER_NONE275,7639
-#define DIR_ENTRY_VALID_OWNER(DIR_ENTRY_VALID_OWNER276,7674
-struct dir_entry_tdir_entry_t278,7743
-	int owner;  /* Node owning the block (-1 = No owner)*/owner280,7764
-	int num_sharers;  /* Number of 1s in next field */num_sharers281,7820
-	unsigned char sharer[0];  /* Bitmap of sharers (must be last field) */sharer282,7872
-struct dir_tdir_t285,7948
-	char *name;name287,7963
-	int num_nodes;num_nodes291,8084
-	int xsize, ysize, zsize, psize;xsize298,8383
-	int xsize, ysize, zsize, psize;ysize298,8383
-	int xsize, ysize, zsize, psize;zsize298,8383
-	int xsize, ysize, zsize, psize;psize298,8383
-	struct dir_lock_t *dir_lock;dir_lock302,8530
-	struct dir_lock_t *pref_dir_lock; //VVVpref_dir_lock306,8667
-	unsigned char data[0];data310,8835
-enum mmu_access_tmmu_access_t342,10149
-	mmu_access_invalid = 0,mmu_access_invalid344,10169
-	mmu_access_read,mmu_access_read345,10194
-	mmu_access_write,mmu_access_write346,10212
-	mmu_access_executemmu_access_execute347,10231
-struct mod_port_tmod_port_t374,10740
-	int locked;locked377,10784
-	long long lock_when;  /* Cycle when it was locked */lock_when378,10797
-	struct mod_stack_t *stack;  /* Access locking port */stack379,10851
-	struct mod_stack_t *waiting_list_head;waiting_list_head382,10927
-	struct mod_stack_t *waiting_list_tail;waiting_list_tail383,10967
-	int waiting_list_count;waiting_list_count384,11007
-	int waiting_list_max;waiting_list_max385,11032
-enum mod_access_kind_tmod_access_kind_t392,11159
-	mod_access_invalid = 0,mod_access_invalid394,11184
-	mod_access_load,mod_access_load395,11209
-	mod_access_store,mod_access_store396,11227
-	mod_access_nc_store,mod_access_nc_store397,11246
-	mod_access_prefetchmod_access_prefetch398,11268
-enum mod_kind_tmod_kind_t402,11312
-	mod_kind_invalid = 0,mod_kind_invalid404,11330
-	mod_kind_cache,mod_kind_cache405,11353
-	mod_kind_main_memory,mod_kind_main_memory406,11370
-	mod_kind_local_memorymod_kind_local_memory407,11393
-enum mod_range_kind_tmod_range_kind_t411,11448
-	mod_range_invalid = 0,mod_range_invalid413,11472
-	mod_range_bounds,mod_range_bounds414,11496
-	mod_range_interleavedmod_range_interleaved415,11515
-#define MOD_ACCESS_HASH_TABLE_SIZE MOD_ACCESS_HASH_TABLE_SIZE418,11542
-struct mod_tmod_t421,11602
-	enum mod_kind_t kind;kind424,11635
-	char *name;name425,11658
-	int block_size;block_size426,11671
-	int log_block_size;log_block_size427,11688
-	int latency;latency428,11709
-	int mshr_size;mshr_size429,11723
-	int prefetch_enabled;prefetch_enabled430,11739
-	int level;level433,11811
-	enum mod_range_kind_t range_kind;range_kind436,11862
-			unsigned int low;low442,11962
-			unsigned int high;high443,11983
-		} bounds;bounds444,12005
-			unsigned int mod;mod449,12078
-			unsigned int div;div450,12099
-			unsigned int eq;eq451,12120
-		} interleaved;interleaved452,12140
-	} range;range453,12157
-	struct linked_list_t *pq;pq456,12201
-	struct mod_port_t *ports;ports459,12242
-	int num_ports;num_ports460,12269
-	int num_locked_ports;num_locked_ports461,12285
-	struct mod_stack_t *port_waiting_list_head;port_waiting_list_head464,12347
-	struct mod_stack_t *port_waiting_list_tail;port_waiting_list_tail465,12392
-	int port_waiting_list_count;port_waiting_list_count466,12437
-	int port_waiting_list_max;port_waiting_list_max467,12467
-	struct dir_t *dir;dir470,12513
-	int dir_size;dir_size471,12533
-	int dir_assoc;dir_assoc472,12548
-	int dir_num_sets;dir_num_sets473,12564
-	struct mod_stack_t *waiting_list_head;waiting_list_head476,12614
-	struct mod_stack_t *waiting_list_tail;waiting_list_tail477,12654
-	int waiting_list_count;waiting_list_count478,12694
-	int waiting_list_max;waiting_list_max479,12719
-	struct cache_t *cache;cache482,12766
-	struct linked_list_t *high_mod_list;high_mod_list485,12826
-	struct linked_list_t *low_mod_list;low_mod_list486,12864
-	int sub_block_size;sub_block_size490,13023
-	int num_sub_blocks;  /* block_size / sub_block_size */num_sub_blocks491,13044
-	struct net_t *high_net;high_net494,13122
-	struct net_t *low_net;low_net495,13147
-	struct net_node_t *high_net_node;high_net_node496,13171
-	struct net_node_t *low_net_node;low_net_node497,13206
-	struct mod_stack_t *access_list_head;access_list_head500,13260
-	struct mod_stack_t *access_list_tail;access_list_tail501,13299
-	int access_list_count;access_list_count502,13338
-	int access_list_max;access_list_max503,13362
-	struct mod_stack_t *write_access_list_head;write_access_list_head506,13410
-	struct mod_stack_t *write_access_list_tail;write_access_list_tail507,13455
-	int write_access_list_count;write_access_list_count508,13500
-	int write_access_list_max;write_access_list_max509,13530
-	int access_list_coalesced_count;access_list_coalesced_count513,13675
-		struct mod_stack_t *bucket_list_head;bucket_list_head518,13751
-		struct mod_stack_t *bucket_list_tail;bucket_list_tail519,13791
-		int bucket_list_count;bucket_list_count520,13831
-		int bucket_list_max;bucket_list_max521,13856
-	} access_hash_table[MOD_ACCESS_HASH_TABLE_SIZE];access_hash_table522,13879
-	int color;color526,14048
-	long long accesses;accesses529,14079
-	long long hits;hits530,14100
-	long long reads;reads532,14118
-	long long effective_reads;effective_reads533,14136
-	long long effective_read_hits;effective_read_hits534,14164
-	long long writes;writes535,14196
-	long long effective_writes;effective_writes536,14215
-	long long effective_write_hits;effective_write_hits537,14244
-	long long evictions;evictions538,14277
-	long long blocking_reads;blocking_reads540,14300
-	long long non_blocking_reads;non_blocking_reads541,14327
-	long long read_hits;read_hits542,14358
-	long long blocking_writes;blocking_writes543,14380
-	long long non_blocking_writes;non_blocking_writes544,14408
-	long long write_hits;write_hits545,14440
-	long long read_retries;read_retries547,14464
-	long long write_retries;write_retries548,14489
-	long long no_retry_accesses;no_retry_accesses550,14516
-	long long no_retry_hits;no_retry_hits551,14546
-	long long no_retry_reads;no_retry_reads552,14572
-	long long no_retry_read_hits;no_retry_read_hits553,14599
-	long long no_retry_writes;no_retry_writes554,14630
-	long long no_retry_write_hits;no_retry_write_hits555,14658
-	long long completed_prefetches;completed_prefetches557,14692
-	long long programmed_prefetches;programmed_prefetches558,14725
-	long long useful_prefetches;useful_prefetches559,14759
-	long long delayed_hits;delayed_hits560,14789
-	double prefetch_precision;prefetch_precision561,14814
-	double prefetch_coverage;prefetch_coverage562,14842
-enum mod_request_dir_tmod_request_dir_t722,20580
-	mod_request_invalid = 0,mod_request_invalid724,20605
-	mod_request_up_down,mod_request_up_down725,20631
-	mod_request_down_upmod_request_down_up726,20653
-enum ack_typesack_types730,20694
-	reply_NO_REPLY = 0,reply_NO_REPLY732,20711
-	reply_ACK,reply_ACK733,20732
-	reply_ACK_DATA,reply_ACK_DATA734,20744
-	reply_ACK_DATA_SENT_TO_PEER,reply_ACK_DATA_SENT_TO_PEER735,20761
-	reply_ACK_ERRORreply_ACK_ERROR736,20791
-struct mod_stack_tmod_stack_t740,20824
-	long long id;id742,20845
-	enum mod_access_kind_t access_kind;access_kind743,20860
-	int *witness_ptr;witness_ptr744,20897
-	struct linked_list_t *event_queue;event_queue746,20917
-	void *event_queue_item;event_queue_item747,20953
-	struct mod_t *mod;mod749,20979
-	struct mod_t *target_mod;target_mod750,20999
-	struct mod_t *except_mod;except_mod751,21026
-	struct mod_t *peer;peer752,21053
-	struct mod_port_t *port;port754,21075
-	unsigned int addr;addr756,21102
-	int tag;tag757,21122
-	int set;set758,21132
-	int way;way759,21142
-	int state;state760,21152
-	int core;core761,21164
-	int thread;thread762,21175
-	int src_set;src_set764,21189
-	int src_way;src_way765,21203
-	int src_tag;src_tag766,21217
-	int src_prefetch_slot;src_prefetch_slot767,21231
-	enum mod_request_dir_t request_dir;request_dir769,21256
-	int reply_size;reply_size770,21293
-	int reply;reply771,21310
-	int retain_owner;retain_owner772,21322
-	int pending;pending773,21341
-	struct mod_stack_t *access_list_prev;access_list_prev776,21396
-	struct mod_stack_t *access_list_next;access_list_next777,21435
-	struct mod_stack_t *write_access_list_prev;write_access_list_prev780,21521
-	struct mod_stack_t *write_access_list_next;write_access_list_next781,21566
-	struct mod_stack_t *bucket_list_prev;bucket_list_prev784,21666
-	struct mod_stack_t *bucket_list_next;bucket_list_next785,21705
-	int hit : 1;hit788,21758
-	int err : 1;err789,21772
-	int shared : 1;shared790,21786
-	int read : 1;read791,21803
-	int nc_store : 1;nc_store792,21818
-	int blocking : 1;blocking793,21837
-	int writeback : 1;writeback794,21856
-	int eviction : 1;eviction795,21876
-	int pref_eviction : 1; //VVVpref_eviction796,21895
-	int retry : 1;retry797,21925
-	int coalesced : 1;coalesced798,21941
-	int port_locked : 1;port_locked799,21961
-	int prefetch; //VVVprefetch800,21983
-	int prefetch_hit : 1;prefetch_hit801,22004
-	int prefetch_slot; //VVVprefetch_slot802,22027
-	struct net_msg_t *msg;msg805,22095
-	int waiting_list_event;  /* Event to schedule when stack is waken up */waiting_list_event808,22158
-	struct mod_stack_t *waiting_list_prev;waiting_list_prev809,22231
-	struct mod_stack_t *waiting_list_next;waiting_list_next810,22271
-	int port_waiting_list_event;port_waiting_list_event813,22352
-	struct mod_stack_t *port_waiting_list_prev;port_waiting_list_prev814,22382
-	struct mod_stack_t *port_waiting_list_next;port_waiting_list_next815,22427
-	struct mod_stack_t *waiting_list_head;waiting_list_head820,22650
-	struct mod_stack_t *waiting_list_tail;waiting_list_tail821,22690
-	int waiting_list_count;waiting_list_count822,22730
-	int waiting_list_max;waiting_list_max823,22755
-	struct mod_stack_t *master_stack;master_stack827,22920
-	int dir_lock_event;dir_lock_event830,22996
-	struct mod_stack_t *dir_lock_next;dir_lock_next831,23017
-	struct mod_stack_t *ret_stack;ret_stack834,23074
-	int ret_event;ret_event835,23106
-#define mem_debugging(mem_debugging901,25143
-#define mem_debug(mem_debug902,25200
-#define mem_tracing(mem_tracing905,25294
-#define mem_trace(mem_trace906,25349
-#define mem_trace_header(mem_trace_header907,25411
-struct mem_system_tmem_system_t910,25519
-	struct list_t *mod_list;mod_list913,25577
-	struct list_t *net_list;net_list914,25603
+#define MEM_LOG_PAGE_SIZE MEM_LOG_PAGE_SIZE35,1041
+#define MEM_PAGE_SHIFT MEM_PAGE_SHIFT36,1071
+#define MEM_PAGE_SIZE MEM_PAGE_SIZE37,1113
+#define MEM_PAGE_MASK MEM_PAGE_MASK38,1161
+#define MEM_PAGE_COUNT MEM_PAGE_COUNT39,1207
+enum mem_access_tmem_access_t41,1237
+	mem_access_none   = 0x00,mem_access_none43,1257
+	mem_access_read   = 0x01,mem_access_read44,1284
+	mem_access_write  = 0x02,mem_access_write45,1311
+	mem_access_exec   = 0x04,mem_access_exec46,1338
+	mem_access_init   = 0x08,mem_access_init47,1365
+	mem_access_modif  = 0x10mem_access_modif48,1392
+struct mem_page_tmem_page_t55,1492
+	unsigned int tag;tag57,1512
+	enum mem_access_t perm;  /* Access permissions; combination of flags */perm58,1531
+	struct mem_page_t *next;next59,1604
+	unsigned char *data;data60,1630
+struct mem_tmem_t63,1656
+	int num_links;num_links66,1724
+	struct mem_page_t *pages[MEM_PAGE_COUNT];pages69,1761
+	int safe;safe72,1822
+	unsigned int heap_break;heap_break75,1869
+	unsigned int last_address;last_address78,1925
+#define SPEC_MEM_PAGE_TABLE_SIZE SPEC_MEM_PAGE_TABLE_SIZE134,4112
+#define SPEC_MEM_LOG_PAGE_SIZE SPEC_MEM_LOG_PAGE_SIZE138,4258
+#define SPEC_MEM_PAGE_SIZE SPEC_MEM_PAGE_SIZE139,4292
+#define SPEC_MEM_PAGE_MASK SPEC_MEM_PAGE_MASK140,4350
+#define SPEC_MEM_MAX_PAGE_COUNT SPEC_MEM_MAX_PAGE_COUNT146,4667
+struct spec_mem_page_tspec_mem_page_t148,4705
+	unsigned int addr;addr150,4730
+	unsigned char data[SPEC_MEM_PAGE_SIZE];data151,4750
+	struct spec_mem_page_t *next;next152,4791
+struct spec_mem_tspec_mem_t155,4826
+	struct mem_t *mem;  /* Associated non-speculative memory */mem157,4846
+	int page_count;  /* Number of words currently written */page_count159,4908
+	struct spec_mem_page_t *pages[SPEC_MEM_PAGE_TABLE_SIZE];  /* Hash table */pages160,4966
+enum cache_policy_tcache_policy_t181,5505
+	cache_policy_invalid = 0,cache_policy_invalid183,5527
+	cache_policy_lru,cache_policy_lru184,5554
+	cache_policy_fifo,cache_policy_fifo185,5573
+	cache_policy_randomcache_policy_random186,5593
+enum cache_block_state_tcache_block_state_t189,5618
+	cache_block_invalid = 0,cache_block_invalid191,5645
+	cache_block_noncoherent,cache_block_noncoherent192,5671
+	cache_block_modified,cache_block_modified193,5697
+	cache_block_owned,cache_block_owned194,5720
+	cache_block_exclusive,cache_block_exclusive195,5740
+	cache_block_sharedcache_block_shared196,5764
+struct cache_block_tcache_block_t199,5788
+	struct cache_block_t *way_next;way_next201,5811
+	struct cache_block_t *way_prev;way_prev202,5844
+	int tag;tag204,5878
+	int transient_tag;transient_tag205,5888
+	int way;way206,5908
+	enum cache_block_state_t state;state208,5919
+	unsigned int prefetched;prefetched209,5952
+struct cache_set_tcache_set_t212,5982
+	struct cache_block_t *way_head;way_head214,6003
+	struct cache_block_t *way_tail;way_tail215,6036
+	struct cache_block_t *blocks;blocks216,6069
+struct cache_tcache_t219,6104
+	char *name;name221,6121
+	unsigned int num_sets;num_sets223,6135
+	unsigned int block_size;block_size224,6159
+	unsigned int assoc;assoc225,6185
+	enum cache_policy_t policy;policy226,6206
+	unsigned int num_pref_streams; /* Number of streams for prefetch */num_pref_streams228,6237
+	unsigned int pref_aggressivity; /* Number of blocks to prefetch per stream */pref_aggressivity229,6306
+	struct stream_buffer_t **stream_buffers;stream_buffers230,6385
+	int fifo;fifo231,6427
+	struct cache_set_t *sets;sets233,6439
+	unsigned int block_mask;block_mask234,6466
+	int log_block_size;log_block_size235,6492
+struct stream_buffer_tstream_buffer_t266,7630
+    struct cache_block_t *elem; 	// block arrayelem268,7655
+    size_t capacity;  				// maximum number of items in the buffercapacity269,7703
+    size_t count;     				// number of items in the buffercount270,7770
+    size_t head;       				// position of headhead271,7829
+    size_t tail;       				// position of tailtail272,7876
+struct dir_lock_tdir_lock_t290,8266
+	int lock;lock292,8286
+	long long stack_id;stack_id293,8297
+	struct mod_stack_t *lock_queue;lock_queue294,8318
+#define DIR_ENTRY_OWNER_NONE DIR_ENTRY_OWNER_NONE297,8355
+#define DIR_ENTRY_VALID_OWNER(DIR_ENTRY_VALID_OWNER298,8390
+struct dir_entry_tdir_entry_t300,8459
+	int owner;  /* Node owning the block (-1 = No owner)*/owner302,8480
+	int num_sharers;  /* Number of 1s in next field */num_sharers303,8536
+	unsigned char sharer[0];  /* Bitmap of sharers (must be last field) */sharer304,8588
+struct dir_tdir_t307,8664
+	char *name;name309,8679
+	int num_nodes;num_nodes313,8800
+	int xsize, ysize, zsize;xsize320,9099
+	int xsize, ysize, zsize;ysize320,9099
+	int xsize, ysize, zsize;zsize320,9099
+	int ssize, asize;ssize325,9310
+	int ssize, asize;asize325,9310
+	struct dir_lock_t *dir_lock;dir_lock329,9443
+	struct dir_lock_t *pref_dir_lock; //VVVpref_dir_lock332,9546
+	unsigned char data[0];data336,9714
+enum mmu_access_tmmu_access_t371,11136
+	mmu_access_invalid = 0,mmu_access_invalid373,11156
+	mmu_access_read,mmu_access_read374,11181
+	mmu_access_write,mmu_access_write375,11199
+	mmu_access_executemmu_access_execute376,11218
+struct mod_port_tmod_port_t403,11727
+	int locked;locked406,11771
+	long long lock_when;  /* Cycle when it was locked */lock_when407,11784
+	struct mod_stack_t *stack;  /* Access locking port */stack408,11838
+	struct mod_stack_t *waiting_list_head;waiting_list_head411,11914
+	struct mod_stack_t *waiting_list_tail;waiting_list_tail412,11954
+	int waiting_list_count;waiting_list_count413,11994
+	int waiting_list_max;waiting_list_max414,12019
+enum mod_access_kind_tmod_access_kind_t421,12146
+	mod_access_invalid = 0,mod_access_invalid423,12171
+	mod_access_load,mod_access_load424,12196
+	mod_access_store,mod_access_store425,12214
+	mod_access_nc_store,mod_access_nc_store426,12233
+	mod_access_prefetchmod_access_prefetch427,12255
+enum mod_kind_tmod_kind_t431,12299
+	mod_kind_invalid = 0,mod_kind_invalid433,12317
+	mod_kind_cache,mod_kind_cache434,12340
+	mod_kind_main_memory,mod_kind_main_memory435,12357
+	mod_kind_local_memorymod_kind_local_memory436,12380
+enum mod_range_kind_tmod_range_kind_t440,12435
+	mod_range_invalid = 0,mod_range_invalid442,12459
+	mod_range_bounds,mod_range_bounds443,12483
+	mod_range_interleavedmod_range_interleaved444,12502
+#define MOD_ACCESS_HASH_TABLE_SIZE MOD_ACCESS_HASH_TABLE_SIZE447,12529
+struct mod_tmod_t450,12589
+	enum mod_kind_t kind;kind453,12622
+	char *name;name454,12645
+	int block_size;block_size455,12658
+	int log_block_size;log_block_size456,12675
+	int latency;latency457,12696
+	int mshr_size;mshr_size458,12710
+	int prefetch_enabled;prefetch_enabled459,12726
+	int level;level462,12798
+	enum mod_range_kind_t range_kind;range_kind465,12849
+			unsigned int low;low471,12949
+			unsigned int high;high472,12970
+		} bounds;bounds473,12992
+			unsigned int mod;mod478,13065
+			unsigned int div;div479,13086
+			unsigned int eq;eq480,13107
+		} interleaved;interleaved481,13127
+	} range;range482,13144
+	struct linked_list_t *pq;pq485,13188
+	struct mod_port_t *ports;ports488,13229
+	int num_ports;num_ports489,13256
+	int num_locked_ports;num_locked_ports490,13272
+	struct mod_stack_t *port_waiting_list_head;port_waiting_list_head493,13334
+	struct mod_stack_t *port_waiting_list_tail;port_waiting_list_tail494,13379
+	int port_waiting_list_count;port_waiting_list_count495,13424
+	int port_waiting_list_max;port_waiting_list_max496,13454
+	struct dir_t *dir;dir499,13500
+	int dir_size;dir_size500,13520
+	int dir_assoc;dir_assoc501,13535
+	int dir_num_sets;dir_num_sets502,13551
+	struct mod_stack_t *waiting_list_head;waiting_list_head505,13601
+	struct mod_stack_t *waiting_list_tail;waiting_list_tail506,13641
+	int waiting_list_count;waiting_list_count507,13681
+	int waiting_list_max;waiting_list_max508,13706
+	struct cache_t *cache;cache511,13753
+	struct linked_list_t *high_mod_list;high_mod_list514,13813
+	struct linked_list_t *low_mod_list;low_mod_list515,13851
+	int sub_block_size;sub_block_size519,14010
+	int num_sub_blocks;  /* block_size / sub_block_size */num_sub_blocks520,14031
+	struct net_t *high_net;high_net523,14109
+	struct net_t *low_net;low_net524,14134
+	struct net_node_t *high_net_node;high_net_node525,14158
+	struct net_node_t *low_net_node;low_net_node526,14193
+	struct mod_stack_t *access_list_head;access_list_head529,14247
+	struct mod_stack_t *access_list_tail;access_list_tail530,14286
+	int access_list_count;access_list_count531,14325
+	int access_list_max;access_list_max532,14349
+	struct mod_stack_t *write_access_list_head;write_access_list_head535,14397
+	struct mod_stack_t *write_access_list_tail;write_access_list_tail536,14442
+	int write_access_list_count;write_access_list_count537,14487
+	int write_access_list_max;write_access_list_max538,14517
+	int access_list_coalesced_count;access_list_coalesced_count542,14662
+		struct mod_stack_t *bucket_list_head;bucket_list_head547,14738
+		struct mod_stack_t *bucket_list_tail;bucket_list_tail548,14778
+		int bucket_list_count;bucket_list_count549,14818
+		int bucket_list_max;bucket_list_max550,14843
+	} access_hash_table[MOD_ACCESS_HASH_TABLE_SIZE];access_hash_table551,14866
+	int color;color555,15035
+	long long accesses;accesses558,15066
+	long long hits;hits559,15087
+	long long reads;reads561,15105
+	long long effective_reads;effective_reads562,15123
+	long long effective_read_hits;effective_read_hits563,15151
+	long long writes;writes564,15183
+	long long effective_writes;effective_writes565,15202
+	long long effective_write_hits;effective_write_hits566,15231
+	long long evictions;evictions567,15264
+	long long blocking_reads;blocking_reads569,15287
+	long long non_blocking_reads;non_blocking_reads570,15314
+	long long read_hits;read_hits571,15345
+	long long blocking_writes;blocking_writes572,15367
+	long long non_blocking_writes;non_blocking_writes573,15395
+	long long write_hits;write_hits574,15427
+	long long read_retries;read_retries576,15451
+	long long write_retries;write_retries577,15476
+	long long no_retry_accesses;no_retry_accesses579,15503
+	long long no_retry_hits;no_retry_hits580,15533
+	long long no_retry_reads;no_retry_reads581,15559
+	long long no_retry_read_hits;no_retry_read_hits582,15586
+	long long no_retry_writes;no_retry_writes583,15617
+	long long no_retry_write_hits;no_retry_write_hits584,15645
+	long long completed_prefetches;completed_prefetches586,15679
+	long long programmed_prefetches;programmed_prefetches587,15712
+	long long useful_prefetches;useful_prefetches588,15746
+	long long delayed_hits;delayed_hits589,15776
+	double prefetch_precision;prefetch_precision590,15801
+	double prefetch_coverage;prefetch_coverage591,15829
+enum mod_request_dir_tmod_request_dir_t751,21608
+	mod_request_invalid = 0,mod_request_invalid753,21633
+	mod_request_up_down,mod_request_up_down754,21659
+	mod_request_down_upmod_request_down_up755,21681
+enum ack_typesack_types759,21722
+	reply_NO_REPLY = 0,reply_NO_REPLY761,21739
+	reply_ACK,reply_ACK762,21760
+	reply_ACK_DATA,reply_ACK_DATA763,21772
+	reply_ACK_DATA_SENT_TO_PEER,reply_ACK_DATA_SENT_TO_PEER764,21789
+	reply_ACK_ERRORreply_ACK_ERROR765,21819
+struct mod_stack_tmod_stack_t769,21852
+	long long id;id771,21873
+	enum mod_access_kind_t access_kind;access_kind772,21888
+	int *witness_ptr;witness_ptr773,21925
+	struct linked_list_t *event_queue;event_queue775,21945
+	void *event_queue_item;event_queue_item776,21981
+	struct mod_t *mod;mod778,22007
+	struct mod_t *target_mod;target_mod779,22027
+	struct mod_t *except_mod;except_mod780,22054
+	struct mod_t *peer;peer781,22081
+	struct mod_port_t *port;port783,22103
+	unsigned int addr;addr785,22130
+	int tag;tag786,22150
+	int set;set787,22160
+	int way;way788,22170
+	int state;state789,22180
+	int core;core790,22192
+	int thread;thread791,22203
+	int src_set;src_set793,22217
+	int src_way;src_way794,22231
+	int src_tag;src_tag795,22245
+	int src_pref_stream;src_pref_stream796,22259
+	int src_pref_slot;src_pref_slot797,22281
+	enum mod_request_dir_t request_dir;request_dir799,22302
+	int reply_size;reply_size800,22339
+	int reply;reply801,22356
+	int retain_owner;retain_owner802,22368
+	int pending;pending803,22387
+	struct mod_stack_t *access_list_prev;access_list_prev806,22442
+	struct mod_stack_t *access_list_next;access_list_next807,22481
+	struct mod_stack_t *write_access_list_prev;write_access_list_prev810,22567
+	struct mod_stack_t *write_access_list_next;write_access_list_next811,22612
+	struct mod_stack_t *bucket_list_prev;bucket_list_prev814,22712
+	struct mod_stack_t *bucket_list_next;bucket_list_next815,22751
+	int hit : 1;hit818,22804
+	int err : 1;err819,22818
+	int shared : 1;shared820,22832
+	int read : 1;read821,22849
+	int nc_store : 1;nc_store822,22864
+	int blocking : 1;blocking823,22883
+	int writeback : 1;writeback824,22902
+	int eviction : 1;eviction825,22922
+	int pref_eviction : 1; //VVVpref_eviction826,22941
+	int retry : 1;retry827,22971
+	int coalesced : 1;coalesced828,22987
+	int port_locked : 1;port_locked829,23007
+	int prefetch; //VVVprefetch831,23030
+	int prefetch_hit : 1;prefetch_hit832,23051
+	int pref_stream; //VVVpref_stream833,23074
+	int pref_slot; //VVVpref_slot834,23098
+	struct cache_block_t * pref_block; //On prefetch hit, pointer to the block pref_block835,23120
+	struct net_msg_t *msg;msg838,23239
+	int waiting_list_event;  /* Event to schedule when stack is waken up */waiting_list_event841,23302
+	struct mod_stack_t *waiting_list_prev;waiting_list_prev842,23375
+	struct mod_stack_t *waiting_list_next;waiting_list_next843,23415
+	int port_waiting_list_event;port_waiting_list_event846,23496
+	struct mod_stack_t *port_waiting_list_prev;port_waiting_list_prev847,23526
+	struct mod_stack_t *port_waiting_list_next;port_waiting_list_next848,23571
+	struct mod_stack_t *waiting_list_head;waiting_list_head853,23794
+	struct mod_stack_t *waiting_list_tail;waiting_list_tail854,23834
+	int waiting_list_count;waiting_list_count855,23874
+	int waiting_list_max;waiting_list_max856,23899
+	struct mod_stack_t *master_stack;master_stack860,24064
+	int dir_lock_event;dir_lock_event863,24140
+	struct mod_stack_t *dir_lock_next;dir_lock_next864,24161
+	struct mod_stack_t *ret_stack;ret_stack867,24218
+	int ret_event;ret_event868,24250
+#define mem_debugging(mem_debugging934,26287
+#define mem_debug(mem_debug935,26344
+#define mem_tracing(mem_tracing938,26438
+#define mem_trace(mem_trace939,26493
+#define mem_trace_header(mem_trace_header940,26555
+struct mem_system_tmem_system_t943,26663
+	struct list_t *mod_list;mod_list946,26721
+	struct list_t *net_list;net_list947,26747
 
 mmu.c,1707
 char *mmu_report_file_name = "";mmu_report_file_name28,859
@@ -586,24 +605,24 @@ void mem_dump(struct mem_t *mem, char *filename, unsigned int start, unsigned in
 void mem_load(struct mem_t *mem, char *file_name, unsigned int start)mem_load614,14359
 void mem_clone(struct mem_t *dst_mem, struct mem_t *src_mem)mem_clone643,15005
 
-directory.c,1822
+directory.c,1872
 #define DIR_ENTRY_SHARERS_SIZE DIR_ENTRY_SHARERS_SIZE24,831
 #define DIR_ENTRY_SIZE DIR_ENTRY_SIZE25,889
 #define DIR_ENTRY(DIR_ENTRY26,966
-struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize, int psize, int num_nodes)dir_create30,1123
-void dir_free(struct dir_t *dir)dir_free101,2661
-struct dir_entry_t *dir_entry_get(struct dir_t *dir, int x, int y, int z)dir_entry_get110,2779
-struct dir_entry_t *dir_pref_entry_get(struct dir_t *dir, int pref_slot)dir_pref_entry_get118,3009
-void dir_entry_dump_sharers(struct dir_t *dir, int x, int y, int z)dir_entry_dump_sharers125,3284
-void dir_entry_set_owner(struct dir_t *dir, int x, int y, int z, int node)dir_entry_set_owner139,3622
-void dir_entry_set_sharer(struct dir_t *dir, int x, int y, int z, int node)dir_entry_set_sharer154,4009
-void dir_entry_clear_sharer(struct dir_t *dir, int x, int y, int z, int node)dir_entry_clear_sharer175,4575
-void dir_entry_clear_all_sharers(struct dir_t *dir, int x, int y, int z)dir_entry_clear_all_sharers196,5134
-int dir_entry_is_sharer(struct dir_t *dir, int x, int y, int z, int node)dir_entry_is_sharer213,5521
-int dir_entry_group_shared_or_owned(struct dir_t *dir, int x, int y)dir_entry_group_shared_or_owned223,5787
-struct dir_lock_t *dir_pref_lock_get(struct dir_t *dir, int pref_slot)dir_pref_lock_get236,6065
-struct dir_lock_t *dir_lock_get(struct dir_t *dir, int x, int y)dir_lock_get244,6282
-int dir_pref_entry_lock(struct dir_t *dir, int pref_slot, int event,dir_pref_entry_lock253,6545
-int dir_entry_lock(struct dir_t *dir, int x, int y, int event, struct mod_stack_t *stack)dir_entry_lock314,8004
-void dir_entry_unlock(struct dir_t *dir, int x, int y)dir_entry_unlock376,9467
-void dir_pref_entry_unlock(struct dir_t *dir, int pref_slot)dir_pref_entry_unlock400,10123
+struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize,dir_create30,1123
+void dir_free(struct dir_t *dir)dir_free108,2985
+struct dir_entry_t *dir_entry_get(struct dir_t *dir, int x, int y, int z)dir_entry_get117,3103
+struct dir_entry_t *dir_pref_entry_get(struct dir_t *dir, int pref_stream, int pref_slot, int z)dir_pref_entry_get125,3333
+void dir_entry_dump_sharers(struct dir_t *dir, int x, int y, int z)dir_entry_dump_sharers136,3784
+void dir_entry_set_owner(struct dir_t *dir, int x, int y, int z, int node)dir_entry_set_owner150,4122
+void dir_entry_set_sharer(struct dir_t *dir, int x, int y, int z, int node)dir_entry_set_sharer165,4509
+void dir_entry_clear_sharer(struct dir_t *dir, int x, int y, int z, int node)dir_entry_clear_sharer186,5075
+void dir_entry_clear_all_sharers(struct dir_t *dir, int x, int y, int z)dir_entry_clear_all_sharers207,5634
+int dir_entry_is_sharer(struct dir_t *dir, int x, int y, int z, int node)dir_entry_is_sharer224,6021
+int dir_entry_group_shared_or_owned(struct dir_t *dir, int x, int y)dir_entry_group_shared_or_owned234,6287
+struct dir_lock_t *dir_pref_lock_get(struct dir_t *dir, int pref_stream, int pref_slot)dir_pref_lock_get247,6565
+struct dir_lock_t *dir_lock_get(struct dir_t *dir, int x, int y)dir_lock_get256,6877
+int dir_pref_entry_lock(struct dir_t *dir, int pref_stream, int pref_slot, int event,dir_pref_entry_lock265,7140
+int dir_entry_lock(struct dir_t *dir, int x, int y, int event, struct mod_stack_t *stack)dir_entry_lock327,8694
+void dir_entry_unlock(struct dir_t *dir, int x, int y)dir_entry_unlock389,10157
+void dir_pref_entry_unlock(struct dir_t *dir, int pref_stream, int pref_slot)dir_pref_entry_unlock413,10813
