@@ -263,6 +263,7 @@ int dir_pref_entry_lock(struct dir_t *dir, int pref_slot, int event,
 	 * return failure to lock. */
 	if (dir_lock->lock)
 	{
+		
 		/* Enqueue the stack to the end of the lock queue */
 		stack->dir_lock_next = NULL;
 		stack->dir_lock_event = event;

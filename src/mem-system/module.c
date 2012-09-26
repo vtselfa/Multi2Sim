@@ -289,7 +289,7 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 
 /* Look for a block in prefetch buffer.
  * The function returns TRUE on hit, FALSE on miss. */
-int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_slot_ptr) 
+int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr) 
 {
 	struct cache_t *cache = mod->cache;
 	struct cache_block_t *blk;
@@ -299,30 +299,36 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_slot_ptr
 	 * locked in the corresponding directory??? */
 	int tag = addr & ~cache->block_mask;
 	
-	int slot;
+	int stream;
 	int psize = cache->num_pref_streams;
-	for(slot=0; slot<psize; slot++)  /*VVV canviar lo de psize*/
+	for(stream=0; stream<psize; stream++)  /*VVV canviar lo de psize*/
 	{
-		blk = &cache->prefetched_blocks[slot];
+		blk = &cache->prefetched_blocks[stream][0]; //SLOT
 		if (blk->tag == tag && blk->state)
 			break;
 		if (blk->transient_tag == tag)
 		{
-			dir_lock = dir_pref_lock_get(mod->dir, slot);
+			dir_lock = dir_pref_lock_get(mod->dir, stream);
 			if (dir_lock->lock)
 				break;
 		}
 	}
 
 	/* Miss */
-	if (slot==psize)
-	{
-		PTR_ASSIGN(pref_slot_ptr, -1);
+	if (stream==psize){
+		PTR_ASSIGN(pref_stream_ptr, -1);
 		return 0;
 	}
-
+	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
+	 * així que no te sentit fer hit */
+	dir_lock = dir_pref_lock_get(mod->dir, stream);
+	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
+		PTR_ASSIGN(pref_stream_ptr, -1);
+		return 0;
+	}
+	
 	/* Hit */
-	PTR_ASSIGN(pref_slot_ptr, slot);	
+	PTR_ASSIGN(pref_stream_ptr, stream);	
 	return 1;
 }
 
@@ -752,7 +758,10 @@ struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	stack->way = -1;
 	stack->set = -1;
 	stack->tag = -1;
-	stack->prefetch_slot = -1;
+	stack->pref_stream = -1;
+	
+
+	printf("Created stack id=%lld\n", stack->id);
 
 	/* Return */
 	return stack;
@@ -767,8 +776,11 @@ void mod_stack_return(struct mod_stack_t *stack)
 	/* Wake up dependent accesses */
 	mod_stack_wakeup_stack(stack);
 
+	printf("Destroyed stack id=%lld\n", stack->id);
+	
 	/* Free */
 	free(stack);
+
 	esim_schedule_event(ret_event, ret_stack, 0);
 }
 

@@ -29,7 +29,7 @@
 #include <misc.h>
 
 /* Number of blocks to prefetch */
-#define PREF_BLOCKS 1
+#define PREF_BLOCKS 5
 
 
 /*
@@ -230,7 +230,7 @@ struct cache_t
 	enum cache_policy_t policy;
 	
 	unsigned int num_pref_streams; /* Number of streams for prefetch */
-	struct cache_block_t *prefetched_blocks;
+	struct cache_block_t **prefetched_blocks;
 	int fifo;
 
 	struct cache_set_t *sets;
@@ -765,7 +765,7 @@ struct mod_stack_t
 	int src_set;
 	int src_way;
 	int src_tag;
-	int src_prefetch_slot;
+	int src_pref_stream;
 
 	enum mod_request_dir_t request_dir;
 	int reply_size;
@@ -800,7 +800,7 @@ struct mod_stack_t
 	int port_locked : 1;
 	int prefetch; //VVV
 	int prefetch_hit : 1;
-	int prefetch_slot; //VVV
+	int pref_stream; //VVV
 
 	/* Message sent through interconnect */
 	struct net_msg_t *msg;
