@@ -220,6 +220,21 @@ struct cache_set_t
 	struct cache_block_t *blocks;
 };
 
+struct stream_block_t
+{
+	int tag;
+	int transient_tag;
+	enum cache_block_state_t state;
+};
+
+struct stream_buffer_t
+{
+	struct stream_buffer_t *stream_next;
+	struct stream_buffer_t *stream_prev;
+	int stream;
+	struct stream_block_t *blocks;
+};
+
 struct cache_t
 {
 	char *name;
@@ -228,9 +243,16 @@ struct cache_t
 	unsigned int block_size;
 	unsigned int assoc;
 	enum cache_policy_t policy;
+
+	struct {
+		unsigned int num_streams; 	/* Number of streams for prefetch */
+		unsigned int aggressivity; /* Number of blocks per stream */
 	
-	unsigned int num_pref_streams; /* Number of streams for prefetch */
-	struct cache_block_t **prefetched_blocks;
+		struct stream_buffer_t *streams;
+		struct stream_block_t *stream_head;
+		struct stream_block_t *stream_tail;
+	} prefetch;
+
 	int fifo;
 
 	struct cache_set_t *sets;
@@ -240,7 +262,7 @@ struct cache_t
 
 
 struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int block_size,
-	unsigned int assoc, unsigned int num_pref_streams, enum cache_policy_t policy);
+	unsigned int assoc, unsigned int pref_streams, unsigned int pref_aggr, enum cache_policy_t policy);
 void cache_free(struct cache_t *cache);
 
 void cache_decode_address(struct cache_t *cache, unsigned int addr,
@@ -251,8 +273,10 @@ void cache_set_block(struct cache_t *cache, int set, int way, int tag,
 	int state, unsigned int prefetched);
 void cache_set_pref_block(struct cache_t *cache, int prefetch_slot, int tag, int state);
 void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int *state_ptr);
-void cache_get_pref_block(struct cache_t *cache, int prefetch_slot,
-	int *tag_ptr, int *state_ptr);
+struct stream_block_t * cache_get_pref_block(struct cache_t *cache, int pref_stream,
+	int pref_slot);
+void cache_get_pref_block_data(struct cache_t *cache, int pref_stream,
+	int pref_slot, int *tag_ptr, int *state_ptr);
 
 void cache_access_block(struct cache_t *cache, int set, int way);
 int cache_replace_block(struct cache_t *cache, int set);
@@ -311,7 +335,7 @@ struct dir_t
 	unsigned char data[0];
 };
 
-struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize, int psize, int num_nodes);
+struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize, int psize, int pref_aggressivity, int num_nodes);
 void dir_free(struct dir_t *dir);
 
 struct dir_entry_t *dir_entry_get(struct dir_t *dir, int x, int y, int z);

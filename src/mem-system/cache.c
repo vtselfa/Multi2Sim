@@ -107,7 +107,56 @@ static void cache_update_waylist(struct cache_set_t *set,
 	}
 }
 
+/*static void cache_update_streamlist(struct stream_buffers_t *sb,
+	struct stream_block_t *blk, enum cache_waylist_enum where)
+{
+	if (!blk->way_prev && !blk->way_next)
+	{
+		assert(set->way_head == blk && set->way_tail == blk);
+		return;
+		
+	}
+	else if (!blk->way_prev)
+	{
+		assert(set->way_head == blk && set->way_tail != blk);
+		if (where == cache_waylist_head)
+			return;
+		set->way_head = blk->way_next;
+		blk->way_next->way_prev = NULL;
+		
+	}
+	else if (!blk->way_next)
+	{
+		assert(set->way_head != blk && set->way_tail == blk);
+		if (where == cache_waylist_tail)
+			return;
+		set->way_tail = blk->way_prev;
+		blk->way_prev->way_next = NULL;
+		
+	}
+	else
+	{
+		assert(set->way_head != blk && set->way_tail != blk);
+		blk->way_prev->way_next = blk->way_next;
+		blk->way_next->way_prev = blk->way_prev;
+	}
 
+	if (where == cache_waylist_head)
+	{
+		blk->way_next = set->way_head;
+		blk->way_prev = NULL;
+		set->way_head->way_prev = blk;
+		set->way_head = blk;
+	}
+	else
+	{
+		blk->way_prev = set->way_tail;
+		blk->way_next = NULL;
+		set->way_tail->way_next = blk;
+		set->way_tail = blk;
+	}
+}
+*/
 
 
 
@@ -117,11 +166,11 @@ static void cache_update_waylist(struct cache_set_t *set,
 
 
 struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int block_size,
-	unsigned int assoc, unsigned int num_pref_streams, enum cache_policy_t policy)
+	unsigned int assoc, unsigned int num_streams, unsigned int pref_aggr, enum cache_policy_t policy)
 {
 	struct cache_t *cache;
 	struct cache_block_t *block;
-	unsigned int set, way;
+	unsigned int set, way, stream;
 
 	/* Create cache */
 	cache = calloc(1, sizeof(struct cache_t));
@@ -138,7 +187,8 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	cache->block_size = block_size;
 	cache->assoc = assoc;
 	cache->policy = policy;
-	cache->num_pref_streams = num_pref_streams;
+	cache->prefetch.num_streams = num_streams;
+	cache->prefetch.aggressivity = pref_aggr;
 	cache->fifo = 0;
 
 	/* Derived fields */
@@ -149,13 +199,13 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	cache->block_mask = block_size - 1;
 
 	/* Create matrix of prefetched blocks */
-	cache->prefetched_blocks = calloc(num_pref_streams, sizeof(struct cache_block_t*));
-	if (!cache->prefetched_blocks)
+	cache->prefetch.streams = calloc(num_streams, sizeof(struct stream_buffer_t));
+	if (!cache->prefetch.streams)
 		fatal("%s: out of memory", __FUNCTION__);
-	int s;
-	for(s=0; s<cache->num_pref_streams; s++){//Todo: cambiar el 1 per aggressivity
-		cache->prefetched_blocks[s] = calloc(1, sizeof(struct cache_block_t));
-		if (!cache->prefetched_blocks[s])
+	for(stream=0; stream<num_streams; stream++){
+		cache->prefetch.streams[stream].blocks =
+			calloc(pref_aggr, sizeof(struct stream_block_t));
+		if (!cache->prefetch.streams[stream].blocks)
 			fatal("%s: out of memory", __FUNCTION__);
 	}
 
@@ -196,9 +246,9 @@ void cache_free(struct cache_t *cache)
 
 	for (set = 0; set < cache->num_sets; set++)
 		free(cache->sets[set].blocks);
-	for(stream=0; stream<cache->num_pref_streams; stream++)
-		free(cache->prefetched_blocks[stream]);
-	free(cache->prefetched_blocks);
+	for(stream=0; stream<cache->prefetch.num_streams; stream++)
+		free(cache->prefetch.streams[stream].blocks);
+	free(cache->prefetch.streams);
 	free(cache->sets);
 	free(cache->name);
 	free(cache);
@@ -269,15 +319,15 @@ void cache_set_block(struct cache_t *cache, int set, int way, int tag, int state
 /* Set the tag and state of a prefetched block */
 void cache_set_pref_block(struct cache_t *cache, int pref_stream, int tag, int state)
 {
-	assert(pref_stream >= 0 && pref_stream < cache->num_pref_streams);
+	assert(pref_stream >= 0 && pref_stream < cache->prefetch.num_streams);
 
 	mem_trace("mem.set_block in prefetch buffer of \"%s\"\
 			pref_stream=%d tag=0x%x state=\"%s\"\n",
 			cache->name, pref_stream, tag,
 			map_value(&cache_block_state_map, state));
 
-	cache->prefetched_blocks[pref_stream][0].tag = tag; //SLOT
-	cache->prefetched_blocks[pref_stream][0].state = state; //SLOT
+	cache->prefetch.streams[pref_stream].blocks[0].tag = tag; //SLOT
+	cache->prefetch.streams[pref_stream].blocks[0].state = state; //SLOT
 }
 
 
@@ -289,11 +339,22 @@ void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int 
 	PTR_ASSIGN(state_ptr, cache->sets[set].blocks[way].state);
 }
 
-void cache_get_pref_block(struct cache_t *cache, int pref_slot, int *tag_ptr, int *state_ptr)
+struct stream_block_t * cache_get_pref_block(struct cache_t *cache,
+	int pref_stream, int pref_slot)
 {
-	assert(pref_slot>=0 && pref_slot < cache->num_pref_streams);
-	PTR_ASSIGN(tag_ptr, cache->prefetched_blocks[pref_slot][0].tag); //SLOT
-	PTR_ASSIGN(state_ptr, cache->prefetched_blocks[pref_slot][0].state); //SLOT
+	assert(pref_stream>=0 && pref_stream < cache->prefetch.num_streams);
+	assert(pref_slot>=0 && pref_slot < cache->prefetch.aggressivity);
+	return &cache->prefetch.streams[pref_stream].blocks[pref_slot];
+}
+
+void cache_get_pref_block_data(struct cache_t *cache, int pref_stream,
+	int pref_slot, int *tag_ptr, int *state_ptr)
+{
+	assert(pref_stream>=0 && pref_stream < cache->prefetch.num_streams);
+	assert(pref_slot>=0 && pref_slot < cache->prefetch.aggressivity);
+
+	PTR_ASSIGN(tag_ptr, cache->prefetch.streams[pref_stream].blocks[pref_slot].tag);
+	PTR_ASSIGN(state_ptr, cache->prefetch.streams[pref_stream].blocks[pref_slot].state);
 }
 
 
@@ -316,6 +377,31 @@ void cache_access_block(struct cache_t *cache, int set, int way)
 			&cache->sets[set].blocks[way],
 			cache_waylist_head);
 }
+
+
+/* Return LRU or empty stream buffer */
+/*int cache_select_stream(struct cache_t *cache)
+{
+	* Try to find an invalid block. Do this in the LRU order, to avoid picking the
+	 * MRU while its state has not changed to valid yet. */
+/*	assert(set >= 0 && set < cache->num_sets);
+	
+	struct stream_block_t *block;
+	for (block = cache->stream_buffers->streams_tail; block; block = block->way_prev)
+		if (!block->state)
+			return block->stream;
+	
+	* LRU */
+/*	int stream = cache->stream_buffers.stream_tail->stream;
+	cache_update_waylist(&cache->sets[set], cache->sets[set].way_tail, cache_waylist_head);
+
+		return way;
+	}
+	
+	* Random replacement */
+/*	assert(cache->policy == cache_policy_random);
+	return random() % cache->assoc;
+}*/
 
 
 /* Return the way of the block to be replaced in a specific set,

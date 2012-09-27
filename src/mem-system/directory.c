@@ -27,7 +27,7 @@
 	((X) * dir->ysize * dir->zsize + (Y) * dir->zsize + (Z))))
 
 
-struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize, int psize, int num_nodes)
+struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize, int psize, int pref_aggressivity, int num_nodes)
 {
 	struct dir_t *dir;
 	struct dir_entry_t *dir_entry;

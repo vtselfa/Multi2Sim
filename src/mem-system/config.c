@@ -592,6 +592,8 @@ static struct mod_t *mem_config_read_cache(struct config_t *config, char *sectio
 	int mshr_size;
 	int num_ports;
 	int pref;
+	int pref_streams;
+	int pref_aggr;
 
 	char *net_name;
 	char *net_node_name;
@@ -609,7 +611,8 @@ static struct mod_t *mem_config_read_cache(struct config_t *config, char *sectio
 	config_var_enforce(config, buf, "Sets");
 	config_var_enforce(config, buf, "Assoc");
 	config_var_enforce(config, buf, "BlockSize");
-	config_var_enforce(config, buf, "Prefetch");
+	config_var_enforce(config, buf, "PrefetchStreams");
+	config_var_enforce(config, buf, "PrefetchAggressivity");
 
 	/* Read values */
 	str_token(mod_name, sizeof mod_name, section, 1, " ");
@@ -620,7 +623,9 @@ static struct mod_t *mem_config_read_cache(struct config_t *config, char *sectio
 	policy_str = config_read_string(config, buf, "Policy", "LRU");
 	mshr_size = config_read_int(config, buf, "MSHR", 16);
 	num_ports = config_read_int(config, buf, "Ports", 2);
-	pref = config_read_int(config, buf, "Prefetch", 0);
+	pref_streams = config_read_int(config, buf, "PrefetchStreams", 0);
+	pref_aggr = config_read_int(config, buf, "PrefetchAggressivity", 0);
+	pref = (pref_aggr > 0) && (pref_streams > 0);
 
 	/* Checks */
 	policy = map_string_case(&cache_policy_map, policy_str);
@@ -646,8 +651,11 @@ static struct mod_t *mem_config_read_cache(struct config_t *config, char *sectio
 	if (num_ports < 1)
 		fatal("%s: cache %s: invalid value for variable 'Ports'.\n%s",
 			mem_config_file_name, mod_name, err_mem_config_note);
-	if (pref > 1)
-		fatal("%s: cache %s: invalid value for variable 'Prefetch'.\n%s",
+	if (pref_aggr < 0)
+		fatal("%s: cache %s: invalid value for variable 'PrefetchAggressivity'.\n%s",
+			mem_config_file_name, mod_name, err_mem_config_note);
+	if (pref_streams < 0)
+		fatal("%s: cache %s: invalid value for variable 'PrefetchStreams'.\n%s",
 			mem_config_file_name, mod_name, err_mem_config_note);
 
 	/* Create module */
@@ -677,7 +685,7 @@ static struct mod_t *mem_config_read_cache(struct config_t *config, char *sectio
 	mod->low_net_node = net_node;
 
 	/* Create cache */
-	mod->cache = cache_create(mod->name, num_sets, block_size, assoc, PREF_BLOCKS, policy);
+	mod->cache = cache_create(mod->name, num_sets, block_size, assoc, pref_streams, pref_aggr, policy);
 
 	/* Return */
 	return mod;
@@ -750,7 +758,7 @@ static struct mod_t *mem_config_read_main_memory(struct config_t *config, char *
 
 	/* Create cache and directory */
 	mod->cache = cache_create(mod->name, dir_size / dir_assoc, block_size,
-			dir_assoc, PREF_BLOCKS, cache_policy_lru);
+			dir_assoc, 0, 0, cache_policy_lru);
 
 	/* Return */
 	return mod;
@@ -1497,6 +1505,7 @@ static void mem_config_calculate_sub_block_sizes(void)
 {
 	struct mod_t *mod;
 	struct mod_t *high_mod;
+	struct cache_t *cache;
 
 	int num_nodes;
 	int i;
@@ -1523,9 +1532,11 @@ static void mem_config_calculate_sub_block_sizes(void)
 			num_nodes = 1;
 
 		/* Create directory */
+		cache = mod->cache;
 		mod->num_sub_blocks = mod->block_size / mod->sub_block_size;
 		mod->dir = dir_create(mod->name, mod->dir_num_sets, mod->dir_assoc,
-			mod->num_sub_blocks, PREF_BLOCKS, num_nodes);
+			mod->num_sub_blocks, cache->prefetch.num_streams,
+			cache->prefetch.aggressivity, num_nodes);
 		mem_debug("\t%s - %dx%dx%d (%dx%dx%d effective) - %d entries, %d sub-blocks\n",
 			mod->name, mod->dir_num_sets, mod->dir_assoc, num_nodes,
 			mod->dir_num_sets, mod->dir_assoc, linked_list_count(mod->high_mod_list),

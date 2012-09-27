@@ -292,7 +292,7 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr) 
 {
 	struct cache_t *cache = mod->cache;
-	struct cache_block_t *blk;
+	struct stream_block_t *blk;
 	struct dir_lock_t *dir_lock;
 
 	/* A transient tag is considered a hit if the block is
@@ -300,14 +300,12 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_p
 	int tag = addr & ~cache->block_mask;
 	
 	int stream;
-	int psize = cache->num_pref_streams;
-	for(stream=0; stream<psize; stream++)  /*VVV canviar lo de psize*/
-	{
-		blk = &cache->prefetched_blocks[stream][0]; //SLOT
+	int num_streams = cache->prefetch.num_streams;
+	for(stream=0; stream<num_streams; stream++){
+		blk = cache_get_pref_block(cache, stream, 0); //SLOT
 		if (blk->tag == tag && blk->state)
 			break;
-		if (blk->transient_tag == tag)
-		{
+		if (blk->transient_tag == tag){
 			dir_lock = dir_pref_lock_get(mod->dir, stream);
 			if (dir_lock->lock)
 				break;
@@ -315,7 +313,7 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_p
 	}
 
 	/* Miss */
-	if (stream==psize){
+	if (stream==num_streams){
 		PTR_ASSIGN(pref_stream_ptr, -1);
 		return 0;
 	}
@@ -760,9 +758,6 @@ struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	stack->tag = -1;
 	stack->pref_stream = -1;
 	
-
-	printf("Created stack id=%lld\n", stack->id);
-
 	/* Return */
 	return stack;
 }
@@ -776,8 +771,6 @@ void mod_stack_return(struct mod_stack_t *stack)
 	/* Wake up dependent accesses */
 	mod_stack_wakeup_stack(stack);
 
-	printf("Destroyed stack id=%lld\n", stack->id);
-	
 	/* Free */
 	free(stack);
 
