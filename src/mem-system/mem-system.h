@@ -249,8 +249,8 @@ struct cache_t
 		unsigned int aggressivity; /* Number of blocks per stream */
 	
 		struct stream_buffer_t *streams;
-		struct stream_block_t *stream_head;
-		struct stream_block_t *stream_tail;
+		struct stream_buffer_t *stream_head;
+		struct stream_buffer_t *stream_tail;
 	} prefetch;
 
 	int fifo;
@@ -279,6 +279,8 @@ void cache_get_pref_block_data(struct cache_t *cache, int pref_stream,
 	int pref_slot, int *tag_ptr, int *state_ptr);
 
 void cache_access_block(struct cache_t *cache, int set, int way);
+int cache_select_stream(struct cache_t *cache);
+void cache_access_stream(struct cache_t *cache, int stream);
 int cache_replace_block(struct cache_t *cache, int set);
 void cache_set_transient_tag(struct cache_t *cache, int set, int way, int tag);
 

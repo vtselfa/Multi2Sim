@@ -170,6 +170,7 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 {
 	struct cache_t *cache;
 	struct cache_block_t *block;
+	struct stream_buffer_t *sb;
 	unsigned int set, way, stream;
 
 	/* Create cache */
@@ -207,6 +208,16 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 			calloc(pref_aggr, sizeof(struct stream_block_t));
 		if (!cache->prefetch.streams[stream].blocks)
 			fatal("%s: out of memory", __FUNCTION__);
+	}
+	
+	/* Initialize streams */
+	cache->prefetch.stream_head = &cache->prefetch.streams[0];
+	cache->prefetch.stream_tail = &cache->prefetch.streams[num_streams - 1];
+	for (stream = 0; stream < num_streams; stream++){
+		sb = &cache->prefetch.streams[stream];
+		sb->stream = stream;
+		sb->stream_prev = stream ? &cache->prefetch.streams[stream-1] : NULL;
+		sb->stream_next = stream<num_streams-1 ? &cache->prefetch.streams[stream+1] : NULL;
 	}
 
 	/* Create array of sets */
@@ -378,30 +389,59 @@ void cache_access_block(struct cache_t *cache, int set, int way)
 			cache_waylist_head);
 }
 
+void cache_access_stream(struct cache_t *cache, int stream)
+{
+	struct stream_buffer_t * accessed;
+
+	//Integrity tests
+	assert(stream >= 0 && stream < cache->prefetch.num_streams);
+#ifndef NDEBUG
+	for(accessed = cache->prefetch.stream_head;
+		accessed->stream_next;
+		accessed = accessed->stream_next){};
+	assert(accessed == cache->prefetch.stream_tail);
+	for(accessed = cache->prefetch.stream_tail;
+		accessed->stream_prev;
+		accessed = accessed->stream_prev){};
+#endif
+	assert(accessed == cache->prefetch.stream_head);
+
+	//Return if only one stream
+	if(cache->prefetch.num_streams < 2) return;
+
+	accessed = &cache->prefetch.streams[stream];
+	//Is tail
+	if(!accessed->stream_next && accessed->stream_prev){
+		accessed->stream_prev->stream_next = NULL;
+		cache->prefetch.stream_tail = accessed->stream_prev;
+	//Is in the middle
+	} else if(accessed->stream_next && accessed->stream_prev) {
+		accessed->stream_prev->stream_next = accessed->stream_next;
+		accessed->stream_next->stream_prev = accessed->stream_prev;
+	//Is already in the head
+	} else {
+		return;
+	}
+
+	/* Put first */
+	accessed->stream_prev = NULL;
+	accessed->stream_next = cache->prefetch.stream_head;
+	accessed->stream_next->stream_prev = accessed;
+	cache->prefetch.stream_head = accessed;
+}
+
 
 /* Return LRU or empty stream buffer */
-/*int cache_select_stream(struct cache_t *cache)
+int cache_select_stream(struct cache_t *cache)
 {
-	* Try to find an invalid block. Do this in the LRU order, to avoid picking the
-	 * MRU while its state has not changed to valid yet. */
-/*	assert(set >= 0 && set < cache->num_sets);
-	
-	struct stream_block_t *block;
-	for (block = cache->stream_buffers->streams_tail; block; block = block->way_prev)
-		if (!block->state)
-			return block->stream;
-	
-	* LRU */
-/*	int stream = cache->stream_buffers.stream_tail->stream;
-	cache_update_waylist(&cache->sets[set], cache->sets[set].way_tail, cache_waylist_head);
-
-		return way;
-	}
-	
-	* Random replacement */
-/*	assert(cache->policy == cache_policy_random);
-	return random() % cache->assoc;
-}*/
+	/* Try to find an empty stream in the LRU order */
+	struct stream_buffer_t *stream;
+	for (stream = cache->prefetch.stream_tail; stream; stream = stream->stream_prev)
+		if (!stream->blocks[0].state) //SLOT
+				return stream->stream;
+	/* LRU */
+	return cache->prefetch.stream_tail->stream;
+}
 
 
 /* Return the way of the block to be replaced in a specific set,

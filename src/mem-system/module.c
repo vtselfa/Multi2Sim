@@ -246,6 +246,7 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 
 	/* A transient tag is considered a hit if the block is
 	 * locked in the corresponding directory. */
+	/* També és un hit si hi ha stacks en la cua. */
 	tag = addr & ~cache->block_mask;
 	if (mod->range_kind == mod_range_interleaved)
 	{
@@ -269,7 +270,7 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 		if (blk->transient_tag == tag)
 		{
 			dir_lock = dir_lock_get(mod->dir, set, way);
-			if (dir_lock->lock)
+			if (dir_lock->lock || dir_lock->lock_queue)
 				break;
 		}
 	}
@@ -758,6 +759,8 @@ struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	stack->tag = -1;
 	stack->pref_stream = -1;
 	
+	//printf("Created stack=%lld\n", stack->id);
+
 	/* Return */
 	return stack;
 }
@@ -770,6 +773,8 @@ void mod_stack_return(struct mod_stack_t *stack)
 
 	/* Wake up dependent accesses */
 	mod_stack_wakeup_stack(stack);
+
+	//printf("Destroyed stack=%lld\n", stack->id);
 
 	/* Free */
 	free(stack);
