@@ -307,7 +307,7 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_p
 		if (blk->tag == tag && blk->state)
 			break;
 		if (blk->transient_tag == tag){
-			dir_lock = dir_pref_lock_get(mod->dir, stream);
+			dir_lock = dir_pref_lock_get(mod->dir, stream, 0); //SLOT
 			if (dir_lock->lock)
 				break;
 		}
@@ -320,7 +320,7 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_p
 	}
 	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
 	 * així que no te sentit fer hit */
-	dir_lock = dir_pref_lock_get(mod->dir, stream);
+	dir_lock = dir_pref_lock_get(mod->dir, stream, 0); //SLOT
 	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
 		PTR_ASSIGN(pref_stream_ptr, -1);
 		return 0;

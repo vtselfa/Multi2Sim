@@ -271,7 +271,7 @@ int cache_find_block(struct cache_t *cache, unsigned int addr, int *set_ptr, int
 	int *state_ptr);
 void cache_set_block(struct cache_t *cache, int set, int way, int tag,
 	int state, unsigned int prefetched);
-void cache_set_pref_block(struct cache_t *cache, int prefetch_slot, int tag, int state);
+void cache_set_pref_block(struct cache_t *cache, int pref_stream, int pref_slot, int tag, int state);
 void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int *state_ptr);
 struct stream_block_t * cache_get_pref_block(struct cache_t *cache, int pref_stream,
 	int pref_slot);
@@ -322,7 +322,7 @@ struct dir_t
 	 * sets, YSize is the number of ways of the cache, and ZSize
 	 * is the number of sub-blocks of size 'cache_min_block_size'
 	 * that fit within a block. */
-	int xsize, ysize, zsize, psize;
+	int xsize, ysize, zsize, ssize, asize;
 
 	/* Array of xsize * ysize locks. Each lock corresponds to a
 	 * block, i.e. a set of zsize directory entries */
@@ -341,7 +341,7 @@ struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize, int psize,
 void dir_free(struct dir_t *dir);
 
 struct dir_entry_t *dir_entry_get(struct dir_t *dir, int x, int y, int z);
-struct dir_entry_t *dir_pref_entry_get(struct dir_t *dir, int pref_slot);
+struct dir_entry_t *dir_pref_entry_get(struct dir_t *dir, int pref_stream, int pref_slot, int z);
 
 void dir_entry_set_owner(struct dir_t *dir, int x, int y, int z, int node);
 void dir_entry_set_sharer(struct dir_t *dir, int x, int y, int z, int node);
@@ -353,11 +353,11 @@ int dir_entry_group_shared_or_owned(struct dir_t *dir, int x, int y);
 void dir_entry_dump_sharers(struct dir_t *dir, int x, int y, int z);
 
 struct dir_lock_t *dir_lock_get(struct dir_t *dir, int x, int y);
-struct dir_lock_t *dir_pref_lock_get(struct dir_t *dir, int pref_slot);
+struct dir_lock_t *dir_pref_lock_get(struct dir_t *dir, int pref_stream, int pref_slot);
 int dir_entry_lock(struct dir_t *dir, int x, int y, int event, struct mod_stack_t *stack);
-int dir_pref_entry_lock(struct dir_t *dir, int pref_slot, int event, struct mod_stack_t *stack);
+int dir_pref_entry_lock(struct dir_t *dir, int pref_stream, int pref_slot, int event, struct mod_stack_t *stack);
 void dir_entry_unlock(struct dir_t *dir, int x, int y);
-void dir_pref_entry_unlock(struct dir_t *dir, int pref_slot);
+void dir_pref_entry_unlock(struct dir_t *dir, int pref_stream, int pref_slot);
 
 
 

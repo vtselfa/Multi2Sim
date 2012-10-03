@@ -328,17 +328,18 @@ void cache_set_block(struct cache_t *cache, int set, int way, int tag, int state
 
 
 /* Set the tag and state of a prefetched block */
-void cache_set_pref_block(struct cache_t *cache, int pref_stream, int tag, int state)
+void cache_set_pref_block(struct cache_t *cache, int pref_stream, int pref_slot, int tag, int state)
 {
 	assert(pref_stream >= 0 && pref_stream < cache->prefetch.num_streams);
+	assert(pref_slot>=0 && pref_slot < cache->prefetch.aggressivity);
 
 	mem_trace("mem.set_block in prefetch buffer of \"%s\"\
 			pref_stream=%d tag=0x%x state=\"%s\"\n",
 			cache->name, pref_stream, tag,
 			map_value(&cache_block_state_map, state));
 
-	cache->prefetch.streams[pref_stream].blocks[0].tag = tag; //SLOT
-	cache->prefetch.streams[pref_stream].blocks[0].state = state; //SLOT
+	cache->prefetch.streams[pref_stream].blocks[pref_slot].tag = tag;
+	cache->prefetch.streams[pref_stream].blocks[pref_slot].state = state;
 }
 
 
