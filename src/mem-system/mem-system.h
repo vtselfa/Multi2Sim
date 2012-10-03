@@ -238,7 +238,6 @@ struct stream_buffer_t
 	int num_slots;
 	int count;
 	int head;
-
 };
 
 struct cache_t
@@ -798,6 +797,7 @@ struct mod_stack_t
 	int src_way;
 	int src_tag;
 	int src_pref_stream;
+	int src_pref_slot;
 
 	enum mod_request_dir_t request_dir;
 	int reply_size;
@@ -833,6 +833,7 @@ struct mod_stack_t
 	int prefetch; //VVV
 	int prefetch_hit : 1;
 	int pref_stream; //VVV
+	int pref_slot; //VVV
 
 	/* Message sent through interconnect */
 	struct net_msg_t *msg;

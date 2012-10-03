@@ -109,6 +109,34 @@ int EV_MOD_PREF_MISS;
 int EV_MOD_PREF_UNLOCK;
 int EV_MOD_PREF_FINISH;
 
+/* AUXILIAR FUNCTIONS*/
+int must_enqueue_prefetch(struct mod_stack_t *stack)
+{
+	if(stack->mod->kind == mod_kind_cache && //És una cache
+		!stack->prefetch && //No estem en una cadena de prefetch
+		stack->mod->prefetch_enabled && //El prefetch està habilitat
+		stack->mod->level==2 && //És L2 :P
+		stack->request_dir == mod_request_up_down) //Petició up down
+		
+		return 1;
+	else
+		return 0;
+}
+
+void enqueue_prefetch(struct mod_stack_t *stack, unsigned int addr)
+{
+	struct x86_uop_t * pref = x86_uop_create();
+	pref->phy_addr = addr; 
+	pref->prefetch = 1;
+	pref->core = stack->core;
+	pref->thread = stack->thread;
+	pref->flags = X86_UINST_MEM;
+	linked_list_out(stack->mod->pq);
+	linked_list_insert(stack->mod->pq, pref);
+}
+
+
+
 /* NMOESI Protocol */
 
 void mod_handler_pref(int event, void *data)
@@ -1032,15 +1060,15 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 		
 		stack->prefetch_hit = 0;
 		/* Look for block in prefetch buffer */
-		if(!stack->hit && mod->prefetch_enabled)
-		{
+		if(!stack->hit && mod->prefetch_enabled){
 			stack->prefetch_hit = mod_find_pref_block(mod, stack->addr,
 				&stack->pref_stream);
-			if(stack->prefetch_hit)
+			if(stack->prefetch_hit){
 				fprintf(stderr,"    %lld 0x%x %s prefetch_hit == %d pref_stream== %d\n", stack->id, stack->tag, mod->name, stack->prefetch_hit, stack->pref_stream);
+				stack->pref_slot = cache->prefetch.streams[stack->pref_stream].head; //El hit és al HEAD sempre
+			}
 		}
 		assert(stack->hit || stack->prefetch_hit || stack->request_dir == mod_request_up_down);
-
 		assert(!stack->hit || !stack->prefetch_hit);
 		
 		/* Statistics */
@@ -1061,8 +1089,7 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 			stack->blocking ? mod->blocking_writes++ : mod->non_blocking_writes++;
 
 			/* Increment witness variable when port is locked */
-			if (stack->witness_ptr)
-			{
+			if (stack->witness_ptr)	{
 				(*stack->witness_ptr)++;
 				stack->witness_ptr = NULL;
 			}
@@ -1084,30 +1111,16 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 					mod->no_retry_write_hits++;
 			}
 		}
-
-		if (!stack->hit){
+		
+		if(!stack->hit){
+			/* Select victim way */
 			if (stack->way < 0)
-				/* Select victim */
 				stack->way = cache_replace_block(mod->cache, stack->set);
-			
-			/*Enqueue prefetch on miss*/
-			if(mod->kind == mod_kind_cache && //És una cache
-				!stack->prefetch && //No estem en una cadena de prefetch
-				mod->prefetch_enabled && //El prefetch està habilitat
-				mod->level==2 && //És L2 :P
-				stack->request_dir == mod_request_up_down) //Petició up down
-			{
-				struct x86_uop_t * pref = x86_uop_create();
-				pref->phy_addr = stack->addr + mod->block_size;
-				pref->prefetch = 1;
-				pref->core = stack->core;
-				pref->thread = stack->thread;
-				pref->flags = X86_UINST_MEM;
-				linked_list_out(mod->pq);
-				linked_list_insert(mod->pq, pref);
-			}
+			/* Enqueue prefetch on miss */
+			if(must_enqueue_prefetch(stack)) //Esta stack acompleix les condicions per encuar un prefetch?
+				enqueue_prefetch(stack, stack->addr + stack->mod->block_size);
 		}
-		assert(stack->way >= 0 || stack->prefetch_hit);
+		assert(stack->way >= 0);
 		
 		/* TOASK: Hit (o prefetch_hit) fent prefetch retorna sense fer lock al dir? */
 		if(prefetching_here && (stack->hit || stack->prefetch_hit))
