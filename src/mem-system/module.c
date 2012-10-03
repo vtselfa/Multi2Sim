@@ -287,10 +287,9 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 	PTR_ASSIGN(state_ptr, cache->sets[set].blocks[way].state);
 	return 1;
 }
-
 /* Look for a block in prefetch buffer.
  * The function returns TRUE on hit, FALSE on miss. */
-int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr) 
+int mod_find_pref_block_up_down(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr) 
 {
 	struct cache_t *cache = mod->cache;
 	struct stream_block_t *blk;
@@ -300,14 +299,15 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_p
 	 * locked in the corresponding directory??? */
 	int tag = addr & ~cache->block_mask;
 	
-	int stream;
+	int stream, slot;
 	int num_streams = cache->prefetch.num_streams;
 	for(stream=0; stream<num_streams; stream++){
-		blk = cache_get_pref_block(cache, stream, 0); //SLOT
+		slot = cache->prefetch.streams[stream].head;
+		blk = cache_get_pref_block(cache, stream, slot); //SLOT
 		if (blk->tag == tag && blk->state)
 			break;
 		if (blk->transient_tag == tag){
-			dir_lock = dir_pref_lock_get(mod->dir, stream, 0); //SLOT
+			dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
 			if (dir_lock->lock)
 				break;
 		}
@@ -316,18 +316,73 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_p
 	/* Miss */
 	if (stream==num_streams){
 		PTR_ASSIGN(pref_stream_ptr, -1);
+		PTR_ASSIGN(pref_slot_ptr, -1);
 		return 0;
 	}
 	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
 	 * així que no te sentit fer hit */
-	dir_lock = dir_pref_lock_get(mod->dir, stream, 0); //SLOT
+	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
 	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
 		PTR_ASSIGN(pref_stream_ptr, -1);
+		PTR_ASSIGN(pref_slot_ptr, -1);
 		return 0;
 	}
 	
 	/* Hit */
 	PTR_ASSIGN(pref_stream_ptr, stream);	
+	PTR_ASSIGN(pref_slot_ptr, slot);
+	return 1;
+}
+
+/* Look for a block in prefetch buffer.
+ * The function returns TRUE on hit, FALSE on miss. */
+int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr) 
+{
+	struct cache_t *cache = mod->cache;
+	struct stream_block_t *blk;
+	struct dir_lock_t *dir_lock;
+	struct stream_buffer_t* sb;
+	int tag = addr & ~cache->block_mask;
+	int stream, slot;
+	int num_streams = cache->prefetch.num_streams;
+
+	for(stream=0; stream < num_streams; stream++){
+		sb = &cache->prefetch.streams[stream];
+		assert(!sb->head);
+		for(slot = sb->head; slot < sb->head + sb->count; slot++){
+			blk = cache_get_pref_block(cache, stream, slot); //SLOT
+			if (blk->tag == tag && blk->state)
+				break;
+			if (blk->transient_tag == tag){
+				dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
+				if (dir_lock->lock)
+					break;
+			}
+		}
+		if(slot != sb->head + sb->count){ /* Hit */
+			assert(sb->count);
+			break;
+		}
+	}
+
+	/* Miss */
+	if (stream==num_streams){
+		PTR_ASSIGN(pref_stream_ptr, -1);
+		PTR_ASSIGN(pref_slot_ptr, -1);
+		return 0;
+	}
+	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
+	 * així que no te sentit fer hit */
+	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
+	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
+		PTR_ASSIGN(pref_stream_ptr, -1);
+		PTR_ASSIGN(pref_slot_ptr, -1);
+		return 0;
+	}
+	
+	/* Hit */
+	PTR_ASSIGN(pref_stream_ptr, stream);	
+	PTR_ASSIGN(pref_slot_ptr, slot);
 	return 1;
 }
 

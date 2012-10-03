@@ -607,9 +607,10 @@ int mod_can_access(struct mod_t *mod, unsigned int addr);
 
 int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr, int *way_ptr, 
 	int *tag_ptr, int *state_ptr);
-int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_slot_ptr); 
+int mod_find_pref_block_up_down(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr); 
+int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr); 
 
-				void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event);
+void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event);
 void mod_unlock_port(struct mod_t *mod, struct mod_port_t *port,
 	struct mod_stack_t *stack);
 
