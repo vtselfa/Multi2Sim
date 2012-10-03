@@ -171,7 +171,7 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	struct cache_t *cache;
 	struct cache_block_t *block;
 	struct stream_buffer_t *sb;
-	unsigned int set, way, stream;
+	unsigned int set, way, stream, slot;
 
 	/* Create cache */
 	cache = calloc(1, sizeof(struct cache_t));
@@ -216,8 +216,11 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	for (stream = 0; stream < num_streams; stream++){
 		sb = &cache->prefetch.streams[stream];
 		sb->stream = stream;
+		sb->num_slots = pref_aggr;
 		sb->stream_prev = stream ? &cache->prefetch.streams[stream-1] : NULL;
 		sb->stream_next = stream<num_streams-1 ? &cache->prefetch.streams[stream+1] : NULL;
+		for(slot = 0; slot < pref_aggr; slot++)
+			sb->blocks[slot].slot = slot;
 	}
 
 	/* Create array of sets */

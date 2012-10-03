@@ -222,6 +222,7 @@ struct cache_set_t
 
 struct stream_block_t
 {
+	int slot;
 	int tag;
 	int transient_tag;
 	enum cache_block_state_t state;
@@ -229,10 +230,15 @@ struct stream_block_t
 
 struct stream_buffer_t
 {
+	int stream;
 	struct stream_buffer_t *stream_next;
 	struct stream_buffer_t *stream_prev;
-	int stream;
 	struct stream_block_t *blocks;
+	
+	int num_slots;
+	int count;
+	int head;
+
 };
 
 struct cache_t
