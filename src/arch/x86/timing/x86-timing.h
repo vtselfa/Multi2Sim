@@ -194,6 +194,8 @@ struct x86_uop_t
 	//Pref
 	int prefetch;
 	struct mod_t *pref_mod;
+	int stream; //Destination stream
+	int seq_num; //Sequence number
 };
 
 struct x86_uop_t *x86_uop_create(void);

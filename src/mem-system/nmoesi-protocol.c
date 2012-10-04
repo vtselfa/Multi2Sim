@@ -123,16 +123,21 @@ int must_enqueue_prefetch(struct mod_stack_t *stack)
 		return 0;
 }
 
-void enqueue_prefetch(struct mod_stack_t *stack, unsigned int addr, int num_blocks)
+void enqueue_prefetch(struct mod_stack_t *stack, unsigned int base_addr, int num_blocks)
 {
-	struct x86_uop_t * pref = x86_uop_create();
-	pref->phy_addr = addr; 
-	pref->prefetch = 1;
-	pref->core = stack->core;
-	pref->thread = stack->thread;
-	pref->flags = X86_UINST_MEM;
-	linked_list_out(stack->mod->pq);
-	linked_list_insert(stack->mod->pq, pref);
+	int i;
+	for(i=0; i<num_blocks; i++){
+		struct x86_uop_t * pref = x86_uop_create();
+		pref->phy_addr = base_addr + i * stack->mod->block_size; 
+		pref->prefetch = 1;
+		pref->core = stack->core;
+		pref->thread = stack->thread;
+		pref->flags = X86_UINST_MEM;
+		pref->stream = stack->pref_stream; //Destination stream
+		pref->seq_num = i; //Sequence number 
+		linked_list_out(stack->mod->pq);
+		linked_list_insert(stack->mod->pq, pref);
+	}
 }
 
 
@@ -1070,7 +1075,6 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 				int pref_stream, pref_slot;
 				int prefetch_hit = mod_find_pref_block_down_up(mod, stack->addr, &pref_stream, &pref_slot);
 			
-				printf("%d %d\n", stack->prefetch_hit, prefetch_hit);
 				assert(stack->prefetch_hit == -prefetch_hit);
 				assert(stack->pref_stream == pref_stream);
 				assert(stack->pref_slot == pref_slot);

@@ -399,7 +399,7 @@ void cache_access_stream(struct cache_t *cache, int stream)
 
 	//Integrity tests
 	assert(stream >= 0 && stream < cache->prefetch.num_streams);
-#ifndef NDEBUG
+	#ifndef NDEBUG
 	for(accessed = cache->prefetch.stream_head;
 		accessed->stream_next;
 		accessed = accessed->stream_next){};
@@ -407,7 +407,7 @@ void cache_access_stream(struct cache_t *cache, int stream)
 	for(accessed = cache->prefetch.stream_tail;
 		accessed->stream_prev;
 		accessed = accessed->stream_prev){};
-#endif
+	#endif
 	assert(accessed == cache->prefetch.stream_head);
 
 	//Return if only one stream
@@ -438,13 +438,11 @@ void cache_access_stream(struct cache_t *cache, int stream)
 /* Return LRU or empty stream buffer */
 int cache_select_stream(struct cache_t *cache)
 {
-	/* Try to find an empty stream in the LRU order */
-	struct stream_buffer_t *stream;
-	for (stream = cache->prefetch.stream_tail; stream; stream = stream->stream_prev)
-		if (!stream->blocks[0].state) //SLOT
-				return stream->stream;
-	/* LRU */
-	return cache->prefetch.stream_tail->stream;
+	int s = cache->prefetch.stream_tail->stream;
+
+	/* Update LRU */
+	cache_access_stream(cache, s);
+	return s;
 }
 
 
