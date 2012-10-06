@@ -130,23 +130,60 @@ int must_enqueue_prefetch(struct mod_stack_t *stack, int level)
 		return 0;
 }
 
-void enqueue_prefetch(struct mod_stack_t *stack, int level, int num_blocks)
+void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int level)
 {
 	int i;
-
-	if(level == 1){
-		return;
-	}
-
-	for(i=1; i<=num_blocks; i++){
-		struct x86_uop_t * pref = x86_uop_create();
-		pref->phy_addr = stack->addr + i * stack->target_mod->block_size; 
+	int num_blocks;
+	struct mod_t *mod;
+	struct x86_uop_t * pref; 
+	
+	if(level == 1)
+		mod = stack->mod;
+	else
+		mod = stack->target_mod;
+	
+	num_blocks = mod->cache->prefetch.aggressivity;
+	for(i=0; i<num_blocks; i++){
+		pref = x86_uop_create();
+		pref->phy_addr = stack->addr + (i+1) * mod->block_size; 
 		pref->prefetch = 1;
 		pref->core = stack->core;
 		pref->thread = stack->thread;
 		pref->flags = X86_UINST_MEM;
+		pref->pref_mod = mod;
 		pref->stream = stack->pref_stream; //Destination stream
 		pref->seq_num = i; //Sequence number 
+		if(level == 1){
+			x86_pq_insert(pref);
+		} else {
+			linked_list_out(stack->target_mod->pq);
+			linked_list_insert(stack->target_mod->pq, pref);
+		}
+	}
+}
+
+void enqueue_prefetch_on_hit(struct mod_stack_t *stack, int level)
+{
+	struct mod_t *mod;
+	struct x86_uop_t * pref; 
+	
+	if(level == 1)
+		mod = stack->mod;
+	else
+		mod = stack->target_mod;
+
+	pref = x86_uop_create();
+	pref->phy_addr = stack->addr + mod->block_size * mod->cache->prefetch.aggressivity; 
+	pref->prefetch = 1;
+	pref->core = stack->core;
+	pref->thread = stack->thread;
+	pref->flags = X86_UINST_MEM;
+	pref->pref_mod = mod;
+	pref->stream = stack->pref_stream; //Destination stream
+	pref->seq_num = -1; //Sequence number 
+	if(level == 1){
+		x86_pq_insert(pref);
+	} else {
 		linked_list_out(stack->target_mod->pq);
 		linked_list_insert(stack->target_mod->pq, pref);
 	}
@@ -468,18 +505,16 @@ void mod_handler_nmoesi_load(int event, void *data)
 			esim_schedule_event(EV_MOD_NMOESI_LOAD_UNLOCK, stack, 0);
 			return;
 		}
-		
-		/* Enqueue prefetch(es) on miss */
-		if(must_enqueue_prefetch(stack, mod->level))
-		{
-			struct x86_uop_t * pref = x86_uop_create();
-			pref->phy_addr = stack->addr + mod->block_size;
-			pref->prefetch = 1;
-			pref->core = stack->core;
-			pref->thread = stack->thread;
-			pref->flags = X86_UINST_MEM;
-			pref->pref_mod = mod;
-			x86_pq_insert(pref);
+
+		/* Enqueue prefetch(es) on cache miss */
+		if(!stack->state && must_enqueue_prefetch(stack, mod->level)){
+			if(stack->prefetch_hit){
+				/* We only have to prefetch one block and put it on the tail of the buffer */
+				enqueue_prefetch_on_hit(stack, mod->level);
+			} else { 
+				/* We have to fill all the stream buffer */
+				enqueue_prefetch_on_miss(stack, mod->level);
+			}
 		}
 
 		/* Prefetch hit */
@@ -2133,14 +2168,14 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 			return;
 		}
 
-		/* Enqueue prefetch(es) on miss */
+		/* Enqueue prefetch(es) on cache miss */
 		if(!stack->state && must_enqueue_prefetch(stack, target_mod->level)){
 			if(stack->prefetch_hit){
 				/* We only have to prefetch one block and put it on the tail of the buffer */
-				enqueue_prefetch(stack, target_mod->level, 1);
+				enqueue_prefetch_on_hit(stack, target_mod->level);
 			} else { 
 				/* We have to fill all the stream buffer */
-				enqueue_prefetch(stack, target_mod->level, target_mod->cache->prefetch.aggressivity);
+				enqueue_prefetch_on_miss(stack, target_mod->level);
 			}
 		}
 
