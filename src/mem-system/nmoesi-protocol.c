@@ -1327,10 +1327,6 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 
 	assert(stack->request_dir);
 	
-	//True if prefetching, destination of block is mod and we are going up down. 
-	int prefetching_here = stack->prefetch == mod->level &&
-		stack->request_dir==mod_request_up_down;
-
 	if (event == EV_MOD_NMOESI_FIND_AND_LOCK)
 	{
 		fprintf(stderr,"  %lld %lld 0x%x %s find and lock (blocking=%d)\n",
@@ -1440,32 +1436,8 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 		}
 		assert(stack->way >= 0);
 		
-		/* TOASK: Hit (o prefetch_hit) fent prefetch retorna sense fer lock al dir? */
-		if(prefetching_here && (stack->hit || stack->prefetch_hit))
-		{
-			ret->hit = stack->hit;
-			ret->prefetch_hit = stack->prefetch_hit;
-			mod_unlock_port(mod, port, stack);
-			mod_stack_return(stack);
-			return;
-		}
-
-		/* If prefetching select prefetch slot for the new block */
-		if(prefetching_here)
-		{
-			/*stack->pref_stream = mod->cache->fifo;
-			mod->cache->fifo++;
-			mod->cache->fifo%=mod->cache->prefetch.num_streams;*/
-			stack->pref_stream = cache_select_stream(cache);
-			struct stream_buffer_t* sb = &cache->prefetch.streams[stack->pref_stream];
-			stack->pref_slot = sb->head; //Açò és temporal...
-			fprintf(stderr,"    %lld 0x%x %s lru: stream=%d, slot=%d, state=%s\n",
-				stack->id, stack->tag, mod->name, stack->pref_stream, stack->pref_slot,
-				map_value(&cache_block_state_map, stack->state));
-		}
-
 		/* If prefetching or prefetch hit lock prefetch entry */
-		if(prefetching_here || stack->prefetch_hit)
+		if(stack->prefetch_hit)
 		{
 			dir_lock = dir_pref_lock_get(mod->dir, stack->pref_stream, 0); //SLOT
 			if (dir_lock->lock && !stack->blocking)
@@ -1494,9 +1466,8 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 			}
 		}
 
-		/* If not prefetching and ( cache hit or is a up_down request ) lock cache entry */
-		if( !prefetching_here &&
-			(stack->hit || stack->request_dir == mod_request_up_down) ) 
+		/* If cache hit or is a up_down request lock cache entry */
+		if(stack->hit || stack->request_dir == mod_request_up_down ) 
 		{
 			dir_lock = dir_lock_get(mod->dir, stack->set, stack->way);
 			if (dir_lock->lock && !stack->blocking)
@@ -1520,7 +1491,7 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 
 
 		/* Miss */
-		if (!stack->hit && !prefetching_here) //TODO: down up
+		if (!stack->hit) //TODO: down up
 		{
 			/* Get victim */
 			cache_get_block(mod->cache, stack->set, stack->way, NULL, &stack->state);
@@ -1535,7 +1506,7 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 		/* Entry is locked. Record the transient tag so that a subsequent lookup
 		 * detects that the block is being brought.
 		 * Also, update LRU counters here. */
-		if(!prefetching_here && stack->request_dir == mod_request_up_down) //VVV
+		if(stack->request_dir == mod_request_up_down) //VVV
 		{
 			cache_set_transient_tag(mod->cache, stack->set, stack->way, stack->tag);
 			cache_access_block(mod->cache, stack->set, stack->way);
@@ -1548,20 +1519,7 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 				block->transient_tag = cache_block_invalid;
 			}
 		}
-		if(prefetching_here)
-		{
-			struct stream_block_t *block =
-				cache_get_pref_block(cache, stack->pref_stream, 0); //SLOT
-			block->transient_tag = stack->tag;
-
-			/* Increment counter of buffered blocks */
-			if(!block->state) /* ...but only if we are not replacing a block */
-				mod->cache->prefetch.streams[stack->pref_stream].count++; //COUNT
-
-			//Update LRU stream
-			cache_access_stream(mod->cache, stack->pref_stream);
-		}
-
+		
 		/* Access latency */
 		esim_schedule_event(EV_MOD_NMOESI_FIND_AND_LOCK_ACTION, stack, mod->latency);
 		return;
@@ -1582,7 +1540,6 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 
 		/* Eviction */
 		if (!stack->hit && stack->state && //Valid block
-			!prefetching_here && //Not prefetching
 			stack->request_dir == mod_request_up_down) //Up down request
 		{
 			assert(stack->request_dir == mod_request_up_down);
@@ -1595,27 +1552,6 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 			esim_schedule_event(EV_MOD_NMOESI_EVICT, new_stack, 0);
 			return;
 		}
-		
-		/* Prefetch buffer slot eviction */
-		if(prefetching_here)
-		{
-			struct stream_block_t *block =
-					cache_get_pref_block(cache, stack->pref_stream, 0); //SLOT
-			if(block->state){
-				assert(stack->request_dir == mod_request_up_down);
-				assert(!stack->hit && !stack->prefetch_hit);
-
-				stack->pref_eviction = 1;
-				new_stack = mod_stack_create(stack->id, mod, 0,
-					EV_MOD_NMOESI_FIND_AND_LOCK_FINISH, stack,stack->core,
-					stack->thread, stack->prefetch);
-				new_stack->pref_stream = stack->pref_stream;
-				new_stack->pref_slot = stack->pref_slot;
-				esim_schedule_event(EV_MOD_NMOESI_PREF_EVICT, new_stack, 0);
-				return;
-			}
-		}
-
 
 		/* Continue */
 		esim_schedule_event(EV_MOD_NMOESI_FIND_AND_LOCK_FINISH, stack, 0);
@@ -1630,32 +1566,16 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 			stack->id, mod->name);
 
 		/* If evict produced err, return err */
-		if (stack->err)
+		if (stack->err && stack->eviction)
 		{
-			if(stack->eviction)
-			{
-				cache_get_block(mod->cache, stack->set, stack->way, NULL, &stack->state);
-				assert(stack->state);
-				ret->err = 1;
-				dir_entry_unlock(mod->dir, stack->set, stack->way);
-				mod_stack_return(stack);
-				return;
-			}
-			else if(stack->pref_eviction)
-			{
-				cache_get_pref_block_data(mod->cache, stack->pref_stream,
-					0, NULL, &stack->state); //SLOT
-				assert(stack->state);
-				ret->err = 1;
-				dir_pref_entry_unlock(mod->dir, stack->pref_stream, 0); //SLOT
-				mod_stack_return(stack);
-				return;
-			}
-			else
-			{
-				fatal("stack->error not caused by eviction\n");
-			}
+			cache_get_block(mod->cache, stack->set, stack->way, NULL, &stack->state);
+			assert(stack->state);
+			ret->err = 1;
+			dir_entry_unlock(mod->dir, stack->set, stack->way);
+			mod_stack_return(stack);
+			return;
 		}
+		assert(!stack->err);
 
 		/* Eviction */
 		if (stack->eviction)
@@ -1665,14 +1585,6 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 			assert(!stack->state);
 		}
 		
-		if(stack->pref_eviction)
-		{
-			//mod->evictions++;
-			cache_get_pref_block_data(mod->cache, stack->pref_stream,
-				0, NULL, &stack->state);
-			assert(!stack->state);
-		}
-
 		/* If this is a main memory, the block is here. A previous miss was just a miss
 		 * in the directory. */
 		if (mod->kind == mod_kind_main_memory && !stack->state)
