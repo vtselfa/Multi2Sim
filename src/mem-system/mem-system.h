@@ -685,6 +685,11 @@ extern int EV_MOD_NMOESI_FIND_AND_LOCK_PORT;
 extern int EV_MOD_NMOESI_FIND_AND_LOCK_ACTION;
 extern int EV_MOD_NMOESI_FIND_AND_LOCK_FINISH;
 
+extern int EV_MOD_NMOESI_PREF_FIND_AND_LOCK;
+extern int EV_MOD_NMOESI_PREF_FIND_AND_LOCK_PORT;
+extern int EV_MOD_NMOESI_PREF_FIND_AND_LOCK_ACTION;
+extern int EV_MOD_NMOESI_PREF_FIND_AND_LOCK_FINISH;
+
 extern int EV_MOD_NMOESI_EVICT;
 extern int EV_MOD_NMOESI_EVICT_INVALID;
 extern int EV_MOD_NMOESI_EVICT_ACTION;
@@ -890,6 +895,7 @@ void mod_stack_wakeup_stack(struct mod_stack_t *master_stack);
 
 /* NMOESI */
 void mod_handler_nmoesi_find_and_lock(int event, void *data);
+void mod_handler_nmoesi_pref_find_and_lock(int event, void *data);
 void mod_handler_nmoesi_load(int event, void *data);
 void mod_handler_nmoesi_store(int event, void *data);
 void mod_handler_nmoesi_nc_store(int event, void *data);
@@ -899,8 +905,8 @@ void mod_handler_nmoesi_write_request(int event, void *data);
 void mod_handler_nmoesi_read_request(int event, void *data);
 void mod_handler_nmoesi_invalidate(int event, void *data);
 void mod_handler_nmoesi_peer(int event, void *data);
-
 void mod_handler_pref(int event, void *data);
+
 /* Local memory */
 void mod_handler_local_mem_load(int event, void *data);
 void mod_handler_local_mem_store(int event, void *data);

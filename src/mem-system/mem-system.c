@@ -85,6 +85,16 @@ void mem_system_init(void)
 	EV_MOD_NMOESI_FIND_AND_LOCK_PORT = esim_register_event_with_name(mod_handler_nmoesi_find_and_lock, "mod_nmoesi_find_and_lock_port");
 	EV_MOD_NMOESI_FIND_AND_LOCK_ACTION = esim_register_event_with_name(mod_handler_nmoesi_find_and_lock, "mod_nmoesi_find_and_lock_action");
 	EV_MOD_NMOESI_FIND_AND_LOCK_FINISH = esim_register_event_with_name(mod_handler_nmoesi_find_and_lock, "mod_nmoesi_find_and_lock_finish");
+	
+	EV_MOD_NMOESI_PREF_FIND_AND_LOCK = esim_register_event_with_name(
+		mod_handler_nmoesi_pref_find_and_lock, "mod_nmoesi_pref_find_and_lock");
+	EV_MOD_NMOESI_PREF_FIND_AND_LOCK_PORT = esim_register_event_with_name(
+		mod_handler_nmoesi_pref_find_and_lock, "mod_nmoesi_pref_find_and_lock_port");
+	EV_MOD_NMOESI_PREF_FIND_AND_LOCK_ACTION = esim_register_event_with_name(
+		mod_handler_nmoesi_pref_find_and_lock, "mod_nmoesi_pref_find_and_lock_action");
+	EV_MOD_NMOESI_PREF_FIND_AND_LOCK_FINISH = esim_register_event_with_name(
+		mod_handler_nmoesi_pref_find_and_lock, "mod_nmoesi_pref_find_and_lock_finish");
+
 
 	EV_MOD_NMOESI_EVICT = esim_register_event_with_name(mod_handler_nmoesi_evict, "mod_nmoesi_evict");
 	EV_MOD_NMOESI_EVICT_INVALID = esim_register_event_with_name(mod_handler_nmoesi_evict, "mod_nmoesi_evict_invalid");
