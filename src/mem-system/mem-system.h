@@ -779,6 +779,7 @@ enum ack_types
 
 struct mod_stack_pref_group_t{
 	long long id;
+	int ref_count; /* Reference counter */
 	int num_prefetches; /* Number of remaining prefetches */
 	int dest_stream; /* Group's destination stream */
 };
@@ -905,6 +906,7 @@ struct mod_stack_t
 extern long long mod_stack_id;
 
 struct mod_stack_pref_group_t *mod_stack_pref_group_create(int num_prefetches);
+void mod_stack_pref_group_free(struct mod_stack_pref_group_t *group);
 
 struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	unsigned int addr, int ret_event, void *ret_stack, int core, int thread, int prefetch);

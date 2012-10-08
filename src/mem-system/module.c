@@ -95,15 +95,8 @@ void mod_free(struct mod_t *mod)
 		/* Free all the uops and pref_groups associated (if any) 
 		 * remaining in the queue */
 		struct x86_uop_t * uop = linked_list_get(pq);
-		if(uop->prefetch && uop->pref_kind == GROUP){
-			assert(uop->pref_data.on_miss.group->num_prefetches > 0);
-			if(uop->pref_data.on_miss.group->num_prefetches > 0){
-				fprintf(stderr,"Destroyed group %lld \n", uop->pref_data.on_miss.group->id);
-				free(uop->pref_data.on_miss.group);
-			}
-		}
 		linked_list_remove(pq);
-		free(uop);
+		x86_uop_free_if_not_queued(uop);
 	}
 	linked_list_free(mod->pq);
 
@@ -143,6 +136,8 @@ long long mod_access(struct mod_t *mod, enum mod_access_kind_t access_kind,
 	if(uop && uop->prefetch){
 		stack->pref_kind = uop->pref_kind;
 		stack->pref_data = uop->pref_data;
+		if(stack->pref_kind == GROUP)
+			stack->pref_data.on_miss.group->ref_count++;
 	}
 
 	/* Initialize */
@@ -849,13 +844,9 @@ void mod_stack_return(struct mod_stack_t *stack)
 
 	//printf("Destroyed stack=%lld\n", stack->id);
 
-	if(stack->prefetch && stack->pref_kind == GROUP){
-		stack->pref_data.on_miss.group->num_prefetches--;
-		if(!stack->pref_data.on_miss.group->num_prefetches){
-			fprintf(stderr,"Destroyed group %lld \n", stack->pref_data.on_miss.group->id);
-			free(stack->pref_data.on_miss.group);
-		}
-	}
+	/* Reference counted free of pref_block */
+	if(stack->prefetch && stack->pref_kind == GROUP)
+		mod_stack_pref_group_free(stack->pref_data.on_miss.group);
 
 	/* Free */
 	free(stack);
@@ -874,12 +865,23 @@ struct mod_stack_pref_group_t *mod_stack_pref_group_create(int num_prefetches)
 	group->id = ++mod_stack_pref_group_id;
 	group->num_prefetches = num_prefetches;
 	group->dest_stream = -1;
+	group->ref_count = 1;
 
 	fprintf(stderr,"Created group %lld \n", group->id);
 
 	return group;
 }
 
+/* Free pref group */
+void mod_stack_pref_group_free(struct mod_stack_pref_group_t *group)
+{
+	group->ref_count--;
+	assert(group->ref_count >= 0);
+	if(!group->ref_count){
+		fprintf(stderr,"Destroyed group %lld \n", group->id);
+		free(group);
+	}
+}
 
 /* Enqueue access in module wait list. */
 void mod_stack_wait_in_mod(struct mod_stack_t *stack,
