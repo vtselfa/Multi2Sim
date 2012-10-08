@@ -342,7 +342,14 @@ void x86_lsq_done()
 			uop = linked_list_get(pq);
 			uop->in_lq = 0;
 			linked_list_remove(pq);
-			x86_uop_free_if_not_queued(uop);
+			if(uop->prefetch && uop->pref_kind == GROUP){
+				assert(uop->pref_data.on_miss.group->num_prefetches > 0);
+				if(uop->pref_data.on_miss.group->num_prefetches > 0){
+					fprintf(stderr,"Destroyed group %lld \n", uop->pref_data.on_miss.group->id);
+					free(uop->pref_data.on_miss.group);
+				}
+			}	
+			free(uop);
 		}
 		linked_list_free(pq);
 	}

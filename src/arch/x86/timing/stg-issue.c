@@ -142,31 +142,31 @@ static int x86_cpu_issue_lq(int core, int thread, int quant)
 static int x86_cpu_issue_pq(int core, int thread, int quant)
 {
 	struct linked_list_t *pq = X86_THREAD.pq;
-	struct x86_uop_t *pref;
+	struct x86_uop_t *uop;
     
     /* Process pq */
 	linked_list_head(pq);
 	while (!linked_list_is_end(pq) && quant)
 	{
 		/* Get element from prefetch queue */
-		pref = linked_list_get(pq);
+		uop = linked_list_get(pq);
 
-		pref->ready = 1;
+		uop->ready = 1;
 		
 		/* Prefetch block from instructions cache module */
 		/* Check that memory system is accessible */
-		if (!mod_can_access(pref->pref_mod, pref->phy_addr))
+		if (!mod_can_access(uop->pref_mod, uop->phy_addr))
 		{
 			linked_list_next(pq);
 			continue;
 		}
 		
 		/* Access memory system */
-		mod_access(pref->pref_mod, mod_access_prefetch, pref->phy_addr,
-		NULL, X86_CORE.event_queue, pref, core, thread, 1);
+		mod_access(uop->pref_mod, mod_access_prefetch, uop->phy_addr,
+		NULL, X86_CORE.event_queue, uop, core, thread, 1);
 
 		/* Statistics */
-		pref->pref_mod->programmed_prefetches++;
+		uop->pref_mod->programmed_prefetches++;
 		
 		/* Remove from pref queue */
 		x86_pq_remove(core, thread);
@@ -174,15 +174,15 @@ static int x86_cpu_issue_pq(int core, int thread, int quant)
 		/* The cache system will place the prefectch at the head of the
 		 * event queue when it is ready. For now, mark "in_event_queue" to
 		 * prevent the uop from being freed. */
-		pref->in_event_queue = 1;
-		pref->issued = 1;
-		pref->issue_when = x86_cpu->cycle;
+		uop->in_event_queue = 1;
+		uop->issued = 1;
+		uop->issue_when = x86_cpu->cycle;
 		
 		quant--;
 		
 		/* MMU statistics */
 		if (*mmu_report_file_name)
-			mmu_access_page(pref->phy_addr, mmu_access_read);
+			mmu_access_page(uop->phy_addr, mmu_access_read);
 	}
 	
 	return quant;
@@ -192,7 +192,7 @@ static int x86_cpu_issue_pq(int core, int thread, int quant)
 static int x86_cpu_issue_l2pq(int core, int thread, int quant)
 {
 	struct linked_list_t *l2mods = X86_THREAD.data_mod->low_mod_list;
-	struct x86_uop_t *pref;
+	struct x86_uop_t *uop;
     
 	/* Process all L2 modules below L1 */
 	linked_list_head(l2mods);
@@ -206,22 +206,22 @@ static int x86_cpu_issue_l2pq(int core, int thread, int quant)
 		while (!linked_list_is_end(pq))
 		{
 			/* Get element from prefetch queue */
-			pref = linked_list_get(pq);
+			uop = linked_list_get(pq);
 
-			pref->ready = 1;
+			uop->ready = 1;
 		
-			assert(pref->prefetch);
+			assert(uop->prefetch);
 
 			/* Check that memory system is accessible */
-			if (!mod_can_access(l2mod, pref->phy_addr))
+			if (!mod_can_access(l2mod, uop->phy_addr))
 			{
 				linked_list_next(pq);
 				continue;
 			}
 			
 			/* Access memory system */
-			mod_access(l2mod, mod_access_prefetch, pref->phy_addr,
-				NULL, X86_CORE.event_queue, pref, core, thread, 1); 
+			mod_access(l2mod, mod_access_prefetch, uop->phy_addr,
+				NULL, X86_CORE.event_queue, uop, core, thread, 1); 
 			
 			/* Statistics */
 			l2mod->programmed_prefetches++;
@@ -232,15 +232,15 @@ static int x86_cpu_issue_l2pq(int core, int thread, int quant)
 			/* The cache system will place the prefectch at the head of the
 			 * event queue when it is ready. For now, mark "in_event_queue" to
 			 * prevent the uop from being freed. */
-			pref->in_event_queue = 1;
-			pref->issued = 1;
-			pref->issue_when = x86_cpu->cycle;
+			uop->in_event_queue = 1;
+			uop->issued = 1;
+			uop->issue_when = x86_cpu->cycle;
 		
 			//quant--;
 		
 			/* MMU statistics */
 			if (*mmu_report_file_name)
-				mmu_access_page(pref->phy_addr, mmu_access_read);
+				mmu_access_page(uop->phy_addr, mmu_access_read);
 		}
 		linked_list_next(l2mods);
 	}

@@ -71,7 +71,7 @@ static void x86_cpu_writeback_core(int core)
 
 		/* Writeback */
 		uop->completed = 1;
-		if (uop->prefetch==0)
+		if (!uop->prefetch)
 			x86_reg_file_write(uop);
 		X86_CORE.reg_file_int_writes += uop->ph_int_odep_count;
 		X86_CORE.reg_file_fp_writes += uop->ph_fp_odep_count;

@@ -35,7 +35,6 @@ struct x86_uop_t *x86_uop_create(void)
 	/* Initialize */
 	uop->magic = UOP_MAGIC;
 
-	uop->prefetch=0;
 	/* Return */
 	return uop;
 }
@@ -50,7 +49,7 @@ void x86_uop_free_if_not_queued(struct x86_uop_t *uop)
 		uop->in_uop_trace_list)
 	{
 		return;
-	}
+	}	
 
 	/* Free */
 	uop->magic = 0;

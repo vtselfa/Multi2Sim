@@ -191,11 +191,11 @@ struct x86_uop_t
 	int twolevel_bht_index, twolevel_pht_row, twolevel_pht_col, twolevel_pred;
 	int choice_index, choice_pred;
 	
-	//Pref
-	int prefetch;
+	//Prefetch
+	int prefetch : 1;
+	enum pref_kind_t pref_kind;
 	struct mod_t *pref_mod;
-	int stream; //Destination stream
-	int seq_num; //Sequence number
+	union pref_data_t pref_data;
 };
 
 struct x86_uop_t *x86_uop_create(void);

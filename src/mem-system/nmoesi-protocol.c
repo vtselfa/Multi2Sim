@@ -137,32 +137,35 @@ int must_enqueue_prefetch(struct mod_stack_t *stack, int level)
 
 void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int level)
 {
-	int i;
-	int num_blocks;
+	int i, num_prefetches;
 	struct mod_t *mod;
-	struct x86_uop_t * pref; 
-	
+	struct x86_uop_t * uop; 
+	struct mod_stack_pref_group_t *pref_group;
+
 	if(level == 1)
 		mod = stack->mod;
 	else
 		mod = stack->target_mod;
 	
-	num_blocks = mod->cache->prefetch.aggressivity;
-	for(i=0; i<num_blocks; i++){
-		pref = x86_uop_create();
-		pref->phy_addr = stack->addr + (i+1) * mod->block_size; 
-		pref->prefetch = 1;
-		pref->core = stack->core;
-		pref->thread = stack->thread;
-		pref->flags = X86_UINST_MEM;
-		pref->pref_mod = mod;
-		pref->stream = stack->pref_stream; //Destination stream
-		pref->seq_num = i; //Sequence number 
+	num_prefetches = mod->cache->prefetch.aggressivity;
+	pref_group = mod_stack_pref_group_create(num_prefetches);
+	
+	for(i=0; i<num_prefetches; i++){
+		uop = x86_uop_create();
+		uop->phy_addr = stack->addr + (i+1) * mod->block_size; 
+		uop->prefetch = 1;
+		uop->core = stack->core;
+		uop->thread = stack->thread;
+		uop->flags = X86_UINST_MEM;
+		uop->pref_mod = mod;
+		uop->pref_kind = GROUP;
+		uop->pref_data.on_miss.group = pref_group;
+		uop->pref_data.on_miss.seq_num = i; 
 		if(level == 1){
-			x86_pq_insert(pref);
+			x86_pq_insert(uop);
 		} else {
 			linked_list_out(stack->target_mod->pq);
-			linked_list_insert(stack->target_mod->pq, pref);
+			linked_list_insert(stack->target_mod->pq, uop);
 		}
 	}
 }
@@ -170,27 +173,27 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int level)
 void enqueue_prefetch_on_hit(struct mod_stack_t *stack, int level)
 {
 	struct mod_t *mod;
-	struct x86_uop_t * pref; 
+	struct x86_uop_t *uop; 
 	
 	if(level == 1)
 		mod = stack->mod;
 	else
 		mod = stack->target_mod;
 
-	pref = x86_uop_create();
-	pref->phy_addr = stack->addr + mod->block_size * mod->cache->prefetch.aggressivity; 
-	pref->prefetch = 1;
-	pref->core = stack->core;
-	pref->thread = stack->thread;
-	pref->flags = X86_UINST_MEM;
-	pref->pref_mod = mod;
-	pref->stream = stack->pref_stream; //Destination stream
-	pref->seq_num = -1; //Sequence number 
+	uop = x86_uop_create();
+	uop->phy_addr = stack->addr + mod->block_size * mod->cache->prefetch.aggressivity; 
+	uop->prefetch = 1;
+	uop->core = stack->core;
+	uop->thread = stack->thread;
+	uop->flags = X86_UINST_MEM;
+	uop->pref_mod = mod;
+	uop->pref_data.on_hit.dest_stream = stack->pref_stream; //Destination stream
+	uop->pref_kind = SINGLE;
 	if(level == 1){
-		x86_pq_insert(pref);
+		x86_pq_insert(uop);
 	} else {
 		linked_list_out(stack->target_mod->pq);
-		linked_list_insert(stack->target_mod->pq, pref);
+		linked_list_insert(stack->target_mod->pq, uop);
 	}
 }
 

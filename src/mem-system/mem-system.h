@@ -756,6 +756,9 @@ extern int EV_MOD_NMOESI_PEER_FINISH;
 /* Current identifier for stack */
 extern long long mod_stack_id;
 
+/* current identifier for pref_group */
+extern long long mod_stack_pref_group_id;
+
 /* Read/write request direction */
 enum mod_request_dir_t
 {
@@ -772,6 +775,27 @@ enum ack_types
 	reply_ACK_DATA,
 	reply_ACK_DATA_SENT_TO_PEER,
 	reply_ACK_ERROR
+};
+
+struct mod_stack_pref_group_t{
+	long long id;
+	int num_prefetches; /* Number of remaining prefetches */
+	int dest_stream; /* Group's destination stream */
+};
+
+enum pref_kind_t {INVALID=0, SINGLE, GROUP};
+
+union pref_data_t
+{
+	struct
+	{
+		int dest_stream;
+	} on_hit;
+	struct
+	{
+		int seq_num;
+		struct mod_stack_pref_group_t *group;
+	} on_miss;
 };
 
 /* Stack */
@@ -840,6 +864,9 @@ struct mod_stack_t
 	int prefetch_hit : 1;
 	int pref_stream; //VVV
 	int pref_slot; //VVV
+	
+	enum pref_kind_t pref_kind;
+	union pref_data_t pref_data;
 
 	/* Message sent through interconnect */
 	struct net_msg_t *msg;
@@ -876,6 +903,8 @@ struct mod_stack_t
 };
 
 extern long long mod_stack_id;
+
+struct mod_stack_pref_group_t *mod_stack_pref_group_create(int num_prefetches);
 
 struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	unsigned int addr, int ret_event, void *ret_stack, int core, int thread, int prefetch);

@@ -18,6 +18,7 @@
 
 
 #include <mem-system.h>
+#include <x86-timing.h>
 
 /* String map for access type */
 struct string_map_t mod_access_kind_map =
@@ -86,12 +87,21 @@ void mod_free(struct mod_t *mod)
 	linked_list_free(mod->low_mod_list);
 	linked_list_free(mod->high_mod_list);
 
-	/* L2 prefetch queue VVV*/
+	/* Free L2 prefetch queue */
 	struct linked_list_t *pq = mod->pq;
 	linked_list_head(pq);
 	while (linked_list_count(pq))
 	{
+		/* Free all the uops and pref_groups associated (if any) 
+		 * remaining in the queue */
 		struct x86_uop_t * uop = linked_list_get(pq);
+		if(uop->prefetch && uop->pref_kind == GROUP){
+			assert(uop->pref_data.on_miss.group->num_prefetches > 0);
+			if(uop->pref_data.on_miss.group->num_prefetches > 0){
+				fprintf(stderr,"Destroyed group %lld \n", uop->pref_data.on_miss.group->id);
+				free(uop->pref_data.on_miss.group);
+			}
+		}
 		linked_list_remove(pq);
 		free(uop);
 	}
@@ -121,12 +131,19 @@ long long mod_access(struct mod_t *mod, enum mod_access_kind_t access_kind,
 	void *event_queue_item, int core, int thread, int prefetch)
 {
 	struct mod_stack_t *stack;
+	struct x86_uop_t *uop = (struct x86_uop_t *) event_queue_item;
 	int event;
-
+	
 	/* Create module stack with new ID */
 	mod_stack_id++;
 	stack = mod_stack_create(mod_stack_id,
 		mod, addr, ESIM_EV_NONE, NULL, core, thread, prefetch);
+	
+	/* Pass prefetch parameters */
+	if(uop && uop->prefetch){
+		stack->pref_kind = uop->pref_kind;
+		stack->pref_data = uop->pref_data;
+	}
 
 	/* Initialize */
 	stack->witness_ptr = witness_ptr;
@@ -786,6 +803,7 @@ void mod_coalesce(struct mod_t *mod, struct mod_stack_t *master_stack,
  */
 
 long long mod_stack_id;
+long long mod_stack_pref_group_id;
 
 struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	unsigned int addr, int ret_event, void *ret_stack, int core, int thread, int prefetch)
@@ -831,10 +849,35 @@ void mod_stack_return(struct mod_stack_t *stack)
 
 	//printf("Destroyed stack=%lld\n", stack->id);
 
+	if(stack->prefetch && stack->pref_kind == GROUP){
+		stack->pref_data.on_miss.group->num_prefetches--;
+		if(!stack->pref_data.on_miss.group->num_prefetches){
+			fprintf(stderr,"Destroyed group %lld \n", stack->pref_data.on_miss.group->id);
+			free(stack->pref_data.on_miss.group);
+		}
+	}
+
 	/* Free */
 	free(stack);
 
 	esim_schedule_event(ret_event, ret_stack, 0);
+}
+
+
+/* Create pref group */
+struct mod_stack_pref_group_t *mod_stack_pref_group_create(int num_prefetches)
+{
+	struct mod_stack_pref_group_t *group;
+	group = calloc(1, sizeof(struct mod_stack_pref_group_t));
+	if (!group)
+		fatal("%s: out of memory", __FUNCTION__);
+	group->id = ++mod_stack_pref_group_id;
+	group->num_prefetches = num_prefetches;
+	group->dest_stream = -1;
+
+	fprintf(stderr,"Created group %lld \n", group->id);
+
+	return group;
 }
 
 
