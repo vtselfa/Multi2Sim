@@ -315,11 +315,11 @@ int mod_find_pref_block_up_down(struct mod_t *mod, unsigned int addr, int *pref_
 	int num_streams = cache->prefetch.num_streams;
 	for(stream=0; stream<num_streams; stream++){
 		slot = cache->prefetch.streams[stream].head;
-		blk = cache_get_pref_block(cache, stream, slot); //SLOT
+		blk = cache_get_pref_block(cache, stream, slot); //SLOT*
 		if (blk->tag == tag && blk->state)
 			break;
 		if (blk->transient_tag == tag){
-			dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
+			dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT*
 			if (dir_lock->lock)
 				break;
 		}
@@ -333,7 +333,7 @@ int mod_find_pref_block_up_down(struct mod_t *mod, unsigned int addr, int *pref_
 	}
 	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
 	 * així que no te sentit fer hit */
-	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
+	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT*
 	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
 		PTR_ASSIGN(pref_stream_ptr, -1);
 		PTR_ASSIGN(pref_slot_ptr, -1);
@@ -360,13 +360,12 @@ int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_
 
 	for(stream=0; stream < num_streams; stream++){
 		sb = &cache->prefetch.streams[stream];
-		assert(!sb->head);
 		for(slot = sb->head; slot < sb->head + sb->count; slot++){
-			blk = cache_get_pref_block(cache, stream, slot); //SLOT
+			blk = cache_get_pref_block(cache, stream, slot%sb->num_slots); //SLOT*
 			if (blk->tag == tag && blk->state)
 				break;
 			if (blk->transient_tag == tag){
-				dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
+				dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT*
 				if (dir_lock->lock)
 					break;
 			}
@@ -385,7 +384,7 @@ int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_
 	}
 	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
 	 * així que no te sentit fer hit */
-	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
+	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT*
 	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
 		PTR_ASSIGN(pref_stream_ptr, -1);
 		PTR_ASSIGN(pref_slot_ptr, -1);
@@ -432,7 +431,7 @@ void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event)
 	mod->num_locked_ports++;
 
 	/* Debug */
-	mem_debug("  %lld stack %lld %s port %d locked\n", esim_cycle, stack->id, mod->name, i);
+	fprintf(stderr,"  %lld stack %lld %s port %d locked (num_ports=%d locked=%d)\n", esim_cycle, stack->id, mod->name, i, mod->num_ports, mod->num_locked_ports);
 
 	/* Schedule event */
 	esim_schedule_event(event, stack, 0);
@@ -455,8 +454,8 @@ void mod_unlock_port(struct mod_t *mod, struct mod_port_t *port,
 	mod->num_locked_ports--;
 
 	/* Debug */
-	mem_debug("  %lld %lld %s port unlocked\n", esim_cycle,
-		stack->id, mod->name);
+	mem_debug("  %lld %lld %s port unlocked (num_ports=%d locked=%d)\n", esim_cycle,
+		stack->id, mod->name, mod->num_ports, mod->num_locked_ports);
 
 	/* Check if there was any access waiting for free port */
 	if (!mod->port_waiting_list_count)
@@ -826,6 +825,7 @@ struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	stack->set = -1;
 	stack->tag = -1;
 	stack->pref_stream = -1;
+	stack->pref_slot = -1;
 	
 	//printf("Created stack=%lld\n", stack->id);
 
