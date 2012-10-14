@@ -1386,17 +1386,13 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 		/* Look for block in prefetch stream buffers */
 		stack->prefetch_hit = 0;
 		if(!stack->hit && mod->prefetch_enabled){
-			//if(stack->request_dir == mod_request_up_down)
+			if(stack->request_dir == mod_request_up_down)
 				/* Look only in strem buffer's heads */
 				stack->prefetch_hit = mod_find_pref_block_up_down(mod, stack->addr, &stack->pref_stream, &stack->pref_slot);
-			//else
+			else
 				/* Look in all slots of stream buffers */
-				int pref_stream, pref_slot;
-				int prefetch_hit = mod_find_pref_block_down_up(mod, stack->addr, &pref_stream, &pref_slot);
+				stack->prefetch_hit = mod_find_pref_block_down_up(mod, stack->addr, &stack->pref_stream, &stack->pref_slot);
 			
-				assert(stack->prefetch_hit == -prefetch_hit);
-				assert(stack->pref_stream == pref_stream);
-				assert(stack->pref_slot == pref_slot);
 			if(stack->prefetch_hit)
 				fprintf(stderr,"    %lld 0x%x %s prefetch_hit=%d pref_stream=%d pref_slot=%d\n", stack->id, stack->tag, mod->name, stack->prefetch_hit, stack->pref_stream, stack->pref_slot);
 		}
