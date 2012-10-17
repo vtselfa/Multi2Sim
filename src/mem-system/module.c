@@ -360,12 +360,13 @@ int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_
 
 	for(stream=0; stream < num_streams; stream++){
 		sb = &cache->prefetch.streams[stream];
+		assert(sb->count <= cache->prefetch.aggressivity);
 		for(slot = sb->head; slot < sb->head + sb->count; slot++){
 			blk = cache_get_pref_block(cache, stream, slot%sb->num_slots); //SLOT*
 			if (blk->tag == tag && blk->state)
 				break;
 			if (blk->transient_tag == tag){
-				dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT*
+				dir_lock = dir_pref_lock_get(mod->dir, stream, slot%sb->num_slots); //SLOT*
 				if (dir_lock->lock)
 					break;
 			}
@@ -375,6 +376,9 @@ int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_
 			break;
 		}
 	}
+	
+	/* Correct slot */
+	slot = slot%sb->num_slots;
 
 	/* Miss */
 	if (stream==num_streams){
