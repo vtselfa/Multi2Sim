@@ -429,7 +429,8 @@ enum mod_access_kind_t
 	mod_access_load,
 	mod_access_store,
 	mod_access_nc_store,
-	mod_access_prefetch
+	mod_access_prefetch,
+	mod_access_invalidate
 };
 
 /* Module types */
@@ -667,6 +668,12 @@ extern int EV_MOD_NMOESI_LOAD_ACTION;
 extern int EV_MOD_NMOESI_LOAD_MISS;
 extern int EV_MOD_NMOESI_LOAD_UNLOCK;
 extern int EV_MOD_NMOESI_LOAD_FINISH;
+
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT;
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT_LOCK;
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT_ACTION;
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT_UNLOCK;
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT_FINISH;
 
 extern int EV_MOD_NMOESI_STORE;
 extern int EV_MOD_NMOESI_STORE_LOCK;
@@ -934,6 +941,7 @@ void mod_handler_nmoesi_store(int event, void *data);
 void mod_handler_nmoesi_nc_store(int event, void *data);
 void mod_handler_nmoesi_evict(int event, void *data);
 void mod_handler_nmoesi_pref_evict(int event, void *data);
+void mod_handler_nmoesi_invalidate_slot(int event, void *data);
 void mod_handler_nmoesi_write_request(int event, void *data);
 void mod_handler_nmoesi_read_request(int event, void *data);
 void mod_handler_nmoesi_invalidate(int event, void *data);

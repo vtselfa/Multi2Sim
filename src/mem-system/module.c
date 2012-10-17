@@ -681,7 +681,28 @@ struct mod_stack_t *mod_can_coalesce(struct mod_t *mod,
 	/* Coalesce depending on access kind */
 	switch (access_kind)
 	{
-
+	case mod_access_invalidate:
+	{
+		for (stack = tail; stack; stack = stack->access_list_prev)
+		{
+			if(stack->master_stack)
+					return NULL;
+			
+			/* Only return stack if it's older */	
+			if(older_than_stack->id >= stack->id)
+				return NULL;
+			
+			/* Destination module must be the same */
+			if(stack->mod != older_than_stack->mod)
+				continue;
+			
+			/* We don't really want to coalesce, only if there is a younger access */
+			if (stack->addr >> mod->log_block_size ==
+				addr >> mod->log_block_size)
+				return stack->master_stack ? stack->master_stack : stack;
+		}
+		break;
+	}
 	case mod_access_load:
 	case mod_access_prefetch:
 	{
