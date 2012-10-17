@@ -870,8 +870,9 @@ struct mod_stack_t
 	int retry : 1;
 	int coalesced : 1;
 	int port_locked : 1;
-	int prefetch; //VVV
 	int prefetch_hit : 1;
+	int sequential_hit : 1;
+	int prefetch; //VVV
 	int pref_stream; //VVV
 	int pref_slot; //VVV
 	
