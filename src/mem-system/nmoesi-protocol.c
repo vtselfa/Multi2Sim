@@ -520,14 +520,16 @@ void mod_handler_nmoesi_load(int event, void *data)
 
 		/* Enqueue prefetch(es) */
 		if(!stack->state && must_enqueue_prefetch(stack, mod->level)){
-			if(stack->prefetch_hit && stack->sequential_hit){
-				/* Prefetch only one block */
-				int stream = cache_find_stream(cache, stack->addr & ~cache->prefetch.stream_mask);
-				assert(stream>=0 && stream<cache->prefetch.num_streams);
-				assert(stream == stack->pref_stream);
-				assert(stack->pref_stream>=0 && stack->pref_stream<cache->prefetch.num_streams);
-				assert(stack->pref_slot>=0 && stack->pref_slot<cache->prefetch.aggressivity);
-				enqueue_prefetch_on_hit(stack, mod->level);
+			if(stack->prefetch_hit){
+				if(stack->sequential_hit){
+					/* Prefetch only one block */
+					int stream = cache_find_stream(cache, stack->addr & ~cache->prefetch.stream_mask);
+					assert(stream>=0 && stream<cache->prefetch.num_streams);
+					assert(stream == stack->pref_stream);
+					assert(stack->pref_stream>=0 && stack->pref_stream<cache->prefetch.num_streams);
+					assert(stack->pref_slot>=0 && stack->pref_slot<cache->prefetch.aggressivity);
+					enqueue_prefetch_on_hit(stack, mod->level);
+				}
 			} else { 
 				/* Fill all the stream buffer */
 				int stream = cache_find_stream(cache,stack->addr & ~cache->prefetch.stream_mask);
@@ -574,8 +576,7 @@ void mod_handler_nmoesi_load(int event, void *data)
 			return;
 		}
 		
-		if(stack->prefetch_hit)
-		{
+		if(stack->prefetch_hit){
 			int tag;
 			cache_get_pref_block_data(cache, stack->pref_stream, stack->pref_slot, &tag, &stack->state);//SLOT*
 			assert(stack->tag == tag);
@@ -588,14 +589,12 @@ void mod_handler_nmoesi_load(int event, void *data)
 			cache_set_pref_block(cache, stack->pref_stream, stack->pref_slot, -1, cache_block_invalid); //SLOT*
 			sb = &cache->prefetch.streams[stack->pref_stream];
 			sb->count--; //COUNT*
-			sb->head = (stack->pref_slot + 1) % sb->num_slots; //HEAD
-		}
-		else
-		{
+			if(stack->sequential_hit) /* Hit in head */
+				sb->head = (stack->pref_slot + 1) % sb->num_slots; //HEAD
+		}else{
 			/* Set block state to excl/shared depending on return var 'shared'.
 		 	* Also set the tag of the block. */
-			cache_set_block(cache, stack->set, stack->way, stack->tag,
-				stack->shared ? cache_block_shared : cache_block_exclusive, 0);
+			cache_set_block(cache, stack->set, stack->way, stack->tag, stack->shared ? cache_block_shared : cache_block_exclusive, 0);
 		}
 
 		/* Continue */
@@ -807,7 +806,8 @@ void mod_handler_nmoesi_store(int event, void *data)
 			cache_set_pref_block(mod->cache, stack->pref_stream, stack->pref_slot, -1, cache_block_invalid); //SLOT*
 			struct stream_buffer_t *sb = &mod->cache->prefetch.streams[stack->pref_stream];
 			sb->count--; //COUNT*
-			sb->head = (sb->head + 1) % sb->num_slots; //HEAD
+			if(stack->sequential_hit) /* Hit in head */
+				sb->head = (sb->head + 1) % sb->num_slots; //HEAD
 		}
 
 		/* Continue */
@@ -1082,7 +1082,8 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 
 	struct mod_t *mod = stack->mod;
 	struct cache_t *cache = mod->cache;
-
+	struct stream_buffer_t *sb;
+	
 	assert(stack->request_dir);
 	
 	if (event == EV_MOD_NMOESI_PREF_FIND_AND_LOCK)
@@ -1165,41 +1166,38 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 			return;
 		}
 
-		struct mod_stack_pref_group_t *group;
-		struct stream_buffer_t *sb;
-		int slot;
 		if(stack->pref_kind == GROUP){
 			/* Select prefetch stream */
-			group = stack->pref_data.on_miss.group; 
+			struct mod_stack_pref_group_t *group = stack->pref_data.on_miss.group; 
 			if(group->dest_stream == -1)
 				group->dest_stream = cache_select_stream(cache);
 			stack->pref_stream = group->dest_stream;
-
+			cache->prefetch.streams[stack->pref_stream].stream_tag = group->stream_tag;
+			
 			/* Select prefetch slot */
 			sb = &cache->prefetch.streams[stack->pref_stream];
-			slot = sb->head + stack->pref_data.on_miss.seq_num; //HEAD
-			/* Anem "decrementant" el slot fins arribar al head o trobar algú del nostre grup */
-			for(; slot%sb->num_slots != sb->head; slot--){
-				if(sb->blocks[slot % sb->num_slots].group == stack->pref_data.on_miss.group->id)
-					break;
-			}
-			/* Hem trobat a algú del nostre grup, així que incrementem slot per a apuntar a un buit */
-			if(sb->blocks[slot].group == stack->pref_data.on_miss.group->id)
-				slot = (slot + 1) % sb->num_slots;
-			else
-				slot = slot % sb->num_slots;
+			stack->pref_slot = sb->head + stack->pref_data.on_miss.seq_num; //HEAD
 
-			//sb->blocks[slot].group = stack->pref_data.on_miss.group->id; //No es pot fer ací, xq si no bloqueja es cancela
-			stack->pref_slot = slot;
-			
+			/* Assertions */
 			assert(stack->pref_slot>=0 && stack->pref_slot<sb->num_slots);
+			assert(stack->pref_stream>=0 && stack->pref_stream<cache->prefetch.num_streams);
+			
 		} else if(stack->pref_kind == SINGLE) {
+			int state;
+
 			/* Select prefetch stream */
 			stack->pref_stream = stack->pref_data.on_hit.dest_stream;
 
 			/* Select prefetch slot */
 			sb = &cache->prefetch.streams[stack->pref_stream];
-			stack->pref_slot = (sb->head + sb->count) % sb->num_slots; //TAIL
+			stack->pref_slot = (sb->head - 1) % sb->num_slots; //TAIL
+			
+			/* Assertions */
+			cache_get_pref_block_data(cache, stack->pref_stream, stack->pref_slot, NULL, &state);
+			assert(state == cache_block_invalid);
+			assert(stack->pref_slot>=0 && stack->pref_slot<sb->num_slots);
+			assert(stack->pref_stream>=0 && stack->pref_stream<cache->prefetch.num_streams);
+
 		} else { /* Invalidation */
 			assert(stack->pref_slot>=0 && stack->pref_stream>=0);
 			assert(stack->access_kind==mod_access_invalidate);
@@ -1228,8 +1226,8 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 		struct stream_block_t *block = cache_get_pref_block(cache, stack->pref_stream, stack->pref_slot); //SLOT*
 		block->transient_tag = stack->tag;
 
-		if(stack->pref_kind==GROUP)
-			sb->blocks[slot].group = stack->pref_data.on_miss.group->id; //Marquem el grup
+		if(stack->pref_kind==GROUP) //OBSOLETE
+			sb->blocks[stack->pref_slot].group = stack->pref_data.on_miss.group->id; //Marquem el grup
 		
 		/* Only do this if prefetching, not invalidating (invalidate has pref_kind = NULL)*/
 		if(stack->pref_kind){
@@ -1538,12 +1536,12 @@ void mod_handler_nmoesi_find_and_lock(int event, void *data)
 			cache_set_transient_tag(mod->cache, stack->set, stack->way, stack->tag);
 			cache_access_block(mod->cache, stack->set, stack->way);
 			
-			//Si hi ha un prefetch hit en up down el block 
-			//el marquem com a que l'anem a llevar del buffer
+			//Si hi ha un prefetch hit en up down el block el marquem com a que l'anem a llevar del buffer i actulitzem LRU
 			if(stack->prefetch_hit){
-				struct stream_block_t *block =
-					cache_get_pref_block(cache, stack->pref_stream, stack->pref_slot); //SLOT*
+				struct stream_block_t *block = cache_get_pref_block(cache, stack->pref_stream, stack->pref_slot); //SLOT*
 				block->transient_tag = cache_block_invalid;
+				if(stack->sequential_hit)
+					cache_access_stream(cache, stack->pref_stream);
 			}
 		}
 		
@@ -2619,16 +2617,15 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 		if(stack->prefetch_hit) //VVV
 		{
 			/* Portem el bloc del buffer a la cache */
-			struct stream_block_t *block =
-				cache_get_pref_block(target_mod->cache, stack->pref_stream, stack->pref_slot); //SLOT*
+			struct stream_block_t *block = cache_get_pref_block(target_mod->cache, stack->pref_stream, stack->pref_slot); //SLOT*
 			assert(stack->tag == block->tag);
-			cache_set_block(target_mod->cache, stack->set, stack->way, block->tag,
-				block->state, 0);
+			cache_set_block(target_mod->cache, stack->set, stack->way, block->tag, block->state, 0);
 			block->state = cache_block_invalid;
 			block->tag = -1;
 			struct stream_buffer_t *sb = &target_mod->cache->prefetch.streams[stack->pref_stream];
 			sb->count--; //COUNT
-			sb->head = (sb->head + 1) % sb->num_slots; //HEAD
+			if(stack->sequential_hit)
+				sb->head = (sb->head + 1) % sb->num_slots; //HEAD
 		}
 		/* Set block state to excl/shared depending on the return value 'shared'
 		 * that comes from a read request into the next cache level.
@@ -3298,7 +3295,8 @@ void mod_handler_nmoesi_write_request(int event, void *data)
 			cache_set_pref_block(target_mod->cache, stack->pref_stream, stack->pref_slot, -1, cache_block_invalid); //SLOT*
 			struct stream_buffer_t *sb = &target_mod->cache->prefetch.streams[stack->pref_stream];
 			sb->count--; //COUNT
-			sb->head = (sb->head + 1) % sb->num_slots; //HEAD
+			if(stack->sequential_hit)
+				sb->head = (sb->head + 1) % sb->num_slots; //HEAD
 			dir_pref_entry_unlock(target_mod->dir, stack->pref_stream, stack->pref_slot); //SLOT*
 		}
 		dir_entry_unlock(target_mod->dir, stack->set, stack->way);
