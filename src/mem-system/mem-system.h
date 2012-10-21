@@ -274,6 +274,8 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	unsigned int assoc, unsigned int pref_streams, unsigned int pref_aggr, enum cache_policy_t policy);
 void cache_free(struct cache_t *cache);
 
+int cache_find_stream(struct cache_t *cache, unsigned int stream_tag);
+
 void cache_decode_address(struct cache_t *cache, unsigned int addr,
 	int *set_ptr, int *tag_ptr, unsigned int *offset_ptr);
 int cache_find_block(struct cache_t *cache, unsigned int addr, int *set_ptr, int *pway, 
@@ -793,6 +795,8 @@ struct mod_stack_pref_group_t{
 	int ref_count; /* Reference counter */
 	int num_prefetches; /* Number of remaining prefetches */
 	int dest_stream; /* Group's destination stream */
+	
+	unsigned int stream_tag;
 };
 
 enum pref_kind_t {INVALID=0, SINGLE, GROUP};

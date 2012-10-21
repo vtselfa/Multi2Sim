@@ -211,6 +211,7 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	}
 	
 	/* Initialize streams */
+	cache->prefetch.stream_mask = 0xFFFF; /* 16 bits */
 	cache->prefetch.stream_head = &cache->prefetch.streams[0];
 	cache->prefetch.stream_tail = &cache->prefetch.streams[num_streams - 1];
 	for (stream = 0; stream < num_streams; stream++){
@@ -251,6 +252,16 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	
 	/* Return it */
 	return cache;
+}
+
+
+int cache_find_stream(struct cache_t *cache, unsigned int stream_tag){
+	int stream;
+	for(stream=0; stream<cache->prefetch.num_streams; stream++){
+		if(cache->prefetch.streams[stream].stream_tag == stream_tag)
+			return stream;
+	}
+	return -1;
 }
 
 

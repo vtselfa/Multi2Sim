@@ -145,6 +145,7 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int level)
 {
 	int i, num_prefetches;
 	struct mod_t *mod;
+	struct cache_t *cache;
 	struct x86_uop_t * uop; 
 	struct mod_stack_pref_group_t *pref_group;
 
@@ -153,12 +154,17 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int level)
 	else
 		mod = stack->target_mod;
 	
-	num_prefetches = mod->cache->prefetch.aggressivity;
+	cache = mod->cache;
+
+	num_prefetches = cache->prefetch.aggressivity;
 	pref_group = mod_stack_pref_group_create(num_prefetches);
 	pref_group->ref_count = num_prefetches; 	
+	
+	pref_group->stream_tag = stack->addr & ~cache->prefetch.stream_mask;
+	
 	for(i=0; i<num_prefetches; i++){
 		uop = x86_uop_create();
-		uop->phy_addr = stack->addr + (i+1) * mod->block_size; 
+		uop->phy_addr = stack->addr + (i+1) * mod->block_size;
 		uop->prefetch = 1;
 		uop->core = stack->core;
 		uop->thread = stack->thread;
@@ -173,6 +179,7 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int level)
 			linked_list_out(stack->target_mod->pq);
 			linked_list_insert(stack->target_mod->pq, uop);
 		}
+		assert(pref_group->stream_tag == (uop->phy_addr & ~cache->prefetch.stream_mask));
 	}
 }
 
@@ -511,14 +518,21 @@ void mod_handler_nmoesi_load(int event, void *data)
 			return;
 		}
 
-		/* Enqueue prefetch(es) on cache miss */
+		/* Enqueue prefetch(es) */
 		if(!stack->state && must_enqueue_prefetch(stack, mod->level)){
 			if(stack->prefetch_hit && stack->sequential_hit){
-				/* We only have to prefetch one block and put it on the tail of the buffer if it was a hit on the head of the stream.*/
+				/* Prefetch only one block */
+				int stream = cache_find_stream(cache, stack->addr & ~cache->prefetch.stream_mask);
+				assert(stream>=0 && stream<cache->prefetch.num_streams);
+				assert(stream == stack->pref_stream);
+				assert(stack->pref_stream>=0 && stack->pref_stream<cache->prefetch.num_streams);
+				assert(stack->pref_slot>=0 && stack->pref_slot<cache->prefetch.aggressivity);
 				enqueue_prefetch_on_hit(stack, mod->level);
 			} else { 
-				/* We have to fill all the stream buffer */
-				enqueue_prefetch_on_miss(stack, mod->level);
+				/* Fill all the stream buffer */
+				int stream = cache_find_stream(cache,stack->addr & ~cache->prefetch.stream_mask);
+				if(stream == -1) /* stream_tag not found */
+					enqueue_prefetch_on_miss(stack, mod->level);
 			}
 		}
 
