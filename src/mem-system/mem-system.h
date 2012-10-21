@@ -232,6 +232,7 @@ struct stream_block_t
 struct stream_buffer_t
 {
 	int stream;
+	unsigned int stream_tag; /* Tag of stream being brougth */
 	struct stream_buffer_t *stream_next;
 	struct stream_buffer_t *stream_prev;
 	struct stream_block_t *blocks;
@@ -253,8 +254,9 @@ struct cache_t
 
 	struct {
 		unsigned int num_streams; 	/* Number of streams for prefetch */
-		unsigned int aggressivity; /* Number of blocks per stream */
-	
+		unsigned int aggressivity; 	/* Number of blocks per stream */
+		unsigned int stream_mask; 	/* For obtaining stream_tag */
+
 		struct stream_buffer_t *streams;
 		struct stream_buffer_t *stream_head;
 		struct stream_buffer_t *stream_tail;
