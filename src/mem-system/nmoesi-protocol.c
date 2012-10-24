@@ -162,14 +162,14 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int level)
 	pref_group->ref_count = num_prefetches; 	
 	
 
-	pref_group->stream_tag = stack->addr & ~cache->prefetch.stream_mask;
+	pref_group->stream_tag = (stack->addr + mod->block_size) & ~cache->prefetch.stream_mask;
 	
 	/* Select stream */
 	pref_group->dest_stream = cache_select_stream(cache);
 	sb = &cache->prefetch.streams[pref_group->dest_stream];
 
 	/* Set stream's transcient tag to indicate the block is being brought */
-	sb->stream_transcient_tag = stack->addr & ~cache->prefetch.stream_mask;
+	sb->stream_transcient_tag = (stack->addr + mod->block_size) & ~cache->prefetch.stream_mask;
 	
 	for(i=0; i<num_prefetches; i++){
 		uop = x86_uop_create();
@@ -188,7 +188,8 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int level)
 			linked_list_out(stack->target_mod->pq);
 			linked_list_insert(stack->target_mod->pq, uop);
 		}
-		assert(pref_group->stream_tag == (uop->phy_addr & ~cache->prefetch.stream_mask));
+		/* If we reach the end of the stream AKA the stream_tag changes, stop */
+		break;
 	}
 	sb->next_address = stack->addr + (i+1) * mod->block_size; /* Next address to be fetched */
 }
