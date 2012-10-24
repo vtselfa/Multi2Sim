@@ -19,6 +19,7 @@ config.status
 config.log
 autom4te.cache/*
 TAGS
+tags
 src/results/*
 m2s
 test

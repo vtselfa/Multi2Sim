@@ -232,7 +232,8 @@ struct stream_block_t
 struct stream_buffer_t
 {
 	int stream;
-	unsigned int stream_tag; /* Tag of stream being brougth */
+	int stream_tag; /* Tag of stream */
+	int stream_transcient_tag; /* Tag of stream being brougth */
 	struct stream_buffer_t *stream_next;
 	struct stream_buffer_t *stream_prev;
 	struct stream_block_t *blocks;
@@ -241,6 +242,7 @@ struct stream_buffer_t
 	int count;
 	int head;
 	int tail;
+	int next_address;
 };
 
 struct cache_t
@@ -614,7 +616,7 @@ int mod_can_access(struct mod_t *mod, unsigned int addr);
 
 int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr, int *way_ptr, 
 	int *tag_ptr, int *state_ptr);
-int mod_find_pref_block_up_down(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr); 
+int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr); 
 int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr); 
 
 void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event);

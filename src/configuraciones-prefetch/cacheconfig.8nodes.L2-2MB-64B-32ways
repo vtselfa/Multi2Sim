@@ -3,8 +3,8 @@ Sets = 128
 Assoc = 4
 BlockSize = 64
 Latency = 1
-PrefetchStreams = 5
-PrefetchAggressivity = 2
+PrefetchStreams = 7
+PrefetchAggressivity = 3
 
 [ CacheGeometry l2 ]
 Sets = 1024

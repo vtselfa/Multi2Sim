@@ -299,96 +299,69 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 	PTR_ASSIGN(state_ptr, cache->sets[set].blocks[way].state);
 	return 1;
 }
+
+
 /* Look for a block in prefetch buffer.
- * The function returns TRUE on hit, FALSE on miss. */
-int mod_find_pref_block_up_down(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr) 
+ * The function returns 0 on miss, 1 if hit on head and 2 if hit in the middle of the stream. */
+int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr) 
 {
 	struct cache_t *cache = mod->cache;
 	struct stream_block_t *blk;
 	struct dir_lock_t *dir_lock;
+	struct stream_buffer_t *sb;
 
 	/* A transient tag is considered a hit if the block is
 	 * locked in the corresponding directory??? */
 	int tag = addr & ~cache->block_mask;
-	
+
+	unsigned int stream_tag = addr & ~cache->prefetch.stream_mask;
+
 	int stream, slot;
 	int num_streams = cache->prefetch.num_streams;
 	for(stream=0; stream<num_streams; stream++){
-		slot = cache->prefetch.streams[stream].head;
-		blk = cache_get_pref_block(cache, stream, slot); //SLOT*
-		if (blk->tag == tag && blk->state)
-			break;
-		if (blk->transient_tag == tag){
-			dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT*
-			if (dir_lock->lock)
-				break;
-		}
-	}
-
-	/* Miss */
-	if (stream==num_streams){
-		PTR_ASSIGN(pref_stream_ptr, -1);
-		PTR_ASSIGN(pref_slot_ptr, -1);
-		return 0;
-	}
-	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
-	 * així que no te sentit fer hit */
-	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT*
-	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
-		PTR_ASSIGN(pref_stream_ptr, -1);
-		PTR_ASSIGN(pref_slot_ptr, -1);
-		return 0;
-	}
-	
-	/* Hit */
-	PTR_ASSIGN(pref_stream_ptr, stream);	
-	PTR_ASSIGN(pref_slot_ptr, slot);
-	return 1;
-}
-
-/* Look for a block in prefetch buffer.
- * The function returns TRUE on hit, FALSE on miss. */
-int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr) 
-{
-	struct cache_t *cache = mod->cache;
-	struct stream_block_t *blk;
-	struct dir_lock_t *dir_lock;
-	struct stream_buffer_t* sb;
-	int tag = addr & ~cache->block_mask;
-	int stream, slot;
-	int num_streams = cache->prefetch.num_streams;
-
-	for(stream=0; stream < num_streams; stream++){
+		int i, count;
 		sb = &cache->prefetch.streams[stream];
-		assert(sb->count <= cache->prefetch.aggressivity);
-		for(slot = sb->head; slot < sb->head + sb->count; slot++){
-			blk = cache_get_pref_block(cache, stream, slot%sb->num_slots); //SLOT*
+		
+		/* Block can't be in this stream */
+		/*if(!sb->stream_tag == stream_tag)
+			continue;*/
+
+		count = sb->head + sb->num_slots;
+		for(i = sb->head; i < count; i++){
+			slot = i % sb->num_slots;
+			blk = cache_get_pref_block(cache, stream, slot);
+			
+			/* Increment any invalid unlocked head */
+			if(slot == sb->head && !blk->state){
+				dir_lock = dir_pref_lock_get(mod->dir, stream, slot);
+				if(!dir_lock->lock){
+					sb->head = (sb->head + 1) % sb->num_slots;
+					continue;
+				}
+			}
+				
+			/* Tag hit */
 			if (blk->tag == tag && blk->state)
-				break;
+				goto hit; /* LOL */
+
+			/* Locked block and transient tag hit */
 			if (blk->transient_tag == tag){
-				dir_lock = dir_pref_lock_get(mod->dir, stream, slot%sb->num_slots); //SLOT*
+				dir_lock = dir_pref_lock_get(mod->dir, stream, slot);
 				if (dir_lock->lock)
-					break;
+					goto hit; /* LOL */
 			}
 		}
-		if(slot != sb->head + sb->count){ /* Hit */
-			assert(sb->count);
-			break;
-		}
 	}
-	
-	/* Correct slot */
-	slot = slot%sb->num_slots;
 
 	/* Miss */
-	if (stream==num_streams){
+	if (stream == num_streams){
 		PTR_ASSIGN(pref_stream_ptr, -1);
 		PTR_ASSIGN(pref_slot_ptr, -1);
 		return 0;
 	}
 	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
 	 * així que no te sentit fer hit */
-	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT*
+	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
 	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
 		PTR_ASSIGN(pref_stream_ptr, -1);
 		PTR_ASSIGN(pref_slot_ptr, -1);
@@ -396,9 +369,14 @@ int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_
 	}
 	
 	/* Hit */
+hit:
+	assert(sb->stream_tag == stream_tag); /* Assegurem-nos de que el bloc estava on tocava */
 	PTR_ASSIGN(pref_stream_ptr, stream);	
 	PTR_ASSIGN(pref_slot_ptr, slot);
-	return 1;
+	if(sb->head == slot)
+		return 1; //Hit in head
+	else
+		return 2; //Hit in the middle of the stream 
 }
 
 
@@ -685,44 +663,32 @@ struct mod_stack_t *mod_can_coalesce(struct mod_t *mod,
 	/* Coalesce depending on access kind */
 	switch (access_kind)
 	{
-	case mod_access_invalidate:
+	case mod_access_load:
 	{
 		for (stack = tail; stack; stack = stack->access_list_prev)
 		{
-			if(stack->master_stack)
-					return NULL;
-			
-			/* Only return stack if it's older */	
-			if(older_than_stack->id >= stack->id)
+			/* Only coalesce with groups of loads at the tail */
+			if (stack->access_kind != mod_access_load)
 				return NULL;
-			
-			/* Destination module must be the same */
+
+			/* Only coalesce if destination module is the same */
 			if(stack->mod != older_than_stack->mod)
 				continue;
-			
-			/* We don't really want to coalesce, only if there is a younger access */
-			if (stack->addr >> mod->log_block_size ==
-				addr >> mod->log_block_size)
+
+			if (stack->addr >> mod->log_block_size == addr >> mod->log_block_size)
 				return stack->master_stack ? stack->master_stack : stack;
 		}
 		break;
 	}
-	case mod_access_load:
+
 	case mod_access_prefetch:
 	{
 		for (stack = tail; stack; stack = stack->access_list_prev)
 		{
-			if(stack->master_stack)
-					return NULL;
-			
 			/* Only coalesce with groups of reads at the tail */
 			if (stack->access_kind != mod_access_load && stack->access_kind != mod_access_prefetch)
 				return NULL;
 
-			/* Only coalesce with older stacks */	
-			if(older_than_stack->id >= stack->id)
-				return NULL;
-			
 			/* Only coalesce if destination module is the same */
 			if(stack->mod != older_than_stack->mod)
 				continue;
