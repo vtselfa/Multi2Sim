@@ -238,6 +238,7 @@ struct stream_buffer_t
 	struct stream_buffer_t *stream_prev;
 	struct stream_block_t *blocks;
 	
+	int pending_prefetches; /* Remaining prefetches of a prefetch group */
 	int num_slots;
 	int count;
 	int head;

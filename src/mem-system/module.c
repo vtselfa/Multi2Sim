@@ -370,7 +370,7 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_p
 	
 	/* Hit */
 hit:
-	assert(sb->stream_tag == stream_tag); /* Assegurem-nos de que el bloc estava on tocava */
+	assert(sb->stream_tag == stream_tag || sb->stream_transcient_tag == stream_tag); /* Assegurem-nos de que el bloc estava on tocava */
 	PTR_ASSIGN(pref_stream_ptr, stream);	
 	PTR_ASSIGN(pref_slot_ptr, slot);
 	if(sb->head == slot)
