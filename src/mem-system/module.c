@@ -160,6 +160,10 @@ long long mod_access(struct mod_t *mod, enum mod_access_kind_t access_kind,
 		{
 			event = EV_MOD_PREF;
 		}
+		else if (access_kind == mod_access_invalidate)
+		{
+			event = EV_MOD_NMOESI_INVALIDATE_SLOT;
+		}
 		else
 		{
 			panic("%s: invalid entry kind", __FUNCTION__);

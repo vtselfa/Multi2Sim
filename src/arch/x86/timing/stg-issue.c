@@ -162,8 +162,11 @@ static int x86_cpu_issue_pq(int core, int thread, int quant)
 		}
 		
 		/* Access memory system */
-		mod_access(uop->pref.mod, mod_access_prefetch, uop->phy_addr,
-		NULL, X86_CORE.event_queue, uop, core, thread, 1);
+		if(uop->pref.invalidating)
+			mod_access(uop->pref.mod, mod_access_invalidate, uop->phy_addr, NULL, X86_CORE.event_queue, uop, core, thread, 1);
+		else
+			mod_access(uop->pref.mod, mod_access_prefetch, uop->phy_addr, NULL, X86_CORE.event_queue, uop, core, thread, 1);
+
 
 		/* Statistics */
 		uop->pref.mod->programmed_prefetches++;
