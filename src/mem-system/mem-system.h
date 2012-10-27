@@ -793,28 +793,17 @@ enum ack_types
 	reply_ACK_ERROR
 };
 
-struct mod_stack_pref_group_t{
-	long long id;
-	int ref_count; /* Reference counter */
-	int num_prefetches; /* Number of remaining prefetches */
-	int dest_stream; /* Group's destination stream */
-	
-	unsigned int stream_tag;
-};
-
 enum pref_kind_t {INVALID=0, SINGLE, GROUP};
 
-union pref_data_t
+struct pref_data_t
 {
-	struct
-	{
-		int dest_stream;
-	} on_hit;
-	struct
-	{
-		int seq_num;
-		struct mod_stack_pref_group_t *group;
-	} on_miss;
+	/* Common camps */
+	enum pref_kind_t kind;
+	struct mod_t *mod;
+	int dest_stream;
+	/* Group only camps */
+	int seq_num;
+	int invalidating : 1;
 };
 
 /* Stack */
@@ -881,12 +870,11 @@ struct mod_stack_t
 	int port_locked : 1;
 	int prefetch_hit : 1;
 	int sequential_hit : 1;
+
 	int prefetch; //VVV
 	int pref_stream; //VVV
 	int pref_slot; //VVV
-	
-	enum pref_kind_t pref_kind;
-	union pref_data_t pref_data;
+	struct pref_data_t pref;
 
 	/* Message sent through interconnect */
 	struct net_msg_t *msg;

@@ -133,12 +133,8 @@ long long mod_access(struct mod_t *mod, enum mod_access_kind_t access_kind,
 		mod, addr, ESIM_EV_NONE, NULL, core, thread, prefetch);
 	
 	/* Pass prefetch parameters */
-	if(uop && uop->prefetch){
-		stack->pref_kind = uop->pref_kind;
-		stack->pref_data = uop->pref_data;
-		if(stack->pref_kind == GROUP)
-			stack->pref_data.on_miss.group->ref_count++;
-	}
+	if(uop && uop->pref.kind)
+		stack->pref = uop->pref;
 
 	/* Initialize */
 	stack->witness_ptr = witness_ptr;
@@ -835,44 +831,12 @@ void mod_stack_return(struct mod_stack_t *stack)
 
 	//printf("Destroyed stack=%lld\n", stack->id);
 
-	/* Reference counted free of pref_block */
-	if(stack->prefetch && stack->pref_kind == GROUP)
-		mod_stack_pref_group_free(stack->pref_data.on_miss.group);
-
 	/* Free */
 	free(stack);
 
 	esim_schedule_event(ret_event, ret_stack, 0);
 }
 
-
-/* Create pref group */
-struct mod_stack_pref_group_t *mod_stack_pref_group_create(int num_prefetches)
-{
-	struct mod_stack_pref_group_t *group;
-	group = calloc(1, sizeof(struct mod_stack_pref_group_t));
-	if (!group)
-		fatal("%s: out of memory", __FUNCTION__);
-	group->id = ++mod_stack_pref_group_id;
-	group->num_prefetches = num_prefetches;
-	group->dest_stream = -1;
-	group->ref_count = 1;
-
-	fprintf(stderr,"Created group %lld \n", group->id);
-
-	return group;
-}
-
-/* Free pref group */
-void mod_stack_pref_group_free(struct mod_stack_pref_group_t *group)
-{
-	group->ref_count--;
-	assert(group->ref_count >= 0);
-	if(!group->ref_count){
-		fprintf(stderr,"Destroyed group %lld \n", group->id);
-		free(group);
-	}
-}
 
 /* Enqueue access in module wait list. */
 void mod_stack_wait_in_mod(struct mod_stack_t *stack,

@@ -155,18 +155,18 @@ static int x86_cpu_issue_pq(int core, int thread, int quant)
 		
 		/* Prefetch block from instructions cache module */
 		/* Check that memory system is accessible */
-		if (!mod_can_access(uop->pref_mod, uop->phy_addr))
+		if (!mod_can_access(uop->pref.mod, uop->phy_addr))
 		{
 			linked_list_next(pq);
 			continue;
 		}
 		
 		/* Access memory system */
-		mod_access(uop->pref_mod, mod_access_prefetch, uop->phy_addr,
+		mod_access(uop->pref.mod, mod_access_prefetch, uop->phy_addr,
 		NULL, X86_CORE.event_queue, uop, core, thread, 1);
 
 		/* Statistics */
-		uop->pref_mod->programmed_prefetches++;
+		uop->pref.mod->programmed_prefetches++;
 		
 		/* Remove from pref queue */
 		x86_pq_remove(core, thread);
@@ -210,7 +210,7 @@ static int x86_cpu_issue_l2pq(int core, int thread, int quant)
 
 			uop->ready = 1;
 		
-			assert(uop->prefetch);
+			assert(uop->pref.kind);
 
 			/* Check that memory system is accessible */
 			if (!mod_can_access(l2mod, uop->phy_addr))

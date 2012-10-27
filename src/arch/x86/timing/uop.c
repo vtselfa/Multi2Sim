@@ -51,10 +51,6 @@ void x86_uop_free_if_not_queued(struct x86_uop_t *uop)
 		return;
 	}	
 	
-	/* Reference counted free of pref_group */
-	if(uop->prefetch && uop->pref_kind == GROUP)
-		mod_stack_pref_group_free(uop->pref_data.on_miss.group);
-
 	/* Free */
 	uop->magic = 0;
 	x86_uinst_free(uop->uinst);
