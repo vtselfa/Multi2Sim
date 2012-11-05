@@ -613,7 +613,7 @@ void mod_handler_nmoesi_load(int event, void *data)
 			if(stack->prefetch_hit){
 				if(stack->sequential_hit){
 					/* Prefetch only one block */
-					int stream = cache_find_stream(cache, stack->addr & ~cache->prefetch.stream_mask);
+					int stream = cache_find_stream(cache, (stack->addr + mod->block_size) & ~cache->prefetch.stream_mask);
 					assert(stream>=0 && stream<cache->prefetch.num_streams);
 					assert(stream == stack->pref_stream);
 					assert(stack->pref_stream>=0 && stack->pref_stream<cache->prefetch.num_streams);
@@ -622,7 +622,7 @@ void mod_handler_nmoesi_load(int event, void *data)
 				}
 			} else { 
 				/* Fill all the stream buffer */
-				int stream = cache_find_stream(cache,stack->addr & ~cache->prefetch.stream_mask);
+				int stream = cache_find_stream(cache, (stack->addr + mod->block_size) & ~cache->prefetch.stream_mask);
 				if(stream == -1) /* stream_tag not found */
 					enqueue_prefetch_on_miss(stack, mod->level);
 			}
