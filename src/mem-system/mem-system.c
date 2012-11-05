@@ -312,12 +312,19 @@ void mem_system_dump_report()
 		fprintf(f, "NonBlockingWrites = %lld\n", mod->non_blocking_writes);
 		fprintf(f, "WriteHits = %lld\n", mod->write_hits);
 		fprintf(f, "WriteMisses = %lld\n", mod->writes - mod->write_hits);
-		fprintf(f, "Completed Prefetches = %lld\n", mod->completed_prefetches);
+		fprintf(f, "\n");
 		fprintf(f, "Programmed Prefetches = %lld\n", mod->programmed_prefetches);
-		fprintf(f, "Useful Prefetches = %lld\n", mod->useful_prefetches);
-		fprintf(f, "Delayed hits = %lld\n", mod->delayed_hits);
+		fprintf(f, "Single prefetches = %lld\n", mod->single_prefetches);
+		fprintf(f, "Prefetch groups = %lld\n", mod->group_prefetches);
+		fprintf(f, "Canceled prefetches = %lld\n", mod->canceled_prefetches);
+		fprintf(f, "Slot invalidations = %lld\n", mod->slot_invalidations);
+		fprintf(f, "Completed Prefetches = %lld\n", mod->completed_prefetches);
+		fprintf(f, "Prefetch hits (rw)(up_down) = %lld\n", mod->up_down_hits);
+		fprintf(f, "Prefetch head hits (rw)(up_down) = %lld\n", mod->up_down_head_hits);
+		fprintf(f, "Prefetch hits (r)(down_up) = %lld\n", mod->down_up_read_hits);
+		fprintf(f, "Prefetch hits (w)(down_up) = %lld\n", mod->down_up_write_hits);
 		fprintf(f, "Prefetch precision = %.4g\n",mod->completed_prefetches ?
-			(double) mod->useful_prefetches / mod->completed_prefetches : 0.0);
+			(double) mod->up_down_hits / mod->completed_prefetches : 0.0);
 		fprintf(f, "MPKI = %.4g\n",x86_cpu->inst ?
 			(double) (mod->accesses - mod->hits) / x86_cpu->inst : 0.0);
 		fprintf(f, "\n\n");

@@ -667,8 +667,8 @@ struct mod_stack_t *mod_can_coalesce(struct mod_t *mod,
 	{
 		for (stack = tail; stack; stack = stack->access_list_prev)
 		{
-			/* Only coalesce with groups of loads at the tail */
-			if (stack->access_kind != mod_access_load)
+			/* Only coalesce with groups of loads or prefetches at the tail */
+			if (stack->access_kind != mod_access_load && stack->access_kind != mod_access_prefetch)
 				return NULL;
 
 			/* Only coalesce if destination module is the same */
@@ -817,6 +817,8 @@ struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	stack->tag = -1;
 	stack->pref_stream = -1;
 	stack->pref_slot = -1;
+	stack->pref.dest_stream = -1;
+	stack->pref.dest_slot = -1;
 	
 	//printf("Created stack=%lld\n", stack->id);
 

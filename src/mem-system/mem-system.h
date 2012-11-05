@@ -596,11 +596,19 @@ struct mod_t
 	long long no_retry_writes;
 	long long no_retry_write_hits;
 	
-	long long completed_prefetches;
-	long long programmed_prefetches;
-	long long useful_prefetches;
+	/* Prefetch statistics */
+	long long programmed_prefetches; /* Issued prefetches */
+	long long single_prefetches; /* Prefetches on hit */
+	long long group_prefetches; /* Prefetches on miss */
+	long long canceled_prefetches; /* Canceled because block is coming or already in cache */
+	long long slot_invalidations; /* Canceled prefetches + end of stream reached */
+	long long completed_prefetches; /* Issued - invalidated */
+	long long up_down_hits;
+	long long up_down_head_hits;
+	long long down_up_read_hits;
+	long long down_up_write_hits;
 	long long delayed_hits;
-	double prefetch_precision;
+	double prefetch_precision; /* Up-down hits / completed_prefetches */
 	double prefetch_coverage;
 };
 
@@ -801,8 +809,8 @@ struct pref_data_t
 	enum pref_kind_t kind;
 	struct mod_t *mod;
 	int dest_stream;
+	int dest_slot;
 	/* Group only camps */
-	int seq_num;
 	int invalidating : 1;
 };
 
