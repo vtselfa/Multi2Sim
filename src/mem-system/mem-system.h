@@ -229,6 +229,13 @@ struct stream_block_t
 	enum cache_block_state_t state;
 };
 
+struct stride_detector_camp_t
+{
+	int tag;
+	int last_addr;
+	int stride;
+};
+
 struct stream_buffer_t
 {
 	int stream;
@@ -243,6 +250,7 @@ struct stream_buffer_t
 	int count;
 	int head;
 	int tail;
+	int stride;
 	int next_address;
 };
 
@@ -263,6 +271,8 @@ struct cache_t
 		struct stream_buffer_t *streams;
 		struct stream_buffer_t *stream_head;
 		struct stream_buffer_t *stream_tail;
+
+		struct linked_list_t *stride_detector;	
 	} prefetch;
 
 	int fifo;
@@ -287,10 +297,8 @@ void cache_set_block(struct cache_t *cache, int set, int way, int tag,
 	int state, unsigned int prefetched);
 void cache_set_pref_block(struct cache_t *cache, int pref_stream, int pref_slot, int tag, int state);
 void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int *state_ptr);
-struct stream_block_t * cache_get_pref_block(struct cache_t *cache, int pref_stream,
-	int pref_slot);
-void cache_get_pref_block_data(struct cache_t *cache, int pref_stream,
-	int pref_slot, int *tag_ptr, int *state_ptr);
+struct stream_block_t * cache_get_pref_block(struct cache_t *cache, int pref_stream, int pref_slot);
+void cache_get_pref_block_data(struct cache_t *cache, int pref_stream, int pref_slot, int *tag_ptr, int *state_ptr);
 
 void cache_access_block(struct cache_t *cache, int set, int way);
 int cache_select_stream(struct cache_t *cache);
@@ -298,6 +306,7 @@ void cache_access_stream(struct cache_t *cache, int stream);
 int cache_replace_block(struct cache_t *cache, int set);
 void cache_set_transient_tag(struct cache_t *cache, int set, int way, int tag);
 
+int cache_detect_stride(struct cache_t *cache, int addr);
 
 
 
@@ -882,6 +891,7 @@ struct mod_stack_t
 	int prefetch; //VVV
 	int pref_stream; //VVV
 	int pref_slot; //VVV
+	int stride;
 	struct pref_data_t pref;
 
 	/* Message sent through interconnect */

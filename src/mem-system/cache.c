@@ -211,7 +211,7 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 	}
 	
 	/* Initialize streams */
-	cache->prefetch.stream_mask = 0xFFFF; /* 16 bits */
+	cache->prefetch.stream_mask = 0x1FFF; /* 13 bits */
 	cache->prefetch.stream_head = &cache->prefetch.streams[0];
 	cache->prefetch.stream_tail = &cache->prefetch.streams[num_streams - 1];
 	for (stream = 0; stream < num_streams; stream++){
@@ -225,6 +225,9 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 		for(slot = 0; slot < pref_aggr; slot++)
 			sb->blocks[slot].slot = slot;
 	}
+	
+	/* Stride detector */
+	cache->prefetch.stride_detector = linked_list_create(); 
 
 	/* Create array of sets */
 	cache->sets = calloc(num_sets, sizeof(struct cache_set_t));
@@ -259,24 +262,85 @@ struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int blo
 
 int cache_find_stream(struct cache_t *cache, unsigned int stream_tag){
 	int stream;
+	/* Only look the transcient tag */
 	for(stream=0; stream<cache->prefetch.num_streams; stream++){
-		if(cache->prefetch.streams[stream].stream_tag == stream_tag || cache->prefetch.streams[stream].stream_transcient_tag == stream_tag)
+		if(cache->prefetch.streams[stream].stream_transcient_tag == stream_tag)
 			return stream;
 	}
 	return -1;
 }
 
+int cache_detect_stride(struct cache_t *cache, int addr)
+{
+	struct linked_list_t *sd = cache->prefetch.stride_detector;
+	struct stride_detector_camp_t *camp, *to_free = NULL;
+	int tag = addr & ~cache->prefetch.stream_mask;
+	int stride;
+	int result;
+
+	linked_list_head(sd);
+	while(!linked_list_is_end(sd)){
+		camp = linked_list_get(sd);
+		if(camp->tag == tag){
+			stride = addr - camp->last_addr;
+			if(stride == camp->stride && abs(stride) >= cache->block_size){
+				result = stride; /* Stride detected */
+				to_free = camp;
+				linked_list_remove(sd);
+			}else{
+				result = 0;
+			}
+
+			/* Update camps */
+			if(abs(stride) >= cache->block_size){
+				camp->stride = stride;
+				camp->last_addr = addr;
+			}
+
+			/* Free mem */
+			free(to_free);
+
+			return result;
+		}
+		linked_list_next(sd);
+	}
+	
+	/* Add access to the list */
+	camp = calloc(1, sizeof(struct stride_detector_camp_t));
+	if(!camp)
+		fatal("%s: out of memory", __FUNCTION__);
+	camp->last_addr = addr;
+	camp->tag = tag;
+	linked_list_add(sd, camp);
+
+	return 0;
+}
 
 void cache_free(struct cache_t *cache)
 {
 	unsigned int set, stream;
+	struct linked_list_t *sd = cache->prefetch.stride_detector;
+	struct stream_detector_camp_t *camp;
 
+	/* Destroy sets */
 	for (set = 0; set < cache->num_sets; set++)
 		free(cache->sets[set].blocks);
+	free(cache->sets);
+	
+	/* Destroy streams */
 	for(stream=0; stream<cache->prefetch.num_streams; stream++)
 		free(cache->prefetch.streams[stream].blocks);
 	free(cache->prefetch.streams);
-	free(cache->sets);
+	
+	/* Destroy stream detector */
+	while(linked_list_count(sd)){
+		linked_list_head(sd);
+		camp = linked_list_get(sd);
+		free(camp);
+		linked_list_remove(sd);
+	}
+	linked_list_free(sd);
+	
 	free(cache->name);
 	free(cache);
 }

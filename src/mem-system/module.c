@@ -819,6 +819,7 @@ struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	stack->pref_slot = -1;
 	stack->pref.dest_stream = -1;
 	stack->pref.dest_slot = -1;
+	stack->stride = -1;
 	
 	//printf("Created stack=%lld\n", stack->id);
 
