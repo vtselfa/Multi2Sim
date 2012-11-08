@@ -774,8 +774,7 @@ void mod_handler_nmoesi_store(int event, void *data)
 			stack->id, mod->name, stack->addr);
 		
 		/* Record access */
-		if(stack->request_dir == mod_request_up_down)
-			mod_access_start(mod, stack, mod_access_store);
+		mod_access_start(mod, stack, mod_access_store);
 
 		/* Coalesce access */
 		master_stack = mod_can_coalesce(mod, mod_access_store, stack->addr, stack);
@@ -935,8 +934,7 @@ void mod_handler_nmoesi_store(int event, void *data)
 			linked_list_add(stack->event_queue, stack->event_queue_item);
 
 		/* Finish access */
-		if(stack->request_dir == mod_request_up_down)		
-			mod_access_finish(mod, stack);
+		mod_access_finish(mod, stack);
 
 		/* Return */
 		mod_stack_return(stack);
