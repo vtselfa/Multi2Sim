@@ -182,7 +182,7 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int stride, int level)
 	fprintf(stderr, "    Enqueued prefetch group at addr=0x%x to stream=%d with stride=0x%x(%d)\n", stack->addr+stride, stream, stride, stride);
 
 	/* Mark the number of pending prefetches for this stream */
-	sb->pending_prefetches = num_prefetches;
+	sb->pending_prefetches += num_prefetches;
 	
 	/* Insert prefetches */
 	int invalidating = 0;
