@@ -216,6 +216,40 @@ struct cache_set_t
 	struct cache_block_t *blocks;
 };
 
+struct stream_block_t
+{
+	int slot;
+	int tag;
+	int transient_tag;
+	long long group; //ID of group bringing the block (if any) 
+	enum cache_block_state_t state;
+};
+
+struct stride_detector_camp_t
+{
+	int tag;
+	int last_addr;
+	int stride;
+};
+
+struct stream_buffer_t
+{
+	int stream;
+	int stream_tag; /* Tag of stream */
+	int stream_transcient_tag; /* Tag of stream being brougth */
+	struct stream_buffer_t *stream_next;
+	struct stream_buffer_t *stream_prev;
+	struct stream_block_t *blocks;
+	
+	int pending_prefetches; /* Remaining prefetches of a prefetch group */
+	int num_slots;
+	int count;
+	int head;
+	int tail;
+	int stride;
+	int next_address;
+};
+
 struct cache_t
 {
 	char *name;
@@ -224,10 +258,19 @@ struct cache_t
 	unsigned int block_size;
 	unsigned int assoc;
 	enum cache_policy_t policy;
-	
-	unsigned int num_pref_streams; /* Number of streams for prefetch */
-	unsigned int pref_aggressivity; /* Number of blocks to prefetch per stream */
-	struct stream_buffer_t **stream_buffers;
+
+	struct {
+		unsigned int num_streams; 	/* Number of streams for prefetch */
+		unsigned int aggressivity; 	/* Number of blocks per stream */
+		unsigned int stream_mask; 	/* For obtaining stream_tag */
+
+		struct stream_buffer_t *streams;
+		struct stream_buffer_t *stream_head;
+		struct stream_buffer_t *stream_tail;
+
+		struct linked_list_t *stride_detector;	
+	} prefetch;
+
 	int fifo;
 
 	struct cache_set_t *sets;
@@ -236,50 +279,26 @@ struct cache_t
 };
 
 
-struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int block_size,
-	unsigned int assoc, unsigned int num_pref_streams, unsigned int pref_aggressivity,
-	enum cache_policy_t policy);
+struct cache_t *cache_create(char *name, unsigned int num_sets, unsigned int block_size, unsigned int assoc, unsigned int pref_streams, unsigned int pref_aggr, enum cache_policy_t policy);
 void cache_free(struct cache_t *cache);
 
-void cache_decode_address(struct cache_t *cache, unsigned int addr,
-	int *set_ptr, int *tag_ptr, unsigned int *offset_ptr);
-int cache_find_block(struct cache_t *cache, unsigned int addr, int *set_ptr, int *pway, 
-	int *state_ptr);
-void cache_set_block(struct cache_t *cache, int set, int way, int tag,
-	int state, unsigned int prefetched);
+int cache_find_stream(struct cache_t *cache, unsigned int stream_tag);
+
+void cache_decode_address(struct cache_t *cache, unsigned int addr, int *set_ptr, int *tag_ptr, unsigned int *offset_ptr);
+int cache_find_block(struct cache_t *cache, unsigned int addr, int *set_ptr, int *pway, int *state_ptr);
+void cache_set_block(struct cache_t *cache, int set, int way, int tag, int state, unsigned int prefetched);
 void cache_set_pref_block(struct cache_t *cache, int pref_stream, int pref_slot, int tag, int state);
 void cache_get_block(struct cache_t *cache, int set, int way, int *tag_ptr, int *state_ptr);
-void cache_get_pref_block(struct cache_t *cache, int prefetch_slot,
-	int *tag_ptr, int *state_ptr);
+struct stream_block_t * cache_get_pref_block(struct cache_t *cache, int pref_stream, int pref_slot);
+void cache_get_pref_block_data(struct cache_t *cache, int pref_stream, int pref_slot, int *tag_ptr, int *state_ptr);
 
 void cache_access_block(struct cache_t *cache, int set, int way);
+int cache_select_stream(struct cache_t *cache);
+void cache_access_stream(struct cache_t *cache, int stream);
 int cache_replace_block(struct cache_t *cache, int set);
 void cache_set_transient_tag(struct cache_t *cache, int set, int way, int tag);
 
-
-
-/*
- * Stream buffer for prefetch
- */
-
-
-struct stream_buffer_t
-{
-    struct cache_block_t *elem; 	// block array
-    size_t capacity;  				// maximum number of items in the buffer
-    size_t count;     				// number of items in the buffer
-    size_t head;       				// position of head
-    size_t tail;       				// position of tail
-};
-
-
-struct stream_buffer_t* stream_buffer_create(size_t capacity);
-void stream_buffer_free(struct stream_buffer_t *sb);
-struct cache_block_t* stream_buffer_get_at(struct stream_buffer_t *sb, int pos);
-void stream_buffer_remove(struct stream_buffer_t *sb);
-struct cache_block_t* stream_buffer_head(struct stream_buffer_t *sb);
-int stream_buffer_empty(struct stream_buffer_t *sb);
-
+int cache_detect_stride(struct cache_t *cache, int addr);
 
 
 
@@ -318,32 +337,25 @@ struct dir_t
 	 * sets, YSize is the number of ways of the cache, and ZSize
 	 * is the number of sub-blocks of size 'cache_min_block_size'
 	 * that fit within a block. */
-	int xsize, ysize, zsize;
-	
-	/* SSize is the number of prefetch stream buffers in the cache.
-	 * ASize is the aggressivity of the prefetch aka max number of
-	 * blocks fetched and stored in prefecth streams. */
-	int ssize, asize;
+	int xsize, ysize, zsize, ssize, asize;
 
 	/* Array of xsize * ysize locks. Each lock corresponds to a
 	 * block, i.e. a set of zsize directory entries */
 	struct dir_lock_t *dir_lock;
 	
-	/* Array of ssize * asize locks. Each lock corresponds to a block. */
-	struct dir_lock_t *pref_dir_lock; //VVV
+	/* Array of locks for prefetched blocks */
+	struct dir_lock_t *pref_dir_lock;
 
 	/* Last field. This is an array of xsize*ysize*zsize elements of type
 	 * dir_entry_t, which have likewise variable size. */
 	unsigned char data[0];
 };
 
-struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize,
-	int pref_streams, int pref_aggressivity, int num_nodes);
+struct dir_t *dir_create(char *name, int xsize, int ysize, int zsize, int psize, int pref_aggressivity, int num_nodes);
 void dir_free(struct dir_t *dir);
 
 struct dir_entry_t *dir_entry_get(struct dir_t *dir, int x, int y, int z);
-struct dir_entry_t *dir_pref_entry_get(struct dir_t *dir, int pref_stream,
-	int pref_slot, int z);
+struct dir_entry_t *dir_pref_entry_get(struct dir_t *dir, int pref_stream, int pref_slot, int z);
 
 void dir_entry_set_owner(struct dir_t *dir, int x, int y, int z, int node);
 void dir_entry_set_sharer(struct dir_t *dir, int x, int y, int z, int node);
@@ -357,8 +369,7 @@ void dir_entry_dump_sharers(struct dir_t *dir, int x, int y, int z);
 struct dir_lock_t *dir_lock_get(struct dir_t *dir, int x, int y);
 struct dir_lock_t *dir_pref_lock_get(struct dir_t *dir, int pref_stream, int pref_slot);
 int dir_entry_lock(struct dir_t *dir, int x, int y, int event, struct mod_stack_t *stack);
-int dir_pref_entry_lock(struct dir_t *dir, int pref_stream, int pref_slot, int event,
-	struct mod_stack_t *stack);
+int dir_pref_entry_lock(struct dir_t *dir, int pref_stream, int pref_slot, int event, struct mod_stack_t *stack);
 void dir_entry_unlock(struct dir_t *dir, int x, int y);
 void dir_pref_entry_unlock(struct dir_t *dir, int pref_stream, int pref_slot);
 
@@ -425,7 +436,8 @@ enum mod_access_kind_t
 	mod_access_load,
 	mod_access_store,
 	mod_access_nc_store,
-	mod_access_prefetch
+	mod_access_prefetch,
+	mod_access_invalidate
 };
 
 /* Module types */
@@ -584,11 +596,19 @@ struct mod_t
 	long long no_retry_writes;
 	long long no_retry_write_hits;
 	
-	long long completed_prefetches;
-	long long programmed_prefetches;
-	long long useful_prefetches;
+	/* Prefetch statistics */
+	long long programmed_prefetches; /* Issued prefetches */
+	long long single_prefetches; /* Prefetches on hit */
+	long long group_prefetches; /* Prefetches on miss */
+	long long canceled_prefetches; /* Canceled because block is coming or already in cache */
+	long long slot_invalidations; /* Canceled prefetches + end of stream reached */
+	long long completed_prefetches; /* Issued - invalidated */
+	long long up_down_hits;
+	long long up_down_head_hits;
+	long long down_up_read_hits;
+	long long down_up_write_hits;
 	long long delayed_hits;
-	double prefetch_precision;
+	double prefetch_precision; /* Up-down hits / completed_prefetches */
 	double prefetch_coverage;
 };
 
@@ -605,9 +625,10 @@ int mod_can_access(struct mod_t *mod, unsigned int addr);
 
 int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr, int *way_ptr, 
 	int *tag_ptr, int *state_ptr);
-int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int *pref_slot_ptr); 
+int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr); 
+int mod_find_pref_block_down_up(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr); 
 
-				void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event);
+void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event);
 void mod_unlock_port(struct mod_t *mod, struct mod_port_t *port,
 	struct mod_stack_t *stack);
 
@@ -663,6 +684,12 @@ extern int EV_MOD_NMOESI_LOAD_MISS;
 extern int EV_MOD_NMOESI_LOAD_UNLOCK;
 extern int EV_MOD_NMOESI_LOAD_FINISH;
 
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT;
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT_LOCK;
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT_ACTION;
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT_UNLOCK;
+extern int EV_MOD_NMOESI_INVALIDATE_SLOT_FINISH;
+
 extern int EV_MOD_NMOESI_STORE;
 extern int EV_MOD_NMOESI_STORE_LOCK;
 extern int EV_MOD_NMOESI_STORE_ACTION;
@@ -681,6 +708,11 @@ extern int EV_MOD_NMOESI_FIND_AND_LOCK;
 extern int EV_MOD_NMOESI_FIND_AND_LOCK_PORT;
 extern int EV_MOD_NMOESI_FIND_AND_LOCK_ACTION;
 extern int EV_MOD_NMOESI_FIND_AND_LOCK_FINISH;
+
+extern int EV_MOD_NMOESI_PREF_FIND_AND_LOCK;
+extern int EV_MOD_NMOESI_PREF_FIND_AND_LOCK_PORT;
+extern int EV_MOD_NMOESI_PREF_FIND_AND_LOCK_ACTION;
+extern int EV_MOD_NMOESI_PREF_FIND_AND_LOCK_FINISH;
 
 extern int EV_MOD_NMOESI_EVICT;
 extern int EV_MOD_NMOESI_EVICT_INVALID;
@@ -748,6 +780,9 @@ extern int EV_MOD_NMOESI_PEER_FINISH;
 /* Current identifier for stack */
 extern long long mod_stack_id;
 
+/* current identifier for pref_group */
+extern long long mod_stack_pref_group_id;
+
 /* Read/write request direction */
 enum mod_request_dir_t
 {
@@ -764,6 +799,19 @@ enum ack_types
 	reply_ACK_DATA,
 	reply_ACK_DATA_SENT_TO_PEER,
 	reply_ACK_ERROR
+};
+
+enum pref_kind_t {INVALID=0, SINGLE, GROUP};
+
+struct pref_data_t
+{
+	/* Common camps */
+	enum pref_kind_t kind;
+	struct mod_t *mod;
+	int dest_stream;
+	int dest_slot;
+	/* Group only camps */
+	int invalidating : 1;
 };
 
 /* Stack */
@@ -828,12 +876,14 @@ struct mod_stack_t
 	int retry : 1;
 	int coalesced : 1;
 	int port_locked : 1;
+	int prefetch_hit : 1;
+	int sequential_hit : 1;
 
 	int prefetch; //VVV
-	int prefetch_hit : 1;
 	int pref_stream; //VVV
 	int pref_slot; //VVV
-	struct cache_block_t * pref_block; //On prefetch hit, pointer to the block 
+	int stride;
+	struct pref_data_t pref;
 
 	/* Message sent through interconnect */
 	struct net_msg_t *msg;
@@ -871,35 +921,36 @@ struct mod_stack_t
 
 extern long long mod_stack_id;
 
-struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
-	unsigned int addr, int ret_event, void *ret_stack, int core, int thread, int prefetch);
+struct mod_stack_pref_group_t *mod_stack_pref_group_create(int num_prefetches);
+void mod_stack_pref_group_free(struct mod_stack_pref_group_t *group);
+
+struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod, unsigned int addr, int ret_event, void *ret_stack, int core, int thread, int prefetch);
 void mod_stack_return(struct mod_stack_t *stack);
 
-void mod_stack_wait_in_mod(struct mod_stack_t *stack,
-	struct mod_t *mod, int event);
+void mod_stack_wait_in_mod(struct mod_stack_t *stack, struct mod_t *mod, int event);
 void mod_stack_wakeup_mod(struct mod_t *mod);
 
-void mod_stack_wait_in_port(struct mod_stack_t *stack,
-	struct mod_port_t *port, int event);
+void mod_stack_wait_in_port(struct mod_stack_t *stack, struct mod_port_t *port, int event);
 void mod_stack_wakeup_port(struct mod_port_t *port);
 
-void mod_stack_wait_in_stack(struct mod_stack_t *stack,
-	struct mod_stack_t *master_stack, int event);
+void mod_stack_wait_in_stack(struct mod_stack_t *stack, struct mod_stack_t *master_stack, int event);
 void mod_stack_wakeup_stack(struct mod_stack_t *master_stack);
 
 /* NMOESI */
 void mod_handler_nmoesi_find_and_lock(int event, void *data);
+void mod_handler_nmoesi_pref_find_and_lock(int event, void *data);
 void mod_handler_nmoesi_load(int event, void *data);
 void mod_handler_nmoesi_store(int event, void *data);
 void mod_handler_nmoesi_nc_store(int event, void *data);
 void mod_handler_nmoesi_evict(int event, void *data);
 void mod_handler_nmoesi_pref_evict(int event, void *data);
+void mod_handler_nmoesi_invalidate_slot(int event, void *data);
 void mod_handler_nmoesi_write_request(int event, void *data);
 void mod_handler_nmoesi_read_request(int event, void *data);
 void mod_handler_nmoesi_invalidate(int event, void *data);
 void mod_handler_nmoesi_peer(int event, void *data);
-
 void mod_handler_pref(int event, void *data);
+
 /* Local memory */
 void mod_handler_local_mem_load(int event, void *data);
 void mod_handler_local_mem_store(int event, void *data);

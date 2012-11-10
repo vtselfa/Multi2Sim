@@ -623,8 +623,8 @@ static struct mod_t *mem_config_read_cache(struct config_t *config, char *sectio
 	policy_str = config_read_string(config, buf, "Policy", "LRU");
 	mshr_size = config_read_int(config, buf, "MSHR", 16);
 	num_ports = config_read_int(config, buf, "Ports", 2);
-	pref_aggr = config_read_int(config, buf, "PrefetchAggressivity", 0);
 	pref_streams = config_read_int(config, buf, "PrefetchStreams", 0);
+	pref_aggr = config_read_int(config, buf, "PrefetchAggressivity", 0);
 	pref = (pref_aggr > 0) && (pref_streams > 0);
 
 	/* Checks */
@@ -757,8 +757,7 @@ static struct mod_t *mem_config_read_main_memory(struct config_t *config, char *
 	mod->high_net_node = net_node;
 
 	/* Create cache and directory */
-	mod->cache = cache_create(mod->name, dir_size / dir_assoc, block_size,
-			dir_assoc, 0,0, cache_policy_lru);
+	mod->cache = cache_create(mod->name, dir_size / dir_assoc, block_size, dir_assoc, 0, 0, cache_policy_lru);
 
 	/* Return */
 	return mod;
@@ -1532,11 +1531,11 @@ static void mem_config_calculate_sub_block_sizes(void)
 			num_nodes = 1;
 
 		/* Create directory */
- 		cache = mod->cache;
+		cache = mod->cache;
 		mod->num_sub_blocks = mod->block_size / mod->sub_block_size;
 		mod->dir = dir_create(mod->name, mod->dir_num_sets, mod->dir_assoc,
-			mod->num_sub_blocks, cache->num_pref_streams,
-			cache->pref_aggressivity, num_nodes);
+			mod->num_sub_blocks, cache->prefetch.num_streams,
+			cache->prefetch.aggressivity, num_nodes);
 		mem_debug("\t%s - %dx%dx%d (%dx%dx%d effective) - %d entries, %d sub-blocks\n",
 			mod->name, mod->dir_num_sets, mod->dir_assoc, num_nodes,
 			mod->dir_num_sets, mod->dir_assoc, linked_list_count(mod->high_mod_list),

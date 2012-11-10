@@ -66,6 +66,12 @@ void mem_system_init(void)
 	EV_MOD_NMOESI_LOAD_MISS = esim_register_event_with_name(mod_handler_nmoesi_load, "mod_nmoesi_load_miss");
 	EV_MOD_NMOESI_LOAD_UNLOCK = esim_register_event_with_name(mod_handler_nmoesi_load, "mod_nmoesi_load_unlock");
 	EV_MOD_NMOESI_LOAD_FINISH = esim_register_event_with_name(mod_handler_nmoesi_load, "mod_nmoesi_load_finish");
+	
+	EV_MOD_NMOESI_INVALIDATE_SLOT = esim_register_event_with_name( mod_handler_nmoesi_invalidate_slot, "mod_nmoesi_invalidate_slot");
+	EV_MOD_NMOESI_INVALIDATE_SLOT_LOCK = esim_register_event_with_name( mod_handler_nmoesi_invalidate_slot, "mod_nmoesi_invalidate_slot_lock");
+	EV_MOD_NMOESI_INVALIDATE_SLOT_ACTION = esim_register_event_with_name( mod_handler_nmoesi_invalidate_slot, "mod_nmoesi_invalidate_slot_action");
+	EV_MOD_NMOESI_INVALIDATE_SLOT_UNLOCK = esim_register_event_with_name( mod_handler_nmoesi_invalidate_slot, "mod_nmoesi_invalidate_slot_unlock");
+	EV_MOD_NMOESI_INVALIDATE_SLOT_FINISH = esim_register_event_with_name( mod_handler_nmoesi_invalidate_slot, "mod_nmoesi_invalidate_slot_finish");
 
 	EV_MOD_NMOESI_STORE = esim_register_event_with_name(mod_handler_nmoesi_store, "mod_nmoesi_store");
 	EV_MOD_NMOESI_STORE_LOCK = esim_register_event_with_name(mod_handler_nmoesi_store, "mod_nmoesi_store_lock");
@@ -85,6 +91,16 @@ void mem_system_init(void)
 	EV_MOD_NMOESI_FIND_AND_LOCK_PORT = esim_register_event_with_name(mod_handler_nmoesi_find_and_lock, "mod_nmoesi_find_and_lock_port");
 	EV_MOD_NMOESI_FIND_AND_LOCK_ACTION = esim_register_event_with_name(mod_handler_nmoesi_find_and_lock, "mod_nmoesi_find_and_lock_action");
 	EV_MOD_NMOESI_FIND_AND_LOCK_FINISH = esim_register_event_with_name(mod_handler_nmoesi_find_and_lock, "mod_nmoesi_find_and_lock_finish");
+	
+	EV_MOD_NMOESI_PREF_FIND_AND_LOCK = esim_register_event_with_name(
+		mod_handler_nmoesi_pref_find_and_lock, "mod_nmoesi_pref_find_and_lock");
+	EV_MOD_NMOESI_PREF_FIND_AND_LOCK_PORT = esim_register_event_with_name(
+		mod_handler_nmoesi_pref_find_and_lock, "mod_nmoesi_pref_find_and_lock_port");
+	EV_MOD_NMOESI_PREF_FIND_AND_LOCK_ACTION = esim_register_event_with_name(
+		mod_handler_nmoesi_pref_find_and_lock, "mod_nmoesi_pref_find_and_lock_action");
+	EV_MOD_NMOESI_PREF_FIND_AND_LOCK_FINISH = esim_register_event_with_name(
+		mod_handler_nmoesi_pref_find_and_lock, "mod_nmoesi_pref_find_and_lock_finish");
+
 
 	EV_MOD_NMOESI_EVICT = esim_register_event_with_name(mod_handler_nmoesi_evict, "mod_nmoesi_evict");
 	EV_MOD_NMOESI_EVICT_INVALID = esim_register_event_with_name(mod_handler_nmoesi_evict, "mod_nmoesi_evict_invalid");
@@ -296,12 +312,18 @@ void mem_system_dump_report()
 		fprintf(f, "NonBlockingWrites = %lld\n", mod->non_blocking_writes);
 		fprintf(f, "WriteHits = %lld\n", mod->write_hits);
 		fprintf(f, "WriteMisses = %lld\n", mod->writes - mod->write_hits);
-		fprintf(f, "Completed Prefetches = %lld\n", mod->completed_prefetches);
+		fprintf(f, "\n");
 		fprintf(f, "Programmed Prefetches = %lld\n", mod->programmed_prefetches);
-		fprintf(f, "Useful Prefetches = %lld\n", mod->useful_prefetches);
-		fprintf(f, "Delayed hits = %lld\n", mod->delayed_hits);
+		fprintf(f, "Single prefetches = %lld\n", mod->single_prefetches);
+		fprintf(f, "Prefetch groups = %lld\n", mod->group_prefetches);
+		fprintf(f, "Canceled prefetches = %lld\n", mod->canceled_prefetches);
+		fprintf(f, "Completed Prefetches = %lld\n", mod->completed_prefetches);
+		fprintf(f, "Prefetch hits (rw)(up_down) = %lld\n", mod->up_down_hits);
+		fprintf(f, "Prefetch head hits (rw)(up_down) = %lld\n", mod->up_down_head_hits);
+		fprintf(f, "Prefetch hits (r)(down_up) = %lld\n", mod->down_up_read_hits);
+		fprintf(f, "Prefetch hits (w)(down_up) = %lld\n", mod->down_up_write_hits);
 		fprintf(f, "Prefetch precision = %.4g\n",mod->completed_prefetches ?
-			(double) mod->useful_prefetches / mod->completed_prefetches : 0.0);
+			(double) mod->up_down_hits / mod->completed_prefetches : 0.0);
 		fprintf(f, "MPKI = %.4g\n",x86_cpu->inst ?
 			(double) (mod->accesses - mod->hits) / x86_cpu->inst : 0.0);
 		fprintf(f, "\n\n");
