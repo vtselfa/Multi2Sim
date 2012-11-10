@@ -317,7 +317,6 @@ void mem_system_dump_report()
 		fprintf(f, "Single prefetches = %lld\n", mod->single_prefetches);
 		fprintf(f, "Prefetch groups = %lld\n", mod->group_prefetches);
 		fprintf(f, "Canceled prefetches = %lld\n", mod->canceled_prefetches);
-		fprintf(f, "Slot invalidations = %lld\n", mod->slot_invalidations);
 		fprintf(f, "Completed Prefetches = %lld\n", mod->completed_prefetches);
 		fprintf(f, "Prefetch hits (rw)(up_down) = %lld\n", mod->up_down_hits);
 		fprintf(f, "Prefetch head hits (rw)(up_down) = %lld\n", mod->up_down_head_hits);

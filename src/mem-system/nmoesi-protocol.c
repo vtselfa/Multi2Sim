@@ -168,7 +168,7 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int stride, int level)
 
 	/* Not enqueue prefetch if there are pending prefetches */
 	if(sb->pending_prefetches){
-		printf("Anulat\n");
+		fprintf(stderr, "    Canceled prefetch group at addr=0x%x to stream=%d with stride=0x%x(%d)\n", stack->addr+stride, stream, stride, stride);
 		return;
 	}
 
@@ -185,10 +185,14 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int stride, int level)
 	sb->pending_prefetches += num_prefetches;
 	
 	/* Insert prefetches */
-	int invalidating = 0;
 	for(i=0; i<num_prefetches; i++){
 		uop = x86_uop_create();
 		uop->phy_addr = stack->addr + (i+1) * stride;
+		/* If we reach the end of the stream, AKA the stream_tag changes, insert invalidations */
+		if(sb->stream_transcient_tag != (uop->phy_addr & ~cache->prefetch.stream_mask)){
+			uop->phy_addr = sb->stream_transcient_tag;
+			uop->pref.invalidating = 1;
+		}
 		uop->core = stack->core;
 		uop->thread = stack->thread;
 		uop->flags = X86_UINST_MEM;
@@ -196,14 +200,7 @@ void enqueue_prefetch_on_miss(struct mod_stack_t *stack, int stride, int level)
 		uop->pref.mod = mod;
 		uop->pref.dest_stream = stream;
 		uop->pref.dest_slot = (sb->head + i) % sb->num_slots; //HEAD
-		uop->pref.invalidating = invalidating;
 		
-		/* If we reach the end of the stream, AKA the stream_tag changes, insert invalidations */
-		if(!invalidating && sb->stream_transcient_tag != (uop->phy_addr & ~cache->prefetch.stream_mask)){
-			invalidating = 1;
-			uop->pref.invalidating = invalidating;
-		}
-
 		if(level == 1){
 			x86_pq_insert(uop);
 		} else {
@@ -238,8 +235,10 @@ void enqueue_prefetch_on_hit(struct mod_stack_t *stack, int level)
 	sb = &mod->cache->prefetch.streams[stack->pref_stream];
 
 	/* Don't prefetch if next_address is not in the stream anymore */
-	if(sb->stream_transcient_tag != (sb->next_address & ~cache->prefetch.stream_mask) && sb->stream_tag != (sb->next_address & ~cache->prefetch.stream_mask))
+	if(sb->stream_transcient_tag != (sb->next_address & ~cache->prefetch.stream_mask) && sb->stream_tag != (sb->next_address & ~cache->prefetch.stream_mask)){
+		mod->canceled_prefetches++;
 		return;
+	}
 
 	uop = x86_uop_create();
 	uop->phy_addr = sb->next_address;
@@ -292,12 +291,20 @@ void mod_handler_pref(int event, void *data)
 
 		/* Record access */
 		mod_access_start(mod, stack, mod_access_prefetch);
+		
+		/* Invalidate slot if required */
+		if(stack->pref.invalidating){
+			new_stack = mod_stack_create(stack->id, mod, stack->addr, EV_MOD_PREF_FINISH, stack, stack->core, stack->thread, stack->prefetch);
+			new_stack->retry = stack->retry;
+			new_stack->pref = stack->pref;
+			esim_schedule_event(EV_MOD_NMOESI_INVALIDATE_SLOT, new_stack, 0);
+			return;
+		}
 
 		/* Coalesce access -> finish */
 		master_stack = mod_can_coalesce(mod, mod_access_prefetch, stack->addr, stack);
 		if (master_stack){
 			fprintf(stderr,"    %lld will finish due to %lld\n",stack->id, master_stack->id);
-			
 			if(stack->pref.kind == GROUP){
 				new_stack = mod_stack_create(stack->id, mod, stack->addr, EV_MOD_PREF_FINISH, stack, stack->core, stack->thread, stack->prefetch);
 				new_stack->retry = stack->retry;
@@ -306,10 +313,6 @@ void mod_handler_pref(int event, void *data)
 			} else {
 				esim_schedule_event(EV_MOD_PREF_FINISH, stack, 0);
 			}
-
-			/* Statistics */
-			mod->canceled_prefetches++;
-
 			return;
 		}
 		
@@ -329,7 +332,6 @@ void mod_handler_pref(int event, void *data)
 		older_stack = mod_in_flight_write(mod, stack);
 		if (older_stack){
 			fprintf(stderr,"    %lld will finish due to write %lld\n",stack->id, older_stack->id);
-			
 			if(stack->pref.kind == GROUP){
 				new_stack = mod_stack_create(stack->id, mod, stack->addr, EV_MOD_PREF_FINISH, stack, stack->core, stack->thread, stack->prefetch);
 				new_stack->retry = stack->retry;
@@ -338,10 +340,6 @@ void mod_handler_pref(int event, void *data)
 			} else {
 				esim_schedule_event(EV_MOD_PREF_FINISH, stack, 0);
 			}
-
-			/* Statistics */
-			mod->canceled_prefetches++;
-
 			return;
 		}
 
@@ -352,7 +350,6 @@ void mod_handler_pref(int event, void *data)
 		{
 			fprintf(stderr,"    %lld will finish due to access %lld\n", stack->id, older_stack->id);
 			new_stack = mod_stack_create(stack->id, mod, 0, EV_MOD_PREF_FINISH, stack, stack->core, stack->thread, stack->prefetch);
-			
 			if(stack->pref.kind == GROUP){
 				new_stack = mod_stack_create(stack->id, mod, stack->addr, EV_MOD_PREF_FINISH, stack, stack->core, stack->thread, stack->prefetch);
 				new_stack->retry = stack->retry;
@@ -361,10 +358,6 @@ void mod_handler_pref(int event, void *data)
 			} else {
 				esim_schedule_event(EV_MOD_PREF_FINISH, stack, 0);
 			}
-
-			/* Statistics */
-			mod->canceled_prefetches++;
-			
 			return;
 		}
 
@@ -414,10 +407,6 @@ void mod_handler_pref(int event, void *data)
 			} else {
 				esim_schedule_event(EV_MOD_PREF_FINISH, stack, 0);
 			}
-
-			/* Statistics */
-			mod->canceled_prefetches++;
-			
 			return;
 		}
 
@@ -2170,12 +2159,29 @@ void mod_handler_nmoesi_invalidate_slot(int event, void *data)
 		assert(sb->pending_prefetches > 0);
 		if(sb->pending_prefetches == 1){
 			sb->stream_tag = stack->addr & ~cache->prefetch.stream_mask;
+			/* Debug */
+			if(sb->stream_tag != sb->stream_transcient_tag){
+				int i,slot,count; 
+				struct stream_block_t *block;
+				struct dir_lock_t *dir_lock;
+
+				fprintf(stderr, "stream_tag=0x%x stream_transcient_tag=0x%x\n", sb->stream_tag, sb->stream_transcient_tag);
+				
+				count = sb->head + sb->num_slots;
+				for(i = sb->head; i < count; i++){
+					slot = i % sb->num_slots;
+					block = cache_get_pref_block(cache, sb->stream, slot);
+					dir_lock = dir_pref_lock_get(mod->dir, sb->stream, slot);
+					fprintf(stderr,"\t\t{slot=%d, tag=0x%x, transient_tag=0x%x, state=%s, locked=%d}\n", slot, block->tag, block->transient_tag, map_value(&cache_block_state_map, block->state), dir_lock->lock);
+				}
+
+			}
 			assert(sb->stream_tag == sb->stream_transcient_tag);
 		}
 		sb->pending_prefetches--;
 		
 		/* Statistics */
-		mod->slot_invalidations++;
+		mod->canceled_prefetches++;
 
 		/* Return */
 		if(stack->ret_stack){
