@@ -273,46 +273,49 @@ int cache_find_stream(struct cache_t *cache, unsigned int stream_tag){
 int cache_detect_stride(struct cache_t *cache, int addr)
 {
 	struct linked_list_t *sd = cache->prefetch.stride_detector;
-	struct stride_detector_camp_t *camp, *to_free = NULL;
+	struct stride_detector_camp_t *camp;
 	int tag = addr & ~cache->prefetch.stream_mask;
 	int stride;
-	int result;
+	const int table_max_size = 128;
 
-	linked_list_head(sd);
-	while(!linked_list_is_end(sd)){
+	LINKED_LIST_FOR_EACH(sd){
+		/* Search through the table looking for a stream tag match */
 		camp = linked_list_get(sd);
 		if(camp->tag == tag){
+			/* Stream tag present */
 			stride = addr - camp->last_addr;
-			if(stride == camp->stride && abs(stride) >= cache->block_size){
-				result = stride; /* Stride detected */
-				to_free = camp;
+			if(stride == camp->stride){
+				/* There is a stride and it matches */
 				linked_list_remove(sd);
+				free(camp);
+				return stride;
 			}else{
-				result = 0;
+				/* There isn't a stride or it doesn't match */
+				if(abs(stride) >= cache->block_size){
+					/* Update camps only if stride is greater than block's size */
+					camp->stride = stride;
+					camp->last_addr = addr;
+				}
+				return 0;
 			}
-
-			/* Update camps */
-			if(abs(stride) >= cache->block_size){
-				camp->stride = stride;
-				camp->last_addr = addr;
-			}
-
-			/* Free mem */
-			free(to_free);
-
-			return result;
 		}
-		linked_list_next(sd);
 	}
 	
-	/* Add access to the list */
+	/* Strem tag not present*/
+	if(linked_list_count(sd) >= table_max_size){
+		/* Table is full, free oldest entry */
+		linked_list_head(sd);
+		camp = linked_list_get(sd);
+		free(camp);
+		linked_list_remove(sd);
+	}
 	camp = calloc(1, sizeof(struct stride_detector_camp_t));
 	if(!camp)
 		fatal("%s: out of memory", __FUNCTION__);
 	camp->last_addr = addr;
 	camp->tag = tag;
 	linked_list_add(sd, camp);
-
+	
 	return 0;
 }
 

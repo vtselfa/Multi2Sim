@@ -764,6 +764,10 @@ void mod_handler_nmoesi_store(int event, void *data)
 		
 		/* Record access */
 		mod_access_start(mod, stack, mod_access_store);
+		
+		/* Add access to stride detector and record if there is a stride */
+		if(mod->prefetch_enabled)
+			stack->stride = cache_detect_stride(mod->cache, stack->addr);
 
 		/* Coalesce access */
 		master_stack = mod_can_coalesce(mod, mod_access_store, stack->addr, stack);
