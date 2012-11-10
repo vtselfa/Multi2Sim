@@ -1,0 +1,4 @@
+- Eliminar els pref_group_t, ja no valen per a res.
+- Assegurar-se que ninguna stack pot quedar-se bloquejada en un slot a causa de que la que estava esperant davant d'ella desperta i fa hit en la cache, anant-se'n, per tant, sense despertar a la següent en la cua del slot. Açò està solucionat ja per a les loads i stores gracies a coalesce i companyia. No ho tinc tant clar per a les peticions down_up.
+- Revisar si els canvits fets a les read_request són innocuus. La part de coalesce, wait in stack i eixes coses.
+

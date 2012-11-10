@@ -18,6 +18,7 @@
 
 
 #include <mem-system.h>
+#include <x86-timing.h>
 
 /* String map for access type */
 struct string_map_t mod_access_kind_map =
@@ -86,14 +87,16 @@ void mod_free(struct mod_t *mod)
 	linked_list_free(mod->low_mod_list);
 	linked_list_free(mod->high_mod_list);
 
-	/* L2 prefetch queue VVV*/
+	/* Free L2 prefetch queue */
 	struct linked_list_t *pq = mod->pq;
 	linked_list_head(pq);
 	while (linked_list_count(pq))
 	{
+		/* Free all the uops and pref_groups associated (if any) 
+		 * remaining in the queue */
 		struct x86_uop_t * uop = linked_list_get(pq);
 		linked_list_remove(pq);
-		free(uop);
+		x86_uop_free_if_not_queued(uop);
 	}
 	linked_list_free(mod->pq);
 
@@ -121,12 +124,17 @@ long long mod_access(struct mod_t *mod, enum mod_access_kind_t access_kind,
 	void *event_queue_item, int core, int thread, int prefetch)
 {
 	struct mod_stack_t *stack;
+	struct x86_uop_t *uop = (struct x86_uop_t *) event_queue_item;
 	int event;
 
 	/* Create module stack with new ID */
 	mod_stack_id++;
 	stack = mod_stack_create(mod_stack_id,
 		mod, addr, ESIM_EV_NONE, NULL, core, thread, prefetch);
+	
+	/* Pass prefetch parameters */
+	if(uop && uop->pref.kind)
+		stack->pref = uop->pref;
 
 	/* Initialize */
 	stack->witness_ptr = witness_ptr;
@@ -151,6 +159,10 @@ long long mod_access(struct mod_t *mod, enum mod_access_kind_t access_kind,
 		else if (access_kind == mod_access_prefetch)
 		{
 			event = EV_MOD_PREF;
+		}
+		else if (access_kind == mod_access_invalidate)
+		{
+			event = EV_MOD_NMOESI_INVALIDATE_SLOT;
 		}
 		else
 		{
@@ -246,6 +258,7 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 
 	/* A transient tag is considered a hit if the block is
 	 * locked in the corresponding directory. */
+	/* També és un hit si hi ha stacks en la cua. */
 	tag = addr & ~cache->block_mask;
 	if (mod->range_kind == mod_range_interleaved)
 	{
@@ -269,7 +282,7 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 		if (blk->transient_tag == tag)
 		{
 			dir_lock = dir_lock_get(mod->dir, set, way);
-			if (dir_lock->lock)
+			if (dir_lock->lock || /*VVV*/ dir_lock->lock_queue)
 				break;
 		}
 	}
@@ -287,13 +300,13 @@ int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,
 	return 1;
 }
 
+
 /* Look for a block in prefetch buffer.
- * The function returns TRUE on hit, FALSE on miss. */
-int mod_find_pref_block(struct mod_t *mod, unsigned int addr,
-	int *pref_stream_ptr, int *pref_slot_ptr) 
+ * The function returns 0 on miss, 1 if hit on head and 2 if hit in the middle of the stream. */
+int mod_find_pref_block(struct mod_t *mod, unsigned int addr, int *pref_stream_ptr, int* pref_slot_ptr) 
 {
 	struct cache_t *cache = mod->cache;
-	struct cache_block_t *blk;
+	struct stream_block_t *blk;
 	struct dir_lock_t *dir_lock;
 	struct stream_buffer_t *sb;
 
@@ -301,36 +314,68 @@ int mod_find_pref_block(struct mod_t *mod, unsigned int addr,
 	 * locked in the corresponding directory??? */
 	int tag = addr & ~cache->block_mask;
 	
+	unsigned int stream_tag = addr & ~cache->prefetch.stream_mask;
 	int stream, slot;
-	int ssize = cache->num_pref_streams;
-	for(stream = 0; stream < ssize; stream++){
-		sb = cache->stream_buffers[stream];
-		if(stream_buffer_empty(sb)) continue;
+	int num_streams = cache->prefetch.num_streams;
+	for(stream=0; stream<num_streams; stream++){
+		int i, count;
+		sb = &cache->prefetch.streams[stream];
 		
-		slot = sb->head;
-		blk = &sb->elem[slot];
-		if (blk->tag == tag && blk->state)
-			break;
-		
-		if (blk->transient_tag == tag){
-			dir_lock = dir_pref_lock_get(mod->dir, stream, slot);
-			if (dir_lock->lock)
-				break;
+		/* Block can't be in this stream */
+		/*if(!sb->stream_tag == stream_tag)
+			continue;*/
+
+		count = sb->head + sb->num_slots;
+		for(i = sb->head; i < count; i++){
+			slot = i % sb->num_slots;
+			blk = cache_get_pref_block(cache, stream, slot);
+			
+			/* Increment any invalid unlocked head */
+			if(slot == sb->head && !blk->state){
+				dir_lock = dir_pref_lock_get(mod->dir, stream, slot);
+				if(!dir_lock->lock){
+					sb->head = (sb->head + 1) % sb->num_slots;
+					continue;
+				}
+			}
+				
+			/* Tag hit */
+			if (blk->tag == tag && blk->state)
+				goto hit; /* LOL */
+
+			/* Locked block and transient tag hit */
+			if (blk->transient_tag == tag){
+				dir_lock = dir_pref_lock_get(mod->dir, stream, slot);
+				if (dir_lock->lock)
+					goto hit; /* LOL */
+			}
 		}
 	}
 
 	/* Miss */
-	if (stream == ssize)
-	{
+	if (stream == num_streams){
+		PTR_ASSIGN(pref_stream_ptr, -1);
+		PTR_ASSIGN(pref_slot_ptr, -1);
+		return 0;
+	}
+	/* Si hi ha una store davant esperant, quan agafe el bloc va a modificar-lo,
+	 * així que no te sentit fer hit */
+	dir_lock = dir_pref_lock_get(mod->dir, stream, slot); //SLOT
+	if (dir_lock->lock_queue && dir_lock->lock_queue->access_kind == mod_access_store){
 		PTR_ASSIGN(pref_stream_ptr, -1);
 		PTR_ASSIGN(pref_slot_ptr, -1);
 		return 0;
 	}
 
 	/* Hit */
-	PTR_ASSIGN(pref_stream_ptr, stream);
+hit:
+	assert(sb->stream_tag == stream_tag || sb->stream_transcient_tag == stream_tag); /* Assegurem-nos de que el bloc estava on tocava */
+	PTR_ASSIGN(pref_stream_ptr, stream);	
 	PTR_ASSIGN(pref_slot_ptr, slot);
-	return 1;
+	if(sb->head == slot)
+		return 1; //Hit in head
+	else
+		return 2; //Hit in the middle of the stream 
 }
 
 
@@ -367,7 +412,7 @@ void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event)
 	mod->num_locked_ports++;
 
 	/* Debug */
-	mem_debug("  %lld stack %lld %s port %d locked\n", esim_cycle, stack->id, mod->name, i);
+	fprintf(stderr,"  %lld stack %lld %s port %d locked (num_ports=%d locked=%d)\n", esim_cycle, stack->id, mod->name, i, mod->num_ports, mod->num_locked_ports);
 
 	/* Schedule event */
 	esim_schedule_event(event, stack, 0);
@@ -390,8 +435,8 @@ void mod_unlock_port(struct mod_t *mod, struct mod_port_t *port,
 	mod->num_locked_ports--;
 
 	/* Debug */
-	mem_debug("  %lld %lld %s port unlocked\n", esim_cycle,
-		stack->id, mod->name);
+	mem_debug("  %lld %lld %s port unlocked (num_ports=%d locked=%d)\n", esim_cycle,
+		stack->id, mod->name, mod->num_ports, mod->num_locked_ports);
 
 	/* Check if there was any access waiting for free port */
 	if (!mod->port_waiting_list_count)
@@ -617,23 +662,32 @@ struct mod_stack_t *mod_can_coalesce(struct mod_t *mod,
 	/* Coalesce depending on access kind */
 	switch (access_kind)
 	{
-
 	case mod_access_load:
+	{
+		for (stack = tail; stack; stack = stack->access_list_prev)
+		{
+			/* Only coalesce with groups of loads or prefetches at the tail */
+			if (stack->access_kind != mod_access_load && stack->access_kind != mod_access_prefetch)
+				return NULL;
+
+			/* Only coalesce if destination module is the same */
+			if(stack->mod != older_than_stack->mod)
+				continue;
+
+			if (stack->addr >> mod->log_block_size == addr >> mod->log_block_size)
+				return stack->master_stack ? stack->master_stack : stack;
+		}
+		break;
+	}
+
 	case mod_access_prefetch:
 	{
 		for (stack = tail; stack; stack = stack->access_list_prev)
 		{
-			if(stack->master_stack)
-					return NULL;
-			
 			/* Only coalesce with groups of reads at the tail */
 			if (stack->access_kind != mod_access_load && stack->access_kind != mod_access_prefetch)
 				return NULL;
 
-			/* Only coalesce with older stacks */	
-			if(older_than_stack->id >= stack->id)
-				return NULL;
-			
 			/* Only coalesce if destination module is the same */
 			if(stack->mod != older_than_stack->mod)
 				continue;
@@ -733,6 +787,7 @@ void mod_coalesce(struct mod_t *mod, struct mod_stack_t *master_stack,
  */
 
 long long mod_stack_id;
+long long mod_stack_pref_group_id;
 
 struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	unsigned int addr, int ret_event, void *ret_stack, int core, int thread, int prefetch)
@@ -761,6 +816,12 @@ struct mod_stack_t *mod_stack_create(long long id, struct mod_t *mod,
 	stack->tag = -1;
 	stack->pref_stream = -1;
 	stack->pref_slot = -1;
+	stack->pref.dest_stream = -1;
+	stack->pref.dest_slot = -1;
+	stack->stride = -1;
+	
+	//printf("Created stack=%lld\n", stack->id);
+
 	/* Return */
 	return stack;
 }
@@ -774,8 +835,11 @@ void mod_stack_return(struct mod_stack_t *stack)
 	/* Wake up dependent accesses */
 	mod_stack_wakeup_stack(stack);
 
+	//printf("Destroyed stack=%lld\n", stack->id);
+
 	/* Free */
 	free(stack);
+
 	esim_schedule_event(ret_event, ret_stack, 0);
 }
 

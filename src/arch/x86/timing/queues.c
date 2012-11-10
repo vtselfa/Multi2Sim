@@ -340,7 +340,6 @@ void x86_lsq_done()
 		while (linked_list_count(pq))
 		{
 			uop = linked_list_get(pq);
-			uop->in_lq = 0;
 			linked_list_remove(pq);
 			x86_uop_free_if_not_queued(uop);
 		}

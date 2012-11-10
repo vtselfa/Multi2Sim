@@ -12,8 +12,7 @@ libmemsystem_a_SOURCES = \
 	mmu.c \
 	module.c \
 	nmoesi-protocol.c \
-	spec-mem.c \
-	stream-buffer.c
+	spec-mem.c
 
 INCLUDES = @M2S_INCLUDES@
 

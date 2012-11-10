@@ -10,3 +10,16 @@
 *.lai
 *.la
 *.a
+
+#extra
+*.Po
+Makefile
+Makefile.in
+config.status
+config.log
+autom4te.cache/*
+TAGS
+tags
+src/results/*
+m2s
+test
