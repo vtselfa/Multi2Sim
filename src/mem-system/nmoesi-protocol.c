@@ -397,7 +397,7 @@ void mod_handler_pref(int event, void *data)
 		}
 
 		/* Hit */
-		if (stack->hit || stack->prefetch_hit){
+		if (stack->hit){
 			fprintf(stderr,"    will finish due to block already in cache\n");
 			if(stack->pref.kind == GROUP){
 				new_stack = mod_stack_create(stack->id, mod, stack->addr, EV_MOD_PREF_FINISH, stack, stack->core, stack->thread, stack->prefetch);
@@ -407,6 +407,12 @@ void mod_handler_pref(int event, void *data)
 			} else {
 				esim_schedule_event(EV_MOD_PREF_FINISH, stack, 0);
 			}
+			return;
+		}
+
+		/* Prefetch hit -- Block already in stream but in other slot */
+		if(stack->prefetch_hit){
+			esim_schedule_event(EV_MOD_PREF_MISS, stack, 0);
 			return;
 		}
 
@@ -450,6 +456,10 @@ void mod_handler_pref(int event, void *data)
 		/* Store block */
 		cache_set_pref_block(cache, stack->pref_stream, stack->pref_slot, stack->tag, stack->shared ? cache_block_shared : cache_block_exclusive); //SLOT
 		
+		/* If block comes from another slot in the same stream invalidate the original one */
+		if(stack->prefetch_hit)
+			cache_set_pref_block(cache, stack->pref.dest_stream, stack->pref.dest_slot, 0, cache_block_invalid); //SLOT
+		
 		/* Continue */
 		esim_schedule_event(EV_MOD_PREF_UNLOCK, stack, 0);
 		return;
@@ -464,6 +474,8 @@ void mod_handler_pref(int event, void *data)
 
 		/* Unlock directory entry */
 		dir_pref_entry_unlock(mod->dir, stack->pref_stream, stack->pref_slot); //SLOT
+		if(stack->prefetch_hit)
+			dir_pref_entry_unlock(mod->dir, stack->pref.dest_stream, stack->pref.dest_slot); //SLOT
 		
 		/* Statitistics */
 		mod->completed_prefetches++;
@@ -1202,6 +1214,10 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 		fprintf(stderr,"  %lld %lld 0x%x %s pref find and lock port\n", esim_cycle, stack->id, stack->addr, mod->name);
 		mem_trace("mem.access name=\"A-%lld\" state=\"%s:pref_find_and_lock_port\"\n", stack->id, mod->name);
 
+		/* Select prefetch stream and slot */
+		stack->pref_stream = stack->pref.dest_stream;
+		stack->pref_slot = stack->pref.dest_slot;
+		
 		/* Set parent stack flag expressing that port has already been locked.
 		 * This flag is checked by new writes to find out if it is already too
 		 * late to coalesce. */
@@ -1209,9 +1225,41 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 
 		/* Look for block in cache */
 		if(stack->access_kind != mod_access_invalidate){
+			struct stream_buffer_t *sb = &cache->prefetch.streams[stack->pref.dest_stream];
+
 			stack->hit = mod_find_block(mod, stack->addr, &stack->set, &stack->way, &stack->tag, &stack->state);
-			if (stack->hit)
+			if (stack->hit){
 				fprintf(stderr,"    %lld 0x%x %s hit: set=%d, way=%d, state=%s\n", stack->id, stack->tag, mod->name, stack->set, stack->way, map_value(&cache_block_state_map, stack->state));
+			} else if(sb->stream_tag == sb->stream_transcient_tag){
+				/* Maybe some blocks are already here... */
+				int i, slot, count;
+				struct stream_block_t *block;
+				count = sb->head + sb->num_slots;
+				for(i = sb->head; i < count; i++){
+					slot = i % sb->num_slots;
+					block = cache_get_pref_block(cache, sb->stream, slot);
+					if(block->tag == stack->tag){
+						/* Block is already here */
+						if(slot == stack->pref_slot){
+							/* ...and in the correct position */
+							stack->hit = 1;
+							break;
+						}
+						/* Block is not in the correct position */
+						dir_lock = dir_pref_lock_get(mod->dir, sb->stream, slot); //SLOT
+						if (!dir_lock->lock){
+							/* Lock it if is unlocked */
+							dir_pref_entry_lock(mod->dir, sb->stream, slot, EV_MOD_NMOESI_PREF_FIND_AND_LOCK, stack); //SLOT
+							stack->ret_stack->prefetch_hit = 1;
+							stack->ret_stack->pref.dest_slot = slot;
+							stack->ret_stack->pref.dest_stream = sb->stream;
+							/* Set transcient tag */
+							block->transient_tag = 0;
+							break;
+						}
+					}
+				}
+			}
 		}
 
 		/* Statistics */
@@ -1244,9 +1292,6 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 			return;
 		}
 		
-		/* Select prefetch stream and slot */
-		stack->pref_stream = stack->pref.dest_stream;
-		stack->pref_slot = stack->pref.dest_slot;
 
 		/* Assertions */
 		sb = &cache->prefetch.streams[stack->pref_stream];
@@ -1282,7 +1327,7 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 			if(!block->state)
 				sb->count++; //COUNT
 		}
-
+		
 		/* Update LRU stream */
 		cache_access_stream(mod->cache, stack->pref_stream);
 
@@ -1349,7 +1394,6 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 		ret->err = 0;
 		ret->state = stack->state;
 		ret->tag = stack->tag;
-		ret->prefetch_hit = stack->prefetch_hit;
 		ret->pref_stream = stack->pref_stream;
 		ret->pref_slot = stack->pref_slot;
 		mod_stack_return(stack);
@@ -2593,6 +2637,25 @@ void mod_handler_nmoesi_read_request(int event, void *data)
 				if (dir_entry_tag < stack->addr || dir_entry_tag >= stack->addr + mod->block_size)
 					continue;
 				dir_entry = dir_entry_get(dir, stack->set, stack->way, z);
+				
+				/* Error. Crash report.*/
+				if(dir_entry->owner == mod->low_net_node->index){
+					int stream, slot, count, i;
+					struct stream_block_t *block;
+					struct dir_lock_t *dir_lock;
+					struct stream_buffer_t *sb;
+					for(stream = 0; stream<mod->cache->prefetch.num_streams; stream++){
+						sb = &mod->cache->prefetch.streams[stream];
+						count = sb->head + sb->num_slots;
+						fprintf(stderr, "\n\t\tStream %d\n", stream);
+						for(i = sb->head; i < count; i++){
+							slot = i % sb->num_slots;
+							block = cache_get_pref_block(mod->cache, sb->stream, slot);
+							dir_lock = dir_pref_lock_get(mod->dir, sb->stream, slot);
+							fprintf(stderr,"\t\t{slot=%d, tag=0x%x, transient_tag=0x%x, state=%s, locked=%d}\n", slot, block->tag, block->transient_tag, map_value(&cache_block_state_map, block->state), dir_lock->lock);
+						}
+					}
+				}
 				assert(dir_entry->owner != mod->low_net_node->index);
 			}
 
