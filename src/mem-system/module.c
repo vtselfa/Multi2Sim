@@ -243,6 +243,26 @@ void mod_get_tag_set(struct mod_t *mod, unsigned int addr, int *tag_ptr, int *se
 	PTR_ASSIGN(set_ptr, set);
 }
 
+/* Search for a block in a stream and return the slot where the block is found or -1 if the block is not in the stream */
+int mod_find_block_in_stream(struct mod_t *mod, unsigned int addr, int stream)
+{
+	struct cache_t *cache = mod->cache;
+	struct stream_buffer_t *sb = &cache->prefetch.streams[stream];				
+	struct stream_block_t *block;
+	int tag = addr & ~cache->block_mask;
+	int i, slot, count;
+	
+	count = sb->head + sb->num_slots;
+	for(i = sb->head; i < count; i++){
+		slot = i % sb->num_slots;
+		block = cache_get_pref_block(cache, sb->stream, slot);
+		if(block->tag == tag)
+			return slot;
+	}
+	return -1;
+}
+
+
 /* Return {set, way, tag, state} for an address.
  * The function returns TRUE on hit, FALSE on miss. */
 int mod_find_block(struct mod_t *mod, unsigned int addr, int *set_ptr,

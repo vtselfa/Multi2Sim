@@ -410,9 +410,16 @@ void mod_handler_pref(int event, void *data)
 			return;
 		}
 
-		/* Prefetch hit -- Block already in stream but in other slot */
+		/* Prefetch hit -- Block already in the stream */
 		if(stack->prefetch_hit){
-			esim_schedule_event(EV_MOD_PREF_MISS, stack, 0);
+			fprintf(stderr,"     block is already in the stream ");
+			if(stack->pref_slot == stack->pref_slot_origin){
+				fprintf(stderr,"and in the correct slot\n");
+				esim_schedule_event(EV_MOD_PREF_FINISH, stack, 0);
+			} else {
+				fprintf(stderr,"but not in the correct slot\n");
+				esim_schedule_event(EV_MOD_PREF_MISS, stack, 0);
+			}
 			return;
 		}
 
@@ -458,7 +465,7 @@ void mod_handler_pref(int event, void *data)
 		
 		/* If block comes from another slot in the same stream invalidate the original one */
 		if(stack->prefetch_hit)
-			cache_set_pref_block(cache, stack->pref.dest_stream, stack->pref.dest_slot, 0, cache_block_invalid); //SLOT
+			cache_set_pref_block(cache, stack->pref_stream_origin, stack->pref_slot_origin, 0, cache_block_invalid); //SLOT
 		
 		/* Continue */
 		esim_schedule_event(EV_MOD_PREF_UNLOCK, stack, 0);
@@ -474,8 +481,10 @@ void mod_handler_pref(int event, void *data)
 
 		/* Unlock directory entry */
 		dir_pref_entry_unlock(mod->dir, stack->pref_stream, stack->pref_slot); //SLOT
+
+		/* Block was in the stream */
 		if(stack->prefetch_hit)
-			dir_pref_entry_unlock(mod->dir, stack->pref.dest_stream, stack->pref.dest_slot); //SLOT
+			dir_pref_entry_unlock(mod->dir, stack->pref_stream_origin, stack->pref_slot_origin); //SLOT
 		
 		/* Statitistics */
 		mod->completed_prefetches++;
@@ -1209,6 +1218,8 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 	{
 		struct mod_port_t *port = stack->port;
 		struct dir_lock_t *dir_lock;
+		struct stream_block_t *sblock;
+		int slot;
 
 		assert(stack->port);
 		fprintf(stderr,"  %lld %lld 0x%x %s pref find and lock port\n", esim_cycle, stack->id, stack->addr, mod->name);
@@ -1223,39 +1234,45 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 		 * late to coalesce. */
 		ret->port_locked = 1;
 
-		/* Look for block in cache */
+		/* Search block in cache and stream */
 		if(stack->access_kind != mod_access_invalidate){
-			struct stream_buffer_t *sb = &cache->prefetch.streams[stack->pref.dest_stream];
-
+			sb = &cache->prefetch.streams[stack->pref.dest_stream];
+			/* Search in cache */
 			stack->hit = mod_find_block(mod, stack->addr, &stack->set, &stack->way, &stack->tag, &stack->state);
 			if (stack->hit){
+				/* Block in cache */
 				fprintf(stderr,"    %lld 0x%x %s hit: set=%d, way=%d, state=%s\n", stack->id, stack->tag, mod->name, stack->set, stack->way, map_value(&cache_block_state_map, stack->state));
-			} else if(sb->stream_tag == sb->stream_transcient_tag){
-				/* Maybe some blocks are already here... */
-				int i, slot, count;
-				struct stream_block_t *block;
-				count = sb->head + sb->num_slots;
-				for(i = sb->head; i < count; i++){
-					slot = i % sb->num_slots;
-					block = cache_get_pref_block(cache, sb->stream, slot);
-					if(block->tag == stack->tag){
-						/* Block is already here */
+			} else {
+				/* Block is not in cache */
+				if(sb->stream_tag == sb->stream_transcient_tag){
+					/* Search block in the stream */
+					slot = mod_find_block_in_stream(mod, stack->addr, stack->pref_stream);
+					if(slot > -1){
+						/* Block found */
 						if(slot == stack->pref_slot){
-							/* ...and in the correct position */
-							stack->hit = 1;
-							break;
-						}
-						/* Block is not in the correct position */
-						dir_lock = dir_pref_lock_get(mod->dir, sb->stream, slot); //SLOT
-						if (!dir_lock->lock){
-							/* Lock it if is unlocked */
-							dir_pref_entry_lock(mod->dir, sb->stream, slot, EV_MOD_NMOESI_PREF_FIND_AND_LOCK, stack); //SLOT
-							stack->ret_stack->prefetch_hit = 1;
-							stack->ret_stack->pref.dest_slot = slot;
-							stack->ret_stack->pref.dest_stream = sb->stream;
-							/* Set transcient tag */
-							block->transient_tag = 0;
-							break;
+							/* Block already in the correct slot. Do nothing. */
+							ret->prefetch_hit = 1;
+							ret->pref_slot = stack->pref_slot;
+							ret->pref_stream = stack->pref_stream;
+							ret->pref_slot_origin = slot;
+							ret->pref_stream_origin = stack->pref_stream;
+							mod_unlock_port(mod, port, stack);
+							mod_stack_return(stack);
+							return;
+						} else {
+							/* Block is not in the correct slot */
+							dir_lock = dir_pref_lock_get(mod->dir, sb->stream, slot); //SLOT
+							if (!dir_lock->lock){
+								/* Lock it if is unlocked */
+								dir_pref_entry_lock(mod->dir, sb->stream, slot, EV_MOD_NMOESI_PREF_FIND_AND_LOCK, stack); //SLOT
+								/* Set transcient tag -- The block will be removed from this slot and reallocated */
+								sblock = cache_get_pref_block(cache, sb->stream, slot); 
+								sblock->transient_tag = 0;
+								/* Mark this circumstance with a prefetch hit */
+								ret->prefetch_hit = 1;
+								ret->pref_slot_origin = slot;
+								ret->pref_stream_origin = stack->pref_stream;
+							}
 						}
 					}
 				}
@@ -1291,7 +1308,6 @@ void mod_handler_nmoesi_pref_find_and_lock(int event, void *data)
 			mod_stack_return(stack);
 			return;
 		}
-		
 
 		/* Assertions */
 		sb = &cache->prefetch.streams[stack->pref_stream];
