@@ -432,7 +432,7 @@ void mod_lock_port(struct mod_t *mod, struct mod_stack_t *stack, int event)
 	mod->num_locked_ports++;
 
 	/* Debug */
-	fprintf(stderr,"  %lld stack %lld %s port %d locked (num_ports=%d locked=%d)\n", esim_cycle, stack->id, mod->name, i, mod->num_ports, mod->num_locked_ports);
+	mem_debug("  %lld stack %lld %s port %d locked (num_ports=%d locked=%d)\n", esim_cycle, stack->id, mod->name, i, mod->num_ports, mod->num_locked_ports);
 
 	/* Schedule event */
 	esim_schedule_event(event, stack, 0);
@@ -779,7 +779,7 @@ void mod_coalesce(struct mod_t *mod, struct mod_stack_t *master_stack,
 	struct mod_stack_t *stack)
 {
 	/* Debug */
-	fprintf(stderr,"  %lld %lld 0x%x %s coalesce with %lld\n", esim_cycle,
+	mem_debug("  %lld %lld 0x%x %s coalesce with %lld\n", esim_cycle,
 		stack->id, stack->addr, mod->name, master_stack->id);
 
 	/* Master stack must not have a parent. We only want one level of
